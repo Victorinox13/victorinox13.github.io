@@ -142,6 +142,15 @@
       flex-wrap: wrap;
     }
 
+    body.exercise-mode .top-actions,
+    body.exercise-mode #resetStats {
+      display: none;
+    }
+
+    body.exercise-mode .topbar {
+      padding-bottom: 8px;
+    }
+
     .shell {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto 26px;
@@ -178,9 +187,9 @@
     .trainer-panel {
       width: min(900px, 100%);
       margin: 0 auto;
-      min-height: 640px;
+      min-height: 0;
       display: grid;
-      grid-template-rows: auto auto 1fr auto;
+      grid-template-rows: auto 1fr;
       overflow: hidden;
     }
 
@@ -440,13 +449,13 @@
     }
 
     .quiz-head {
-      padding: 16px;
+      padding: 12px 18px;
       display: flex;
-      align-items: start;
+      align-items: center;
       justify-content: space-between;
       gap: 14px;
       border-bottom: 1px solid var(--line);
-      background: linear-gradient(90deg, #fff 0 70%, var(--blue-soft));
+      background: var(--surface);
     }
 
     .quiz-actions {
@@ -457,6 +466,10 @@
       justify-content: flex-end;
     }
 
+    body.exercise-mode .quiz-actions {
+      flex: 0 0 auto;
+    }
+
     .quiz-title {
       display: flex;
       align-items: center;
@@ -465,13 +478,11 @@
     }
 
     .notebook {
-      width: 64px;
-      height: 54px;
-      flex: 0 0 auto;
+      display: none;
     }
 
     .score-strip {
-      display: grid;
+      display: none;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       border-bottom: 1px solid var(--line);
       background: var(--surface);
@@ -504,17 +515,17 @@
       padding: 18px;
       display: grid;
       align-content: start;
-      gap: 16px;
+      gap: 14px;
     }
 
     .prompt {
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--line);
+      padding-bottom: 0;
+      border-bottom: 0;
     }
 
     .tense-banner {
-      margin-bottom: 14px;
-      padding: 14px;
+      margin-bottom: 18px;
+      padding: 12px 14px;
       border: 1px solid rgba(23, 105, 224, 0.22);
       border-radius: var(--radius);
       background: var(--blue-soft);
@@ -532,14 +543,14 @@
       display: block;
       margin-top: 5px;
       color: var(--blue);
-      font-size: 2rem;
+      font-size: 2.05rem;
       line-height: 1.05;
       letter-spacing: 0;
       word-break: break-word;
     }
 
     .prompt-meta {
-      display: flex;
+      display: none;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
@@ -636,33 +647,38 @@
     }
 
     .feedback {
-      min-height: 48px;
+      min-height: 42px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
-      padding: 12px;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: var(--surface-soft);
+      padding: 0;
+      border-radius: 0;
+      border: 0;
+      background: transparent;
       color: var(--muted);
       font-weight: 780;
     }
 
     .feedback.good {
       color: var(--green);
-      background: var(--green-soft);
-      border-color: rgba(22, 132, 95, 0.3);
+      background: transparent;
+      border-color: transparent;
     }
 
     .feedback.bad {
       color: var(--coral);
-      background: var(--coral-soft);
-      border-color: rgba(223, 80, 102, 0.3);
+      background: transparent;
+      border-color: transparent;
+    }
+
+    #nextButton:disabled {
+      display: none;
     }
 
     .history {
+      display: none;
       border-top: 1px solid var(--line);
       padding: 14px 16px;
       background: var(--surface);
@@ -797,7 +813,11 @@
       }
 
       .prompt h2 {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
+      }
+
+      .tense-banner strong {
+        font-size: 1.65rem;
       }
 
       .prompt-subject {
@@ -835,7 +855,7 @@
       }
 
       .prompt h2 {
-        font-size: 2.1rem;
+        font-size: 2.25rem;
       }
 
       .chip-list,
@@ -1164,12 +1184,14 @@
       }
 
       function showConfig() {
+        document.body.classList.remove("exercise-mode");
         els.configView.classList.add("active");
         els.exerciseView.classList.remove("active");
         history.replaceState(null, "", "#configuration");
       }
 
       function showExercise() {
+        document.body.classList.add("exercise-mode");
         els.configView.classList.remove("active");
         els.exerciseView.classList.add("active");
         history.replaceState(null, "", "#exercice");
