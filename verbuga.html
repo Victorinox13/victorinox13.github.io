@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verbes Français</title>
+  <meta name="description" content="Un entraîneur moderne pour apprendre les conjugaisons françaises avec des questions à quatre choix.">
+  <style>
+    :root {
+      --paper: #f7f8fb;
+      --surface: #ffffff;
+      --surface-soft: #eef3f7;
+      --ink: #182033;
+      --muted: #657085;
+      --line: #d9e0ea;
+      --blue: #1769e0;
+      --blue-soft: #e7f0ff;
+      --coral: #df5066;
+      --coral-soft: #ffe9ed;
+      --green: #16845f;
+      --green-soft: #e2f5ee;
+      --gold: #b47612;
+      --gold-soft: #fff3d7;
+      --shadow: 0 18px 45px rgba(26, 40, 68, 0.12);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(23, 105, 224, 0.12) 0 33%, rgba(255, 255, 255, 0) 33% 66%, rgba(223, 80, 102, 0.12) 66%),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topbar {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      flex: 0 0 auto;
+    }
+
+    .brand-mark span {
+      grid-column: 1 / 4;
+      grid-row: 1;
+      align-self: center;
+      justify-self: center;
+      z-index: 1;
+      color: var(--ink);
+      font-weight: 900;
+      font-size: 0.82rem;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+    }
+
+    .brand-mark {
+      background: linear-gradient(90deg, #21468b 0 33%, #fff 33% 66%, #ae1c28 66%);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .top-actions,
+    .toolbar,
+    .segmented,
+    .inline-actions,
+    .stats-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto 26px;
+      display: grid;
+      grid-template-columns: minmax(320px, 450px) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .config-panel {
+      padding: 16px;
+    }
+
+    .trainer-panel {
+      min-height: 640px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .section-head h2,
+    .quiz-title h2 {
+      font-size: 1.05rem;
+      letter-spacing: 0;
+    }
+
+    .pill,
+    .button,
+    .icon-button,
+    .chip,
+    .option-button,
+    .segmented button {
+      min-height: 42px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .button,
+    .icon-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 0 12px;
+      font-weight: 750;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .button.primary {
+      color: #fff;
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+
+    .button.ghost {
+      background: var(--surface-soft);
+    }
+
+    .icon {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+
+    .field {
+      padding: 13px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .field:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .field-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .field-count {
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stats-row {
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 10px;
+      color: var(--muted);
+      background: var(--surface-soft);
+      font-size: 0.85rem;
+      font-weight: 750;
+    }
+
+    .pill strong {
+      color: var(--ink);
+    }
+
+    .segmented {
+      width: 100%;
+      padding: 3px;
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .segmented button {
+      flex: 1 1 110px;
+      border-color: transparent;
+      background: transparent;
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    .segmented button.active {
+      color: var(--blue);
+      background: var(--surface);
+      border-color: var(--line);
+      box-shadow: 0 8px 20px rgba(23, 105, 224, 0.12);
+    }
+
+    .toolbar {
+      margin-bottom: 10px;
+      align-items: stretch;
+    }
+
+    .search {
+      flex: 1 1 190px;
+      min-height: 42px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      padding: 0 12px;
+      min-width: 0;
+    }
+
+    .inline-actions button {
+      min-height: 42px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .verb-groups {
+      display: grid;
+      gap: 12px;
+    }
+
+    .verb-group {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .verb-group h3 {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      background: var(--surface-soft);
+      font-size: 0.92rem;
+      letter-spacing: 0;
+    }
+
+    .verb-group h3 span {
+      color: var(--muted);
+      font-weight: 750;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ending-filters {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 10px 10px 0;
+    }
+
+    .ending-filters button,
+    .chip {
+      transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+    }
+
+    .ending-filters button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--muted);
+      font-weight: 850;
+    }
+
+    .ending-filters button.active {
+      color: var(--green);
+      border-color: rgba(22, 132, 95, 0.34);
+      background: var(--green-soft);
+    }
+
+    .chip-list {
+      max-height: 228px;
+      overflow: auto;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+      gap: 8px;
+      scrollbar-color: var(--line) transparent;
+    }
+
+    .chip {
+      width: 100%;
+      padding: 8px 9px;
+      text-align: left;
+      color: var(--ink);
+      font-size: 0.9rem;
+      line-height: 1.18;
+      font-weight: 750;
+      min-width: 0;
+      word-break: break-word;
+    }
+
+    .chip small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 750;
+    }
+
+    .chip[aria-pressed="true"] {
+      color: var(--blue);
+      border-color: rgba(23, 105, 224, 0.42);
+      background: var(--blue-soft);
+    }
+
+    .chip:hover,
+    .option-button:hover,
+    .button:hover,
+    .inline-actions button:hover {
+      transform: translateY(-1px);
+    }
+
+    .tense-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(138px, 1fr));
+      gap: 8px;
+    }
+
+    .quiz-head {
+      padding: 16px;
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 14px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, #fff 0 70%, var(--blue-soft));
+    }
+
+    .quiz-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .notebook {
+      width: 64px;
+      height: 54px;
+      flex: 0 0 auto;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .score-strip div {
+      padding: 12px 14px;
+      border-right: 1px solid var(--line);
+    }
+
+    .score-strip div:last-child {
+      border-right: 0;
+    }
+
+    .score-strip span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 850;
+    }
+
+    .score-strip strong {
+      display: block;
+      margin-top: 3px;
+      font-size: 1.18rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .quiz-body {
+      padding: 18px;
+      display: grid;
+      align-content: start;
+      gap: 16px;
+    }
+
+    .prompt {
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .prompt-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      min-height: 30px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 9px;
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      font-size: 0.82rem;
+      font-weight: 850;
+    }
+
+    .tag.blue {
+      color: var(--blue);
+      background: var(--blue-soft);
+      border-color: rgba(23, 105, 224, 0.22);
+    }
+
+    .tag.coral {
+      color: var(--coral);
+      background: var(--coral-soft);
+      border-color: rgba(223, 80, 102, 0.22);
+    }
+
+    .prompt h2 {
+      font-size: 4rem;
+      line-height: 1;
+      letter-spacing: 0;
+      word-break: break-word;
+    }
+
+    .prompt-subject {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 1.15rem;
+      font-weight: 850;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .option-button {
+      min-height: 68px;
+      padding: 12px;
+      text-align: left;
+      font-size: 1.08rem;
+      line-height: 1.2;
+      font-weight: 850;
+      word-break: break-word;
+    }
+
+    .option-button.correct {
+      color: var(--green);
+      background: var(--green-soft);
+      border-color: rgba(22, 132, 95, 0.4);
+    }
+
+    .option-button.wrong {
+      color: var(--coral);
+      background: var(--coral-soft);
+      border-color: rgba(223, 80, 102, 0.42);
+    }
+
+    .feedback {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-weight: 780;
+    }
+
+    .feedback.good {
+      color: var(--green);
+      background: var(--green-soft);
+      border-color: rgba(22, 132, 95, 0.3);
+    }
+
+    .feedback.bad {
+      color: var(--coral);
+      background: var(--coral-soft);
+      border-color: rgba(223, 80, 102, 0.3);
+    }
+
+    .history {
+      border-top: 1px solid var(--line);
+      padding: 14px 16px;
+      background: var(--surface);
+    }
+
+    .history h3 {
+      margin-bottom: 9px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+
+    .history-list {
+      display: grid;
+      gap: 7px;
+      max-height: 138px;
+      overflow: auto;
+    }
+
+    .history-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 6px 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .history-item strong {
+      color: var(--ink);
+    }
+
+    .history-item.ok strong:last-child {
+      color: var(--green);
+    }
+
+    .history-item.no strong:last-child {
+      color: var(--coral);
+    }
+
+    .empty-state {
+      padding: 18px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: var(--surface);
+      font-weight: 750;
+    }
+
+    .footer {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto 28px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 940px) {
+      .topbar,
+      .shell,
+      .footer {
+        width: min(100% - 24px, 720px);
+      }
+
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .trainer-panel {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .topbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .top-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .config-panel,
+      .quiz-body {
+        padding: 12px;
+      }
+
+      .quiz-head {
+        padding: 12px;
+        align-items: center;
+      }
+
+      .notebook {
+        width: 54px;
+      }
+
+      .score-strip {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .score-strip div {
+        padding: 10px;
+      }
+
+      .prompt h2 {
+        font-size: 2.5rem;
+      }
+
+      .prompt-subject {
+        font-size: 1rem;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .chip-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-height: 260px;
+      }
+
+      .tense-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 420px) {
+      .topbar,
+      .shell,
+      .footer {
+        width: calc(100% - 18px);
+      }
+
+      .brand-mark {
+        width: 44px;
+        height: 44px;
+      }
+
+      .prompt h2 {
+        font-size: 2.1rem;
+      }
+
+      .chip-list,
+      .tense-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .segmented button {
+        flex-basis: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><span>FR</span></div>
+      <div>
+        <h1>Verbes Français</h1>
+        <p class="subtitle">Conjugaison active</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="button ghost" id="exportConfig" type="button" title="Exporter la configuration">
+        <span class="icon" aria-hidden="true">↧</span><span>Exporter</span>
+      </button>
+      <label class="button ghost" for="importConfig" title="Importer la configuration">
+        <span class="icon" aria-hidden="true">↥</span><span>Importer</span>
+      </label>
+      <input class="sr-only" id="importConfig" type="file" accept="application/json,.json">
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="panel config-panel" aria-labelledby="configTitle">
+      <div class="section-head">
+        <h2 id="configTitle">Configuration</h2>
+        <button class="button primary" id="startButton" type="button">Commencer</button>
+      </div>
+
+      <div class="stats-row" aria-live="polite">
+        <span class="pill"><strong id="selectedVerbCount">0</strong> verbes</span>
+        <span class="pill"><strong id="selectedTenseCount">0</strong> temps</span>
+        <span class="pill" id="saveStatus">Sauvegardé</span>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Mode</div>
+        <div class="segmented" id="modeSelector" role="tablist" aria-label="Mode d'exercice">
+          <button type="button" data-mode="random">Aléatoire</button>
+          <button type="button" data-mode="unique">Sans doublon</button>
+          <button type="button" data-mode="ordered">Ordre fixe</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <span>Verbes</span>
+          <span class="field-count" id="visibleVerbCount">0 / 0</span>
+        </div>
+        <div class="toolbar">
+          <input class="search" id="verbSearch" type="search" autocomplete="off" placeholder="Rechercher un verbe">
+          <div class="inline-actions" aria-label="Sélection des verbes">
+            <button type="button" id="selectAllVerbs">Tous</button>
+            <button type="button" id="clearVerbs">Aucun</button>
+          </div>
+        </div>
+        <div class="verb-groups">
+          <div class="verb-group">
+            <h3>Irréguliers <span id="irregularCount">0</span></h3>
+            <div class="chip-list" id="irregularList"></div>
+          </div>
+          <div class="verb-group">
+            <h3>Réguliers <span id="regularCount">0</span></h3>
+            <div class="ending-filters" id="endingFilters" aria-label="Filtrer les verbes réguliers">
+              <button type="button" data-ending="-er">-er</button>
+              <button type="button" data-ending="-ir">-ir</button>
+              <button type="button" data-ending="-re">-re</button>
+            </div>
+            <div class="chip-list" id="regularList"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <span>Temps</span>
+          <span class="field-count">14 / 14</span>
+        </div>
+        <div class="toolbar">
+          <div class="inline-actions" aria-label="Sélection des temps">
+            <button type="button" id="selectAllTenses">Tous</button>
+            <button type="button" id="clearTenses">Aucun</button>
+          </div>
+        </div>
+        <div class="tense-grid" id="tenseGrid"></div>
+      </div>
+    </section>
+
+    <section class="panel trainer-panel" aria-labelledby="quizTitle">
+      <div class="quiz-head">
+        <div class="quiz-title">
+          <svg class="notebook" viewBox="0 0 96 78" role="img" aria-label="Carnet de conjugaison">
+            <rect x="7" y="10" width="68" height="58" rx="7" fill="#ffffff" stroke="#d9e0ea" stroke-width="3"></rect>
+            <rect x="18" y="19" width="45" height="5" rx="2.5" fill="#1769e0"></rect>
+            <rect x="18" y="33" width="36" height="5" rx="2.5" fill="#df5066"></rect>
+            <rect x="18" y="47" width="44" height="5" rx="2.5" fill="#16845f"></rect>
+            <path d="M76 18h9a6 6 0 0 1 6 6v34a6 6 0 0 1-6 6h-9z" fill="#fff3d7" stroke="#d9e0ea" stroke-width="3"></path>
+            <path d="M83 23v36" stroke="#b47612" stroke-width="4" stroke-linecap="round"></path>
+          </svg>
+          <div>
+            <h2 id="quizTitle">Exercice</h2>
+            <p class="subtitle" id="quizSubtitle">Prêt</p>
+          </div>
+        </div>
+        <button class="button ghost" id="resetStats" type="button">Réinitialiser</button>
+      </div>
+
+      <div class="score-strip">
+        <div><span>Score</span><strong id="scoreText">0%</strong></div>
+        <div><span>Questions</span><strong id="questionText">0</strong></div>
+        <div><span>Série</span><strong id="streakText">0</strong></div>
+      </div>
+
+      <div class="quiz-body">
+        <div class="prompt" id="promptArea">
+          <div class="prompt-meta">
+            <span class="tag blue" id="tenseTag">Temps</span>
+            <span class="tag coral" id="personTag">Personne</span>
+          </div>
+          <h2 id="verbPrompt">Choisissez</h2>
+          <p class="prompt-subject" id="subjectPrompt">une configuration</p>
+        </div>
+
+        <div class="options" id="optionsArea"></div>
+
+        <div class="feedback" id="feedback" aria-live="polite">
+          <span id="feedbackText">Sélectionnez des verbes et des temps, puis commencez.</span>
+          <button class="button primary" id="nextButton" type="button" disabled>Suivant</button>
+        </div>
+      </div>
+
+      <div class="history">
+        <h3>Dernières réponses</h3>
+        <div class="history-list" id="historyList">
+          <div class="empty-state">Aucune réponse pour le moment.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Configuration enregistrée dans ce navigateur.</span>
+    <span>Données: Verbuga v2z, Lefff, french-verbs · <a href="NOTICE.md">notices</a>.</span>
+  </footer>
+
+  <script src="verb-data.js"></script>
+  <script>
+    (() => {
+      const DATA = window.FRENCH_TRAINER_DATA;
+      const STORAGE_KEY = "verbes-francais-config-v1";
+      const defaultVerbLabels = new Set(["Être", "Avoir", "Aller", "Faire", "Pouvoir", "Vouloir", "Devoir", "Venir", "Prendre", "Parler", "Finir", "Vendre"]);
+      const defaultTenses = new Set(["present", "passe-compose", "imparfait", "futur-simple"]);
+      const byId = new Map(DATA.verbs.map((verb) => [verb.id, verb]));
+      const tensesById = new Map(DATA.tenses.map((tense) => [tense.id, tense]));
+      const allVerbIds = DATA.verbs.map((verb) => verb.id);
+      const allTenseIds = DATA.tenses.map((tense) => tense.id);
+
+      const els = {
+        selectedVerbCount: document.getElementById("selectedVerbCount"),
+        selectedTenseCount: document.getElementById("selectedTenseCount"),
+        saveStatus: document.getElementById("saveStatus"),
+        visibleVerbCount: document.getElementById("visibleVerbCount"),
+        irregularCount: document.getElementById("irregularCount"),
+        regularCount: document.getElementById("regularCount"),
+        irregularList: document.getElementById("irregularList"),
+        regularList: document.getElementById("regularList"),
+        tenseGrid: document.getElementById("tenseGrid"),
+        verbSearch: document.getElementById("verbSearch"),
+        endingFilters: document.getElementById("endingFilters"),
+        modeSelector: document.getElementById("modeSelector"),
+        startButton: document.getElementById("startButton"),
+        exportConfig: document.getElementById("exportConfig"),
+        importConfig: document.getElementById("importConfig"),
+        selectAllVerbs: document.getElementById("selectAllVerbs"),
+        clearVerbs: document.getElementById("clearVerbs"),
+        selectAllTenses: document.getElementById("selectAllTenses"),
+        clearTenses: document.getElementById("clearTenses"),
+        resetStats: document.getElementById("resetStats"),
+        quizSubtitle: document.getElementById("quizSubtitle"),
+        scoreText: document.getElementById("scoreText"),
+        questionText: document.getElementById("questionText"),
+        streakText: document.getElementById("streakText"),
+        tenseTag: document.getElementById("tenseTag"),
+        personTag: document.getElementById("personTag"),
+        verbPrompt: document.getElementById("verbPrompt"),
+        subjectPrompt: document.getElementById("subjectPrompt"),
+        optionsArea: document.getElementById("optionsArea"),
+        feedback: document.getElementById("feedback"),
+        feedbackText: document.getElementById("feedbackText"),
+        nextButton: document.getElementById("nextButton"),
+        historyList: document.getElementById("historyList")
+      };
+
+      const state = {
+        config: loadConfig(),
+        visibleRegularEndings: new Set(["-er", "-ir", "-re"]),
+        bank: [],
+        queue: [],
+        current: null,
+        answered: false,
+        stats: { asked: 0, correct: 0, streak: 0 },
+        history: []
+      };
+
+      function loadConfig() {
+        try {
+          const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
+          return sanitizeConfig(parsed);
+        } catch {
+          return sanitizeConfig({});
+        }
+      }
+
+      function sanitizeConfig(input) {
+        const selectedVerbIds = Array.isArray(input.selectedVerbIds)
+          ? input.selectedVerbIds.filter((id) => byId.has(id))
+          : DATA.verbs.filter((verb) => defaultVerbLabels.has(verb.label)).map((verb) => verb.id);
+        const selectedTenseIds = Array.isArray(input.selectedTenseIds)
+          ? input.selectedTenseIds.filter((id) => tensesById.has(id))
+          : allTenseIds.filter((id) => defaultTenses.has(id));
+        return {
+          selectedVerbIds: selectedVerbIds.length ? selectedVerbIds : allVerbIds.slice(0, 12),
+          selectedTenseIds: selectedTenseIds.length ? selectedTenseIds : ["present"],
+          mode: ["random", "unique", "ordered"].includes(input.mode) ? input.mode : "random"
+        };
+      }
+
+      function saveConfig() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.config));
+        els.saveStatus.textContent = "Sauvegardé";
+        window.clearTimeout(saveConfig.timer);
+        saveConfig.timer = window.setTimeout(() => {
+          els.saveStatus.textContent = "Auto-save";
+        }, 1000);
+      }
+
+      function render() {
+        renderMode();
+        renderVerbs();
+        renderTenses();
+        updateCounts();
+      }
+
+      function renderMode() {
+        els.modeSelector.querySelectorAll("button").forEach((button) => {
+          button.classList.toggle("active", button.dataset.mode === state.config.mode);
+          button.setAttribute("aria-selected", button.dataset.mode === state.config.mode ? "true" : "false");
+        });
+      }
+
+      function visibleVerbs() {
+        const query = els.verbSearch.value.trim().toLocaleLowerCase("fr-FR");
+        return DATA.verbs.filter((verb) => {
+          const matchesText = !query || `${verb.label} ${verb.infinitive}`.toLocaleLowerCase("fr-FR").includes(query);
+          const matchesEnding = verb.group === "irregular" || state.visibleRegularEndings.has(verb.ending);
+          return matchesText && matchesEnding;
+        });
+      }
+
+      function renderVerbs() {
+        const selected = new Set(state.config.selectedVerbIds);
+        const verbs = visibleVerbs();
+        const irregular = verbs.filter((verb) => verb.group === "irregular");
+        const regular = verbs.filter((verb) => verb.group === "regular");
+        els.irregularList.innerHTML = irregular.map((verb) => chipHtml(verb, selected)).join("") || emptyHtml("Aucun verbe");
+        els.regularList.innerHTML = regular.map((verb) => chipHtml(verb, selected)).join("") || emptyHtml("Aucun verbe");
+        els.irregularCount.textContent = irregular.length;
+        els.regularCount.textContent = regular.length;
+        els.visibleVerbCount.textContent = `${verbs.length} / ${DATA.verbs.length}`;
+        els.endingFilters.querySelectorAll("button").forEach((button) => {
+          button.classList.toggle("active", state.visibleRegularEndings.has(button.dataset.ending));
+        });
+      }
+
+      function chipHtml(verb, selected) {
+        const pressed = selected.has(verb.id) ? "true" : "false";
+        const type = verb.group === "regular" ? verb.ending : "irrégulier";
+        const pro = verb.pronominal ? " · pronominal" : "";
+        return `<button class="chip" type="button" data-verb-id="${verb.id}" aria-pressed="${pressed}">${verb.label}<small>${type}${pro}</small></button>`;
+      }
+
+      function emptyHtml(text) {
+        return `<div class="empty-state">${text}</div>`;
+      }
+
+      function renderTenses() {
+        const selected = new Set(state.config.selectedTenseIds);
+        els.tenseGrid.innerHTML = DATA.tenses.map((tense) => {
+          const pressed = selected.has(tense.id) ? "true" : "false";
+          return `<button class="chip" type="button" data-tense-id="${tense.id}" aria-pressed="${pressed}">${tense.label}<small>${tense.mood}</small></button>`;
+        }).join("");
+      }
+
+      function updateCounts() {
+        els.selectedVerbCount.textContent = state.config.selectedVerbIds.length;
+        els.selectedTenseCount.textContent = state.config.selectedTenseIds.length;
+      }
+
+      function buildBank() {
+        const bank = [];
+        state.config.selectedVerbIds.forEach((verbId) => {
+          const verb = byId.get(verbId);
+          state.config.selectedTenseIds.forEach((tenseId) => {
+            const tense = tensesById.get(tenseId);
+            const rows = DATA.forms[verbId]?.[tenseId] || [];
+            rows.forEach((row) => {
+              bank.push({
+                verbId,
+                tenseId,
+                verb: verb.label,
+                infinitive: verb.infinitive,
+                tense: tense.label,
+                mood: tense.mood,
+                prompt: row.prompt,
+                person: row.person,
+                answer: row.answer
+              });
+            });
+          });
+        });
+        if (state.config.mode === "ordered") {
+          bank.sort((a, b) => `${a.verb} ${a.tenseId} ${a.person}`.localeCompare(`${b.verb} ${b.tenseId} ${b.person}`, "fr"));
+        }
+        return bank;
+      }
+
+      function startExercise() {
+        state.bank = buildBank();
+        state.queue = state.config.mode === "random" ? [] : shuffle([...state.bank]);
+        if (state.config.mode === "ordered") state.queue = [...state.bank];
+        if (!state.bank.length) {
+          setFeedback("bad", "Aucune question disponible avec cette sélection.");
+          return;
+        }
+        state.stats = { asked: 0, correct: 0, streak: 0 };
+        state.history = [];
+        els.quizSubtitle.textContent = `${state.bank.length} formes disponibles`;
+        renderHistory();
+        updateScore();
+        nextQuestion();
+      }
+
+      function nextQuestion() {
+        if (!state.bank.length) {
+          startExercise();
+          return;
+        }
+        if (state.config.mode === "random") {
+          state.current = state.bank[Math.floor(Math.random() * state.bank.length)];
+        } else {
+          if (!state.queue.length) {
+            setFeedback("good", "Série terminée.");
+            els.nextButton.disabled = true;
+            els.optionsArea.innerHTML = "";
+            return;
+          }
+          state.current = state.queue.shift();
+        }
+        state.answered = false;
+        renderQuestion(state.current);
+      }
+
+      function renderQuestion(question) {
+        els.tenseTag.textContent = question.tense;
+        els.personTag.textContent = question.prompt;
+        els.verbPrompt.textContent = question.verb;
+        els.subjectPrompt.textContent = question.mood === "Participe" ? "forme attendue" : `forme pour ${question.prompt}`;
+        els.optionsArea.innerHTML = makeOptions(question).map((option) => (
+          `<button class="option-button" type="button" data-answer="${escapeAttr(option)}">${option}</button>`
+        )).join("");
+        els.nextButton.disabled = true;
+        setFeedback("", "Choisissez la forme correcte.");
+      }
+
+      function makeOptions(question) {
+        const options = new Set([question.answer]);
+        const sameTense = DATA.forms[question.verbId]?.[question.tenseId] || [];
+        sameTense.forEach((row) => {
+          if (row.answer !== question.answer) options.add(row.answer);
+        });
+        Object.entries(DATA.forms[question.verbId] || {}).forEach(([, rows]) => {
+          rows.forEach((row) => {
+            if (row.person === question.person && row.answer !== question.answer) options.add(row.answer);
+          });
+        });
+        const sameSlot = state.bank.filter((item) => item.tenseId === question.tenseId && item.person === question.person);
+        shuffle(sameSlot).slice(0, 20).forEach((item) => {
+          if (item.answer !== question.answer) options.add(item.answer);
+        });
+        while (options.size < 4) {
+          const item = state.bank[Math.floor(Math.random() * state.bank.length)];
+          if (item && item.answer !== question.answer) options.add(item.answer);
+          if (state.bank.length < 4 && options.size >= state.bank.length) break;
+        }
+        const distractors = [...options].filter((item) => item !== question.answer);
+        return shuffle([question.answer, ...shuffle(distractors).slice(0, 3)]);
+      }
+
+      function chooseAnswer(value) {
+        if (!state.current || state.answered) return;
+        state.answered = true;
+        const correct = value === state.current.answer;
+        state.stats.asked += 1;
+        state.stats.correct += correct ? 1 : 0;
+        state.stats.streak = correct ? state.stats.streak + 1 : 0;
+        state.history.unshift({
+          correct,
+          verb: state.current.verb,
+          tense: state.current.tense,
+          prompt: state.current.prompt,
+          answer: state.current.answer,
+          chosen: value
+        });
+        state.history = state.history.slice(0, 8);
+        els.optionsArea.querySelectorAll(".option-button").forEach((button) => {
+          button.disabled = true;
+          if (button.dataset.answer === state.current.answer) button.classList.add("correct");
+          if (button.dataset.answer === value && !correct) button.classList.add("wrong");
+        });
+        setFeedback(correct ? "good" : "bad", correct ? "Correct." : `Réponse: ${state.current.answer}`);
+        els.nextButton.disabled = false;
+        updateScore();
+        renderHistory();
+      }
+
+      function updateScore() {
+        const pct = state.stats.asked ? Math.round((state.stats.correct / state.stats.asked) * 100) : 0;
+        els.scoreText.textContent = `${pct}%`;
+        els.questionText.textContent = `${state.stats.correct}/${state.stats.asked}`;
+        els.streakText.textContent = state.stats.streak;
+      }
+
+      function renderHistory() {
+        if (!state.history.length) {
+          els.historyList.innerHTML = emptyHtml("Aucune réponse pour le moment.");
+          return;
+        }
+        els.historyList.innerHTML = state.history.map((item) => (
+          `<div class="history-item ${item.correct ? "ok" : "no"}"><span><strong>${item.verb}</strong> · ${item.prompt} · ${item.tense}</span><strong>${item.correct ? "juste" : "faux"}</strong></div>`
+        )).join("");
+      }
+
+      function setFeedback(kind, text) {
+        els.feedback.className = `feedback ${kind}`.trim();
+        els.feedbackText.textContent = text;
+      }
+
+      function shuffle(items) {
+        const arr = [...items];
+        for (let i = arr.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      function escapeAttr(value) {
+        return String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+      }
+
+      function toggleVerb(id) {
+        const selected = new Set(state.config.selectedVerbIds);
+        selected.has(id) ? selected.delete(id) : selected.add(id);
+        state.config.selectedVerbIds = [...selected];
+        saveConfig();
+        render();
+      }
+
+      function toggleTense(id) {
+        const selected = new Set(state.config.selectedTenseIds);
+        selected.has(id) ? selected.delete(id) : selected.add(id);
+        state.config.selectedTenseIds = [...selected];
+        saveConfig();
+        render();
+      }
+
+      function exportConfig() {
+        const payload = {
+          app: "Verbes Français",
+          version: 1,
+          exportedAt: new Date().toISOString(),
+          config: state.config,
+          labels: {
+            verbs: state.config.selectedVerbIds.map((id) => byId.get(id)?.label).filter(Boolean),
+            tenses: state.config.selectedTenseIds.map((id) => tensesById.get(id)?.label).filter(Boolean)
+          }
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "configuration-verbes-francais.json";
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function importConfig(file) {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          try {
+            const parsed = JSON.parse(reader.result);
+            state.config = sanitizeConfig(parsed.config || parsed);
+            saveConfig();
+            render();
+            setFeedback("good", "Configuration importée.");
+          } catch {
+            setFeedback("bad", "Fichier JSON invalide.");
+          }
+        });
+        reader.readAsText(file);
+      }
+
+      document.addEventListener("click", (event) => {
+        const verbButton = event.target.closest("[data-verb-id]");
+        const tenseButton = event.target.closest("[data-tense-id]");
+        const optionButton = event.target.closest("[data-answer]");
+        if (verbButton) toggleVerb(verbButton.dataset.verbId);
+        if (tenseButton) toggleTense(tenseButton.dataset.tenseId);
+        if (optionButton) chooseAnswer(optionButton.dataset.answer);
+      });
+
+      els.modeSelector.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-mode]");
+        if (!button) return;
+        state.config.mode = button.dataset.mode;
+        saveConfig();
+        renderMode();
+        if (state.bank.length) startExercise();
+      });
+
+      els.endingFilters.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-ending]");
+        if (!button) return;
+        const ending = button.dataset.ending;
+        state.visibleRegularEndings.has(ending) ? state.visibleRegularEndings.delete(ending) : state.visibleRegularEndings.add(ending);
+        renderVerbs();
+      });
+
+      els.verbSearch.addEventListener("input", renderVerbs);
+      els.startButton.addEventListener("click", startExercise);
+      els.nextButton.addEventListener("click", nextQuestion);
+      els.exportConfig.addEventListener("click", exportConfig);
+      els.importConfig.addEventListener("change", (event) => {
+        const [file] = event.target.files;
+        if (file) importConfig(file);
+        event.target.value = "";
+      });
+      els.selectAllVerbs.addEventListener("click", () => {
+        state.config.selectedVerbIds = [...new Set([...state.config.selectedVerbIds, ...visibleVerbs().map((verb) => verb.id)])];
+        saveConfig();
+        render();
+      });
+      els.clearVerbs.addEventListener("click", () => {
+        const visible = new Set(visibleVerbs().map((verb) => verb.id));
+        state.config.selectedVerbIds = state.config.selectedVerbIds.filter((id) => !visible.has(id));
+        saveConfig();
+        render();
+      });
+      els.selectAllTenses.addEventListener("click", () => {
+        state.config.selectedTenseIds = [...allTenseIds];
+        saveConfig();
+        render();
+      });
+      els.clearTenses.addEventListener("click", () => {
+        state.config.selectedTenseIds = [];
+        saveConfig();
+        render();
+      });
+      els.resetStats.addEventListener("click", () => {
+        state.stats = { asked: 0, correct: 0, streak: 0 };
+        state.history = [];
+        updateScore();
+        renderHistory();
+        setFeedback("", "Score réinitialisé.");
+      });
+
+      render();
+      startExercise();
+    })();
+  </script>
+</body>
+</html>
