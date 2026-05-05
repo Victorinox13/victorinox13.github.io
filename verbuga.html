@@ -146,9 +146,20 @@
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto 26px;
       display: grid;
-      grid-template-columns: minmax(320px, 450px) minmax(0, 1fr);
       gap: 18px;
       align-items: start;
+    }
+
+    .view:not(.active) {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .trainer-panel.view.active {
+      display: grid;
     }
 
     .panel {
@@ -159,10 +170,14 @@
     }
 
     .config-panel {
+      width: min(900px, 100%);
+      margin: 0 auto;
       padding: 16px;
     }
 
     .trainer-panel {
+      width: min(900px, 100%);
+      margin: 0 auto;
       min-height: 640px;
       display: grid;
       grid-template-rows: auto auto 1fr auto;
@@ -280,7 +295,7 @@
     }
 
     .segmented button {
-      flex: 1 1 110px;
+      flex: 1 1 180px;
       border-color: transparent;
       background: transparent;
       font-weight: 800;
@@ -434,6 +449,14 @@
       background: linear-gradient(90deg, #fff 0 70%, var(--blue-soft));
     }
 
+    .quiz-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
     .quiz-title {
       display: flex;
       align-items: center;
@@ -489,6 +512,32 @@
       border-bottom: 1px solid var(--line);
     }
 
+    .tense-banner {
+      margin-bottom: 14px;
+      padding: 14px;
+      border: 1px solid rgba(23, 105, 224, 0.22);
+      border-radius: var(--radius);
+      background: var(--blue-soft);
+    }
+
+    .tense-banner span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .tense-banner strong {
+      display: block;
+      margin-top: 5px;
+      color: var(--blue);
+      font-size: 2rem;
+      line-height: 1.05;
+      letter-spacing: 0;
+      word-break: break-word;
+    }
+
     .prompt-meta {
       display: flex;
       align-items: center;
@@ -540,6 +589,28 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
+    }
+
+    .answer-form {
+      display: none;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+    }
+
+    .answer-form.active {
+      display: grid;
+    }
+
+    .answer-input {
+      min-height: 58px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 0 14px;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--ink);
+      background: var(--surface);
+      min-width: 0;
     }
 
     .option-button {
@@ -737,6 +808,10 @@
         grid-template-columns: 1fr;
       }
 
+      .answer-form {
+        grid-template-columns: 1fr;
+      }
+
       .chip-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         max-height: 260px;
@@ -795,10 +870,10 @@
   </header>
 
   <main class="shell">
-    <section class="panel config-panel" aria-labelledby="configTitle">
+    <section class="panel config-panel view active" id="configView" aria-labelledby="configTitle">
       <div class="section-head">
-        <h2 id="configTitle">Configuration</h2>
-        <button class="button primary" id="startButton" type="button">Commencer</button>
+        <h2 id="configTitle">Configuration des verbes</h2>
+        <button class="button primary" id="startButton" type="button">Commencer l'exercice</button>
       </div>
 
       <div class="stats-row" aria-live="polite">
@@ -810,9 +885,8 @@
       <div class="field">
         <div class="field-label">Mode</div>
         <div class="segmented" id="modeSelector" role="tablist" aria-label="Mode d'exercice">
-          <button type="button" data-mode="random">Aléatoire</button>
-          <button type="button" data-mode="unique">Sans doublon</button>
-          <button type="button" data-mode="ordered">Ordre fixe</button>
+          <button type="button" data-mode="choice">Choisir parmi 4 options</button>
+          <button type="button" data-mode="write">Écrire la forme correcte</button>
         </div>
       </div>
 
@@ -860,7 +934,7 @@
       </div>
     </section>
 
-    <section class="panel trainer-panel" aria-labelledby="quizTitle">
+    <section class="panel trainer-panel view" id="exerciseView" aria-labelledby="quizTitle">
       <div class="quiz-head">
         <div class="quiz-title">
           <svg class="notebook" viewBox="0 0 96 78" role="img" aria-label="Carnet de conjugaison">
@@ -876,7 +950,10 @@
             <p class="subtitle" id="quizSubtitle">Prêt</p>
           </div>
         </div>
-        <button class="button ghost" id="resetStats" type="button">Réinitialiser</button>
+        <div class="quiz-actions">
+          <button class="button ghost" id="backToConfig" type="button">Configuration</button>
+          <button class="button ghost" id="resetStats" type="button">Réinitialiser</button>
+        </div>
       </div>
 
       <div class="score-strip">
@@ -887,8 +964,12 @@
 
       <div class="quiz-body">
         <div class="prompt" id="promptArea">
+          <div class="tense-banner">
+            <span>Temps demandé</span>
+            <strong id="tenseText">Temps</strong>
+          </div>
           <div class="prompt-meta">
-            <span class="tag blue" id="tenseTag">Temps</span>
+            <span class="tag blue" id="modeTag">Mode</span>
             <span class="tag coral" id="personTag">Personne</span>
           </div>
           <h2 id="verbPrompt">Choisissez</h2>
@@ -896,6 +977,11 @@
         </div>
 
         <div class="options" id="optionsArea"></div>
+        <form class="answer-form" id="answerForm" autocomplete="off">
+          <label class="sr-only" for="typedAnswer">Réponse</label>
+          <input class="answer-input" id="typedAnswer" type="text" spellcheck="false" autocapitalize="none" placeholder="Écrivez la forme correcte">
+          <button class="button primary" id="submitAnswer" type="submit">Vérifier</button>
+        </form>
 
         <div class="feedback" id="feedback" aria-live="polite">
           <span id="feedbackText">Sélectionnez des verbes et des temps, puis commencez.</span>
@@ -930,6 +1016,8 @@
       const allTenseIds = DATA.tenses.map((tense) => tense.id);
 
       const els = {
+        configView: document.getElementById("configView"),
+        exerciseView: document.getElementById("exerciseView"),
         selectedVerbCount: document.getElementById("selectedVerbCount"),
         selectedTenseCount: document.getElementById("selectedTenseCount"),
         saveStatus: document.getElementById("saveStatus"),
@@ -949,16 +1037,21 @@
         clearVerbs: document.getElementById("clearVerbs"),
         selectAllTenses: document.getElementById("selectAllTenses"),
         clearTenses: document.getElementById("clearTenses"),
+        backToConfig: document.getElementById("backToConfig"),
         resetStats: document.getElementById("resetStats"),
         quizSubtitle: document.getElementById("quizSubtitle"),
         scoreText: document.getElementById("scoreText"),
         questionText: document.getElementById("questionText"),
         streakText: document.getElementById("streakText"),
-        tenseTag: document.getElementById("tenseTag"),
+        tenseText: document.getElementById("tenseText"),
+        modeTag: document.getElementById("modeTag"),
         personTag: document.getElementById("personTag"),
         verbPrompt: document.getElementById("verbPrompt"),
         subjectPrompt: document.getElementById("subjectPrompt"),
         optionsArea: document.getElementById("optionsArea"),
+        answerForm: document.getElementById("answerForm"),
+        typedAnswer: document.getElementById("typedAnswer"),
+        submitAnswer: document.getElementById("submitAnswer"),
         feedback: document.getElementById("feedback"),
         feedbackText: document.getElementById("feedbackText"),
         nextButton: document.getElementById("nextButton"),
@@ -995,7 +1088,7 @@
         return {
           selectedVerbIds: selectedVerbIds.length ? selectedVerbIds : allVerbIds.slice(0, 12),
           selectedTenseIds: selectedTenseIds.length ? selectedTenseIds : ["present"],
-          mode: ["random", "unique", "ordered"].includes(input.mode) ? input.mode : "random"
+          mode: ["choice", "write"].includes(input.mode) ? input.mode : "choice"
         };
       }
 
@@ -1070,6 +1163,18 @@
         els.selectedTenseCount.textContent = state.config.selectedTenseIds.length;
       }
 
+      function showConfig() {
+        els.configView.classList.add("active");
+        els.exerciseView.classList.remove("active");
+        history.replaceState(null, "", "#configuration");
+      }
+
+      function showExercise() {
+        els.configView.classList.remove("active");
+        els.exerciseView.classList.add("active");
+        history.replaceState(null, "", "#exercice");
+      }
+
       function buildBank() {
         const bank = [];
         state.config.selectedVerbIds.forEach((verbId) => {
@@ -1092,18 +1197,15 @@
             });
           });
         });
-        if (state.config.mode === "ordered") {
-          bank.sort((a, b) => `${a.verb} ${a.tenseId} ${a.person}`.localeCompare(`${b.verb} ${b.tenseId} ${b.person}`, "fr"));
-        }
         return bank;
       }
 
       function startExercise() {
         state.bank = buildBank();
-        state.queue = state.config.mode === "random" ? [] : shuffle([...state.bank]);
-        if (state.config.mode === "ordered") state.queue = [...state.bank];
+        state.queue = [];
         if (!state.bank.length) {
           setFeedback("bad", "Aucune question disponible avec cette sélection.");
+          showConfig();
           return;
         }
         state.stats = { asked: 0, correct: 0, streak: 0 };
@@ -1111,6 +1213,7 @@
         els.quizSubtitle.textContent = `${state.bank.length} formes disponibles`;
         renderHistory();
         updateScore();
+        showExercise();
         nextQuestion();
       }
 
@@ -1119,31 +1222,31 @@
           startExercise();
           return;
         }
-        if (state.config.mode === "random") {
-          state.current = state.bank[Math.floor(Math.random() * state.bank.length)];
-        } else {
-          if (!state.queue.length) {
-            setFeedback("good", "Série terminée.");
-            els.nextButton.disabled = true;
-            els.optionsArea.innerHTML = "";
-            return;
-          }
-          state.current = state.queue.shift();
-        }
+        state.current = state.bank[Math.floor(Math.random() * state.bank.length)];
         state.answered = false;
         renderQuestion(state.current);
       }
 
       function renderQuestion(question) {
-        els.tenseTag.textContent = question.tense;
+        els.tenseText.textContent = question.tense;
+        els.modeTag.textContent = state.config.mode === "write" ? "Écrire" : "4 options";
         els.personTag.textContent = question.prompt;
         els.verbPrompt.textContent = question.verb;
         els.subjectPrompt.textContent = question.mood === "Participe" ? "forme attendue" : `forme pour ${question.prompt}`;
-        els.optionsArea.innerHTML = makeOptions(question).map((option) => (
-          `<button class="option-button" type="button" data-answer="${escapeAttr(option)}">${option}</button>`
-        )).join("");
+        els.optionsArea.innerHTML = "";
+        els.answerForm.classList.toggle("active", state.config.mode === "write");
+        els.typedAnswer.value = "";
+        els.typedAnswer.disabled = false;
+        els.submitAnswer.disabled = false;
+        if (state.config.mode === "choice") {
+          els.optionsArea.innerHTML = makeOptions(question).map((option) => (
+            `<button class="option-button" type="button" data-answer="${escapeAttr(option)}">${option}</button>`
+          )).join("");
+        } else {
+          window.setTimeout(() => els.typedAnswer.focus(), 0);
+        }
         els.nextButton.disabled = true;
-        setFeedback("", "Choisissez la forme correcte.");
+        setFeedback("", state.config.mode === "write" ? "Écrivez la forme correcte." : "Choisissez la forme correcte.");
       }
 
       function makeOptions(question) {
@@ -1173,7 +1276,8 @@
       function chooseAnswer(value) {
         if (!state.current || state.answered) return;
         state.answered = true;
-        const correct = value === state.current.answer;
+        const cleanValue = cleanAnswer(value);
+        const correct = cleanValue.toLocaleLowerCase("fr-FR") === cleanAnswer(state.current.answer).toLocaleLowerCase("fr-FR");
         state.stats.asked += 1;
         state.stats.correct += correct ? 1 : 0;
         state.stats.streak = correct ? state.stats.streak + 1 : 0;
@@ -1183,7 +1287,7 @@
           tense: state.current.tense,
           prompt: state.current.prompt,
           answer: state.current.answer,
-          chosen: value
+          chosen: cleanValue
         });
         state.history = state.history.slice(0, 8);
         els.optionsArea.querySelectorAll(".option-button").forEach((button) => {
@@ -1191,6 +1295,8 @@
           if (button.dataset.answer === state.current.answer) button.classList.add("correct");
           if (button.dataset.answer === value && !correct) button.classList.add("wrong");
         });
+        els.typedAnswer.disabled = true;
+        els.submitAnswer.disabled = true;
         setFeedback(correct ? "good" : "bad", correct ? "Correct." : `Réponse: ${state.current.answer}`);
         els.nextButton.disabled = false;
         updateScore();
@@ -1230,6 +1336,14 @@
 
       function escapeAttr(value) {
         return String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+      }
+
+      function cleanAnswer(value) {
+        return String(value || "")
+          .trim()
+          .replace(/[’‘]/g, "'")
+          .replace(/\s+/g, " ")
+          .replace(/\s*-\s*/g, "-");
       }
 
       function toggleVerb(id) {
@@ -1299,7 +1413,6 @@
         state.config.mode = button.dataset.mode;
         saveConfig();
         renderMode();
-        if (state.bank.length) startExercise();
       });
 
       els.endingFilters.addEventListener("click", (event) => {
@@ -1313,6 +1426,17 @@
       els.verbSearch.addEventListener("input", renderVerbs);
       els.startButton.addEventListener("click", startExercise);
       els.nextButton.addEventListener("click", nextQuestion);
+      els.backToConfig.addEventListener("click", showConfig);
+      els.answerForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const answer = cleanAnswer(els.typedAnswer.value);
+        if (!answer) {
+          setFeedback("bad", "Écrivez une réponse avant de vérifier.");
+          els.typedAnswer.focus();
+          return;
+        }
+        chooseAnswer(answer);
+      });
       els.exportConfig.addEventListener("click", exportConfig);
       els.importConfig.addEventListener("change", (event) => {
         const [file] = event.target.files;
@@ -1349,7 +1473,11 @@
       });
 
       render();
-      startExercise();
+      if (location.hash === "#exercice") {
+        startExercise();
+      } else {
+        showConfig();
+      }
     })();
   </script>
 </body>
