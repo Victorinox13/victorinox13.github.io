@@ -1,479 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victor Deleeck | Astroleck</title>
-  <meta name="description" content="The personal website of Victor Deleeck: indie iOS builder, creator of Astroleck, and maker of Push Unrot.">
-  <style>
-    :root {
-      --bg: #07111f;
-      --bg-soft: #0d1a2d;
-      --panel: rgba(10, 19, 33, 0.78);
-      --panel-strong: rgba(14, 26, 44, 0.92);
-      --text: #f4f7fb;
-      --muted: #9fb1c9;
-      --line: rgba(159, 177, 201, 0.18);
-      --accent: #7ed7ff;
-      --accent-strong: #4cbcff;
-      --accent-warm: #ffd36e;
-      --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top, rgba(126, 215, 255, 0.16), transparent 30%),
-        radial-gradient(circle at 80% 15%, rgba(255, 211, 110, 0.12), transparent 18%),
-        linear-gradient(180deg, #08111f 0%, #0b1627 45%, #060d18 100%);
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .stars,
-    .stars::before,
-    .stars::after {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      content: "";
-      background-image:
-        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.5px),
-        radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1.5px),
-        radial-gradient(circle at 75% 30%, rgba(255, 255, 255, 0.85) 0 1px, transparent 1.5px),
-        radial-gradient(circle at 85% 70%, rgba(255, 255, 255, 0.65) 0 1px, transparent 1.5px),
-        radial-gradient(circle at 55% 55%, rgba(126, 215, 255, 0.95) 0 1px, transparent 1.5px);
-      opacity: 0.7;
-    }
-
-    .stars::before {
-      transform: scale(1.2);
-      opacity: 0.35;
-    }
-
-    .stars::after {
-      transform: scale(1.5);
-      opacity: 0.18;
-    }
-
-    .wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 32px 0 56px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero {
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      background: linear-gradient(180deg, rgba(12, 22, 39, 0.82), rgba(9, 17, 31, 0.94));
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 340px;
-      height: 340px;
-      right: -80px;
-      top: -120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(126, 215, 255, 0.28), transparent 68%);
-      filter: blur(10px);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: rgba(126, 215, 255, 0.1);
-      border: 1px solid rgba(126, 215, 255, 0.16);
-      color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    h1 {
-      margin: 18px 0 14px;
-      max-width: 11ch;
-      font-size: clamp(3rem, 9vw, 6.3rem);
-      line-height: 0.9;
-      letter-spacing: -0.06em;
-    }
-
-    .lead {
-      margin: 0;
-      max-width: 62ch;
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.8;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.55fr 0.95fr;
-      gap: 22px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 50px;
-      padding: 0 18px;
-      border-radius: 14px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .button.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #04111d;
-    }
-
-    .button.secondary {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-      color: var(--text);
-    }
-
-    .status-card {
-      align-self: end;
-      padding: 22px;
-      border-radius: 24px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-    }
-
-    .status-card h2,
-    section h2 {
-      margin: 0 0 12px;
-      font-size: 1rem;
-      letter-spacing: 0.02em;
-    }
-
-    .status-list,
-    .link-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .status-item,
-    .link-item,
-    .card {
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .status-item strong,
-    .link-item strong,
-    .card strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.98rem;
-    }
-
-    .status-item span,
-    .link-item span,
-    .card p,
-    .mini {
-      color: var(--muted);
-      line-height: 1.65;
-      margin: 0;
-    }
-
-    .sections {
-      display: grid;
-      gap: 22px;
-      margin-top: 22px;
-    }
-
-    .panel {
-      padding: 24px;
-      border-radius: 28px;
-      background: var(--panel-strong);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 22px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 16px;
-    }
-
-    .socials {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .social {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .social span:last-child {
-      color: var(--accent);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .note {
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.7;
-    }
-
-    footer {
-      margin-top: 18px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    @media (max-width: 880px) {
-      .hero-grid,
-      .two-col,
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        max-width: none;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .wrap {
-        width: min(100% - 20px, 1120px);
-        padding-top: 18px;
-      }
-
-      .hero,
-      .panel {
-        padding: 20px;
-        border-radius: 22px;
-      }
-
-      h1 {
-        font-size: 2.9rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor Deleeck | Astroleck</title>
+<meta name="description" content="The personal website of Victor Deleeck: indie iOS builder, creator of Astroleck, and maker of Push Unrot.">
+<style>
+:root {
+--bg: #07111f;
+--bg-soft: #0d1a2d;
+--panel: rgba(10, 19, 33, 0.78);
+--panel-strong: rgba(14, 26, 44, 0.92);
+--text: #f4f7fb;
+--muted: #9fb1c9;
+--line: rgba(159, 177, 201, 0.18);
+--accent: #7ed7ff;
+--accent-strong: #4cbcff;
+--accent-warm: #ffd36e;
+--shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+margin: 0;
+font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+color: var(--text);
+background:
+radial-gradient(circle at top, rgba(126, 215, 255, 0.16), transparent 30%),
+radial-gradient(circle at 80% 15%, rgba(255, 211, 110, 0.12), transparent 18%),
+linear-gradient(180deg, #08111f 0%, #0b1627 45%, #060d18 100%);
+min-height: 100vh;
+}
+a { color: inherit; }
+.stars, .stars::before, .stars::after {
+position: fixed; inset: 0; pointer-events: none; content: "";
+background-image:
+radial-gradient(circle at 10% 20%, rgba(255,255,255,0.9) 0 1px, transparent 1.5px),
+radial-gradient(circle at 30% 80%, rgba(255,255,255,0.75) 0 1px, transparent 1.5px),
+radial-gradient(circle at 75% 30%, rgba(255,255,255,0.85) 0 1px, transparent 1.5px),
+radial-gradient(circle at 85% 70%, rgba(255,255,255,0.65) 0 1px, transparent 1.5px),
+radial-gradient(circle at 55% 55%, rgba(126,215,255,0.95) 0 1px, transparent 1.5px);
+opacity: 0.7;
+}
+.stars::before { transform: scale(1.2); opacity: 0.35; }
+.stars::after  { transform: scale(1.5); opacity: 0.18; }
+.wrap {
+width: min(1120px, calc(100% - 32px));
+margin: 0 auto; padding: 32px 0 56px; position: relative; z-index: 1;
+}
+.hero {
+padding: 28px; border: 1px solid var(--line); border-radius: 30px;
+background: linear-gradient(180deg, rgba(12,22,39,0.82), rgba(9,17,31,0.94));
+box-shadow: var(--shadow); overflow: hidden; position: relative;
+}
+.hero::after {
+content: ""; position: absolute; width: 340px; height: 340px;
+right: -80px; top: -120px; border-radius: 50%;
+background: radial-gradient(circle, rgba(126,215,255,0.28), transparent 68%);
+filter: blur(10px);
+}
+.eyebrow {
+display: inline-flex; align-items: center; gap: 10px;
+padding: 9px 14px; border-radius: 999px;
+background: rgba(126,215,255,0.1); border: 1px solid rgba(126,215,255,0.16);
+color: var(--accent); font-size: 0.82rem; font-weight: 700;
+text-transform: uppercase; letter-spacing: 0.08em;
+}
+h1 {
+margin: 18px 0 14px; max-width: 11ch;
+font-size: clamp(3rem, 9vw, 6.3rem); line-height: 0.9; letter-spacing: -0.06em;
+}
+.lead {
+margin: 0; max-width: 62ch; color: var(--muted);
+font-size: 1.08rem; line-height: 1.8;
+}
+.hero-grid {
+display: grid; grid-template-columns: 1.55fr 0.95fr;
+gap: 22px; position: relative; z-index: 1;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.button {
+display: inline-flex; align-items: center; justify-content: center;
+min-height: 50px; padding: 0 18px; border-radius: 14px;
+text-decoration: none; font-weight: 700;
+transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.button:hover { transform: translateY(-2px); }
+.button.primary {
+background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+color: #04111d;
+}
+.button.secondary {
+background: rgba(255,255,255,0.04);
+border: 1px solid var(--line); color: var(--text);
+}
+.button.bio {
+background: linear-gradient(135deg, #a8edca, #4ccc8f);
+color: #04111d;
+}
+.status-card {
+align-self: end; padding: 22px; border-radius: 24px;
+background: var(--panel); border: 1px solid var(--line);
+backdrop-filter: blur(12px);
+}
+.status-card h2, section h2 { margin: 0 0 12px; font-size: 1rem; letter-spacing: 0.02em; }
+.status-list, .link-list { display: grid; gap: 12px; }
+.status-item, .link-item, .card {
+padding: 16px 18px; border-radius: 18px;
+background: rgba(255,255,255,0.04);
+border: 1px solid rgba(255,255,255,0.06);
+}
+.status-item strong, .link-item strong, .card strong {
+display: block; margin-bottom: 6px; font-size: 0.98rem;
+}
+.status-item span, .link-item span, .card p, .mini {
+color: var(--muted); line-height: 1.65; margin: 0;
+}
+/* Highlight card for studieplatform */
+.card.highlight {
+border: 1px solid rgba(168, 237, 202, 0.35);
+background: rgba(76, 204, 143, 0.07);
+}
+.card.highlight strong { color: #a8edca; }
+.tag {
+display: inline-block; margin-bottom: 8px;
+padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+text-transform: uppercase; letter-spacing: 0.06em;
+background: rgba(168,237,202,0.15); color: #a8edca;
+border: 1px solid rgba(168,237,202,0.25);
+}
+.sections { display: grid; gap: 22px; margin-top: 22px; }
+.panel {
+padding: 24px; border-radius: 28px;
+background: var(--panel-strong); border: 1px solid var(--line);
+box-shadow: var(--shadow);
+}
+.two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 22px; }
+.cards {
+display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 14px; margin-top: 16px;
+}
+.socials { display: grid; gap: 12px; margin-top: 16px; }
+.social {
+display: flex; justify-content: space-between;
+gap: 16px; align-items: center; text-decoration: none;
+}
+.social span:last-child { color: var(--accent); font-weight: 700; white-space: nowrap; }
+.note {
+margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line);
+color: var(--muted); font-size: 0.92rem; line-height: 1.7;
+}
+footer { margin-top: 18px; text-align: center; color: var(--muted); font-size: 0.92rem; }
+@media (max-width: 880px) {
+.hero-grid, .two-col, .cards { grid-template-columns: 1fr; }
+h1 { max-width: none; }
+}
+@media (max-width: 640px) {
+.wrap { width: min(100% - 20px, 1120px); padding-top: 18px; }
+.hero, .panel { padding: 20px; border-radius: 22px; }
+h1 { font-size: 2.9rem; }
+}
+</style>
 </head>
 <body>
-  <div class="stars" aria-hidden="true"></div>
-  <div class="wrap">
-    <header class="hero">
-      <div class="hero-grid">
-        <div>
-          <span class="eyebrow">Astroleck · Victorinox13</span>
-          <h1>Victor Deleeck</h1>
-          <p class="lead">
-            I am an indie builder and creator working on practical iPhone apps, public
-            experiments, and Astroleck: my space for astronomy, spaceflight, and aviation.
-            This is the front door for what I make and where to follow it.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="https://www.tiktok.com/@astroleck">Follow on TikTok</a>
-            <a class="button secondary" href="https://linktr.ee/astroleck">Open Linktree</a>
-            <a class="button secondary" href="verbuga.html">Verbuga</a>
-            <a class="button secondary" href="https://github.com/Victorinox13">GitHub</a>
-          </div>
-        </div>
+<div class="stars" aria-hidden="true"></div>
+<div class="wrap">
 
-        <aside class="status-card" aria-label="Quick snapshot">
-          <h2>At a glance</h2>
-          <div class="status-list">
-            <div class="status-item">
-              <strong>Victor Deleeck</strong>
-              <span>Personal site for my apps, creator work, and public project links.</span>
-            </div>
-            <div class="status-item">
-              <strong>Astroleck</strong>
-              <span>Inspiring people about astronomy, spaceflight, and aviation.</span>
-            </div>
-            <div class="status-item">
-              <strong>Push Unrot</strong>
-              <span>An iPhone productivity app that makes screen time something you earn with pushups.</span>
-            </div>
-          </div>
-        </aside>
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Astroleck · Victorinox13</span>
+        <h1>Victor Deleeck</h1>
+        <p class="lead">
+          I am an indie builder and creator working on practical iPhone apps, public
+          experiments, and Astroleck: my space for astronomy, spaceflight, and aviation.
+          This is the front door for what I make and where to follow it.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://www.tiktok.com/@astroleck">Follow on TikTok</a>
+          <a class="button secondary" href="https://linktr.ee/astroleck">Open Linktree</a>
+          <a class="button secondary" href="verbuga.html">Verbuga</a>
+          <a class="button bio" href="biologie-studieplatform.html">🧬 Bio Studieplatform</a>
+          <a class="button secondary" href="https://github.com/Victorinox13">GitHub</a>
+        </div>
       </div>
-    </header>
-
-    <main class="sections">
-      <section class="panel two-col">
-        <div>
-          <h2>About</h2>
-          <p class="lead">
-            I like building things that make a simple idea feel concrete. On the software
-            side, that currently means iPhone apps around habits, focus, and useful friction.
-            On the creator side, Astroleck is where I share space, aviation, and astronomy
-            with people who are curious about the sky and the machines that reach it.
-          </p>
-          <div class="cards">
-            <article class="card">
-              <strong>Product mindset</strong>
-              <p>Small, practical tools with clear value and enough friction to change a habit.</p>
-            </article>
-            <article class="card">
-              <strong>Creator focus</strong>
-              <p>Astronomy, spaceflight, aviation, skywatching, and curiosity-driven learning.</p>
-            </article>
+      <aside class="status-card" aria-label="Quick snapshot">
+        <h2>At a glance</h2>
+        <div class="status-list">
+          <div class="status-item">
+            <strong>Victor Deleeck</strong>
+            <span>Personal site for my apps, creator work, and public project links.</span>
+          </div>
+          <div class="status-item">
+            <strong>Astroleck</strong>
+            <span>Inspiring people about astronomy, spaceflight, and aviation.</span>
+          </div>
+          <div class="status-item">
+            <strong>Push Unrot</strong>
+            <span>An iPhone productivity app that makes screen time something you earn with pushups.</span>
           </div>
         </div>
+      </aside>
+    </div>
+  </header>
 
-        <div>
-          <h2>Find me</h2>
-          <div class="socials">
-            <a class="link-item social" href="https://www.tiktok.com/@astroleck">
-              <span>
-                <strong>TikTok</strong>
-                <span class="mini">@astroleck</span>
-              </span>
-              <span>Visit</span>
-            </a>
-            <a class="link-item social" href="https://linktr.ee/astroleck">
-              <span>
-                <strong>Linktree</strong>
-                <span class="mini">YouTube, Discord, gear links, and Astroleck links</span>
-              </span>
-              <span>Open</span>
-            </a>
-            <a class="link-item social" href="https://github.com/Victorinox13">
-              <span>
-                <strong>GitHub</strong>
-                <span class="mini">Code, experiments, and this website</span>
-              </span>
-              <span>Browse</span>
-            </a>
-          </div>
-        </div>
-      </section>
+  <main class="sections">
 
-      <section class="panel">
-        <h2>Projects</h2>
+    <section class="panel two-col">
+      <div>
+        <h2>About</h2>
+        <p class="lead">
+          I like building things that make a simple idea feel concrete. On the software
+          side, that currently means iPhone apps around habits, focus, and useful friction.
+          On the creator side, Astroleck is where I share space, aviation, and astronomy
+          with people who are curious about the sky and the machines that reach it.
+        </p>
         <div class="cards">
           <article class="card">
-            <strong>Push Unrot - Screentime Block</strong>
-            <p>
-              A free iPhone productivity app for people who want a harder barrier between
-              themselves and compulsive scrolling. It locks distracting apps and lets you
-              unlock screen time by completing real pushups counted with the camera.
-            </p>
-            <p class="note">
-              App Store listing: Productivity, iPhone, English, age rating 9+, data not collected.
-              <a href="https://apps.apple.com/in/app/push-unrot-screentime-block/id6762221005">View on the App Store</a>
-            </p>
+            <strong>Product mindset</strong>
+            <p>Small, practical tools with clear value and enough friction to change a habit.</p>
           </article>
           <article class="card">
-            <strong>Astroleck</strong>
-            <p>
-              My creator identity for astronomy, spaceflight, and aviation. Public links point
-              to TikTok, YouTube, a Discord server, and skywatching gear around the Astroleck
-              project.
-            </p>
-            <p class="note">
-              <a href="https://www.tiktok.com/@astroleck">TikTok</a> ·
-              <a href="https://linktr.ee/astroleck">Linktree</a>
-            </p>
+            <strong>Creator focus</strong>
+            <p>Astronomy, spaceflight, aviation, skywatching, and curiosity-driven learning.</p>
           </article>
         </div>
-      </section>
-
-      <section class="panel two-col">
-        <div>
-          <h2>Public footprint</h2>
-          <div class="link-list">
-            <a class="link-item social" href="https://www.tiktok.com/@astroleck">
-              <span>
-                <strong>Astroleck TikTok</strong>
-                <span class="mini">Short-form space, astronomy, and aviation content.</span>
-              </span>
-              <span>Visit</span>
-            </a>
-            <a class="link-item social" href="https://linktr.ee/astroleck">
-              <span>
-                <strong>Astroleck Linktree</strong>
-                <span class="mini">Public hub for TikTok, YouTube, Discord, and gear links.</span>
-              </span>
-              <span>Open</span>
-            </a>
-            <a class="link-item social" href="https://victorinox13.github.io/app-ads.txt">
-              <span>
-                <strong>app-ads.txt</strong>
-                <span class="mini">Advertising authorization file for published apps.</span>
-              </span>
-              <span>Open</span>
-            </a>
-          </div>
+      </div>
+      <div>
+        <h2>Find me</h2>
+        <div class="socials">
+          <a class="link-item social" href="https://www.tiktok.com/@astroleck">
+            <span>
+              <strong>TikTok</strong>
+              <span class="mini">@astroleck</span>
+            </span>
+            <span>Visit</span>
+          </a>
+          <a class="link-item social" href="https://linktr.ee/astroleck">
+            <span>
+              <strong>Linktree</strong>
+              <span class="mini">YouTube, Discord, gear links, and Astroleck links</span>
+            </span>
+            <span>Open</span>
+          </a>
+          <a class="link-item social" href="https://github.com/Victorinox13">
+            <span>
+              <strong>GitHub</strong>
+              <span class="mini">Code, experiments, and this website</span>
+            </span>
+            <span>Browse</span>
+          </a>
         </div>
-        <div>
-          <h2>What this site is for</h2>
-          <p class="lead">
-            This page is a personal profile for Victor Deleeck. It brings together my developer
-            identity, Astroleck creator links, and public app support information in one place.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Projects</h2>
+      <div class="cards">
+        <article class="card">
+          <strong>Push Unrot - Screentime Block</strong>
+          <p>
+            A free iPhone productivity app for people who want a harder barrier between
+            themselves and compulsive scrolling. It locks distracting apps and lets you
+            unlock screen time by completing real pushups counted with the camera.
           </p>
-        </div>
-      </section>
-    </main>
+          <p class="note">
+            App Store listing: Productivity, iPhone, English, age rating 9+, data not collected.
+            <a href="https://apps.apple.com/in/app/push-unrot-screentime-block/id6762221005">View on the App Store</a>
+          </p>
+        </article>
+        <article class="card">
+          <strong>Astroleck</strong>
+          <p>
+            My creator identity for astronomy, spaceflight, and aviation. Public links point
+            to TikTok, YouTube, a Discord server, and skywatching gear around the Astroleck
+            project.
+          </p>
+          <p class="note">
+            <a href="https://www.tiktok.com/@astroleck">TikTok</a> ·
+            <a href="https://linktr.ee/astroleck">Linktree</a>
+          </p>
+        </article>
+        <article class="card highlight">
+          <div class="tag">Studieplatform</div>
+          <strong>Biologie — Compleet studieplatform 6de jaar</strong>
+          <p>
+            Interactief oefenplatform voor het biologie-examen: evolutie, genetisch materiaal,
+            van gen tot eiwit, genetica en voortplanting. 142 vragen, 107 begrippen,
+            33 figuren uit de cursus — met gemixte modus en woordenschattrainer.
+          </p>
+          <p class="note">
+            <a href="biologie-studieplatform.html" style="color:#a8edca;font-weight:700;">Open het studieplatform →</a>
+          </p>
+        </article>
+      </div>
+    </section>
 
-    <footer>
-      © 2026 Victor Deleeck
-    </footer>
-  </div>
+    <section class="panel two-col">
+      <div>
+        <h2>Public footprint</h2>
+        <div class="link-list">
+          <a class="link-item social" href="https://www.tiktok.com/@astroleck">
+            <span>
+              <strong>Astroleck TikTok</strong>
+              <span class="mini">Short-form space, astronomy, and aviation content.</span>
+            </span>
+            <span>Visit</span>
+          </a>
+          <a class="link-item social" href="https://linktr.ee/astroleck">
+            <span>
+              <strong>Astroleck Linktree</strong>
+              <span class="mini">Public hub for TikTok, YouTube, Discord, and gear links.</span>
+            </span>
+            <span>Open</span>
+          </a>
+          <a class="link-item social" href="https://victorinox13.github.io/app-ads.txt">
+            <span>
+              <strong>app-ads.txt</strong>
+              <span class="mini">Advertising authorization file for published apps.</span>
+            </span>
+            <span>Open</span>
+          </a>
+          <a class="link-item social" href="biologie-studieplatform.html">
+            <span>
+              <strong>🧬 Bio Studieplatform</strong>
+              <span class="mini">Interactief studieplatform biologie 6de jaar.</span>
+            </span>
+            <span>Open</span>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h2>What this site is for</h2>
+        <p class="lead">
+          This page is a personal profile for Victor Deleeck. It brings together my developer
+          identity, Astroleck creator links, and public app support information in one place.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Victor Deleeck
+  </footer>
+
+</div>
 </body>
 </html>
