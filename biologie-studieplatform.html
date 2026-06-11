@@ -737,7 +737,21 @@ const vocab=[
   ["Oxytocine","Hormoon dat de baarmoedersamentrekkingen (weeën) op gang brengt tijdens de bevalling.","vrt"],
   ["Ontsluitingsfase","Eerste fase van de bevalling: weeën openen de baarmoederhals tot 10 cm.","vrt"],
   ["Uitdrijvingsfase","Tweede fase van de bevalling: persweeën duwen de baby naar buiten.","vrt"],
-  ["Nageboorte","Derde fase van de bevalling: placenta, navelstreng en vruchtzak worden uitgedreven.","vrt"]
+  ["Nageboorte","Derde fase van de bevalling: placenta, navelstreng en vruchtzak worden uitgedreven.","vrt"],
+  ["Oestrogeen","Vrouwelijk geslachtshormoon aangemaakt door de eierstokken; bevordert innesteling en groei van de baarmoeder.","vrt"],
+  ["Progesteron","Vrouwelijk geslachtshormoon; houdt de zwangerschap in stand en zorgt dat er geen nieuwe eicel rijpt.","vrt"],
+  ["Baarmoederslijmvlies","De binnenste laag van de baarmoeder waar het embryo innesteelt.","vrt"],
+  ["Baarmoederhals","Het onderste deel van de baarmoeder; bevat een slijmprop die de baarmoeder beschermt.","vrt"],
+  ["SIDS (wiegendood)","Sudden Infant Death Syndrome; plotselinge onverklaarbare dood van een baby; risico vergroot door roken.","vrt"],
+  ["FAS (foetaal alcoholsyndroom)","Afwijkingen bij een kind (gelaatsafwijkingen, mentale achterstand) door alcoholgebruik van de moeder tijdens zwangerschap.","vrt"],
+  ["Toxoplasmose","Infectie door Toxoplasma gondii (parasiet via katten/rauw vlees); gevaarlijk voor embryo: blindheid, mentale achterstand.","vrt"],
+  ["CMV (cytomegalovirus)","Virus via speeksel/urine; geen vaccin; gevaarlijk voor het embryo bij infectie tijdens zwangerschap.","vrt"],
+  ["Rubella (rodehond)","Virus dat vroeg in zwangerschap kan leiden tot doofheid, hartafwijkingen; grotendeels voorkomen door vaccinatie.","vrt"],
+  ["Onvruchtbaarheid","Geen zwangerschap na ≥1 jaar regelmatig vrijen zonder anticonceptie.","vrt"],
+  ["KI (kunstmatige inseminatie)","Zaadcellen worden via katheter in de baarmoeder gebracht vlak voor het vruchtbare moment.","vrt"],
+  ["IVF (in-vitrofertilisatie)","Bevruchting in het labo; eicellen worden operatief gehaald, bevrucht en als embryo teruggeplaatst.","vrt"],
+  ["ICSI","Intracytoplasmatische sperma-injectie: één zaadcel rechtstreeks in de eicel gebracht. Gebruikt bij verlaagde mannelijke vruchtbaarheid.","vrt"],
+  ["Embryotransfer","Het terugplaatsen van een bevruchte eicel (embryo) in de baarmoeder na IVF.","vrt"]
 ];
 
 // ==================== GENETICA THEORIE ====================
@@ -864,9 +878,10 @@ const vrtTheory = [
         <li><strong>Bijballen</strong>: rijping en opslag van zaadcellen.</li>
         <li><strong>Zaadleiders</strong>: transport naar de urinebuis.</li>
         <li><strong>Zaadblaasjes</strong>: produceren zaadvocht (basisch → beschermt tegen zure milieu vagina, bevat fructose).</li>
-        <li><strong>Prostaat</strong>: voegt prostaatvocht toe (voedingsstoffen, activeert zaadcellen). Zaadcellen + zaadvocht + prostaatvocht = <span class="kw">sperma</span>.</li>
+        <li><strong>Prostaat</strong>: voegt prostaatvocht toe. Zaadcellen + zaadvocht + prostaatvocht = <span class="kw">sperma</span>.</li>
+        <li><strong>Klieren van Cowper</strong>: produceren voorvocht vóór de ejaculatie.</li>
       </ul>
-      <p>Hormoonregeling: hypothalamus → GnRH → hypofyse → FSH (stimuleert zaadcelvorming via cellen van Sertoli) + LH (stimuleert testosteronproductie via cellen van Leydig). <span class="kw">Negatieve terugkoppeling</span> houdt de testosteronspiegel constant.</p>`},
+`},
   ]},
   {num:"5",title:"Van bevruchting tot geboorte",items:[
     {id:"5.1",t:"Van voortplantingscel naar zygote tot embryo",lvl:"gl",fig:"vrt_klievings",cap:"Klievingsdelingen: van zygote via morula tot blastula in de baarmoeder",body:`
@@ -910,6 +925,46 @@ const vrtTheory = [
       </ul>
       <p><span class="kw">Foliumzuur</span> (vitamine B11): het lichaam heeft dit in grote hoeveelheden nodig in de eerste 5 weken. Tekort verhoogt het risico op een open ruggengraat of hazenlip.</p>`},
   ]},
+,
+  {num:"4",title:"Het vrouwelijk voortplantingsstelsel",items:[
+    {id:"4.1",t:"Bouw en functie (organen kennen — eierstokcyclus NIET kennen)",lvl:"gl",body:`
+      <p><em>Grondig lezen.</em> <strong>⚠️ Opgelet:</strong> de eierstokcyclus (4.2) en p.56 zijn <strong>NIET te kennen</strong>.</p>
+      <ul>
+        <li><strong>Vagina</strong>: rekbaar kanaalvormig orgaan (~8 cm); geboortekanaal; deels bedekt door het maagdenvlies.</li>
+        <li><strong>Baarmoeder</strong>: gespierd orgaan; binnenste laag = <span class="kw">baarmoederslijmvlies</span>. Onderste deel = <span class="kw">baarmoederhals</span> met slijmprop. <span class="kw">Baarmoedermond</span> = ingang voor het embryo.</li>
+        <li><strong>Eileiders</strong>: vangen eitje op na eisprong; trilhaartjes bewegen eitje naar baarmoeder. Bevruchting vindt hier plaats.</li>
+        <li><strong>Eierstokken</strong>: rijping eicellen + aanmaak <span class="kw">oestrogeen</span> en <span class="kw">progesteron</span>.</li>
+      </ul>`}
+  ]},
+  {num:"6b",title:"Chemische en biologische factoren (6.2 + 6.3)",items:[
+    {id:"6.2",t:"Chemische factoren (roken, alcohol, medicatie)",lvl:"gl",body:`
+      <p><em>Grondig lezen.</em></p>
+      <ul>
+        <li><strong>Roken</strong>: nicotine vertraagt de zygote in de eileider → risico buitenbaarmoederlijke zwangerschap. CO vermindert zuurstof naar placenta → vroeggeboorte, miskraam. Na de bevalling: verhoogd risico op <span class="kw">SIDS</span> (wiegendood).</li>
+        <li><strong>Alcohol</strong>: zelfs kleine hoeveelheden schadelijk → <span class="kw">foetaal alcoholsyndroom (FAS)</span>: gelaatsafwijkingen, mentale achterstand.</li>
+        <li><strong>Medicatie</strong>: passeert placenta — altijd arts raadplegen. Voorbeeld: thalidomide (Softenon) → misvormde ledematen bij embryo's.</li>
+        <li><strong>Drugs</strong>: passeren placenta; baby's van verslaafde moeders moeten na geboorte afkicken.</li>
+        <li><strong>Hormoonverstoorders</strong>: stoffen in verpakkingen/pesticiden (bv. bisfenol A) die hormoonwerking verstoren.</li>
+      </ul>`},
+    {id:"6.3",t:"Biologische factoren – ziekteverwekkers",lvl:"gl",body:`
+      <p><em>Grondig lezen.</em> De zwangere vrouw is gevoeliger voor infecties. Sommige ziekteverwekkers passeren de placenta.</p>
+      <ul>
+        <li><strong>CMV (cytomegalovirus)</strong>: via speeksel/urine. Geen vaccin. Goede handhygiëne is bescherming.</li>
+        <li><strong>Toxoplasmose</strong>: parasiet via kattenurine, rauw vlees, besmette groenten → blindheid, mentale achterstand bij embryo. Preventie: goed bakken, spoelen, kattenbak vermijden.</li>
+        <li><strong>Zikavirus</strong>: via muggen + seksueel contact → abnormaal kleine schedel, cognitieve problemen.</li>
+        <li><strong>Rubella</strong>: vroeg in zwangerschap → miskraam, doofheid, hartafwijkingen. Grotendeels voorkomen door vaccinatie.</li>
+      </ul>`}
+  ]},
+  {num:"7",title:"Stimulatie van de vruchtbaarheid",items:[
+    {id:"7.1",t:"TI, KI, IVF en ICSI",lvl:"gl",body:`
+      <p><em>Grondig lezen.</em> <span class="kw">Onvruchtbaarheid</span>: geen zwangerschap na ≥1 jaar regelmatig vrijen zonder anticonceptie.</p>
+      <ul>
+        <li><span class="kw">TI (Timed intercourse)</span>: gynaecoloog bepaalt via echografie + bloedonderzoek het vruchtbaarste moment.</li>
+        <li><span class="kw">KI (Kunstmatige inseminatie)</span>: zaadcellen via katheter in baarmoeder gebracht vlak voor het vruchtbare moment.</li>
+        <li><span class="kw">IVF (In-vitrofertilisatie)</span>: bevruchting in het labo. Eicellen operatief gehaald → bevrucht → na 1 dag: <span class="kw">embryotransfer</span> naar de baarmoeder.</li>
+        <li><span class="kw">ICSI</span>: één zaadcel rechtstreeks in de eicel. Gebruikt bij verlaagde mannelijke vruchtbaarheid.</li>
+      </ul>`}
+  ]}
 ];
 
 // ==================== VOORTPLANTING VRAGEN ====================
@@ -917,12 +972,6 @@ const vrtQ = [
   {type:"tf",q:"Via geslachtelijke voortplanting ontstaat een nieuwe combinatie van genen.",cor:true,fb:"Correct — bij geslachtelijke voortplanting worden gameten van twee ouders gecombineerd, wat nieuwe genetische combinaties oplevert.",chap:"vrt"},
   {type:"tf",q:"Ongeslachtelijke voortplanting vraagt meer energie dan geslachtelijke voortplanting.",cor:false,fb:"Fout. <b>Geslachtelijke</b> voortplanting kost meer energie (zoeken partner, aanmaken geslachtscellen). Ongeslachtelijke voortplanting is sneller en energiezuiniger.",chap:"vrt"},
   {type:"mc",q:"Welke chromosomen bepalen het biologisch geslacht bij de mens?",opts:["chromosomen 22 en 23","de autosomen","de geslachtschromosomen X en Y","het Y-chromosoom alleen"],cor:2,expl:"Het <b>23ste chromosomenpaar</b> zijn de geslachtschromosomen: XX = vrouw, XY = man.",chap:"vrt"},
-  {type:"mc",q:"Waar worden zaadcellen geproduceerd?",opts:["in de bijballen","in de teelballen (testes)","in de zaadleiders","in de prostaat"],cor:1,expl:"Zaadcellen worden geproduceerd in de <b>teelballen (testes)</b>, die in de balzak liggen voor een lagere temperatuur.",chap:"vrt"},
-  {type:"mc",q:"Welke functie hebben de bijballen?",opts:["productie van testosteron","productie van zaadcellen","rijping en opslag van zaadcellen","transport van zaadcellen naar de urinebuis"],cor:2,expl:"De <b>bijballen</b> zorgen voor de <b>rijping en opslag</b> van zaadcellen.",chap:"vrt"},
-  {type:"tf",q:"Zaadvocht heeft een basische zuurgraad die de zaadcellen beschermt tegen het zure milieu van de vagina.",cor:true,fb:"Correct — de zaadblaasjes produceren basisch zaadvocht om de zaadcellen te beschermen in het zure vaginale milieu.",chap:"vrt"},
-  {type:"fill",q:"Zaadcellen, zaadvocht en prostaatvocht samen noemen we …",acc:["sperma"],ans:"sperma",chap:"vrt"},
-  {type:"mc",q:"Welk hormoon stimuleert de testosteronproductie door de cellen van Leydig?",opts:["FSH","LH","GnRH","oestrogeen"],cor:1,expl:"<b>LH</b> (luteïniserend hormoon) stimuleert de cellen van Leydig in de teelballen om testosteron te produceren.",chap:"vrt"},
-  {type:"tf",q:"Testosteron zorgt alleen voor de aanmaak van zaadcellen.",cor:false,fb:"Fout. FSH stimuleert via de cellen van Sertoli de zaadcelvorming. Testosteron heeft veel bredere effecten (secundaire geslachtskenmerken, libido...). Beide hormonen werken samen.",chap:"vrt"},
   {type:"mc",q:"Wat is de bevruchting?",opts:["de innesteling van de blastula in het baarmoederslijmvlies","het versmelten van de kernen van een zaadcel en een eicel","de eisprong (ovulatie)","de eerste klievingsdeling van de zygote"],cor:1,expl:"Bevruchting = het versmelten van de haploïde kernen van zaadcel en eicel → <b>zygote</b> (diploïd).",chap:"vrt"},
   {type:"tf",q:"De eerste delingen van de bevruchte eicel heten klievingsdelingen.",cor:true,fb:"Correct — de zygote deelt zich via klievingsdelingen. De cellen worden telkens kleiner na elke deling.",chap:"vrt"},
   {type:"mc",q:"Wanneer zijn de cellen van het embryo het gevoeligst voor teratogenen?",opts:["in trimester 3, wanneer de organen rijpen","in trimester 2, wanneer de foetus het snelst groeit","in trimester 1 (embryonale fase), wanneer alle organen worden aangelegd","meteen na de geboorte"],cor:2,expl:"In het eerste trimester worden alle organen aangelegd — de cellen zijn dan het actiefst en het gevoeligst voor teratogenen.",chap:"vrt"},
@@ -934,6 +983,62 @@ const vrtQ = [
   {type:"mc",q:"Wat is de functie van de placenta?",opts:["productie van gameten","uitwisseling van stoffen tussen moeder en foetus; selectieve barrière","opslag van hormonen","verwijdering van het embryo na de geboorte"],cor:1,expl:"De placenta regelt de <b>uitwisseling van stoffen</b> (zuurstof, voedingsstoffen, afvalstoffen) tussen moeder en foetus en fungeert als een <b>selectieve barrière</b>.",chap:"vrt"},
   {type:"mc",q:"Welk hormoon start de weeën tijdens de bevalling?",opts:["oestrogeen","progesteron","oxytocine","testosteron"],cor:2,expl:"<b>Oxytocine</b> zorgt ervoor dat de baarmoederspieren regelmatig samentrekken → de weeën.",chap:"vrt"},
   {type:"open",q:"Alcohol is een teratogeen. Leg uit hoe alcohol de ontwikkeling van de foetus kan schaden.",model:"Alcohol passeert de selectieve barrière van de placenta en bereikt de foetus. Het embryo/de foetus kan alcohol niet afbreken zoals een volwassene. Alcohol kan het DNA en de normale celdeling in de sterk delende embryonale cellen verstoren, wat leidt tot hersenbeschadiging, groeiachterstand en het foetaal alcoholsyndroom (FAS), met kenmerken zoals gelaatsafwijkingen en cognitieve problemen.",chap:"vrt"},
+  {type:"mc",q:"Welke organen produceren oestrogeen en progesteron bij de vrouw?",opts:["de baarmoeder","de eierstokken","de eileiders","de bijballen"],cor:1,expl:"De <b>eierstokken</b> produceren de vrouwelijke geslachtshormonen oestrogeen en progesteron.",chap:"vrt"},
+  {type:"mc",q:"Waar vindt de bevruchting van de eicel normaal gezien plaats?",opts:["in de baarmoeder","in de eierstok","in de eileider","in de vagina"],cor:2,expl:"Bevruchting vindt normaal plaats in de <b>eileider</b>. Daarna beweegt de zygote naar de baarmoeder voor innesteling.",chap:"vrt"},
+  {type:"tf",q:"De baarmoederhals bevat een slijmprop die de baarmoeder afsluit tegen infecties.",cor:true,fb:"Correct — de slijmprop beschermt de baarmoeder en het embryo tegen infecties van buitenaf.",chap:"vrt"},
+  {type:"tf",q:"Nicotine kan leiden tot een buitenbaarmoederlijke zwangerschap.",cor:true,fb:"Correct — nicotine vertraagt de beweging van de zygote door de eileider, waardoor de kans op innesteling in de eileider (buitenbaarmoederlijke zwangerschap) toeneemt.",chap:"vrt"},
+  {type:"mc",q:"Wat is het foetaal alcoholsyndroom (FAS)?",opts:["een infectie door alcohol tijdens de zwangerschap","een aandoening bij de moeder door alcoholgebruik","een verzameling van afwijkingen bij het kind door alcoholgebruik tijdens de zwangerschap","een genetische aandoening die versterkt wordt door alcohol"],cor:2,expl:"FAS is een <b>verzameling van afwijkingen bij het kind</b> (gelaatsafwijkingen, mentale achterstand, gedragsproblemen) als gevolg van alcoholgebruik door de moeder tijdens de zwangerschap.",chap:"vrt"},
+  {type:"tf",q:"Bij IVF vindt de bevruchting plaats in het lichaam van de vrouw.",cor:false,fb:"Fout. Bij IVF (in-vitrofertilisatie) vindt de bevruchting plaats <b>in het labo</b>, buiten het lichaam.",chap:"vrt"},
+  {type:"mc",q:"Wat is het verschil tussen KI en IVF?",opts:["Bij KI wordt de bevruchting in het labo uitgevoerd, bij IVF in het lichaam","Bij KI worden zaadcellen in de baarmoeder gebracht; bij IVF worden eicellen uit het lichaam gehaald en in het labo bevrucht","KI gebruikt donor-eicellen, IVF gebruikt eigen eicellen","Er is geen verschil"],cor:1,expl:"Bij <b>KI</b> worden zaadcellen via katheter in de baarmoeder gebracht. Bij <b>IVF</b> worden eicellen operatief gehaald, in het labo bevrucht, en de embryo's worden later teruggeplaatst.",chap:"vrt"},
+  {type:"fill",q:"De behandeling waarbij één zaadcel rechtstreeks in de eicel wordt gebracht, heet …",acc:["icsi","intracytoplasmatische sperma-injectie"],ans:"ICSI",chap:"vrt"},
+  {type:"mc",q:"Via welk dier wordt toxoplasmose het vaakst overgedragen?",opts:["honden","katten","vogels","varkens"],cor:1,expl:"<em>Toxoplasma gondii</em> gebruikt <b>katten</b> als gastheer. De parasiet zit in de uitwerpselen van katten.",chap:"vrt"},
+  {type:"tf",q:"Rubella wordt grotendeels voorkomen door vaccinatie.",cor:true,fb:"Correct — door het rubellavaccin is rubella tijdens de zwangerschap tegenwoordig zeldzaam geworden.",chap:"vrt"},
+  {type:"open",q:"Noem drie chemische teratogenen en leg voor elk uit hoe ze de embryonale ontwikkeling kunnen schaden.",model:"1. Nicotine (roken): vertraagt de zygote in de eileider → risico op buitenbaarmoederlijke zwangerschap; CO vermindert zuurstof naar de placenta → vroeggeboorte, neurologische schade. 2. Alcohol: passeert placenta → foetaal alcoholsyndroom (FAS): gelaatsafwijkingen, mentale achterstand. 3. Medicatie (bv. thalidomide/Softenon): remt de aanleg van ledematen bij het embryo → misvormde of ontbrekende ledematen.",chap:"vrt"}
+  // ── MANNELIJK VOORTPLANTINGSSTELSEL ──
+  
+  
+  
+  
+  
+  
+  
+  // ── VROUWELIJK VOORTPLANTINGSSTELSEL + CYCLUS ──
+  ,{type:"mc",q:"Wat is de functie van de trilhaartjes in de eileiders?",opts:["ze produceren oestrogeen","ze zorgen voor de bevruchting","ze bewegen de eicel richting baarmoeder","ze verhinderen dat zaadcellen de eicel bereiken"],cor:2,expl:"De trilhaartjes in de eileider bewegen de eicel (en later de zygote) via golfbewegingen richting de <b>baarmoeder</b>.",chap:"vrt"}
+  
+  
+  
+  
+  ,{type:"mc",q:"Welk hormoon houdt het geel lichaam in stand wanneer er WEL bevruchting plaatsvindt?",opts:["FSH","LH","hCG (humaan choriongonadotrofine)","prolactine"],cor:2,expl:"Het embryo produceert <b>hCG</b>, dat ervoor zorgt dat het geel lichaam niet afbreekt en progesteron blijft aanmaken zodat de zwangerschap in stand wordt gehouden.",chap:"vrt"}
+  
+  
+  
+  // ── BEVRUCHTING EN ZWANGERSCHAP ──
+  ,{type:"mc",q:"Hoeveel zaadcellen bereiken de eicel na een ejaculatie?",opts:["alle 100-200 miljoen","slechts één","ongeveer een honderdtal","ongeveer duizend"],cor:2,expl:"Van de 100-200 miljoen zaadcellen bereiken slechts <b>een honderdtal</b> de eicel in de eileider. Slechts één slaagt erin te bevruchten.",chap:"vrt"}
+  ,{type:"tf",q:"Zodra één zaadcel de eicel binnengedrongen is, wordt er een bevruchtigingsmembraan gevormd dat andere zaadcellen buiten houdt.",cor:true,fb:"Correct — het <b>bevruchtigingsmembraan</b> vormt een barrière zodat er maar één zaadcel de eicel kan bevruchten.",chap:"vrt"}
+  ,{type:"mc",q:"Wat zijn de hindernissen die een zaadcel moet overwinnen op weg naar de eicel?",opts:["alleen de glashuid van de eicel","zuur milieu vagina, slijmprop baarmoederhals, keuze eileider, trilhaartjes","de baarmoederhals en de trilhaartjes","de slijmprop en de glashuid"],cor:1,expl:"De zaadcel moet achtereenvolgens passeren: <b>zuur milieu vagina</b>, <b>slijmprop baarmoederhals</b>, <b>keuze van de eileider</b>, en <b>trilhaartjes</b> in de eileider. Plus de immuniteit van de vrouw.",chap:"vrt"}
+  ,{type:"fill",q:"De eerste celdelingen na de bevruchting waarbij de cellen steeds kleiner worden, heten …",acc:["klievingsdelingen","klievingsdeling"],ans:"klievingsdelingen",chap:"vrt"}
+  ,{type:"mc",q:"Wat is het morulastadium?",opts:["de bevruchte eicel vlak na de versmelting van de gameten","het 16-32-cellig stadium bestaande uit embryonale stamcellen","de holle celbol die zich innestelt in de baarmoeder","het stadium waarbij de organen beginnen te worden aangelegd"],cor:1,expl:"De <b>morula</b> is het 16-32-cellig stadium. De cellen zijn embryonale stamcellen die nog geen specifieke functie hebben.",chap:"vrt"}
+  ,{type:"mc",q:"Welke laag van de blastula vormt later de placenta?",opts:["de embryoblast","de blastulaholte","de trofoblast","de morula"],cor:2,expl:"De <b>trofoblast</b> (buitenste cellaag van de blastula) vormt later de placenta. De embryoblast vormt het embryo zelf.",chap:"vrt"}
+  ,{type:"tf",q:"Oestrogeen bevordert de innesteling van de zygote en zorgt ervoor dat de baarmoeder kan groeien.",cor:true,fb:"Correct — oestrogeen bevordert de innesteling en zorgt voor groei van de baarmoeder tijdens de zwangerschap.",chap:"vrt"}
+  ,{type:"mc",q:"Wanneer is de placenta volledig functioneel?",opts:["onmiddellijk na de innesteling","rond week 4","rond week 8-12","rond week 20"],cor:2,expl:"De placenta is pas volledig functioneel vanaf <b>week 8-12</b>, bij de start van de foetale ontwikkeling.",chap:"vrt"}
+  ,{type:"open",q:"Wat zijn de functies van het vruchtwater?",model:"Het vruchtwater (in de vruchtzak) heeft meerdere functies: 1. Bescherming tegen schokken en stoten. 2. Bescherming tegen veranderingen in omgevingstemperatuur. 3. Maakt beweging mogelijk. 4. Draagt bij aan de groei van de foetus.",chap:"vrt"}
+  ,{type:"mc",q:"Wanneer begint het embryonale hartje te kloppen?",opts:["week 3","week 5-6","week 10","week 12"],cor:1,expl:"Het embryonale hartje begint te kloppen na <b>5 tot 6 weken</b>. Op dat moment is het embryo ongeveer 6 mm groot.",chap:"vrt"}
+  ,{type:"tf",q:"Tijdens de foetale fase worden alle organen voor het eerst aangelegd.",cor:false,fb:"Fout. Tijdens de <b>embryonale fase</b> (1e trimester) worden de organen aangelegd. De foetale fase (T2-T3) is vooral een periode van groei en rijping van de reeds gevormde organen.",chap:"vrt"}
+  // ── GEBOORTE ──
+  ,{type:"tf",q:"De uitdrijvingsfase is doorgaans de langste fase van de bevalling.",cor:false,fb:"Fout. De <b>ontsluitingsfase</b> is de langste fase (kan een volledige dag duren). De uitdrijvingsfase is korter.",chap:"vrt"}
+  ,{type:"mc",q:"Wat zijn naweeën?",opts:["de weeën tijdens de ontsluitingsfase","de persweeën die de baby uitdrijven","de samentrekkingen na de geboorte van de baby die de placenta uitdrijven","de eerste weeën bij de start van de bevalling"],cor:2,expl:"<b>Naweeën</b> zijn de baarmoedersamentrekkingen na de geboorte van de baby, die zorgen voor de uitdrijving van de placenta, navelstreng en resten van de vruchtzak.",chap:"vrt"}
+  ,{type:"mc",q:"Bij een stuitligging …",opts:["ligt de baby met het hoofd naar beneden, de normale positie","ligt de baby met de billen naar beneden","is de baby dwars in de baarmoeder","is er sprake van een tweeling"],cor:1,expl:"Bij een <b>stuitligging</b> liggen de billen naar beneden in plaats van het hoofd. Dit bemoeilijkt een vaginale bevalling.",chap:"vrt"}
+  // ── FACTOREN ──
+  ,{type:"mc",q:"Waarom is een embryo extra gevoelig voor teratogenen in het eerste trimester?",opts:["de placenta is dan nog niet aanwezig","alle organen worden dan voor het eerst aangelegd en de cellen delen heel actief","de moeder produceert dan minder antistoffen","het embryo heeft dan nog geen immuunsysteem"],cor:1,expl:"In het eerste trimester worden <b>alle organen aangelegd</b> via actief delende cellen. Actief delende cellen zijn het gevoeligst voor schadelijke stoffen.",chap:"vrt"}
+  ,{type:"tf",q:"Koolmonoxide uit sigarettenrook verhoogt de zuurstoftoevoer naar de foetus.",cor:false,fb:"Fout. CO bindt makkelijker aan hemoglobine dan O₂ → <b>verminderde zuurstoftoevoer</b> naar de placenta en het embryo → risico op vroeggeboorte, miskraam, neurologische schade.",chap:"vrt"}
+  ,{type:"mc",q:"Welke maatregel beschermt zwangere vrouwen het best tegen toxoplasmose?",opts:["vaccinatie","antibiotica innemen","vlees goed bakken, groenten spoelen en contact met kattenbak vermijden","geen rauw fruit eten"],cor:2,expl:"Er bestaat geen vaccin tegen toxoplasmose. Preventie: <b>vlees goed doorbakken</b>, <b>groenten grondig spoelen</b> en de <b>kattenbak vermijden</b>.",chap:"vrt"}
+  ,{type:"tf",q:"Baby's en kleuters kunnen zwangere vrouwen besmetten met CMV via speeksel en urine.",cor:true,fb:"Correct — jonge kinderen scheiden het cytomegalovirus uit via urine en speeksel. Kinderverzorgsters en kleuterleidsters wordt aangeraden te stoppen met werken zodra ze zwanger zijn.",chap:"vrt"}
+  ,{type:"mc",q:"Welk hormoon wordt aangemaakt in de bijnieren bij stress en kan de vruchtbaarheid beïnvloeden?",opts:["testosteron","oxytocine","cortisol","prolactine"],cor:2,expl:"<b>Cortisol</b> wordt aangemaakt in de bijnieren bij stress en beïnvloedt de hypothalamus en hypofyse, die een belangrijke rol spelen bij het reguleren van de vruchtbaarheid.",chap:"vrt"}
+  // ── VRUCHTBAARHEID ──
+  ,{type:"tf",q:"Onvruchtbaarheid komt alleen voor bij vrouwen.",cor:false,fb:"Fout. Onvruchtbaarheid kan bij <b>zowel mannen als vrouwen</b> voorkomen. Bij mannen kan het gaan om onvoldoende of onbeweeglijke zaadcellen.",chap:"vrt"}
+  ,{type:"mc",q:"Wat is het verschil tussen IVF en ICSI?",opts:["bij IVF wordt één zaadcel in de eicel geïnjecteerd; bij ICSI worden meerdere zaadcellen bij de eicel gebracht","bij ICSI wordt één zaadcel rechtstreeks in de eicel gebracht; bij IVF wordt bevruchting in het labo gedaan met meerdere zaadcellen","er is geen verschil","ICSI gebruikt donor-zaadcellen, IVF niet"],cor:1,expl:"Bij <b>IVF</b>: eicellen + zaadcellen samen in het labo → bevruchting spontaan. Bij <b>ICSI</b>: <b>één zaadcel</b> wordt met een fijne naald rechtstreeks in de eicel gebracht. ICSI wordt gebruikt bij verlaagde mannelijke vruchtbaarheid.",chap:"vrt"}
+  ,{type:"open",q:"Noem vier mogelijke oorzaken van onvruchtbaarheid bij een vrouw.",model:"1. Geen eisprong in de eierstokken (hormonale stoornissen). 2. Verklevingen in de eileiders (bv. na infectie). 3. Endometriose. 4. Poliepen in de baarmoeder. 5. Antistoffen tegen het embryo. 6. Afwijkende baarmoedervorm (bv. T-vormige baarmoeder). (Andere: vaginisme)",chap:"vrt"}
+
 ];
 
 // ==================== WOORDENSCHAT GENETICA + VOORTPLANTING ====================
