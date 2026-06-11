@@ -219,14 +219,14 @@ let satelliteLayer = null;
 
 function initMap(lat, lon) {
   if (map) return;
-  map = L.map("map", { zoomControl: false, attributionControl: false }).setView([lat, lon], HOUSE_ZOOM);
+  map = L.map("map", { zoomControl: false, attributionControl: false, fadeAnimation: false }).setView([lat, lon], HOUSE_ZOOM);
 
   darkLayer = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
     subdomains: "abcd", maxZoom: 19, detectRetina: true,
   }).addTo(map);
 
   satelliteLayer = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
-    maxZoom: 19, detectRetina: true,
+    maxZoom: 19,
   });
 
   L.control.attribution({ prefix: false, position: "bottomright" })
@@ -266,17 +266,12 @@ async function loadLocation(lat, lon, label) {
   els.locName.textContent = label;
   els.coordReadout.textContent = `LAT ${lat.toFixed(4)} · LON ${lon.toFixed(4)}`;
 
-  initMap(lat, lon);
-  map.setView([lat, lon], HOUSE_ZOOM);
-  setMarker(lat, lon);
-  setTimeout(() => map.invalidateSize(), 50);
-
   try {
     const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
       `&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m,surface_pressure,precipitation,is_day` +
       `&hourly=temperature_2m,precipitation_probability,weather_code,visibility,cloud_cover` +
       `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max,wind_speed_10m_max` +
-      `&timezone=auto&forecast_days=7`;
+      `&timezone=auto&forecast_days=16`;
     const aqUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}` +
       `&current=european_aqi,pm2_5,pm10,ozone,nitrogen_dioxide,uv_index&timezone=auto`;
 
@@ -295,10 +290,13 @@ async function loadLocation(lat, lon, label) {
 
     els.dashboard.classList.remove("hidden");
     setStatus("Live verbonden — gegevens actueel", null);
+
+    initMap(lat, lon);
     setTimeout(() => {
       map.invalidateSize();
       map.setView([lat, lon], HOUSE_ZOOM);
-    }, 100);
+      setMarker(lat, lon);
+    }, 50);
   } catch (e) {
     setStatus("Fout bij laden van weerdata: " + e.message, "error");
   }
