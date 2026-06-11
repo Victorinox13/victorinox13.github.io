@@ -272,6 +272,34 @@ a { color: inherit; }
   filter: saturate(1.05) brightness(0.92) contrast(1.05);
 }
 
+#map.satellite .leaflet-tile-pane {
+  filter: none;
+}
+
+/* ---------- Map layer toggle ---------- */
+.map-layer-toggle {
+  position: absolute; right: 12px; bottom: 12px; z-index: 6;
+  display: flex; gap: 4px;
+  background: rgba(10, 12, 17, 0.7); border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  border-radius: 999px; padding: 4px;
+}
+
+.map-layer-toggle button {
+  font-family: var(--font); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.04em;
+  background: transparent; color: var(--muted);
+  border: none; border-radius: 999px; padding: 5px 12px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.map-layer-toggle button:hover { color: var(--text); }
+
+.map-layer-toggle button.active {
+  background: var(--accent-soft); color: var(--accent);
+}
+
 .map-readout {
   position: absolute; left: 12px; bottom: 12px; z-index: 6;
   font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.04em;
@@ -355,7 +383,26 @@ a { color: inherit; }
 
 /* ---------- Hourly ---------- */
 .hourly-track {
-  display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px;
+  display: flex; gap: 10px; overflow-x: auto; padding-bottom: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.hourly-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.hourly-track::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hourly-track::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+.hourly-track::-webkit-scrollbar-thumb:hover {
+  background: var(--faint);
 }
 .hour-card {
   flex: 0 0 auto; min-width: 86px; text-align: center; padding: 14px 10px;

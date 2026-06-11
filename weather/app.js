@@ -60,6 +60,8 @@ const els = {
   dashboard: document.getElementById("dashboard"),
   locName: document.getElementById("locName"),
   coordReadout: document.getElementById("coordReadout"),
+  mapLayerDark: document.getElementById("mapLayerDark"),
+  mapLayerSat: document.getElementById("mapLayerSat"),
   nowIcon: document.getElementById("nowIcon"),
   nowTemp: document.getElementById("nowTemp"),
   nowDesc: document.getElementById("nowDesc"),
@@ -212,17 +214,44 @@ els.gpsBtn.addEventListener("click", () => {
 /* ---------- Map ---------- */
 const HOUSE_ZOOM = 17;
 
+let darkLayer = null;
+let satelliteLayer = null;
+
 function initMap(lat, lon) {
   if (map) return;
   map = L.map("map", { zoomControl: false, attributionControl: false }).setView([lat, lon], HOUSE_ZOOM);
 
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-    subdomains: "abcd", maxZoom: 19,
+  darkLayer = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    subdomains: "abcd", maxZoom: 19, detectRetina: true,
   }).addTo(map);
+
+  satelliteLayer = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+    maxZoom: 19, detectRetina: true,
+  });
 
   L.control.attribution({ prefix: false, position: "bottomright" })
     .addAttribution("CARTO &middot; OpenStreetMap &middot; Open-Meteo")
     .addTo(map);
+
+  els.mapLayerDark.addEventListener("click", () => setMapLayer("dark"));
+  els.mapLayerSat.addEventListener("click", () => setMapLayer("satellite"));
+}
+
+function setMapLayer(layer) {
+  const mapEl = document.getElementById("map");
+  if (layer === "satellite") {
+    map.removeLayer(darkLayer);
+    satelliteLayer.addTo(map);
+    mapEl.classList.add("satellite");
+    els.mapLayerSat.classList.add("active");
+    els.mapLayerDark.classList.remove("active");
+  } else {
+    map.removeLayer(satelliteLayer);
+    darkLayer.addTo(map);
+    mapEl.classList.remove("satellite");
+    els.mapLayerDark.classList.add("active");
+    els.mapLayerSat.classList.remove("active");
+  }
 }
 
 function setMarker(lat, lon) {
@@ -266,7 +295,10 @@ async function loadLocation(lat, lon, label) {
 
     els.dashboard.classList.remove("hidden");
     setStatus("Live verbonden — gegevens actueel", null);
-    setTimeout(() => map.invalidateSize(), 100);
+    setTimeout(() => {
+      map.invalidateSize();
+      map.setView([lat, lon], HOUSE_ZOOM);
+    }, 100);
   } catch (e) {
     setStatus("Fout bij laden van weerdata: " + e.message, "error");
   }
