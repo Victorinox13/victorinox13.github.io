@@ -11,7 +11,22 @@
  *   link:        "some-page.html",     // relative page or full URL
  *   linkLabel:   "Open het studieplatform →", // optional, defaults to "Open"
  *   highlight:   true,                 // optional — gives the card a green accent
- *   date:        "2026-06"             // YYYY-MM, used to sort newest-first
+ *   date:        "2026-06",            // YYYY-MM, used to sort newest-first
+ *   preview: {                         // mini "site preview" rendered on the card
+ *     kind:    "quiz",                 // "quiz" | "table" | "app" | "space" | "plain"
+ *     bg:      "#f5f7fa",              // preview background color
+ *     fg:      "#0f4a28",              // preview text/line color
+ *     accent:  "#0f5046",              // primary accent (highlighted option / header / ring)
+ *     accent2: "#a8edca"               // optional secondary accent (used by "table" kind)
+ *   }
+ *   // Pick `kind` based on what the project actually looks like:
+ *   //  - "quiz":  question + answer-option rows (study platforms, exam tools)
+ *   //  - "table": grid of cells with an accented header row (data drills, dictionaries)
+ *   //  - "app":   circular progress ring + text bars (mobile apps)
+ *   //  - "space": starfield with a play button (creator/video content)
+ *   //  - "plain": flat color block, no extra shapes (fallback)
+ *   // Pull bg/fg/accent colors from the project's own page so the preview
+ *   // actually looks like a tiny screenshot of it.
  * }
  *
  * Newest items (by `date`) are shown first. This file can be appended to
@@ -28,7 +43,8 @@ const PROJECTS = [
     link: "biologie-studieplatform.html",
     linkLabel: "Open het studieplatform →",
     highlight: true,
-    date: "2026-05"
+    date: "2026-05",
+    preview: { kind: "quiz", bg: "#f5f7fa", fg: "#0f4a28", accent: "#0f5046", accent2: "#a8edca" }
   },
   {
     title: "Verbuga — Verbes Français",
@@ -38,7 +54,8 @@ const PROJECTS = [
     description: "Browserquiz voor Franse werkwoordvervoegingen, gebaseerd op de Verbuga v2z verb list. Oefen vervoegingen per tijd en werkwoordgroep.",
     link: "verbuga.html",
     linkLabel: "Open Verbuga →",
-    date: "2025-09"
+    date: "2025-09",
+    preview: { kind: "table", bg: "#eef3f7", fg: "#22324a", accent: "#1769e0", accent2: "#ae1c28" }
   },
   {
     title: "Push Unrot — Screentime Block",
@@ -48,7 +65,8 @@ const PROJECTS = [
     description: "Een gratis iPhone productiviteitsapp die afleidende apps blokkeert en schermtijd laat ontgrendelen door echte pushups, geteld met de camera.",
     link: "https://apps.apple.com/in/app/push-unrot-screentime-block/id6762221005",
     linkLabel: "Bekijk op de App Store →",
-    date: "2026-04"
+    date: "2026-04",
+    preview: { kind: "app", bg: "#0c1424", fg: "#f4f7fb", accent: "#ff7a59" }
   },
   {
     title: "Astroleck",
@@ -58,6 +76,7 @@ const PROJECTS = [
     description: "Mijn creator-identiteit voor astronomie, ruimtevaart en luchtvaart. TikTok, YouTube, Discord en skywatching gear via Linktree.",
     link: "https://linktr.ee/astroleck",
     linkLabel: "Open Linktree →",
-    date: "2025-01"
+    date: "2025-01",
+    preview: { kind: "space", bg: "#07111f", fg: "#f4f7fb", accent: "#7ed7ff" }
   }
 ];

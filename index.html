@@ -151,6 +151,80 @@ color: var(--muted); cursor: pointer; transition: all 0.15s ease;
 background: rgba(126,215,255,0.14); border-color: rgba(126,215,255,0.4); color: var(--accent);
 }
 .card .emoji { font-size: 1.4rem; margin-right: 6px; }
+
+/* Project cards with per-project mini "site preview" */
+.project-card {
+  padding: 0; overflow: hidden; display: flex; flex-direction: column;
+}
+.project-card .card-body { padding: 16px 18px; flex: 1; }
+.card-preview {
+  position: relative; width: 100%; aspect-ratio: 2.4 / 1;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.preview-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 22px; z-index: 2;
+  display: flex; align-items: center; gap: 5px; padding: 0 8px;
+  background: rgba(0,0,0,0.18);
+}
+.preview-bar span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.32); }
+.preview-body {
+  position: absolute; inset: 0; padding-top: 22px;
+  background: var(--p-bg); color: var(--p-fg); overflow: hidden;
+}
+
+/* kind: quiz (e.g. study platforms) */
+.preview-body.kind-quiz { display: flex; flex-direction: column; justify-content: center; gap: 7px; padding: 22px 16px 16px; }
+.preview-body.kind-quiz .q-line { height: 9px; border-radius: 4px; background: var(--p-fg); opacity: 0.65; width: 78%; }
+.preview-body.kind-quiz .q-line.short { width: 50%; opacity: 0.35; }
+.preview-body.kind-quiz .opt {
+  height: 22px; border-radius: 8px; margin-top: 5px;
+  background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.08);
+}
+.preview-body.kind-quiz .opt.active {
+  background: var(--p-accent); border-color: var(--p-accent);
+}
+
+/* kind: table (e.g. conjugation / data drills) */
+.preview-body.kind-table {
+  padding: 22px 14px 14px; display: grid;
+  grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 6px;
+}
+.preview-body.kind-table .cell { border-radius: 4px; background: rgba(0,0,0,0.06); }
+.preview-body.kind-table .cell.head { background: var(--p-accent); }
+.preview-body.kind-table .cell.accent2 { background: var(--p-accent2); opacity: 0.8; }
+
+/* kind: app (mobile app screenshot vibe) */
+.preview-body.kind-app {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+}
+.preview-body.kind-app .ring {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: conic-gradient(var(--p-accent) 0% 68%, rgba(255,255,255,0.1) 68% 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.preview-body.kind-app .ring::after {
+  content: ""; width: 46px; height: 46px; border-radius: 50%; background: var(--p-bg);
+}
+.preview-body.kind-app .bars { display: flex; flex-direction: column; gap: 6px; }
+.preview-body.kind-app .bars span { display: block; height: 7px; border-radius: 4px; background: var(--p-fg); opacity: 0.5; }
+.preview-body.kind-app .bars span:nth-child(1) { width: 56px; }
+.preview-body.kind-app .bars span:nth-child(2) { width: 38px; opacity: 0.3; }
+
+/* kind: space (creator / dark sky vibe) */
+.preview-body.kind-space {
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(255,255,255,0.85) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 35% 70%, rgba(255,255,255,0.6) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 70% 20%, rgba(255,255,255,0.8) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 85% 65%, rgba(255,255,255,0.5) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 55% 45%, var(--p-accent) 0 1.5px, transparent 2px);
+}
+.preview-body.kind-space .play {
+  position: absolute; inset: 0; margin: auto; width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--p-accent); font-size: 0.95rem;
+}
 .socials { display: grid; gap: 12px; margin-top: 16px; }
 .social {
 display: flex; justify-content: space-between;
@@ -323,18 +397,51 @@ h1 { font-size: 2.9rem; }
   const categories = ['All', ...new Set(projects.map(p => p.category))];
   let active = 'All';
 
+  function previewInner(kind) {
+    switch (kind) {
+      case 'quiz':
+        return '<div class="q-line"></div><div class="q-line short"></div><div class="opt"></div><div class="opt active"></div><div class="opt"></div>';
+      case 'table':
+        return Array.from({ length: 12 }, (_, i) => {
+          const cls = i < 4 ? 'head' : (i % 4 === 3 ? 'accent2' : '');
+          return `<div class="cell${cls ? ' ' + cls : ''}"></div>`;
+        }).join('');
+      case 'app':
+        return '<div class="ring"></div><div class="bars"><span></span><span></span></div>';
+      case 'space':
+        return '<div class="play">▶</div>';
+      default:
+        return '';
+    }
+  }
+
+  function previewMarkup(p) {
+    const prev = p.preview || {};
+    const kind = prev.kind || 'plain';
+    const vars = `--p-bg:${prev.bg || '#0d1a2d'};--p-fg:${prev.fg || '#f4f7fb'};--p-accent:${prev.accent || '#7ed7ff'};--p-accent2:${prev.accent2 || prev.accent || '#7ed7ff'};`;
+    return `
+      <div class="card-preview" style="${vars}">
+        <div class="preview-bar"><span></span><span></span><span></span></div>
+        <div class="preview-body kind-${kind}">${previewInner(kind)}</div>
+      </div>
+    `;
+  }
+
   function render() {
     grid.innerHTML = '';
     projects
       .filter(p => active === 'All' || p.category === active)
       .forEach(p => {
         const card = document.createElement('article');
-        card.className = 'card' + (p.highlight ? ' highlight' : '');
+        card.className = 'project-card card' + (p.highlight ? ' highlight' : '');
         card.innerHTML = `
-          ${p.tag ? `<div class="tag">${p.tag}</div>` : ''}
-          <strong>${p.emoji ? `<span class="emoji">${p.emoji}</span>` : ''}${p.title}</strong>
-          <p>${p.description}</p>
-          <p class="note"><a href="${p.link}"${p.highlight ? ' style="color:#a8edca;font-weight:700;"' : ''}>${p.linkLabel || 'Open →'}</a></p>
+          ${previewMarkup(p)}
+          <div class="card-body">
+            ${p.tag ? `<div class="tag">${p.tag}</div>` : ''}
+            <strong>${p.emoji ? `<span class="emoji">${p.emoji}</span>` : ''}${p.title}</strong>
+            <p>${p.description}</p>
+            <p class="note"><a href="${p.link}"${p.highlight ? ' style="color:#a8edca;font-weight:700;"' : ''}>${p.linkLabel || 'Open →'}</a></p>
+          </div>
         `;
         grid.appendChild(card);
       });
