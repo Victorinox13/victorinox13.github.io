@@ -291,12 +291,18 @@ async function loadLocation(lat, lon, label) {
     els.dashboard.classList.remove("hidden");
     setStatus("Live verbonden — gegevens actueel", null);
 
-    initMap(lat, lon);
-    setTimeout(() => {
-      map.invalidateSize();
-      map.setView([lat, lon], HOUSE_ZOOM);
-      setMarker(lat, lon);
-    }, 50);
+    // Wait for the browser to actually lay out the now-visible dashboard
+    // before Leaflet measures the map container. Without this, L.map()
+    // measures a 0x0 element and places tiles for a tiny viewport,
+    // leaving big gaps when the container finally gets its real size.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        initMap(lat, lon);
+        map.invalidateSize();
+        map.setView([lat, lon], HOUSE_ZOOM);
+        setMarker(lat, lon);
+      });
+    });
   } catch (e) {
     setStatus("Fout bij laden van weerdata: " + e.message, "error");
   }
