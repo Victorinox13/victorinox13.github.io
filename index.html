@@ -140,6 +140,17 @@ box-shadow: var(--shadow);
 display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
 gap: 14px; margin-top: 16px;
 }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.filter-pill {
+padding: 6px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 700;
+background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+color: var(--muted); cursor: pointer; transition: all 0.15s ease;
+}
+.filter-pill:hover { color: var(--text); border-color: rgba(126,215,255,0.35); }
+.filter-pill.active {
+background: rgba(126,215,255,0.14); border-color: rgba(126,215,255,0.4); color: var(--accent);
+}
+.card .emoji { font-size: 1.4rem; margin-right: 6px; }
 .socials { display: grid; gap: 12px; margin-top: 16px; }
 .social {
 display: flex; justify-content: space-between;
@@ -172,9 +183,9 @@ h1 { font-size: 2.9rem; }
         <span class="eyebrow">Astroleck · Victorinox13</span>
         <h1>Victor Deleeck</h1>
         <p class="lead">
-          I am an indie builder and creator working on practical iPhone apps, public
-          experiments, and Astroleck: my space for astronomy, spaceflight, and aviation.
-          This is the front door for what I make and where to follow it.
+          I'm Victor — I build practical iPhone apps, study tools and exam platforms,
+          small experiments and scripts, and Astroleck: my space for astronomy,
+          spaceflight, and aviation. This is the front door for everything I make.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="https://www.tiktok.com/@astroleck">Follow on TikTok</a>
@@ -256,44 +267,8 @@ h1 { font-size: 2.9rem; }
 
     <section class="panel">
       <h2>Projects</h2>
-      <div class="cards">
-        <article class="card">
-          <strong>Push Unrot - Screentime Block</strong>
-          <p>
-            A free iPhone productivity app for people who want a harder barrier between
-            themselves and compulsive scrolling. It locks distracting apps and lets you
-            unlock screen time by completing real pushups counted with the camera.
-          </p>
-          <p class="note">
-            App Store listing: Productivity, iPhone, English, age rating 9+, data not collected.
-            <a href="https://apps.apple.com/in/app/push-unrot-screentime-block/id6762221005">View on the App Store</a>
-          </p>
-        </article>
-        <article class="card">
-          <strong>Astroleck</strong>
-          <p>
-            My creator identity for astronomy, spaceflight, and aviation. Public links point
-            to TikTok, YouTube, a Discord server, and skywatching gear around the Astroleck
-            project.
-          </p>
-          <p class="note">
-            <a href="https://www.tiktok.com/@astroleck">TikTok</a> ·
-            <a href="https://linktr.ee/astroleck">Linktree</a>
-          </p>
-        </article>
-        <article class="card highlight">
-          <div class="tag">Studieplatform</div>
-          <strong>Biologie — Compleet studieplatform 6de jaar</strong>
-          <p>
-            Interactief oefenplatform voor het biologie-examen: evolutie, genetisch materiaal,
-            van gen tot eiwit, genetica en voortplanting. 142 vragen, 107 begrippen,
-            33 figuren uit de cursus — met gemixte modus en woordenschattrainer.
-          </p>
-          <p class="note">
-            <a href="biologie-studieplatform.html" style="color:#a8edca;font-weight:700;">Open het studieplatform →</a>
-          </p>
-        </article>
-      </div>
+      <div class="filters" id="filters"></div>
+      <div class="cards" id="projects-grid"></div>
     </section>
 
     <section class="panel two-col">
@@ -321,13 +296,6 @@ h1 { font-size: 2.9rem; }
             </span>
             <span>Open</span>
           </a>
-          <a class="link-item social" href="biologie-studieplatform.html">
-            <span>
-              <strong>🧬 Bio Studieplatform</strong>
-              <span class="mini">Interactief studieplatform biologie 6de jaar.</span>
-            </span>
-            <span>Open</span>
-          </a>
         </div>
       </div>
       <div>
@@ -346,5 +314,46 @@ h1 { font-size: 2.9rem; }
   </footer>
 
 </div>
+<script src="projects-data.js"></script>
+<script>
+(function () {
+  const grid = document.getElementById('projects-grid');
+  const filters = document.getElementById('filters');
+  const projects = [...PROJECTS].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  const categories = ['All', ...new Set(projects.map(p => p.category))];
+  let active = 'All';
+
+  function render() {
+    grid.innerHTML = '';
+    projects
+      .filter(p => active === 'All' || p.category === active)
+      .forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'card' + (p.highlight ? ' highlight' : '');
+        card.innerHTML = `
+          ${p.tag ? `<div class="tag">${p.tag}</div>` : ''}
+          <strong>${p.emoji ? `<span class="emoji">${p.emoji}</span>` : ''}${p.title}</strong>
+          <p>${p.description}</p>
+          <p class="note"><a href="${p.link}"${p.highlight ? ' style="color:#a8edca;font-weight:700;"' : ''}>${p.linkLabel || 'Open →'}</a></p>
+        `;
+        grid.appendChild(card);
+      });
+  }
+
+  categories.forEach(cat => {
+    const pill = document.createElement('button');
+    pill.className = 'filter-pill' + (cat === active ? ' active' : '');
+    pill.textContent = cat;
+    pill.addEventListener('click', () => {
+      active = cat;
+      [...filters.children].forEach(c => c.classList.toggle('active', c === pill));
+      render();
+    });
+    filters.appendChild(pill);
+  });
+
+  render();
+})();
+</script>
 </body>
 </html>
