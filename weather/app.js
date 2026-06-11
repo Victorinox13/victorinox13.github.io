@@ -1,5 +1,5 @@
-/* WeatherDeck — cyberdeck weather dashboard
- * Data: Open-Meteo (forecast + air quality), Nominatim/OpenStreetMap (address geocoding), CARTO (basemap)
+/* WeatherDeck — live weather dashboard
+ * Data: Open-Meteo (forecast + air quality), Photon/OpenStreetMap (address geocoding), CARTO (basemap)
  */
 
 const WEATHER_CODES = {
@@ -143,9 +143,9 @@ function closeSuggestions() {
 
 async function fetchSuggestions(q, autoSelect) {
   try {
-    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=jsonv2&addressdetails=1&limit=5&accept-language=nl`);
+    const res = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=5&lang=en`);
     const data = await res.json();
-    currentResults = data || [];
+    currentResults = (data && data.features) || [];
     if (autoSelect && currentResults[0]) { pickResult(currentResults[0]); return; }
     renderSuggestions();
   } catch {
@@ -154,10 +154,10 @@ async function fetchSuggestions(q, autoSelect) {
   }
 }
 
-function addressLines(r) {
-  const a = r.address || {};
-  const main = [a.road, a.house_number].filter(Boolean).join(" ") || a.suburb || a.village || a.town || a.city || r.display_name.split(",")[0];
-  const sub = [a.postcode, a.city || a.town || a.village, a.country].filter(Boolean).join(", ");
+function addressLines(f) {
+  const p = (f && f.properties) || {};
+  const main = [p.street, p.housenumber].filter(Boolean).join(" ") || p.name || "Onbekende locatie";
+  const sub = [p.postcode, p.city || p.district || p.county, p.country].filter(Boolean).join(", ");
   return [main, sub];
 }
 
@@ -176,12 +176,13 @@ function renderSuggestions() {
   els.suggestions.classList.add("open");
 }
 
-function pickResult(r) {
+function pickResult(f) {
   closeSuggestions();
-  const [main, sub] = addressLines(r);
-  els.addressInput.value = [main, sub].filter(Boolean).join(", ");
+  const [main, sub] = addressLines(f);
   const label = [main, sub].filter(Boolean).join(", ");
-  loadLocation(parseFloat(r.lat), parseFloat(r.lon), label);
+  els.addressInput.value = label;
+  const [lon, lat] = f.geometry.coordinates;
+  loadLocation(lat, lon, label);
 }
 
 /* ---------- GPS ---------- */
@@ -193,10 +194,10 @@ els.gpsBtn.addEventListener("click", () => {
       const { latitude, longitude } = pos.coords;
       let label = `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
       try {
-        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=jsonv2&addressdetails=1&accept-language=nl`);
+        const res = await fetch(`https://photon.komoot.io/reverse?lon=${longitude}&lat=${latitude}&lang=en`);
         const data = await res.json();
-        if (data && data.address) {
-          const [main, sub] = addressLines(data);
+        if (data && data.features && data.features[0]) {
+          const [main, sub] = addressLines(data.features[0]);
           label = [main, sub].filter(Boolean).join(", ");
         }
       } catch {}
@@ -234,7 +235,7 @@ function setMarker(lat, lon) {
 async function loadLocation(lat, lon, label) {
   setStatus("Locatiegegevens laden…", "loading");
   els.locName.textContent = label;
-  els.coordReadout.textContent = `LAT ${lat.toFixed(4)} / LON ${lon.toFixed(4)}`;
+  els.coordReadout.textContent = `LAT ${lat.toFixed(4)} · LON ${lon.toFixed(4)}`;
 
   initMap(lat, lon);
   map.setView([lat, lon], HOUSE_ZOOM);
@@ -264,7 +265,7 @@ async function loadLocation(lat, lon, label) {
     renderWindow(weather);
 
     els.dashboard.classList.remove("hidden");
-    setStatus("ONLINE — live data verbonden", null);
+    setStatus("Live verbonden — gegevens actueel", null);
     setTimeout(() => map.invalidateSize(), 100);
   } catch (e) {
     setStatus("Fout bij laden van weerdata: " + e.message, "error");

@@ -226,29 +226,41 @@ background: rgba(126,215,255,0.14); border-color: rgba(126,215,255,0.4); color: 
   color: var(--p-accent); font-size: 0.95rem;
 }
 
-/* kind: radar (cyberdeck weather scope) */
-.preview-body.kind-radar {
+/* kind: orbit (mission-control weather deck) */
+.preview-body.kind-orbit {
   display: flex; align-items: center; justify-content: center;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 8px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 8px);
+  background:
+    radial-gradient(160px 100px at 50% 110%, color-mix(in srgb, var(--p-accent) 16%, transparent), transparent 70%),
+    var(--p-bg);
 }
-.preview-body.kind-radar .scope {
-  width: 60px; height: 60px; border-radius: 50%;
-  border: 1px solid var(--p-accent); position: relative; overflow: hidden;
-  background: repeating-radial-gradient(circle, transparent 0 8px, rgba(255,255,255,0.06) 8px 9px);
+.preview-body.kind-orbit .orbits {
+  position: relative; width: 64px; height: 64px;
 }
-.preview-body.kind-radar .scope::before {
-  content: ""; position: absolute; inset: 0;
-  background: conic-gradient(from 0deg, var(--p-accent), transparent 30%);
-  opacity: 0.55; animation: radar-spin 3s linear infinite;
+.preview-body.kind-orbit .orbit {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--p-accent) 45%, transparent);
 }
-.preview-body.kind-radar .scope::after {
-  content: ""; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px;
-  margin: -3px; border-radius: 50%; background: var(--p-accent2, var(--p-accent));
-  box-shadow: 0 0 8px 2px var(--p-accent2, var(--p-accent));
+.preview-body.kind-orbit .orbit.r2 {
+  inset: 12px; border-color: color-mix(in srgb, var(--p-accent2, var(--p-accent)) 35%, transparent);
+  transform: rotate(35deg);
 }
-@keyframes radar-spin { to { transform: rotate(360deg); } }
+.preview-body.kind-orbit .core {
+  position: absolute; left: 50%; top: 50%; width: 10px; height: 10px;
+  margin: -5px; border-radius: 50%; background: var(--p-accent);
+  box-shadow: 0 0 14px 3px color-mix(in srgb, var(--p-accent) 60%, transparent);
+}
+.preview-body.kind-orbit .sat {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--p-accent2, var(--p-accent)); top: -2.5px; left: 50%; margin-left: -2.5px;
+  box-shadow: 0 0 6px 1px var(--p-accent2, var(--p-accent));
+  transform-origin: 50% 34.5px;
+  animation: orbit-spin 4s linear infinite;
+}
+.preview-body.kind-orbit .orbit.r2 .sat { transform-origin: 50% 22.5px; animation-duration: 6s; animation-direction: reverse; }
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 .socials { display: grid; gap: 12px; margin-top: 16px; }
 .social {
 display: flex; justify-content: space-between;
@@ -434,8 +446,8 @@ h1 { font-size: 2.9rem; }
         return '<div class="ring"></div><div class="bars"><span></span><span></span></div>';
       case 'space':
         return '<div class="play">▶</div>';
-      case 'radar':
-        return '<div class="scope"></div>';
+      case 'orbit':
+        return '<div class="orbits"><div class="orbit r1"><div class="sat"></div></div><div class="orbit r2"><div class="sat"></div></div><div class="core"></div></div>';
       default:
         return '';
     }

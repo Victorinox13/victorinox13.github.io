@@ -36,15 +36,15 @@
 const PROJECTS = [
   {
     title: "WeatherDeck",
-    emoji: "📡",
+    emoji: "🛰️",
     category: "Tools",
     tag: "Live Weerdashboard",
-    description: "Cyberdeck-stijl weerdashboard: zoek je adres en krijg direct een ingezoomde kaart van je huis, plus actuele condities, uurlijkse en 7-daagse voorspelling, luchtkwaliteit, zon/maan-cyclus en zicht-uit-je-raam.",
+    description: "Mission-control weerdashboard: zoek je adres en krijg direct een ingezoomde kaart van je huis, plus actuele condities, uurlijkse en 7-daagse voorspelling, luchtkwaliteit, zon/maan-cyclus en zicht-uit-je-raam.",
     link: "weather/index.html",
     linkLabel: "Open WeatherDeck →",
     highlight: true,
     date: "2026-06",
-    preview: { kind: "radar", bg: "#1b2027", fg: "#e7eef4", accent: "#7dc8ff", accent2: "#aee0ff" }
+    preview: { kind: "orbit", bg: "#0a0c11", fg: "#f3f5f8", accent: "#6ea8fe", accent2: "#ffb46b" }
   },
   {
     title: "Bio Studieplatform",
