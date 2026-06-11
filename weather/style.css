@@ -1,23 +1,23 @@
 :root {
-  --bg: #0d1116;
-  --bg-elevated: #161b22;
-  --surface: #1a2029;
-  --surface-strong: #222936;
-  --border: #2a323e;
-  --border-strong: #3a4554;
-  --text: #e6edf3;
-  --muted: #9aa6b2;
-  --faint: #6b7785;
-  --accent: #7cc3ff;
-  --accent-strong: #58b0ff;
-  --accent-soft: rgba(124, 195, 255, 0.12);
+  --bg: #0a0c11;
+  --bg-elevated: #11141b;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-strong: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #f3f5f8;
+  --muted: #8d97a8;
+  --faint: #5b6573;
+  --accent: #6ea8fe;
+  --accent-strong: #4f8cff;
+  --accent-soft: rgba(110, 168, 254, 0.14);
   --warm: #ffb46b;
   --warm-soft: rgba(255, 180, 107, 0.14);
   --good: #6ee7b7;
   --bad: #ff8a8a;
-  --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
-  --radius: 6px;
-  --radius-sm: 4px;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 60px -28px rgba(0, 0, 0, 0.85);
+  --radius: 20px;
+  --radius-sm: 12px;
   --font: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Share Tech Mono", monospace;
 }
@@ -42,11 +42,15 @@ a { color: inherit; }
 /* ---------- Ambient backdrop ---------- */
 .bg-glow {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: var(--bg);
+  background:
+    radial-gradient(620px 420px at 14% -6%, rgba(110, 168, 254, 0.16), transparent 60%),
+    radial-gradient(560px 420px at 92% 8%, rgba(255, 180, 107, 0.10), transparent 60%),
+    radial-gradient(900px 700px at 50% 115%, rgba(110, 168, 254, 0.07), transparent 65%),
+    var(--bg);
 }
 
 .stars {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.25;
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5;
   background-image:
     radial-gradient(1px 1px at 8% 22%, rgba(255,255,255,0.55), transparent 60%),
     radial-gradient(1px 1px at 22% 68%, rgba(255,255,255,0.4), transparent 60%),
