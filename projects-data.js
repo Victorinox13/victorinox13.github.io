@@ -35,6 +35,18 @@
  */
 const PROJECTS = [
   {
+    title: "WeatherDeck",
+    emoji: "📡",
+    category: "Tools",
+    tag: "Live Weerdashboard",
+    description: "Cyberdeck-stijl weerdashboard: zoek je adres en krijg direct een live neerslagradar boven je huis, plus uurlijkse en 7-daagse voorspelling, luchtkwaliteit, zon/maan-cyclus en zicht-uit-je-raam.",
+    link: "weather/index.html",
+    linkLabel: "Open WeatherDeck →",
+    highlight: true,
+    date: "2026-06",
+    preview: { kind: "radar", bg: "#03060a", fg: "#d6fff3", accent: "#39ff88", accent2: "#00e5ff" }
+  },
+  {
     title: "Bio Studieplatform",
     emoji: "🧬",
     category: "Studietools",

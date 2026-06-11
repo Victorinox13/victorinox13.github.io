@@ -225,6 +225,30 @@ background: rgba(126,215,255,0.14); border-color: rgba(126,215,255,0.4); color: 
   display: flex; align-items: center; justify-content: center;
   color: var(--p-accent); font-size: 0.95rem;
 }
+
+/* kind: radar (cyberdeck weather scope) */
+.preview-body.kind-radar {
+  display: flex; align-items: center; justify-content: center;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 8px);
+}
+.preview-body.kind-radar .scope {
+  width: 60px; height: 60px; border-radius: 50%;
+  border: 1px solid var(--p-accent); position: relative; overflow: hidden;
+  background: repeating-radial-gradient(circle, transparent 0 8px, rgba(255,255,255,0.06) 8px 9px);
+}
+.preview-body.kind-radar .scope::before {
+  content: ""; position: absolute; inset: 0;
+  background: conic-gradient(from 0deg, var(--p-accent), transparent 30%);
+  opacity: 0.55; animation: radar-spin 3s linear infinite;
+}
+.preview-body.kind-radar .scope::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px;
+  margin: -3px; border-radius: 50%; background: var(--p-accent2, var(--p-accent));
+  box-shadow: 0 0 8px 2px var(--p-accent2, var(--p-accent));
+}
+@keyframes radar-spin { to { transform: rotate(360deg); } }
 .socials { display: grid; gap: 12px; margin-top: 16px; }
 .social {
 display: flex; justify-content: space-between;
@@ -265,7 +289,6 @@ h1 { font-size: 2.9rem; }
           <a class="button primary" href="https://www.tiktok.com/@astroleck">Follow on TikTok</a>
           <a class="button secondary" href="https://linktr.ee/astroleck">Open Linktree</a>
           <a class="button secondary" href="verbuga.html">Verbuga</a>
-          <a class="button secondary" href="weather.html">Weer</a>
           <a class="button bio" href="biologie-studieplatform.html">🧬 Bio Studieplatform</a>
           <a class="button secondary" href="https://github.com/Victorinox13">GitHub</a>
         </div>
@@ -411,6 +434,8 @@ h1 { font-size: 2.9rem; }
         return '<div class="ring"></div><div class="bars"><span></span><span></span></div>';
       case 'space':
         return '<div class="play">▶</div>';
+      case 'radar':
+        return '<div class="scope"></div>';
       default:
         return '';
     }
