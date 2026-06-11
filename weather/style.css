@@ -307,6 +307,12 @@ a { color: inherit; }
   padding: 5px 10px; border-radius: var(--radius-sm);
 }
 
+@media (max-width: 480px) {
+  .map-readout { top: 12px; bottom: auto; font-size: 0.62rem; padding: 4px 8px; }
+  .map-layer-toggle button { padding: 5px 8px; font-size: 0.62rem; }
+  .leaflet-control-attribution { display: none; }
+}
+
 .house-marker {
   width: 18px; height: 18px; position: relative;
 }
