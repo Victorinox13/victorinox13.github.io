@@ -1,5 +1,5 @@
 /* WeatherDeck — cyberdeck weather dashboard
- * Data: Open-Meteo (forecast + geocoding + air quality), RainViewer (radar tiles), CARTO (basemap)
+ * Data: Open-Meteo (forecast + air quality), Nominatim/OpenStreetMap (address geocoding), CARTO (basemap)
  */
 
 const WEATHER_CODES = {
@@ -72,19 +72,10 @@ const els = {
   sysInfo: document.getElementById("sysInfo"),
   hourly: document.getElementById("hourly"),
   daily: document.getElementById("daily"),
-  playBtn: document.getElementById("playBtn"),
-  frameSlider: document.getElementById("frameSlider"),
-  frameTime: document.getElementById("frameTime"),
-  frameTag: document.getElementById("frameTag"),
 };
 
 let map = null;
-let radarLayer = null;
 let marker = null;
-let radarFrames = [];
-let radarHost = "";
-let radarPastCount = 0;
-let playTimer = null;
 
 /* ---------- Clock ---------- */
 function tickClock() {
@@ -152,9 +143,9 @@ function closeSuggestions() {
 
 async function fetchSuggestions(q, autoSelect) {
   try {
-    const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=5&language=nl&format=json`);
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=jsonv2&addressdetails=1&limit=5&accept-language=nl`);
     const data = await res.json();
-    currentResults = data.results || [];
+    currentResults = data || [];
     if (autoSelect && currentResults[0]) { pickResult(currentResults[0]); return; }
     renderSuggestions();
   } catch {
@@ -163,14 +154,21 @@ async function fetchSuggestions(q, autoSelect) {
   }
 }
 
+function addressLines(r) {
+  const a = r.address || {};
+  const main = [a.road, a.house_number].filter(Boolean).join(" ") || a.suburb || a.village || a.town || a.city || r.display_name.split(",")[0];
+  const sub = [a.postcode, a.city || a.town || a.village, a.country].filter(Boolean).join(", ");
+  return [main, sub];
+}
+
 function renderSuggestions() {
   if (!currentResults.length) { closeSuggestions(); return; }
   els.suggestions.innerHTML = "";
   currentResults.forEach((r, i) => {
     const div = document.createElement("div");
     div.className = "suggestion-item";
-    const place = [r.admin1, r.country].filter(Boolean).join(", ");
-    div.innerHTML = `<span>${r.name}</span><span class="muted">${place}</span>`;
+    const [main, sub] = addressLines(r);
+    div.innerHTML = `<span>${main}</span><span class="muted">${sub}</span>`;
     div.addEventListener("click", () => pickResult(r));
     els.suggestions.appendChild(div);
   });
@@ -180,9 +178,10 @@ function renderSuggestions() {
 
 function pickResult(r) {
   closeSuggestions();
-  els.addressInput.value = [r.name, r.admin1].filter(Boolean).join(", ");
-  const label = [r.name, r.admin1, r.country].filter(Boolean).join(", ");
-  loadLocation(r.latitude, r.longitude, label);
+  const [main, sub] = addressLines(r);
+  els.addressInput.value = [main, sub].filter(Boolean).join(", ");
+  const label = [main, sub].filter(Boolean).join(", ");
+  loadLocation(parseFloat(r.lat), parseFloat(r.lon), label);
 }
 
 /* ---------- GPS ---------- */
@@ -192,12 +191,14 @@ els.gpsBtn.addEventListener("click", () => {
   navigator.geolocation.getCurrentPosition(
     async (pos) => {
       const { latitude, longitude } = pos.coords;
-      let label = `${latitude.toFixed(3)}, ${longitude.toFixed(3)}`;
+      let label = `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
       try {
-        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=nl`);
+        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=jsonv2&addressdetails=1&accept-language=nl`);
         const data = await res.json();
-        const place = [data.locality, data.principalSubdivision, data.countryName].filter(Boolean).join(", ");
-        if (place) label = place;
+        if (data && data.address) {
+          const [main, sub] = addressLines(data);
+          label = [main, sub].filter(Boolean).join(", ");
+        }
       } catch {}
       els.addressInput.value = label;
       loadLocation(latitude, longitude, label);
@@ -208,23 +209,18 @@ els.gpsBtn.addEventListener("click", () => {
 });
 
 /* ---------- Map ---------- */
+const HOUSE_ZOOM = 17;
+
 function initMap(lat, lon) {
   if (map) return;
-  map = L.map("map", { zoomControl: false, attributionControl: false }).setView([lat, lon], 9);
+  map = L.map("map", { zoomControl: false, attributionControl: false }).setView([lat, lon], HOUSE_ZOOM);
 
   L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
     subdomains: "abcd", maxZoom: 19,
   }).addTo(map);
 
-  map.createPane("radar");
-  map.getPane("radar").style.zIndex = 450;
-  map.getPane("radar").style.pointerEvents = "none";
-
-  radarLayer = L.tileLayer("", { pane: "radar", opacity: 0.75, tileSize: 256 });
-  radarLayer.addTo(map);
-
   L.control.attribution({ prefix: false, position: "bottomright" })
-    .addAttribution("CARTO &middot; RainViewer &middot; Open-Meteo")
+    .addAttribution("CARTO &middot; OpenStreetMap &middot; Open-Meteo")
     .addTo(map);
 }
 
@@ -234,66 +230,6 @@ function setMarker(lat, lon) {
   else marker = L.marker([lat, lon], { icon }).addTo(map);
 }
 
-/* ---------- Radar frames (RainViewer) ---------- */
-async function loadRadar(lat, lon) {
-  try {
-    const res = await fetch("https://api.rainviewer.com/public/weather-maps.json");
-    const data = await res.json();
-    radarHost = data.host;
-    const past = data.radar.past || [];
-    const nowcast = data.radar.nowcast || [];
-    radarFrames = [...past, ...nowcast];
-    radarPastCount = past.length;
-
-    els.frameSlider.max = String(radarFrames.length - 1);
-    els.frameSlider.value = String(radarPastCount > 0 ? radarPastCount - 1 : 0);
-    setRadarFrame(parseInt(els.frameSlider.value, 10));
-  } catch {
-    els.frameTime.textContent = "n.v.t.";
-    els.frameTag.textContent = "OFFLINE";
-  }
-}
-
-function setRadarFrame(idx) {
-  const frame = radarFrames[idx];
-  if (!frame || !radarLayer) return;
-  radarLayer.setUrl(`${radarHost}${frame.path}/256/{z}/{x}/{y}/2/1_1.png`);
-  const d = new Date(frame.time * 1000);
-  els.frameTime.textContent = d.toLocaleTimeString("nl-BE", { hour: "2-digit", minute: "2-digit" });
-  const isForecast = idx >= radarPastCount;
-  els.frameTag.textContent = isForecast ? "FORECAST" : (idx === radarPastCount - 1 ? "LIVE" : "PAST");
-  els.frameTag.classList.toggle("forecast", isForecast);
-}
-
-els.frameSlider.addEventListener("input", (e) => {
-  stopPlayback();
-  setRadarFrame(parseInt(e.target.value, 10));
-});
-
-els.playBtn.addEventListener("click", () => {
-  if (playTimer) stopPlayback();
-  else startPlayback();
-});
-
-function startPlayback() {
-  if (!radarFrames.length) return;
-  els.playBtn.textContent = "❚❚";
-  els.playBtn.classList.add("active");
-  playTimer = setInterval(() => {
-    let idx = parseInt(els.frameSlider.value, 10) + 1;
-    if (idx > radarFrames.length - 1) idx = 0;
-    els.frameSlider.value = String(idx);
-    setRadarFrame(idx);
-  }, 600);
-}
-
-function stopPlayback() {
-  clearInterval(playTimer);
-  playTimer = null;
-  els.playBtn.textContent = "▶";
-  els.playBtn.classList.remove("active");
-}
-
 /* ---------- Main load ---------- */
 async function loadLocation(lat, lon, label) {
   setStatus("Locatiegegevens laden…", "loading");
@@ -301,11 +237,9 @@ async function loadLocation(lat, lon, label) {
   els.coordReadout.textContent = `LAT ${lat.toFixed(4)} / LON ${lon.toFixed(4)}`;
 
   initMap(lat, lon);
-  map.setView([lat, lon], 9);
+  map.setView([lat, lon], HOUSE_ZOOM);
   setMarker(lat, lon);
   setTimeout(() => map.invalidateSize(), 50);
-
-  loadRadar(lat, lon);
 
   try {
     const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +

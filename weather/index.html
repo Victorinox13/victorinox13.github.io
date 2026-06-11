@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WeatherDeck | Astroleck</title>
-<meta name="description" content="WeatherDeck: cyberdeck-stijl live weerdashboard met radar boven jouw adres, voorspellingen, luchtkwaliteit en zon/maan-cyclus.">
+<meta name="description" content="WeatherDeck: cyberdeck-stijl live weerdashboard met een ingezoomde kaart van jouw adres, voorspellingen, luchtkwaliteit en zon/maan-cyclus.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
@@ -42,17 +42,16 @@
 
   <main id="dashboard" class="dashboard hidden">
 
-    <section class="panel radar-panel">
+    <section class="panel map-panel">
       <div class="panel-head">
-        <span>RADAR // <span id="locName">--</span></span>
+        <span>MAP // <span id="locName">--</span></span>
         <span class="led on"></span>
       </div>
-      <div class="radar-map-wrap">
+      <div class="map-wrap">
         <div id="map"></div>
         <div class="scope-overlay" aria-hidden="true">
           <div class="crosshair-h"></div>
           <div class="crosshair-v"></div>
-          <div class="sweep"></div>
           <div class="ring r1"></div>
           <div class="ring r2"></div>
           <div class="ring r3"></div>
@@ -64,12 +63,6 @@
         <div class="map-readout">
           <span id="coordReadout">LAT -- / LON --</span>
         </div>
-      </div>
-      <div class="radar-controls">
-        <button id="playBtn" class="btn-deck small">▶</button>
-        <input type="range" id="frameSlider" min="0" max="0" value="0" step="1">
-        <span class="frame-time" id="frameTime">--:--</span>
-        <span class="frame-tag" id="frameTag">LIVE</span>
       </div>
     </section>
 
@@ -122,7 +115,7 @@
   </main>
 
   <footer class="deck-footer">
-    DATA: OPEN-METEO · RAINVIEWER · CARTO &nbsp;|&nbsp; <a href="../index.html">← Terug naar portaal</a>
+    DATA: OPEN-METEO · OPENSTREETMAP · CARTO &nbsp;|&nbsp; <a href="../index.html">← Terug naar portaal</a>
   </footer>
 </div>
 

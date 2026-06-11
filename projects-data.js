@@ -39,12 +39,12 @@ const PROJECTS = [
     emoji: "📡",
     category: "Tools",
     tag: "Live Weerdashboard",
-    description: "Cyberdeck-stijl weerdashboard: zoek je adres en krijg direct een live neerslagradar boven je huis, plus uurlijkse en 7-daagse voorspelling, luchtkwaliteit, zon/maan-cyclus en zicht-uit-je-raam.",
+    description: "Cyberdeck-stijl weerdashboard: zoek je adres en krijg direct een ingezoomde kaart van je huis, plus actuele condities, uurlijkse en 7-daagse voorspelling, luchtkwaliteit, zon/maan-cyclus en zicht-uit-je-raam.",
     link: "weather/index.html",
     linkLabel: "Open WeatherDeck →",
     highlight: true,
     date: "2026-06",
-    preview: { kind: "radar", bg: "#03060a", fg: "#d6fff3", accent: "#39ff88", accent2: "#00e5ff" }
+    preview: { kind: "radar", bg: "#1b2027", fg: "#e7eef4", accent: "#7dc8ff", accent2: "#aee0ff" }
   },
   {
     title: "Bio Studieplatform",
