@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weer | Astroleck</title>
+  <meta name="description" content="Persoonlijk weerdashboard: live weer, uurlijkse en dagelijkse voorspelling en neerslagradar voor jouw locatie.">
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(10, 19, 33, 0.78);
+      --panel-strong: rgba(14, 26, 44, 0.92);
+      --text: #f4f7fb;
+      --muted: #9fb1c9;
+      --line: rgba(159, 177, 201, 0.18);
+      --accent: #7ed7ff;
+      --accent-strong: #4cbcff;
+      --accent-warm: #ffd36e;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(126, 215, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 80% 15%, rgba(255, 211, 110, 0.12), transparent 18%),
+        linear-gradient(180deg, #08111f 0%, #0b1627 45%, #060d18 100%);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    .stars,
+    .stars::before,
+    .stars::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 75% 30%, rgba(255, 255, 255, 0.85) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 85% 70%, rgba(255, 255, 255, 0.65) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 55% 55%, rgba(126, 215, 255, 0.95) 0 1px, transparent 1.5px);
+      opacity: 0.7;
+    }
+
+    .stars::before { transform: scale(1.2); opacity: 0.35; }
+    .stars::after { transform: scale(1.5); opacity: 0.18; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(12, 22, 39, 0.82), rgba(9, 17, 31, 0.94));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      right: -80px;
+      top: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(126, 215, 255, 0.28), transparent 68%);
+      filter: blur(10px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(126, 215, 255, 0.1);
+      border: 1px solid rgba(126, 215, 255, 0.16);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin: 14px 0 6px;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .button:hover { transform: translateY(-2px); }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #04111d;
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .sections {
+      display: grid;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .panel {
+      padding: 24px;
+      border-radius: 28px;
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .panel h2 {
+      margin: 0 0 16px;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Current weather */
+    .current-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .now-main {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .now-icon { font-size: 4.5rem; line-height: 1; }
+
+    .now-temp {
+      font-size: clamp(3rem, 8vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .now-desc {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-top: 4px;
+    }
+
+    .now-feels {
+      color: var(--accent-warm);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 2px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Hourly */
+    .hourly-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .hour-card {
+      flex: 0 0 auto;
+      min-width: 92px;
+      padding: 14px 12px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+      scroll-snap-align: start;
+    }
+
+    .hour-card .time {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+    }
+
+    .hour-card .icon { font-size: 1.8rem; margin-bottom: 6px; }
+
+    .hour-card .temp { font-weight: 800; font-size: 1.1rem; }
+
+    .hour-card .precip {
+      margin-top: 6px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    /* Daily */
+    .daily-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .day-row {
+      display: grid;
+      grid-template-columns: 100px 40px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .day-row .day-name {
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+
+    .day-row .icon { font-size: 1.6rem; text-align: center; }
+
+    .day-row .precip {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .day-row .range {
+      text-align: right;
+      white-space: nowrap;
+      font-weight: 800;
+    }
+
+    .day-row .range .lo {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* Radar */
+    .radar-frame {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .radar-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .status {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .meta-line {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 880px) {
+      .current-grid { grid-template-columns: 1fr; }
+      .day-row { grid-template-columns: 80px 32px 1fr auto; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 20px, 1120px); padding-top: 18px; }
+      .hero, .panel { padding: 20px; border-radius: 22px; }
+      .now-main { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="hero">
+      <div>
+        <span class="eyebrow">Astroleck · Dashboard</span>
+        <h1>Weer boven jouw huis</h1>
+        <p class="lead" id="locationLine">Locatie ophalen vereist toestemming voor je positie.</p>
+      </div>
+      <button class="button primary" id="locateBtn">Gebruik mijn locatie</button>
+    </header>
+
+    <main class="sections" id="content" style="display:none;">
+      <section class="panel" id="currentPanel">
+        <h2>Nu</h2>
+        <div class="current-grid">
+          <div class="now-main">
+            <div class="now-icon" id="nowIcon">—</div>
+            <div>
+              <div class="now-temp" id="nowTemp">—°</div>
+              <div class="now-desc" id="nowDesc">—</div>
+              <div class="now-feels" id="nowFeels">—</div>
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat"><strong id="statWind">—</strong><span>Wind</span></div>
+            <div class="stat"><strong id="statHumidity">—</strong><span>Vochtigheid</span></div>
+            <div class="stat"><strong id="statPressure">—</strong><span>Luchtdruk</span></div>
+            <div class="stat"><strong id="statClouds">—</strong><span>Bewolking</span></div>
+          </div>
+        </div>
+        <p class="meta-line" id="updatedLine"></p>
+      </section>
+
+      <section class="panel">
+        <h2>Komende uren</h2>
+        <div class="hourly-scroll" id="hourly"></div>
+      </section>
+
+      <section class="panel">
+        <h2>7-daagse voorspelling</h2>
+        <div class="daily-list" id="daily"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Neerslagradar rondom jou</h2>
+        <div class="radar-frame">
+          <iframe id="radarFrame" loading="lazy" title="Neerslagradar"></iframe>
+        </div>
+      </section>
+    </main>
+
+    <div class="status" id="status">Klik op "Gebruik mijn locatie" om het weer boven jouw huis te laden.</div>
+
+    <footer>© 2026 Victor Deleeck</footer>
+  </div>
+
+  <script>
+    const WEATHER_CODES = {
+      0: ["Helder", "☀️"],
+      1: ["Overwegend helder", "🌤️"],
+      2: ["Half bewolkt", "⛅"],
+      3: ["Bewolkt", "☁️"],
+      45: ["Mist", "🌫️"],
+      48: ["Rijp / mist", "🌫️"],
+      51: ["Lichte motregen", "🌦️"],
+      53: ["Motregen", "🌦️"],
+      55: ["Dichte motregen", "🌧️"],
+      56: ["Onderkoelde motregen", "🌧️"],
+      57: ["Dichte onderkoelde motregen", "🌧️"],
+      61: ["Lichte regen", "🌦️"],
+      63: ["Regen", "🌧️"],
+      65: ["Zware regen", "🌧️"],
+      66: ["Onderkoelde regen", "🌧️"],
+      67: ["Zware onderkoelde regen", "🌧️"],
+      71: ["Lichte sneeuw", "🌨️"],
+      73: ["Sneeuw", "🌨️"],
+      75: ["Zware sneeuw", "❄️"],
+      77: ["Sneeuwkorrels", "❄️"],
+      80: ["Lichte buien", "🌦️"],
+      81: ["Buien", "🌧️"],
+      82: ["Zware buien", "⛈️"],
+      85: ["Lichte sneeuwbuien", "🌨️"],
+      86: ["Zware sneeuwbuien", "❄️"],
+      95: ["Onweer", "⛈️"],
+      96: ["Onweer met hagel", "⛈️"],
+      99: ["Zwaar onweer met hagel", "⛈️"]
+    };
+
+    function describe(code) {
+      return WEATHER_CODES[code] || ["Onbekend", "🌡️"];
+    }
+
+    const statusEl = document.getElementById("status");
+    const localeOpts = { weekday: "short", hour: "2-digit", minute: "2-digit" };
+
+    document.getElementById("locateBtn").addEventListener("click", () => {
+      if (!navigator.geolocation) {
+        statusEl.textContent = "Geolocatie wordt niet ondersteund door deze browser.";
+        return;
+      }
+      statusEl.textContent = "Locatie ophalen…";
+      navigator.geolocation.getCurrentPosition(
+        (pos) => loadWeather(pos.coords.latitude, pos.coords.longitude),
+        (err) => {
+          statusEl.textContent = "Kon locatie niet ophalen: " + err.message;
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    });
+
+    async function loadWeather(lat, lon) {
+      statusEl.textContent = "Weerdata laden…";
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+          `&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,surface_pressure,precipitation` +
+          `&hourly=temperature_2m,precipitation_probability,weather_code` +
+          `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max` +
+          `&timezone=auto&forecast_days=7`;
+
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Open-Meteo API gaf een fout terug");
+        const data = await res.json();
+
+        renderCurrent(data);
+        renderHourly(data);
+        renderDaily(data);
+        renderRadar(lat, lon);
+        await renderLocation(lat, lon);
+
+        document.getElementById("content").style.display = "grid";
+        statusEl.style.display = "none";
+      } catch (e) {
+        statusEl.textContent = "Er ging iets mis bij het laden van het weer: " + e.message;
+      }
+    }
+
+    function renderCurrent(data) {
+      const c = data.current;
+      const [desc, icon] = describe(c.weather_code);
+      document.getElementById("nowIcon").textContent = icon;
+      document.getElementById("nowTemp").textContent = Math.round(c.temperature_2m) + "°C";
+      document.getElementById("nowDesc").textContent = desc;
+      document.getElementById("nowFeels").textContent = "Voelt als " + Math.round(c.apparent_temperature) + "°C";
+      document.getElementById("statWind").textContent = Math.round(c.wind_speed_10m) + " km/h";
+      document.getElementById("statHumidity").textContent = c.relative_humidity_2m + "%";
+      document.getElementById("statPressure").textContent = Math.round(c.surface_pressure) + " hPa";
+      document.getElementById("statClouds").textContent = c.cloud_cover + "%";
+
+      const updated = new Date(c.time);
+      document.getElementById("updatedLine").textContent =
+        "Laatst bijgewerkt: " + updated.toLocaleString("nl-BE", { weekday: "long", hour: "2-digit", minute: "2-digit" });
+    }
+
+    function renderHourly(data) {
+      const container = document.getElementById("hourly");
+      container.innerHTML = "";
+      const now = new Date();
+      const times = data.hourly.time;
+      let startIdx = times.findIndex(t => new Date(t) >= now);
+      if (startIdx === -1) startIdx = 0;
+
+      for (let i = startIdx; i < startIdx + 24 && i < times.length; i++) {
+        const time = new Date(times[i]);
+        const temp = Math.round(data.hourly.temperature_2m[i]);
+        const precip = data.hourly.precipitation_probability[i];
+        const [, icon] = describe(data.hourly.weather_code[i]);
+
+        const card = document.createElement("div");
+        card.className = "hour-card";
+        card.innerHTML = `
+          <div class="time">${time.toLocaleTimeString("nl-BE", { hour: "2-digit", minute: "2-digit" })}</div>
+          <div class="icon">${icon}</div>
+          <div class="temp">${temp}°</div>
+          <div class="precip">💧 ${precip}%</div>
+        `;
+        container.appendChild(card);
+      }
+    }
+
+    function renderDaily(data) {
+      const container = document.getElementById("daily");
+      container.innerHTML = "";
+      const days = data.daily.time;
+
+      for (let i = 0; i < days.length; i++) {
+        const date = new Date(days[i]);
+        const [desc, icon] = describe(data.daily.weather_code[i]);
+        const max = Math.round(data.daily.temperature_2m_max[i]);
+        const min = Math.round(data.daily.temperature_2m_min[i]);
+        const precip = data.daily.precipitation_probability_max[i];
+
+        const row = document.createElement("div");
+        row.className = "day-row";
+        const dayName = i === 0 ? "Vandaag" : date.toLocaleDateString("nl-BE", { weekday: "long" });
+        row.innerHTML = `
+          <div class="day-name">${dayName}</div>
+          <div class="icon">${icon}</div>
+          <div class="precip">${desc} · 💧 ${precip}%</div>
+          <div class="range"><span>${max}°</span> <span class="lo">${min}°</span></div>
+        `;
+        container.appendChild(row);
+      }
+    }
+
+    function renderRadar(lat, lon) {
+      const src = `https://embed.windy.com/embed2.html?lat=${lat}&lon=${lon}&zoom=8&level=surface&overlay=radar&menu=&message=true&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&detailLat=${lat}&detailLon=${lon}&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1`;
+      document.getElementById("radarFrame").src = src;
+    }
+
+    async function renderLocation(lat, lon) {
+      const fallback = `Locatie: ${lat.toFixed(3)}, ${lon.toFixed(3)}`;
+      try {
+        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=nl`);
+        if (!res.ok) throw new Error("geocoding mislukt");
+        const data = await res.json();
+        const place = [data.locality, data.principalSubdivision, data.countryName].filter(Boolean).join(", ");
+        document.getElementById("locationLine").textContent = place ? `Live weer voor ${place}.` : fallback;
+      } catch {
+        document.getElementById("locationLine").textContent = fallback;
+      }
+    }
+  </script>
+</body>
+</html>
