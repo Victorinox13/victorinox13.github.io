@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aardrijkskunde — Studieplatform · Thema Atmosfeer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Spline+Sans+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e9eff6;--surface:#fff;--surface2:#f2f7fb;--surface3:#e8f0f8;
+  --ink:#13233c;--soft:#46566d;--faint:#8294a9;--line:#d3deec;--line2:#e7eef7;
+  --sky:#1685b2;--sky-deep:#0b6286;--sky-soft:#d3ecf6;
+  --sun:#e0892a;--sun-soft:#f7e6cf;
+  --coral:#d9533a;--coral-soft:#f7ddd4;
+  --storm:#5b54b8;--storm-soft:#e6e3f6;--space:#0b1a38;
+  --teal:#1685b2;--navy:#0f2c5c;--rose:#d9533a;--amber:#e0892a;
+  --good:#1a7a4a;--good-s:#d4edde;--bad:#b02828;--bad-s:#f5dcdc;
+  --shadow:0 1px 2px rgba(18,40,70,.05),0 14px 32px -16px rgba(16,60,104,.30);
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><g fill='none' stroke='%23b9cde0' stroke-width='1'><path d='M-20 60 C40 20 120 100 160 60 C200 20 240 80 300 50'/><path d='M-20 110 C40 70 120 150 160 110 C200 70 240 130 300 100'/><path d='M-20 165 C40 125 120 205 160 165 C200 125 240 185 300 155'/><path d='M-20 215 C40 175 120 255 160 215 C200 175 240 235 300 205'/></g></svg>")}
+main,header,footer{position:relative;z-index:1}
+h1,h2,h3,h4{font-family:"Sora",system-ui,sans-serif;line-height:1.14;font-weight:700;letter-spacing:-.01em}
+.mono{font-family:"Spline Sans Mono",ui-monospace,monospace;font-weight:600}
+
+/* HEADER (atmosfeer) */
+header{color:#eaf2fb;padding:30px clamp(16px,5vw,56px) 28px;position:relative;overflow:hidden;
+  background:linear-gradient(178deg,#0a1834 0%,#0f2c5c 30%,#1f5598 58%,#3f86c8 80%,#86b9e0 96%,#f0b878 118%)}
+header::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.6;
+  background-image:radial-gradient(1.4px 1.4px at 18% 22%,#fff 50%,transparent 0),radial-gradient(1.2px 1.2px at 42% 12%,#fff 50%,transparent 0),radial-gradient(1.6px 1.6px at 68% 26%,#fff 50%,transparent 0),radial-gradient(1.1px 1.1px at 82% 14%,#fff 50%,transparent 0),radial-gradient(1.3px 1.3px at 30% 34%,#fff 50%,transparent 0),radial-gradient(1px 1px at 90% 32%,#fff 50%,transparent 0);background-repeat:no-repeat}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:62%;pointer-events:none;opacity:.5;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='180'><g fill='none' stroke='%23ffffff' stroke-width='1.1' opacity='0.55'><path d='M-20 150 C80 110 160 150 240 120 C320 90 380 130 440 100'/><path d='M-20 170 C80 135 160 172 240 142 C320 112 380 152 440 122'/><path d='M-20 130 C80 88 160 128 240 96 C320 64 380 108 440 76'/></g></svg>") bottom/520px repeat-x}
+.h-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;position:relative}
+.h-left .eyebrow{font:600 11px/1 "Spline Sans Mono",monospace;letter-spacing:.22em;text-transform:uppercase;color:#bfe3d6;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.h-left .eyebrow::before{content:"";width:17px;height:17px;flex:none;background:no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bfe3d6' stroke-width='2'><circle cx='12' cy='12' r='9'/><path d='M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4'/></svg>")}
+.h-left h1{font-size:clamp(26px,4.8vw,46px);font-weight:800}
+.h-left h1 em{font-style:normal;font-weight:800;background:linear-gradient(95deg,#9fe0ff,#ffd9a0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.h-left p{margin-top:9px;max-width:62ch;color:#d2e2f2;font-size:14px}
+.h-stats{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px;position:relative}
+.ring{--p:0;width:58px;height:58px;border-radius:50%;background:conic-gradient(#7fdcff calc(var(--p)*1%),rgba(255,255,255,.16) 0);display:grid;place-items:center;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 4px 16px -4px rgba(0,0,0,.4)}
+.ring-inner{width:45px;height:45px;border-radius:50%;background:#0c1f44;display:grid;place-items:center}
+.ring-inner span{font:700 12px/1 "Spline Sans Mono",monospace;color:#eaf2fb}
+.h-stat-lbl{font-size:13px;color:#cfe0f1}
+.h-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.chip{font:600 11px/1 "Spline Sans Mono",monospace;letter-spacing:.05em;text-transform:uppercase;padding:6px 10px;border-radius:20px;background:rgba(255,255,255,.14);color:#e4eef8}
+
+/* MAIN NAV */
+main{max-width:1180px;margin:0 auto;padding:0 clamp(14px,4vw,40px) 90px}
+.main-nav{display:flex;gap:5px;margin:-22px 0 6px;z-index:5;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:6px;box-shadow:var(--shadow);width:max-content;max-width:100%;overflow-x:auto}
+.mnav-btn{appearance:none;border:0;background:transparent;cursor:pointer;white-space:nowrap;font:600 13.5px/1 "Inter",sans-serif;color:var(--soft);padding:10px 15px;border-radius:11px;display:flex;align-items:center;gap:7px;transition:.14s}
+.mnav-btn:hover{color:var(--ink);background:var(--surface2)}
+.mnav-btn[aria-selected="true"]{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:#fff;box-shadow:0 4px 14px -5px var(--sky)}
+.mnav-btn svg{width:15px;height:15px;flex:none}
+
+/* SUB TABS */
+.stabs{display:flex;gap:7px;margin:20px 0 20px;flex-wrap:wrap}
+.stab{appearance:none;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font:600 13px/1 "Inter",sans-serif;color:var(--soft);padding:9px 16px;border-radius:22px;transition:.14s}
+.stab:hover{border-color:var(--sky);color:var(--ink)}
+.stab[aria-selected="true"]{background:var(--sky);border-color:var(--sky);color:#fff}
+
+.view,.subview{display:none}
+.view.active,.subview.active{display:block;animation:fadein .28s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* THEORIE */
+.sec-head{margin:8px 0 14px}
+.sec-head .snum{font:600 11px/1 "Spline Sans Mono",monospace;color:var(--sky);letter-spacing:.12em;text-transform:uppercase}
+.sec-head h2{font-size:clamp(20px,3vw,28px);margin-top:6px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px 22px 27px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--sky),var(--sun))}
+.card-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.card-top .cn{font:600 11px/1.3 "Spline Sans Mono",monospace;color:var(--faint)}
+.card-top h3{font-size:18px;flex:1;min-width:160px}
+.badge{font:600 10px/1 "Spline Sans Mono",monospace;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:20px}
+.bk{background:var(--sky-soft);color:var(--sky-deep)}
+.bb{background:var(--sun-soft);color:#8a5712}
+.card-body{color:var(--soft);font-size:15px}
+.card-body p{margin-bottom:10px}
+.card-body strong{color:var(--ink);font-weight:600}
+.card-body em{color:var(--sky-deep);font-style:italic}
+.card-body ul{padding-left:0;list-style:none;margin-bottom:12px}
+.card-body li{padding-left:20px;position:relative;margin-bottom:6px}
+.card-body li::before{content:"";position:absolute;left:3px;top:7px;width:7px;height:7px;border-radius:50%;border:2px solid var(--sky)}
+.kw{background:linear-gradient(transparent 58%,#bfe6f4 0);font-weight:600;color:var(--sky-deep);padding:0 1px}
+figure{margin:13px 0 3px;text-align:center}
+figure img{max-width:100%;border:1px solid var(--line);border-radius:10px}
+figcaption{font-size:12px;color:var(--faint);margin-top:5px;font-style:italic}
+.vtable{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 12px;border-radius:10px;overflow:hidden}
+.vtable th,.vtable td{border:1px solid var(--line);padding:8px 11px;text-align:left}
+.vtable th{background:var(--surface3);font-weight:600;color:var(--ink)}
+.vtable td:first-child{font-weight:600;background:var(--surface2)}
+ol.steps{padding-left:22px;margin-bottom:12px}
+ol.steps li{margin-bottom:7px;font-weight:600;color:var(--ink)}
+ol.steps li span{font-weight:400;color:var(--soft)}
+
+/* VRAGEN */
+.qwrap{max-width:740px;margin:0 auto}
+.qbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.qbar .qpos,.qbar .qsc{font:600 13px/1 "Spline Sans Mono",monospace;color:var(--soft)}
+.qbar .qsc{color:var(--sky)}
+.qtrack-wrap{flex-basis:100%;height:6px;background:var(--line2);border-radius:3px;overflow:hidden;margin-top:1px}
+.qtrack-fill{height:100%;background:linear-gradient(90deg,var(--sky),var(--sun));width:0;transition:width .3s}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:var(--shadow)}
+.qtype-lbl{font:600 10.5px/1 "Spline Sans Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.chap-badge{font:600 9px/1 "Spline Sans Mono",monospace;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:10px}
+.qtext{font-family:"Sora",sans-serif;font-size:20px;font-weight:700;line-height:1.34;color:var(--ink);margin-bottom:4px}
+.qfig{margin:14px 0 4px;text-align:center}
+.qfig img{max-width:100%;max-height:280px;border:1px solid var(--line);border-radius:10px}
+.opts{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.opts.tf{flex-direction:row}
+.opt{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--surface2);font:500 15px/1.4 "Inter",sans-serif;color:var(--ink);padding:13px 15px;border-radius:12px;text-align:left;transition:.12s;display:flex;gap:9px;align-items:flex-start}
+.opts.tf .opt{flex:1;justify-content:center;font-weight:600;font-size:16px}
+.opt:hover:not(:disabled){border-color:var(--sky);background:#fff}
+.opt .mk{font:700 12px/1.3 "Spline Sans Mono",monospace;color:var(--faint);flex:none;margin-top:1px}
+.opt.pg{background:var(--good-s);border-color:var(--good);color:#0f4a28}
+.opt.pb{background:var(--bad-s);border-color:var(--bad);color:#6a1818}
+.opt.pr{border-color:var(--good);color:#0f4a28}
+.opt:disabled{cursor:default}
+.fill-wrap{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.fill-wrap input{flex:1;min-width:180px;font:500 16px/1 "Inter",sans-serif;padding:13px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--ink)}
+.fill-wrap input:focus{outline:none;border-color:var(--sky);background:#fff}
+.hint-txt{align-self:center;font-size:12.5px;color:var(--faint)}
+textarea.openq{width:100%;min-height:90px;margin-top:16px;font:400 15px/1.55 "Inter",sans-serif;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--ink);resize:vertical}
+textarea.openq:focus{outline:none;border-color:var(--sky);background:#fff}
+.fb{margin-top:16px;padding:13px 15px;border-radius:12px;font-size:14px;line-height:1.5;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-s);color:#0f4a28}
+.fb.no{background:var(--bad-s);color:#6a1818}
+.fb.key{background:var(--surface2);color:var(--soft);border:1px dashed var(--line)}
+.fb b{font-weight:600}
+.fb .model{margin-top:6px;color:var(--ink);font-weight:500}
+.self-check{display:flex;gap:9px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.self-check span{font-size:13px;color:var(--soft)}
+.mini{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--surface);font:600 13px/1 "Inter",sans-serif;padding:8px 13px;border-radius:9px;transition:.12s}
+.mini.g:hover{border-color:var(--good);color:var(--good)}
+.mini.b:hover{border-color:var(--bad);color:var(--bad)}
+.qactions{display:flex;gap:9px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
+.btn{appearance:none;cursor:pointer;border:0;font:600 15px/1 "Inter",sans-serif;padding:12px 20px;border-radius:11px;transition:.13s;display:inline-flex;align-items:center;gap:8px}
+.btn-p{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:#fff;box-shadow:0 6px 16px -6px var(--sky)}
+.btn-p:hover{filter:brightness(1.07)}
+.btn-g{background:transparent;border:1.5px solid var(--line);color:var(--ink)}.btn-g:hover{border-color:var(--sky)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.result-card{text-align:center;padding:8px 0}
+.result-card .big{font-family:"Sora",sans-serif;font-size:54px;font-weight:800;background:linear-gradient(120deg,var(--sky),var(--sun));-webkit-background-clip:text;background-clip:text;color:transparent}
+.result-card p{color:var(--soft);max-width:44ch;margin:8px auto 20px}
+.result-card .stars{font-size:28px;margin:4px 0 8px}
+
+/* WOORDENSCHAT */
+.voc-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.voc-table th{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:#fff;font:600 12.5px/1.3 "Inter",sans-serif;text-align:left;padding:12px 14px}
+.voc-table td{border-top:1px solid var(--line);padding:10px 14px;font-size:14px;vertical-align:top}
+.voc-table td:first-child{font-weight:600;color:var(--ink);width:35%;white-space:nowrap}
+.voc-table tr:nth-child(even) td{background:var(--surface2)}
+.vc{font:600 9px/1 "Spline Sans Mono",monospace;text-transform:uppercase;letter-spacing:.05em;padding:3px 6px;border-radius:9px;margin-left:6px;vertical-align:middle}
+.voc-learn-wrap{max-width:650px;margin:0 auto}
+.dir-btns{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.dir-btn{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--surface);font:600 13px/1.3 "Inter",sans-serif;color:var(--soft);padding:10px 14px;border-radius:11px;transition:.14s}
+.dir-btn[aria-pressed="true"]{background:var(--coral);border-color:var(--coral);color:#fff}
+.vlcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 24px;box-shadow:var(--shadow)}
+.vl-prompt-lbl{font:600 10px/1 "Spline Sans Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:10px}
+.vl-prompt{font-family:"Sora",sans-serif;font-size:19px;font-weight:600;line-height:1.4;color:var(--ink)}
+.vl-prompt.big{font-size:27px;font-weight:700}
+
+/* VOORTGANG */
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px}
+.prog-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)}
+.prog-card h4{font-size:14.5px;margin-bottom:8px}
+.prog-bar-wrap{height:8px;background:var(--line2);border-radius:4px;overflow:hidden;margin-top:6px}
+.prog-bar{height:100%;border-radius:4px;transition:width .4s;background:linear-gradient(90deg,var(--sky),var(--sun))}
+.prog-lbl{font:600 12px/1 "Spline Sans Mono",monospace;color:var(--faint);margin-top:5px}
+
+footer{max-width:1180px;margin:0 auto;padding:18px clamp(14px,4vw,40px) 60px;color:var(--faint);font-size:12.5px;line-height:1.6}
+@media(max-width:700px){.opts.tf{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2.5px solid var(--sun);outline-offset:2px;border-radius:5px}
+</style>
+</head>
+<body>
+<style>
+/* thematische hoofdstukkleuren — elk hoofdstuk een eigen atmosferische tint */
+.cc0{background:#e4e3f3;color:#3a3a8a}
+.cc1{background:#f7e7cf;color:#8a5712}
+.cc2{background:#f8ddd4;color:#a8381f}
+.cc3{background:#d2ecf5;color:#0b6488}
+.cc4{background:#dbe6f8;color:#244f9e}
+.cc5{background:#ece0f4;color:#693a9a}
+.cc6{background:#dcefdf;color:#1f6a3a}
+</style>
+<header>
+  <div class="h-row">
+    <div class="h-left">
+      <div class="eyebrow">Thema Atmosfeer · 5D · Aardrijkskunde</div>
+      <h1>Compleet <em>studieplatform</em></h1>
+      <p>De atmosfeer · stralingsbalans · temperatuur · wind &amp; luchtdruk · neerslag &amp; wolken · extreem weer · weerkaart — alle theorie, alle vragen, gemixte modus en woordenschat.</p>
+    </div>
+  </div>
+  <div class="h-stats">
+    <div class="ring" id="ringAll"><div class="ring-inner"><span id="ringPct">0%</span></div></div>
+    <div>
+      <div class="h-stat-lbl" id="progLbl">Je voortgang wordt automatisch bewaard.</div>
+      <div class="h-chips" id="chapChips"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <nav class="main-nav" id="mainNav" role="tablist" aria-label="Onderdeel"></nav>
+  <div id="views"></div>
+</main>
+
+<footer>
+  Bron: <em>Thema Atmosfeer (5D)</em> — samenvattingen hoofdstuk 7 t.e.m. 14 — ruim 100 oefenvragen en 73 begrippen. Theorie, vragen en woordenschat rechtstreeks uit je cursus. Voortgang wordt lokaal bewaard op dit toestel.
+</footer>
+
+<script>
+/* ======================================================
+   DATA — alle hoofdstukken
+====================================================== */
+const CHAPTERS=[
+{key:"atm",short:"H7",label:"De atmosfeer",icon:"layers",
+ theory:[
+  {num:"I",title:"Ontstaan en evolutie van de atmosfeer",items:[
+   {id:"I.1",t:"Wat is de atmosfeer?",body:`
+     <p>De <span class="kw">atmosfeer</span> (of dampkring) is de luchtlaag die onze planeet omringt en ons leven mogelijk maakt.</p>
+     <ul>
+       <li>Door de aanwezige <strong>zuurstof</strong> kan de mens ademen.</li>
+       <li>De <span class="kw">ozonlaag</span> beschermt ons tegen schadelijke zonnestraling.</li>
+       <li>Meteoroïden branden op door wrijving.</li>
+       <li>De onderste laag is de <strong>machinekamer van het weer en het klimaat</strong>.</li>
+     </ul>`},
+   {id:"I.2",t:"De drie fasen in de evolutie",body:`
+     <p>De atmosfeer evolueerde in drie fasen:</p>
+     <ol class="steps">
+       <li><span class="kw">Primaire atmosfeer</span> <span>— 4,6 miljard jaar geleden, bij het ontstaan van de aarde. Bestond enkel uit <strong>waterstof en helium</strong>.</span></li>
+       <li><span class="kw">Secundaire atmosfeer</span> <span>— vanaf ca. 4 miljard jaar geleden, na afkoeling van de aardkorst. Bestond uit <strong>koolstofdioxide (CO₂) en waterdamp</strong>.</span></li>
+       <li><span class="kw">Tertiaire atmosfeer</span> <span>— ca. 3,5 miljard jaar geleden. Het ontstaan van <strong>bacteriën</strong> doet <strong>zuurstofgas en stikstofgas</strong> ontstaan.</span></li>
+     </ol>`}
+  ]},
+  {num:"II",title:"Indeling volgens TEMPERATUUR — vijf lagen",items:[
+   {id:"II.1",t:"Troposfeer",body:`
+     <p>De <span class="kw">troposfeer</span> is de <strong>eerste laag</strong>, ongeveer <strong>9 tot 12 km</strong> hoog.</p>
+     <ul>
+       <li>Temperatuur daalt van 15 °C aan het aardoppervlak tot <strong>-55 °C</strong> aan de tropopauze: de lucht wordt van onderuit verwarmd door de aarde.</li>
+       <li>Samen met de temperatuur daalt ook de <strong>luchtdruk</strong> sterk met de hoogte ('ijle lucht').</li>
+       <li>Belangrijkste gassen: <strong>stikstof en zuurstof</strong>. Alle weerprocessen (wind, neerslag) vinden hier plaats. Ze is <strong>onstabiel</strong>.</li>
+     </ul>`},
+   {id:"II.2",t:"Stratosfeer",body:`
+     <p>De <span class="kw">stratosfeer</span> loopt van <strong>12 tot 50 km</strong>. De temperatuur gaat <strong>geleidelijk terug omhoog</strong> tot opnieuw 0 °C op 50 km, omdat de <strong>ozonlaag</strong> in de toplaag zonnestralen absorbeert.</p>`},
+   {id:"II.3",t:"Mesosfeer",body:`
+     <p>In de <span class="kw">mesosfeer</span> (derde laag) <strong>branden meteoren op</strong> en lichten ze op als vallende sterren.</p>`},
+   {id:"II.4",t:"Thermosfeer",body:`
+     <p>In de <span class="kw">thermosfeer</span> (vierde laag) stijgt de temperatuur opnieuw tot wel <strong>1000 °C</strong>. Hier bevinden zich de eerste satellieten en het ISS.</p>
+     <ul>
+       <li>Vanaf 80 km komt het <span class="kw">poollicht</span> voor (aan de Noordpool: noorderlicht / aurora borealis): geladen deeltjes van de zon (zonnewinden) worden door het magnetisch veld naar de polen afgebogen.</li>
+       <li>Grote zonnevlammen kunnen een <span class="kw">geomagnetische storm</span> veroorzaken — soms is het poollicht dan tot in België zichtbaar, en het elektriciteitsnet kan verstoord raken.</li>
+     </ul>`},
+   {id:"II.5",t:"Exosfeer",body:`
+     <p>De <span class="kw">exosfeer</span> (vijfde, laatste laag) begint op <strong>500 km</strong> en gaat over in het luchtledige universum. De temperatuur stijgt nog, maar door zeer weinig materie is dit amper waarneembaar.</p>`}
+  ]},
+  {num:"III",title:"De ozonlaag en het 'gat'",items:[
+   {id:"III.1",t:"Wat is ozon?",body:`
+     <p>De <span class="kw">ozonlaag</span> bevindt zich in de <strong>stratosfeer</strong>. <strong>Ozon (O₃)</strong> ontstaat doordat een zuurstofmolecuul onder invloed van <strong>uv-straling</strong> een ozonmolecuul vormt. Ozon <strong>absorbeert schadelijke UV-straling</strong> van de zon.</p>`},
+   {id:"III.2",t:"Het 'gat' in de ozonlaag",body:`
+     <p>Het 'gat' is geen echt gat, maar een plaats waar de <strong>ozonconcentratie veel lager</strong> is. De afbraak is het grootst aan de <strong>Zuidpool in september</strong> (enkel bij zeer lage temperaturen én voldoende zonlicht).</p>
+     <ul>
+       <li>Oorzaak: <span class="kw">CFK's</span> (chloor, fluor, koolwaterstof) uit vroegere spuitbussen en koelmiddelen. Onder uv-straling breken zij ozon af.</li>
+       <li>Gevolg: meer UV-straling bereikt het aardoppervlak → meer huidkankers en huidaandoeningen.</li>
+       <li>Door een <strong>verbod op CFK's</strong> is het gat de voorbije decennia sterk verkleind.</li>
+     </ul>`}
+  ]},
+  {num:"IV",title:"Indeling volgens CHEMISCHE SAMENSTELLING",items:[
+   {id:"IV.1",t:"Homosfeer en heterosfeer",body:`
+     <p>Deze indeling gebeurt op basis van de concentratie aan <strong>zuurstofgas (O₂)</strong>.</p>
+     <ul>
+       <li><span class="kw">Homosfeer</span>: van <strong>0 tot 85 km</strong>. Veel stikstofgas, weinig zuurstofgas, maar de <strong>verhouding is stabiel</strong>.</li>
+       <li><span class="kw">Heterosfeer</span>: van <strong>85 km tot het luchtledige universum</strong>. Het zuurstofgehalte <strong>neemt toe met de hoogte</strong> en is in verhouding hoger dan in de homosfeer.</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Atmosfeer (dampkring)","De luchtlaag die de aarde omringt en leven mogelijk maakt; onderste laag is de machinekamer van weer en klimaat."],
+  ["Primaire atmosfeer","Eerste atmosfeer (4,6 miljard jaar geleden), bestond enkel uit waterstof en helium."],
+  ["Secundaire atmosfeer","Atmosfeer vanaf ca. 4 miljard jaar geleden, uit CO₂ en waterdamp."],
+  ["Tertiaire atmosfeer","Atmosfeer vanaf ca. 3,5 miljard jaar geleden; bacteriën doen zuurstof- en stikstofgas ontstaan."],
+  ["Troposfeer","Eerste laag (9-12 km); temperatuur daalt tot -55 °C; alle weerprocessen vinden hier plaats."],
+  ["Tropopauze","Bovengrens van de troposfeer."],
+  ["Stratosfeer","Tweede laag (12-50 km); temperatuur stijgt terug door de ozonlaag."],
+  ["Mesosfeer","Derde laag waarin meteoren opbranden."],
+  ["Thermosfeer","Vierde laag; temperatuur tot 1000 °C; satellieten, ISS en poollicht."],
+  ["Exosfeer","Vijfde laag (vanaf 500 km), gaat over in het universum."],
+  ["Ozonlaag","Laag in de stratosfeer die schadelijke UV-straling absorbeert."],
+  ["Ozon (O₃)","Molecuul dat ontstaat uit zuurstof onder uv-straling; absorbeert UV."],
+  ["CFK's","Chloor-fluor-koolwaterstoffen die ozon afbreken; oorzaak van het ozongat."],
+  ["Poollicht (aurora)","Lichtverschijnsel door zonnewinden die naar de polen worden afgebogen."],
+  ["Homosfeer","Laag 0-85 km met stabiele verhouding stikstof/zuurstof."],
+  ["Heterosfeer","Laag vanaf 85 km waar het zuurstofgehalte toeneemt met de hoogte."]
+ ],
+ q:[
+  {type:"mc",q:"Uit welke gassen bestond de primaire atmosfeer?",opts:["Koolstofdioxide en waterdamp","Waterstof en helium","Zuurstof en stikstof","Ozon en methaan"],cor:1,expl:"De <b>primaire atmosfeer</b> (4,6 miljard jaar geleden) bestond uitsluitend uit <b>waterstof en helium</b>."},
+  {type:"mc",q:"Waardoor ontstonden zuurstofgas en stikstofgas in de tertiaire atmosfeer?",opts:["Door vulkaanuitbarstingen","Door het ontstaan van bacteriën","Door afkoeling van de aardkorst","Door meteorieninslagen"],cor:1,expl:"Het ontstaan van <b>bacteriën</b> (ca. 3,5 miljard jaar geleden) deed zuurstof- en stikstofgas ontstaan."},
+  {type:"tf",q:"Alle weerprocessen, zoals wind en neerslag, vinden plaats in de troposfeer.",cor:true,fb:"Correct — de troposfeer is de machinekamer van het weer."},
+  {type:"fill",q:"De temperatuur daalt in de troposfeer tot ongeveer … °C aan de tropopauze.",acc:["-55","55","min 55","-55°c"],ans:"-55 °C"},
+  {type:"mc",q:"Waarom stijgt de temperatuur opnieuw in de stratosfeer?",opts:["Door wrijving met meteoren","Door absorptie van zonnestralen door de ozonlaag","Door de nabijheid van satellieten","Door de aardrotatie"],cor:1,expl:"De <b>ozonlaag</b> in de toplaag van de stratosfeer absorbeert zonnestralen, waardoor de temperatuur terug oploopt tot 0 °C op 50 km."},
+  {type:"mc",q:"In welke laag branden meteoren op als vallende sterren?",opts:["Troposfeer","Stratosfeer","Mesosfeer","Exosfeer"],cor:2,expl:"In de <b>mesosfeer</b> branden meteoren op."},
+  {type:"mc",q:"In welke laag kan de temperatuur oplopen tot 1000 °C en bevindt zich het ISS?",opts:["Stratosfeer","Mesosfeer","Thermosfeer","Exosfeer"],cor:2,expl:"De <b>thermosfeer</b> bereikt tot 1000 °C; satellieten en het ISS bevinden zich hier."},
+  {type:"tf",q:"Het poollicht ontstaat doordat zonnewinden door het magnetisch veld van de aarde naar de polen worden afgebogen.",cor:true,fb:"Correct — geladen deeltjes (zonnewinden) reageren met ionen in de bovenste atmosfeerlagen aan de polen."},
+  {type:"fill",q:"De ozonlaag bevindt zich in de … (atmosferische laag).",acc:["stratosfeer"],ans:"stratosfeer"},
+  {type:"mc",q:"Wanneer en waar is de ozonafbraak het grootst?",opts:["Aan de Noordpool in juni","Aan de Zuidpool in september","Aan de evenaar het hele jaar","Boven de oceanen in de winter"],cor:1,expl:"De afbraak is het grootst aan de <b>Zuidpool in september</b> — enkel bij zeer lage temperaturen én voldoende zonlicht."},
+  {type:"open",q:"Leg uit hoe CFK's de ozonlaag aantasten en welk gevolg dat heeft voor de mens.",model:"CFK's (chloor, fluor en koolwaterstof) werden vroeger gebruikt in spuitbussen en als koelmiddel. Onder invloed van uv-straling breken zij de ozonmoleculen af, waardoor de ozonconcentratie daalt. Hierdoor bereikt meer schadelijke UV-straling het aardoppervlak, wat leidt tot meer huidkankers en andere huidaandoeningen. Door een verbod op CFK's is het 'gat' intussen sterk verkleind."},
+  {type:"mc",q:"Wat kenmerkt de homosfeer?",opts:["Het zuurstofgehalte neemt toe met de hoogte","De verhouding stikstof/zuurstof is stabiel","Ze begint pas op 85 km hoogte","Er is meer zuurstof dan stikstof"],cor:1,expl:"In de <b>homosfeer</b> (0-85 km) is veel stikstof en weinig zuurstof, maar de <b>verhouding is stabiel</b>."},
+  {type:"mc",q:"In hoeveel lagen wordt de atmosfeer op basis van temperatuur ingedeeld?",opts:["Drie","Vier","Vijf","Zes"],cor:2,expl:"Op basis van de temperatuur onderscheid je <b>vijf</b> lagen: troposfeer, stratosfeer, mesosfeer, thermosfeer en exosfeer."},
+  {type:"tf",q:"De luchtdruk stijgt naarmate je hoger in de troposfeer komt.",cor:false,fb:"Fout. Hoe hoger je gaat, hoe <b>lager</b> de luchtdruk en hoe minder zuurstof ('ijle lucht')."},
+  {type:"mc",q:"Waarom vliegen vliegtuigen gemiddeld op ongeveer 10 km hoogte?",opts:["Daar is de temperatuur het hoogst","Door de lagere luchtdruk is er minder luchtweerstand, wat brandstof bespaart","Daar bevindt zich de ozonlaag","Om boven de straalstroom te blijven"],cor:1,expl:"Bij lagere luchtdruk zijn er minder deeltjes → <b>minder luchtweerstand</b> → minder brandstof en sneller vliegen."},
+  {type:"fill",q:"De exosfeer begint op ongeveer … km hoogte.",acc:["500","500 km"],ans:"500 km"},
+  {type:"open",q:"Beschrijf hoe de temperatuur verandert van de troposfeer tot en met de thermosfeer.",model:"In de troposfeer daalt de temperatuur (van 15 °C tot -55 °C aan de tropopauze). In de stratosfeer stijgt ze terug (tot 0 °C op 50 km) door absorptie van zonnestralen in de ozonlaag. In de mesosfeer daalt de temperatuur opnieuw. In de thermosfeer stijgt ze sterk, tot wel 1000 °C. Het verloop is dus afwisselend dalen-stijgen-dalen-stijgen."}
+ ]
+},
+
+{key:"str",short:"H8",label:"Stralingsbalans",icon:"sun",
+ theory:[
+  {num:"I",title:"De stralingsbalans en het natuurlijk broeikaseffect",items:[
+   {id:"I.1",t:"Wat is de stralingsbalans?",body:`
+     <p>Het klimaat wordt bepaald door het <span class="kw">evenwicht tussen invallende en uitgaande energie</span>: de <span class="kw">stralingsbalans</span>. De <strong>zon</strong> is de motor van dit systeem.</p>`},
+   {id:"I.2",t:"Het natuurlijk broeikaseffect",body:`
+     <p>Ongeveer <strong>1/3</strong> van de zonnestralen wordt teruggekaatst of geabsorbeerd:</p>
+     <ul>
+       <li>geabsorbeerd door gassen (CO₂, O₃, waterdamp…);</li>
+       <li>teruggekaatst door wolken;</li>
+       <li>teruggekaatst door het aardoppervlak. Het percentage teruggekaatste straling noem je het <span class="kw">albedo</span> (sneeuw ≈ 90 %, bos ≈ 20 %).</li>
+     </ul>
+     <p>Ongeveer <strong>2/3</strong> wordt door de aarde geabsorbeerd en terug uitgestraald als <span class="kw">infraroodstraling (warmte)</span>. <strong>Broeikasgassen</strong> (CO₂, CH₄) houden een deel van die warmte vast in de troposfeer. Deze processen samen vormen het <strong>natuurlijk broeikaseffect</strong>.</p>`}
+  ]},
+  {num:"II",title:"Stabiele temperatuur door het natuurlijk broeikaseffect",items:[
+   {id:"II.1",t:"Evenwicht en isolatie",body:`
+     <p>Bij een stralingsbalans in evenwicht is de gemiddelde temperatuur op aarde <strong>15 °C</strong>. <strong>Zonder</strong> natuurlijk broeikaseffect zou dit <strong>-18 °C</strong> zijn → een ijsplaneet. Broeikasgassen werken dus als <strong>isolatie</strong> — nodig, maar met mate.</p>`}
+  ]},
+  {num:"III",title:"Verstoringen van de stralingsbalans",items:[
+   {id:"III.1",t:"Het versterkt broeikaseffect",body:`
+     <p>Sinds de <strong>industrialisering</strong> stijgt het aandeel broeikasgassen door de mens. Hierdoor kan minder infraroodstraling ontsnappen en wordt meer warmte vastgehouden: het <span class="kw">versterkt broeikaseffect</span> ('opwarming van de aarde' / global warming).</p>
+     <p>Gevolgen (kettingreactie): planten en dieren sterven uit, klimaat- en vegetatietypes verschuiven, ijskappen smelten, zeespiegel stijgt, warmer zeewater maakt orkanen krachtiger.</p>`},
+   {id:"III.2",t:"De Milancovic-parameters",body:`
+     <p>De aarde draait in een <strong>ellipsvormige baan</strong>, de aardas schommelt en de aarde tolt. Deze <span class="kw">Milancovic-parameters</span> bepalen de intensiteit en verdeling van de instraling. Over lange perioden zijn ze mee verantwoordelijk voor klimaatvariaties; in hun meest extreme samenval leiden ze tot afkoeling óf opwarming.</p>`}
+  ]}
+ ],
+ vocab:[
+  ["Stralingsbalans","Het evenwicht tussen invallende en uitgaande energie; bepaalt het klimaat."],
+  ["Albedo","Het percentage zonnestraling dat door het aardoppervlak wordt teruggekaatst (sneeuw ≈ 90 %, bos ≈ 20 %)."],
+  ["Infraroodstraling","Warmtestraling die de aarde uitzendt na absorptie van zonlicht."],
+  ["Broeikasgassen","Gassen (CO₂, CH₄, waterdamp…) die infraroodstraling vasthouden in de troposfeer."],
+  ["Natuurlijk broeikaseffect","Het van nature vasthouden van warmte; houdt de aarde op gemiddeld 15 °C."],
+  ["Versterkt broeikaseffect","Extra opwarming doordat de mens meer broeikasgassen uitstoot."],
+  ["Milancovic-parameters","Schommelingen in de baan, aardas en tolbeweging van de aarde die het klimaat over lange perioden beïnvloeden."]
+ ],
+ q:[
+  {type:"mc",q:"Wat is de stralingsbalans?",opts:["De hoeveelheid zonlicht op de evenaar","Het evenwicht tussen invallende en uitgaande energie","Het verschil tussen dag- en nachttemperatuur","De straling van de ozonlaag"],cor:1,expl:"De <b>stralingsbalans</b> is het evenwicht tussen invallende en uitgaande energie; de zon is de motor."},
+  {type:"fill",q:"Het percentage straling dat het aardoppervlak terugkaatst, noem je de/het …",acc:["albedo"],ans:"albedo"},
+  {type:"mc",q:"Welk oppervlak heeft het grootste albedo?",opts:["Een bos","Een oceaan","Sneeuw","Asfalt"],cor:2,expl:"<b>Sneeuw</b> heeft een groot albedo (≈ 90 %), een bos slechts ≈ 20 %."},
+  {type:"tf",q:"Broeikasgassen zoals CO₂ en CH₄ houden infraroodstraling vast in de troposfeer.",cor:true,fb:"Correct — daardoor blijft warmte behouden (natuurlijk broeikaseffect)."},
+  {type:"mc",q:"Hoeveel zou de gemiddelde temperatuur op aarde zijn zónder natuurlijk broeikaseffect?",opts:["0 °C","15 °C","-18 °C","-55 °C"],cor:2,expl:"Zonder natuurlijk broeikaseffect zou het <b>-18 °C</b> zijn (ijsplaneet). Mét: 15 °C."},
+  {type:"tf",q:"Broeikasgassen zijn altijd schadelijk en best volledig verwijderd.",cor:false,fb:"Fout. Broeikasgassen zijn nodig voor een evenwichtige stralingsbalans — maar met mate. Te veel leidt tot het versterkt broeikaseffect."},
+  {type:"mc",q:"Wat is het versterkt broeikaseffect?",opts:["Een natuurlijke afkoeling van de aarde","Extra opwarming doordat de mens meer broeikasgassen uitstoot","Het smelten van de ozonlaag","De warmte van vulkanen"],cor:1,expl:"Door een toenemend aandeel broeikasgassen kan minder infrarood ontsnappen → extra opwarming = het <b>versterkt broeikaseffect</b>."},
+  {type:"open",q:"Welke twee processen liggen mee aan de oorzaak van temperatuursveranderingen door verstoring van de stralingsbalans?",model:"1. Het versterkt broeikaseffect: door de stijgende uitstoot van broeikasgassen (CO₂, CH₄) door de mens wordt meer warmte vastgehouden. 2. De Milancovic-parameters: de ellipsvormige baan, de schommeling van de aardas en de tolbeweging van de aarde bepalen over lange perioden de intensiteit en verdeling van de zonne-instraling."},
+  {type:"mc",q:"De Milancovic-parameters verklaren vooral …",opts:["het dagelijkse weer","klimaatvariaties over zeer lange perioden","de werking van de ozonlaag","het ontstaan van wind"],cor:1,expl:"De <b>Milancovic-parameters</b> zijn over langere perioden verantwoordelijk voor variaties in het klimaat."},
+  {type:"open",q:"Noem drie gevolgen van het versterkt broeikaseffect.",model:"Mogelijke gevolgen: planten en dieren sterven uit; klimaat- en vegetatietypes verschuiven; ijskappen smelten; de zeespiegel stijgt; zeewater wordt warmer waardoor orkanen krachtiger worden. (Het is een kettingreactie.)"},
+  {type:"mc",q:"Hoeveel van de zonnestralen wordt door de aarde geabsorbeerd?",opts:["Ongeveer 1/3","Ongeveer de helft","Ongeveer 2/3","Alles"],cor:2,expl:"Ongeveer <b>2/3</b> van de zonnestralen wordt door de aarde geabsorbeerd; ongeveer 1/3 wordt teruggekaatst of door gassen geabsorbeerd."},
+  {type:"tf",q:"Een bos heeft een hoger albedo dan sneeuw.",cor:false,fb:"Fout. <b>Sneeuw</b> heeft een veel hoger albedo (≈ 90 %) dan een bos (≈ 20 %)."},
+  {type:"fill",q:"Het broeikasgas met de formule CH₄ heet …",acc:["methaan"],ans:"methaan"},
+  {type:"mc",q:"Wat vormt de motor van de stralingsbalans?",opts:["De oceanen","De zon","De ozonlaag","De aardrotatie"],cor:1,expl:"De <b>zon</b> is de motor van het stralingsbalanssysteem."},
+  {type:"open",q:"Wat is het verschil tussen het natuurlijk en het versterkt broeikaseffect?",model:"Het natuurlijk broeikaseffect is het van nature vasthouden van warmte door broeikasgassen (CO₂, CH₄, waterdamp), waardoor de aarde gemiddeld 15 °C is in plaats van -18 °C. Het versterkt broeikaseffect ontstaat doordat de mens sinds de industrialisering extra broeikasgassen uitstoot: er kan minder infraroodstraling ontsnappen, waardoor de aarde extra opwarmt (global warming)."}
+ ]
+},
+
+{key:"tmp",short:"H9",label:"Temperatuur",icon:"thermo",
+ theory:[
+  {num:"I",title:"Invalshoek en bestralingsduur van de zon",items:[
+   {id:"I.1",t:"Invalshoek",body:`
+     <p>De <span class="kw">invalshoek</span> van de zon is <strong>kleiner in de winter</strong> dan in de zomer. Ook het moment van de dag telt: 's morgens staat de zon laag (frisser), 's middags het hoogst (warmer). Het <strong>warmste moment</strong> is wel ±1 uur ná de hoogste zonnestand, omdat de absorptie van warmte door de atmosfeer tijd vraagt.</p>`},
+   {id:"I.2",t:"Bestralingsduur",body:`
+     <p>De <span class="kw">bestralingsduur</span> is korter in de winter dan in de zomer. Door de kanteling van de aarde zijn de dagen in de zomer langer → meer inkomende energie → warmer.</p>`}
+  ]},
+  {num:"II",title:"Breedteligging",items:[
+   {id:"II.1",t:"Energietekort en energieoverschot",body:`
+     <p>De aarde is <strong>bolvormig</strong>. Op <strong>grotere breedtes</strong> (naar de polen) beschijnt de stralenbundel een <strong>groter oppervlak</strong> → energie verspreidt → <span class="kw">energietekort (energiedeficit)</span>. Aan de <strong>evenaar</strong> (kleinere breedtes) is het oppervlak kleiner → energie geconcentreerd → <span class="kw">energieoverschot (energiesurplus)</span>.</p>`}
+  ]},
+  {num:"III",title:"Bewolking",items:[
+   {id:"III.1",t:"Dag en nacht",body:`
+     <ul>
+       <li><strong>Overdag</strong>: wolken weerkaatsen zonnestralen → de aarde warmt minder op (koeler).</li>
+       <li><strong>'s Nachts</strong>: wolken weerkaatsen de uitgestraalde warmte terug naar de aarde → het blijft warmer. Bij een open hemel gaat de warmte verloren.</li>
+     </ul>`}
+  ]},
+  {num:"IV",title:"Bodemeigenschappen",items:[
+   {id:"IV.1",t:"Kleur, vochtigheid en begroeiing",body:`
+     <ul>
+       <li><strong>Bodemkleur</strong>: een lichte bodem heeft een groter weerkaatsingsvermogen (<span class="kw">albedo-effect</span>) en warmt trager op.</li>
+       <li><strong>Bodemvochtigheid</strong>: een vochtige bodem warmt trager op (het water moet eerst verdampen).</li>
+       <li><strong>Bodembegroeiing</strong>: een begroeide bodem warmt trager op (zonlicht wordt eerst gebruikt voor <strong>fotosynthese</strong>).</li>
+     </ul>`}
+  ]},
+  {num:"V",title:"Hoogteligging",items:[
+   {id:"V.1",t:"Temperatuurdaling met de hoogte",body:`
+     <p>In de troposfeer daalt de temperatuur ca. <strong>0,6 °C per 100 m</strong>. Op hogere reliëfelementen (gebergtes) is het dus kouder dan lager gelegen.</p>`}
+  ]},
+  {num:"VI",title:"Contrast land–zee",items:[
+   {id:"VI.1",t:"Trage opwarming en afkoeling van water",body:`
+     <p>Land warmt in de zomer <strong>sneller</strong> op dan de oceaan; zeewater warmt trager op (stralen dringen dieper door) maar koelt ook <strong>trager af</strong> door zijn grote <span class="kw">warmtecapaciteit</span>. Daardoor zijn de schommelingen tussen dag en nacht <strong>kleiner aan de kust</strong> (gematigd) dan in het binnenland.</p>`}
+  ]},
+  {num:"VII",title:"Zeestromen",items:[
+   {id:"VII.1",t:"Warme en koude zeestromen",body:`
+     <p>Koude zeestromen brengen koud water van de polen naar de evenaar; warme zeestromen het omgekeerde. <strong>Warme zeestromen</strong> geven kleinere temperatuurschommelingen. West-Europa ligt in de <span class="kw">warme Golfstroom</span> → gemiddeld warmer dan plaatsen op dezelfde breedte zonder warme stroom (bv. de oostkust van Noord-Amerika met strengere winters).</p>`}
+  ]},
+  {num:"VIII",title:"Windrichting",items:[
+   {id:"VIII.1",t:"Noord/zuid en zee/land",body:`
+     <ul>
+       <li>Lucht uit het <strong>noorden</strong> is kouder dan lucht uit het <strong>zuiden</strong>.</li>
+       <li><strong>Zeewind</strong> bevat meer neerslag en <strong>zwakt extreme temperaturen af</strong>.</li>
+       <li><strong>Landwind</strong> bevat minder neerslag en <strong>versterkt extremen</strong>.</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Invalshoek van de zon","De hoek waaronder zonnestralen invallen; kleiner in de winter, groter in de zomer."],
+  ["Bestralingsduur","Hoe lang de zon schijnt; langer in de zomer door de kanteling van de aarde."],
+  ["Energietekort (energiedeficit)","Tekort aan energie op grotere breedtes (polen), waar de stralen een groter oppervlak beschijnen."],
+  ["Energieoverschot (energiesurplus)","Overschot aan energie aan de evenaar, waar de stralen geconcentreerd zijn."],
+  ["Albedo-effect","Het weerkaatsen van zonlicht door een licht/lichtgekleurd oppervlak."],
+  ["Warmtecapaciteit","Het vermogen van water om lang warmte vast te houden; verklaart trage opwarming/afkoeling van zeewater."],
+  ["Golfstroom","Warme zeestroom die West-Europa warmer maakt dan vergelijkbare breedtes."],
+  ["Zeewind","Wind van zee, met meer neerslag, die extreme temperaturen afzwakt."],
+  ["Landwind","Wind van het land, met minder neerslag, die extreme temperaturen versterkt."]
+ ],
+ q:[
+  {type:"mc",q:"Wanneer is de invalshoek van de zon het kleinst?",opts:["In de zomer","In de winter","'s Middags","Aan de evenaar"],cor:1,expl:"De invalshoek is <b>kleiner in de winter</b> dan in de zomer."},
+  {type:"tf",q:"Het warmste moment van de dag valt samen met het moment waarop de zon het hoogst staat.",cor:false,fb:"Fout. Het warmste moment is ongeveer een uur láter, omdat de absorptie van warmte door de atmosfeer tijd vraagt."},
+  {type:"mc",q:"Waarom ontstaat er aan de polen een energietekort?",opts:["De zon schijnt er nooit","De stralenbundel beschijnt er een groter oppervlak waardoor energie wordt verspreid","De polen liggen verder van de zon","Er is te veel bewolking"],cor:1,expl:"Door de bolvorm beschijnt de stralenbundel op grotere breedtes een <b>groter oppervlak</b> → energie verspreidt → energietekort."},
+  {type:"fill",q:"Aan de evenaar ontstaat door de geconcentreerde straling een energie…",acc:["overschot","energieoverschot","surplus","energiesurplus"],ans:"energieoverschot (energiesurplus)"},
+  {type:"mc",q:"Wat is het effect van bewolking 's nachts?",opts:["De aarde koelt sneller af","De wolken kaatsen de warmte terug naar de aarde, het blijft warmer","Er verandert niets","De temperatuur daalt onder het vriespunt"],cor:1,expl:"'s Nachts weerkaatsen wolken de uitgestraalde warmte terug → het blijft <b>warmer</b> dan bij een open hemel."},
+  {type:"mc",q:"Waarom warmt een vochtige bodem trager op dan een droge?",opts:["Water is donkerder","Het zonlicht moet eerst het aanwezige water verdampen","Vochtige bodems hebben meer begroeiing","Water heeft een hoog albedo"],cor:1,expl:"Bij een vochtige bodem moet het zonlicht eerst het water <b>verdampen</b> voordat de bodem opwarmt."},
+  {type:"fill",q:"In de troposfeer daalt de temperatuur ongeveer … °C per 100 meter.",acc:["0,6","0.6","0,6 °c","0.6°c"],ans:"0,6 °C"},
+  {type:"mc",q:"Waarom zijn de temperatuurschommelingen tussen dag en nacht kleiner aan de kust?",opts:["De kust ligt lager","Zeewater heeft een grote warmtecapaciteit en warmt/koelt traag","Aan de kust schijnt de zon minder","Er waait altijd landwind"],cor:1,expl:"Zeewater heeft een grote <b>warmtecapaciteit</b>: het warmt traag op én koelt traag af → gematigde, kleinere schommelingen."},
+  {type:"open",q:"Leg uit waarom West-Europa zachtere winters heeft dan de oostkust van Noord-Amerika op dezelfde breedte.",model:"West-Europa ondervindt de invloed van de warme Golfstroom, die warm water vanuit de zone rond de evenaar naar onze regio brengt. Daardoor is de West-Europese kustzone gemiddeld warmer. De oostkust van Noord-Amerika ligt op dezelfde breedtelijn maar ondervindt geen invloed van een warme zeestroom, waardoor de winters er veel strenger zijn."},
+  {type:"tf",q:"Een zeewind versterkt extreme temperaturen.",cor:false,fb:"Fout. Zeewind bevat meer neerslag en zwakt extreme temperaturen juist af. Het is de landwind die extremen versterkt."},
+  {type:"tf",q:"In de zomer warmt het land sneller op dan de oceaan.",cor:true,fb:"Correct — land warmt in de zomer sneller op; zeewater warmt trager op (en koelt ook trager af)."},
+  {type:"fill",q:"West-Europa ondervindt de invloed van de warme zeestroom de …",acc:["golfstroom"],ans:"Golfstroom"},
+  {type:"mc",q:"Welke bodem warmt het snelst op?",opts:["Een lichte, droge, onbegroeide bodem","Een donkere, droge, onbegroeide bodem","Een vochtige bodem","Een begroeide bodem"],cor:1,expl:"Een <b>donkere</b> bodem heeft een laag albedo en warmt snel op; licht, vochtig of begroeid warmt trager op."},
+  {type:"mc",q:"Hoeveel factoren bepalen volgens de cursus de temperatuurverschillen?",opts:["Vier","Zes","Acht","Tien"],cor:2,expl:"De cursus onderscheidt <b>acht</b> factoren (o.a. invalshoek, breedteligging, bewolking, bodem, hoogte, land-zee, zeestromen, windrichting)."},
+  {type:"open",q:"Leg uit waarom het in de winter kouder is dan in de zomer, op basis van invalshoek en bestralingsduur.",model:"In de winter is de invalshoek van de zon kleiner: de zonnestralen vallen schuiner in en verspreiden hun energie over een groter oppervlak, waardoor er minder opwarming per oppervlakte is. Bovendien is de bestralingsduur korter (kortere dagen door de kanteling van de aarde), zodat er minder inkomende energie is. Beide samen maken de winter kouder."}
+ ]
+},
+
+{key:"wnd",short:"H10",label:"Wind & luchtdruk",icon:"wind",
+ theory:[
+  {num:"I",title:"Wind",items:[
+   {id:"I.1",t:"Definitie",body:`
+     <p><span class="kw">Wind</span> is de verplaatsing van warme of koude lucht van de ene naar de andere plaats. Snelheid en richting hangen af van de <strong>temperatuur</strong> en de <strong>luchtdrukverschillen</strong>.</p>`}
+  ]},
+  {num:"II",title:"Luchtdruk",items:[
+   {id:"II.1",t:"Kenmerken",body:`
+     <p><span class="kw">Luchtdruk</span> is het gewicht dat de lucht op de aarde uitoefent. Gemeten met een <strong>barometer</strong>, uitgedrukt in <strong>hectopascal (hPa)</strong>. De gemiddelde luchtdruk is <strong>1013 hPa</strong>.</p>
+     <ul>
+       <li>Boven 1013 hPa: <span class="kw">hogedruk / anticycloon</span>.</li>
+       <li>Onder 1013 hPa: <span class="kw">lagedruk / cycloon</span>.</li>
+     </ul>`},
+   {id:"II.2",t:"Hoge- vs. lagedrukgebied",body:`
+     <ul>
+       <li><strong>Hogedrukgebied (H)</strong>: lucht daalt, warmt op en neemt vocht op → wolken lossen op → <strong>helder, droog, warmer</strong> weer. Wind draait in <strong>wijzerzin</strong> (noordelijk halfrond).</li>
+       <li><strong>Lagedrukgebied (L)</strong>: lucht stijgt, koelt af → wolkvorming en neerslag → <strong>bewolkt, nat, kouder</strong> weer. Wind draait in <strong>tegenwijzerzin</strong>.</li>
+     </ul>
+     <p>Lucht verplaatst zich over de grond van hogedruk naar lagedruk. <span class="kw">Isobaren</span> verbinden punten met dezelfde luchtdruk: hoe dichter ze bij elkaar liggen, hoe sneller de wind.</p>`}
+  ]},
+  {num:"III",title:"Thermische cellen en coriolis-effect",items:[
+   {id:"III.1",t:"Vorming van een thermische cel",body:`
+     <p>Temperatuurverschillen veroorzaken drukverschillen: warme lucht is lichter en stijgt, koude lucht daalt.</p>
+     <ul>
+       <li>Aan de <strong>evenaar</strong> (warm) stijgt de lucht → constant <strong>lagedrukgebied</strong>.</li>
+       <li>Aan de <strong>polen</strong> (koud) daalt de lucht → constant <strong>hogedrukgebied</strong>.</li>
+     </ul>
+     <p>Hierdoor ontstaan <strong>drie luchtcirculatiecellen</strong> tussen de evenaar en elke pool (afdalen rond 30°, opstijgen rond 60°).</p>`},
+   {id:"III.2",t:"Coriolis-effect",body:`
+     <p>Door de <strong>aardrotatie</strong> wordt de wind afgebogen (<span class="kw">coriolis-effect</span>). Op het <strong>noordelijk halfrond</strong>: rond hogedruk in wijzerzin, rond lagedruk in tegenwijzerzin. Op het zuidelijk halfrond is dit omgekeerd.</p>`}
+  ]},
+  {num:"IV",title:"Straalstromen",items:[
+   {id:"IV.1",t:"Wat is een straalstroom?",body:`
+     <p><span class="kw">Straalstromen</span> (jetstreams) zijn kronkelende luchtstromen op <strong>10-15 km hoogte</strong> die tot meer dan 300 km/u kunnen halen. Ze waaien <strong>altijd van west naar oost</strong> (mee met de aardrotatie).</p>`},
+   {id:"IV.2",t:"Impact op ons weer",body:`
+     <p>Voor onze regio telt de <strong>polaire straalstroom</strong>:</p>
+     <ul>
+       <li>Ligt ze <strong>ten noorden</strong> van België → warme zuidenwind → <strong>warmer, mooier</strong> weer.</li>
+       <li>Ligt ze <strong>ten zuiden</strong> van België → koude noordenwind → <strong>kouder, slechter</strong> weer.</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Wind","Verplaatsing van warme of koude lucht; afhankelijk van temperatuur en luchtdrukverschillen."],
+  ["Luchtdruk","Het gewicht dat de lucht op de aarde uitoefent; gemeten met een barometer in hPa."],
+  ["Barometer","Toestel om de luchtdruk te meten."],
+  ["Hogedrukgebied (anticycloon)","Gebied met luchtdruk boven 1013 hPa; dalende lucht, helder en droog weer; wind in wijzerzin (NH)."],
+  ["Lagedrukgebied (cycloon)","Gebied met luchtdruk onder 1013 hPa; stijgende lucht, wolken en neerslag; wind in tegenwijzerzin (NH)."],
+  ["Isobaren","Lijnen die punten met dezelfde luchtdruk verbinden; dicht opeen = sterke wind."],
+  ["Thermische cel","Luchtcirculatie door temperatuur- en drukverschillen tussen evenaar en polen."],
+  ["Coriolis-effect","Afbuiging van de wind door de aardrotatie."],
+  ["Straalstroom (jetstream)","Kronkelende luchtstroom op 10-15 km hoogte, altijd van west naar oost, tot >300 km/u."]
+ ],
+ q:[
+  {type:"fill",q:"Luchtdruk wordt gemeten met een … en uitgedrukt in hectopascal.",acc:["barometer"],ans:"barometer"},
+  {type:"mc",q:"Wat is de gemiddelde luchtdruk?",opts:["1000 hPa","1013 hPa","1100 hPa","950 hPa"],cor:1,expl:"De gemiddelde luchtdruk is <b>1013 hPa</b>. Daarboven = hogedruk, daaronder = lagedruk."},
+  {type:"mc",q:"Welk weer hoort typisch bij een hogedrukgebied?",opts:["Bewolkt, nat en kouder","Helder, droog en warmer","Mist en sneeuw","Storm en hagel"],cor:1,expl:"In een <b>hogedrukgebied</b> daalt de lucht, warmt op en lossen wolken op → helder, droog en warmer weer."},
+  {type:"tf",q:"In een lagedrukgebied stijgt de lucht, koelt af en ontstaan er wolken en neerslag.",cor:true,fb:"Correct — lagedrukgebieden geven meestal bewolkt, nat en kouder weer."},
+  {type:"mc",q:"Hoe draait de wind rond een hogedrukgebied op het noordelijk halfrond?",opts:["In tegenwijzerzin","In wijzerzin","Recht naar boven","Van oost naar west"],cor:1,expl:"Op het noordelijk halfrond draait de wind rond een <b>hogedrukgebied in wijzerzin</b> (rond lagedruk in tegenwijzerzin)."},
+  {type:"fill",q:"Lijnen die punten met dezelfde luchtdruk verbinden, heten …",acc:["isobaren"],ans:"isobaren"},
+  {type:"tf",q:"Hoe dichter de isobaren bij elkaar liggen, hoe sneller de wind waait.",cor:true,fb:"Correct — dicht opeengepakte isobaren wijzen op een groot drukverschil en dus sterke wind."},
+  {type:"mc",q:"Waardoor heerst er aan de evenaar constant een lagedrukgebied?",opts:["De lucht is er koud en daalt","De warme lucht stijgt er op tot de tropopauze","Er is veel zeewind","De aardas is er gekanteld"],cor:1,expl:"Aan de warme evenaar <b>stijgt</b> de lucht op → de luchtdruk aan het oppervlak daalt → constant lagedrukgebied."},
+  {type:"open",q:"Wat veroorzaakt het coriolis-effect en wat is het gevolg voor de windrichting op het noordelijk halfrond?",model:"Het coriolis-effect wordt veroorzaakt door de aardrotatie, die de bewegende lucht afbuigt. Het gevolg op het noordelijk halfrond is dat de lucht rond een hogedrukgebied in wijzerzin beweegt en rond een lagedrukgebied in tegenwijzerzin. Op het zuidelijk halfrond is die afbuiging omgekeerd."},
+  {type:"mc",q:"In welke richting waaien straalstromen altijd?",opts:["Van noord naar zuid","Van oost naar west","Van west naar oost","Van de polen naar de evenaar"],cor:2,expl:"Straalstromen waaien <b>altijd van west naar oost</b>, mee met de aardrotatie."},
+  {type:"mc",q:"Wanneer krijgt België warmer en mooier weer door de polaire straalstroom?",opts:["Als ze ten zuiden van België ligt","Als ze ten noorden van België ligt","Als ze recht boven België ligt","Als ze stilstaat"],cor:1,expl:"Ligt de straalstroom <b>ten noorden</b> van België, dan bepaalt warme zuidenwind het weer → warmer en mooier."},
+  {type:"mc",q:"Hoe draait de wind rond een lagedrukgebied op het noordelijk halfrond?",opts:["In wijzerzin","In tegenwijzerzin","Recht naar beneden","Van west naar oost"],cor:1,expl:"Rond een <b>lagedrukgebied</b> draait de wind op het noordelijk halfrond in <b>tegenwijzerzin</b> (rond hogedruk in wijzerzin)."},
+  {type:"fill",q:"Aan de koude polen heerst er constant een … (soort drukgebied).",acc:["hogedrukgebied","hogedruk","hoge druk"],ans:"hogedrukgebied"},
+  {type:"mc",q:"Hoeveel luchtcirculatiecellen ontstaan er tussen de evenaar en één pool?",opts:["Eén","Twee","Drie","Vier"],cor:2,expl:"Er ontstaan <b>drie</b> luchtcirculatiecellen tussen de evenaar en elk van de polen."},
+  {type:"tf",q:"Straalstromen bevinden zich op ongeveer 10 tot 15 km hoogte.",cor:true,fb:"Correct — straalstromen waaien op 10-15 km hoogte, tot meer dan 300 km/u, altijd van west naar oost."},
+  {type:"open",q:"Beschrijf wat er met de lucht gebeurt in een hogedrukgebied en welk weer dat geeft.",model:"In een hogedrukgebied daalt de lucht van boven naar beneden. Bij het dalen warmt ze op en kan ze meer vocht opnemen, waardoor de luchtvochtigheid afneemt en wolken oplossen. Het resultaat is helder, droog en meestal warmer weer. (Vergelijkbaar met een haardroger die vochtige lucht opwarmt.)"}
+ ]
+},
+
+{key:"vog",short:"H11",label:"Neerslag & wolken",icon:"cloud",
+ theory:[
+  {num:"I",title:"Luchtvochtigheid",items:[
+   {id:"I.1",t:"Drie verdampingsprocessen",body:`
+     <p>Door de warmte van de zon verdampt voortdurend water via drie processen:</p>
+     <ul>
+       <li><span class="kw">Condensatie</span>: water uit oceanen, zeeën, meren en rivieren warmt op, wordt waterdamp en stijgt. Dit is de <strong>belangrijkste factor</strong> voor de luchtvochtigheid.</li>
+       <li><span class="kw">Evaporatie</span>: water in of boven de bodem wordt waterdamp.</li>
+       <li><span class="kw">Transpiratie</span>: water in vegetatie wordt via de huidmondjes als waterdamp afgegeven.</li>
+     </ul>
+     <p>Door al dat vocht ontstaat de <span class="kw">waterkringloop</span>.</p>`}
+  ]},
+  {num:"II",title:"Neerslag",items:[
+   {id:"II.1",t:"Kenmerken en vormen",body:`
+     <p><span class="kw">Neerslag</span> = de vormen van water die uit een wolk vallen én het aardoppervlak bereiken. Gemeten met een <strong>pluviometer</strong>, uitgedrukt in <strong>mm of l/m²</strong>. Op een kaart voorgesteld met <span class="kw">isohyeten</span>.</p>
+     <ul>
+       <li><strong>Regen</strong>: temperatuur in de wolk hoger dan 0 °C.</li>
+       <li><strong>Sneeuw</strong>: lager dan 0 °C (bij strenge vorst: poedersneeuw).</li>
+       <li><strong>Hagel</strong>: waterdeeltjes komen meermaals in koudere lagen → lagen rond een hagelbol.</li>
+       <li><strong>Mist</strong>: condensatiekernen aan het aardoppervlak.</li>
+     </ul>`},
+   {id:"II.2",t:"Factoren in de neerslagverdeling",body:`
+     <ul>
+       <li><strong>Breedteligging</strong>: drukgordels bepalen de neerslag. Evenaar = lage druk, opstijgende lucht → veel neerslag (regenwouden). Subtropen (0-30°) = hogedruk, dalende lucht → droog (woestijnen). Gematigde zones (30-60°) → matige neerslag. Polaire zones (60-90°) = lage druk maar weinig neerslag door beperkte verdamping.</li>
+       <li><strong>Afstand tot de zee</strong>: hoe verder van de zee, hoe minder waterdamp → minder neerslag.</li>
+       <li><strong>Bergketens</strong>: vochtige lucht stijgt tegen een gebergte (<span class="kw">stijgingsregens</span>) → veel neerslag aan de <span class="kw">loefzijde</span>. Aan de <span class="kw">lijzijde</span> daalt droge lucht → <span class="kw">regenschaduw</span>.</li>
+     </ul>`},
+   {id:"II.3",t:"Processen die neerslag veroorzaken",body:`
+     <ul>
+       <li><span class="kw">Coalescentieproces</span>: in (relatief) warme wolken smelten kleine druppels samen tot grotere die als neerslag vallen (lichte regen, motregen).</li>
+       <li><span class="kw">Wegener-Bergeron-Findeisen-proces</span>: in gemengde wolken (supergekoelde druppels + ijskristallen) → regen, sneeuw of hagel.</li>
+     </ul>`}
+  ]},
+  {num:"III",title:"Wolken",items:[
+   {id:"III.1",t:"Wat is een wolk?",body:`
+     <p>Een <span class="kw">wolk</span> is een verzameling waterdruppels of ijskristallen in de atmosfeer. Doordat de temperatuur daalt met de hoogte, <strong>condenseert</strong> de waterdamp.</p>`},
+   {id:"III.2",t:"Classificatie van wolken",body:`
+     <table class="vtable">
+       <tr><th>Categorie</th><th>Hoogte</th><th>Voorbeeld</th></tr>
+       <tr><td>Hoge bewolking</td><td>5-13 km</td><td>cirrus, cirrocumulus, cirrostratus</td></tr>
+       <tr><td>Middelhoge bewolking</td><td>2-7 km</td><td>altostratus, altocumulus</td></tr>
+       <tr><td>Lage bewolking</td><td>0-2 km</td><td>stratus, cumulus, stratocumulus</td></tr>
+       <tr><td>Verticale bewolking</td><td>0-18 km</td><td>cumulonimbus, nimbostratus</td></tr>
+     </table>`}
+  ]}
+ ],
+ vocab:[
+  ["Condensatie","Water uit oceanen/zeeën/meren/rivieren wordt waterdamp; belangrijkste factor voor luchtvochtigheid."],
+  ["Evaporatie","Water in of boven de bodem wordt waterdamp."],
+  ["Transpiratie","Water in vegetatie wordt via de huidmondjes als waterdamp afgegeven."],
+  ["Waterkringloop","De voortdurende kringloop van water tussen aarde en atmosfeer."],
+  ["Neerslag","Water dat uit een wolk valt en het aardoppervlak bereikt (regen, sneeuw, hagel, mist)."],
+  ["Pluviometer","Toestel om de hoeveelheid neerslag te meten (mm of l/m²)."],
+  ["Isohyeten","Lijnen op een kaart die plaatsen met gelijke neerslag verbinden."],
+  ["Stijgingsregens","Neerslag doordat vochtige lucht gedwongen wordt te stijgen tegen een gebergte."],
+  ["Loefzijde","Windzijde van een gebergte met veel neerslag."],
+  ["Lijzijde","Beschutte zijde van een gebergte; droge, dalende lucht."],
+  ["Regenschaduw","Droog gebied aan de lijzijde van een gebergte."],
+  ["Coalescentieproces","Samensmelten van druppels in warme wolken tot neerslag."],
+  ["Wegener-Bergeron-Findeisen-proces","Neerslagvorming in gemengde wolken (ijskristallen + supergekoelde druppels)."]
+ ],
+ q:[
+  {type:"mc",q:"Welk proces is de belangrijkste factor voor de luchtvochtigheid?",opts:["Transpiratie","Evaporatie","Condensatie via het water","Sublimatie"],cor:2,expl:"De <b>condensatie via het water</b> (uit oceanen, zeeën, meren, rivieren) is de belangrijkste factor voor de luchtvochtigheid."},
+  {type:"mc",q:"Hoe noem je het afgeven van waterdamp door vegetatie via de huidmondjes?",opts:["Evaporatie","Transpiratie","Condensatie","Infiltratie"],cor:1,expl:"<b>Transpiratie</b> = water in vegetatie dat via de huidmondjes als waterdamp wordt afgegeven."},
+  {type:"fill",q:"De hoeveelheid neerslag wordt gemeten met een …",acc:["pluviometer","regenmeter"],ans:"pluviometer"},
+  {type:"fill",q:"Lijnen op een kaart die plaatsen met gelijke neerslag verbinden, heten …",acc:["isohyeten"],ans:"isohyeten"},
+  {type:"mc",q:"Waarom valt er aan de evenaar veel neerslag?",opts:["Door hogedruk en dalende lucht","Door lage druk en opstijgende lucht die afkoelt","Door koude zeestromen","Door weinig verdamping"],cor:1,expl:"Aan de evenaar heerst <b>lage luchtdruk</b>: de lucht stijgt op en koelt af → veel neerslag (regenwouden)."},
+  {type:"tf",q:"Hoe verder een gebied van de zee ligt, hoe meer neerslag er valt.",cor:false,fb:"Fout. Hoe verder van de zee, hoe minder waterdamp er nog in de lucht hangt → hoe minder neerslag."},
+  {type:"mc",q:"Aan welke zijde van een gebergte valt de meeste neerslag?",opts:["De lijzijde","De loefzijde","Beide evenveel","De top"],cor:1,expl:"Aan de <b>loefzijde</b> (windzijde) stijgt de vochtige lucht en valt veel neerslag (stijgingsregens)."},
+  {type:"fill",q:"Het droge gebied aan de lijzijde van een gebergte heet de …",acc:["regenschaduw"],ans:"regenschaduw"},
+  {type:"open",q:"Leg uit hoe een regenschaduw ontstaat.",model:"Vochtige lucht die vanaf de zee een gebergte tegenkomt, wordt gedwongen te stijgen. Bij het stijgen koelt de lucht af en condenseert het vocht, wat veel neerslag geeft aan de loefzijde (stijgingsregens). Aan de andere kant (lijzijde) daalt de lucht weer; ze warmt op en is intussen droog geworden omdat het vocht al is afgegeven. Dat resulteert in een droog gebied met weinig neerslag: de regenschaduw, die zelfs woestijnachtig kan worden."},
+  {type:"mc",q:"Het Wegener-Bergeron-Findeisen-proces vindt plaats in …",opts:["warme wolken","gemengde wolken met ijskristallen en supergekoelde druppels","mist aan de grond","hogedrukgebieden"],cor:1,expl:"Dit proces speelt zich af in <b>gemengde wolken</b> en geeft regen, sneeuw of hagel."},
+  {type:"mc",q:"Tot welke categorie behoort de cumulonimbus?",opts:["Hoge bewolking","Middelhoge bewolking","Lage bewolking","Verticale bewolking"],cor:3,expl:"De <b>cumulonimbus</b> is een <b>verticale</b> wolk (0-18 km)."},
+  {type:"mc",q:"Bij welke temperatuur in de wolk valt er sneeuw in plaats van regen?",opts:["Hoger dan 0 °C","Lager dan 0 °C","Hoger dan 10 °C","Precies 5 °C"],cor:1,expl:"Bij een temperatuur in de wolk <b>lager dan 0 °C</b> valt sneeuw; hoger dan 0 °C geeft regen."},
+  {type:"tf",q:"In subtropische zones (0°-30°) heerst hogedruk met droge, stabiele omstandigheden.",cor:true,fb:"Correct — daar daalt de lucht (hogedruk), wat vaak woestijnklimaten oplevert (bv. de Sahara)."},
+  {type:"fill",q:"De windzijde van een gebergte, met veel neerslag, noem je de …",acc:["loefzijde"],ans:"loefzijde"},
+  {type:"mc",q:"Wat is hagel?",opts:["Bevroren mist aan de grond","Waterdeeltjes die meermaals in koudere lagen terechtkomen en laagjes rond een hagelbol vormen","Lichte regen uit warme wolken","Samengeklonterde sneeuwvlokken"],cor:1,expl:"Bij <b>hagel</b> komen waterdeeltjes telkens opnieuw in koudere lagen terecht, waardoor zich lagen rond een hagelbol vormen tot die zwaar genoeg is om te vallen."}
+ ]
+},
+
+{key:"imp",short:"H13",label:"Extreem weer",icon:"alert",
+ theory:[
+  {num:"I",title:"Hittegolven",items:[
+   {id:"I.1",t:"Definitie en voorwaarden",body:`
+     <p>Een <span class="kw">hittegolf</span> is een periode van aanhoudend hoge temperaturen waar dit uitzonderlijk is. Voorwaarde: minstens <strong>5 opeenvolgende dagen ≥ 25 °C</strong>, waarvan minstens <strong>3 dagen ≥ 30 °C</strong>. Hittegolven komen door de opwarming <strong>vaker, langer en intenser</strong> voor.</p>`},
+   {id:"I.2",t:"Hittestress en hitte-eilandeffect",body:`
+     <p><span class="kw">Hittestress</span> treedt vooral op in bebouwde omgeving. Steden zijn meer verhard, hebben donkere materialen (asfalt), minder luchtdoorstroming en meer warmte door menselijke activiteit → het <span class="kw">hitte-eilandeffect</span>. Hoe groter de stad, hoe groter het effect. <strong>Groen en water</strong> verzachten het.</p>`}
+  ]},
+  {num:"II",title:"Koudegolven",items:[
+   {id:"II.1",t:"Definitie",body:`
+     <p>In België: een <span class="kw">koudegolf</span> = minstens <strong>5 aaneensluitende dagen</strong> waarop de maxima onder het vriespunt blijven, waarbij de minima op minstens <strong>3 dagen lager dan -10 °C</strong> zijn.</p>`}
+  ]},
+  {num:"III",title:"Extreme droogte",items:[
+   {id:"III.1",t:"Meer verdamping",body:`
+     <p>Door stijgende temperaturen vindt er <strong>meer verdamping</strong> plaats → in warme periodes minder regen → <span class="kw">extreme droogte</span> wordt vaker en intenser. Een <strong>droge dag</strong> kent minder neerslag dan dezelfde dag een jaar eerder.</p>`}
+  ]},
+  {num:"IV",title:"Intense regenval",items:[
+   {id:"IV.1",t:"Meer neerslag op minder dagen",body:`
+     <p>De jaarneerslag in België <strong>neemt toe</strong>: warmere lucht houdt meer vocht vast. Minder regendagen + hogere jaarneerslag → <strong>intensere buien</strong>.</p>
+     <p>Water komt in de atmosfeer via condensatie, transpiratie en evaporatie. De rest wordt afgevoerd via <span class="kw">oppervlakteafvoer (runoff)</span> of infiltreert als grondwater. Door <strong>verharding</strong> infiltreert minder water en is de runoff hoger in de stad → meer kans op <strong>overstromingen</strong>.</p>`}
+  ]},
+  {num:"V",title:"Wat doet de wereld?",items:[
+   {id:"V.1",t:"VN en IPCC",body:`
+     <p>De <span class="kw">Verenigde Naties (VN)</span> telt 193 lidstaten. Eén organisatie werkt rond klimaat: het <span class="kw">IPCC</span> (Intergovernmental Panel on Climate Change). Het geeft advies, stelt <strong>mitigatie</strong> (beperken/voorkomen) en <strong>adaptatie</strong> (aanpassen) voor, en publiceert rapporten als basis voor de jaarlijkse klimaatconferenties.</p>`}
+  ]}
+ ],
+ vocab:[
+  ["Hittegolf","Min. 5 opeenvolgende dagen ≥ 25 °C, waarvan min. 3 dagen ≥ 30 °C."],
+  ["Hittestress","Gevoel van niet meer kunnen afkoelen tijdens een hittegolf; vooral in steden."],
+  ["Hitte-eilandeffect","Steden zijn warmer door verharding, donkere materialen en weinig luchtdoorstroming."],
+  ["Koudegolf","In België: min. 5 dagen met maxima onder het vriespunt en min. 3 dagen minima < -10 °C."],
+  ["Extreme droogte","Vaker en intenser door meer verdamping bij stijgende temperaturen."],
+  ["Runoff (oppervlakteafvoer)","Regenwater dat over de oppervlakte wordt afgevoerd i.p.v. te infiltreren."],
+  ["Verharding","Bedekking van de bodem (bebouwing, straten) die infiltratie tegenhoudt en runoff verhoogt."],
+  ["IPCC","Klimaatorganisatie van de VN die advies geeft en wetenschappelijke rapporten publiceert."],
+  ["Mitigatie","Maatregelen om klimaatverandering te beperken of voorkomen."],
+  ["Adaptatie","Maatregelen om je aan klimaatverandering aan te passen."]
+ ],
+ q:[
+  {type:"mc",q:"Wanneer spreek je van een hittegolf?",opts:["3 dagen ≥ 25 °C","5 opeenvolgende dagen ≥ 25 °C, waarvan 3 dagen ≥ 30 °C","7 dagen ≥ 20 °C","2 dagen ≥ 30 °C"],cor:1,expl:"Een hittegolf = minstens <b>5 opeenvolgende dagen ≥ 25 °C</b>, waarvan minstens <b>3 dagen ≥ 30 °C</b>."},
+  {type:"tf",q:"Het hitte-eilandeffect is groter in een grote stad dan op het platteland.",cor:true,fb:"Correct — hoe groter de stad, hoe groter het hitte-eilandeffect, door verharding en weinig luchtdoorstroming."},
+  {type:"mc",q:"Wat verzacht het hitte-eilandeffect in een stad?",opts:["Meer asfalt","Hogere gebouwen","Groen en waterplassen","Meer verkeer"],cor:2,expl:"<b>Groen en waterplassen</b> zwakken het hitte-eilandeffect af."},
+  {type:"open",q:"Leg uit waarom steden tijdens een hittegolf warmer worden dan het platteland.",model:"Stedelijke omgevingen zijn meer verhard en bevatten vaak donkere materialen zoals asfalt, waardoor ze sterker opwarmen en er minder kan verdampen. Daarnaast is er door de (hoge) gebouwen minder luchtdoorstroming en komt er extra warmte vrij door menselijke activiteiten (verwarming, transport, industrie). Daardoor treedt hittestress regelmatiger en intenser op in steden: het hitte-eilandeffect."},
+  {type:"mc",q:"Wanneer spreek je in België van een koudegolf?",opts:["3 dagen onder 0 °C","5 aaneensluitende dagen met maxima onder het vriespunt, met 3 dagen minima < -10 °C","1 dag met -10 °C","10 dagen met sneeuw"],cor:1,expl:"Een koudegolf = min. <b>5 aaneensluitende dagen</b> met maxima onder het vriespunt en min. <b>3 dagen</b> met minima lager dan <b>-10 °C</b>."},
+  {type:"tf",q:"Warmere temperaturen en meer neerslag zijn met elkaar in tegenspraak.",cor:false,fb:"Fout. Warmere lucht kan méér vocht vasthouden, dus warmere temperaturen en meer neerslag zijn niet tegenstrijdig."},
+  {type:"mc",q:"Waarom regent het op regendagen intenser, ook al daalt het aantal regendagen?",opts:["De zon schijnt minder","Warmere lucht houdt meer vocht vast, dat in minder buien valt","Er is meer wind","De luchtdruk daalt"],cor:1,expl:"Bij minder regendagen maar een stijgende jaarneerslag valt dezelfde (of meer) neerslag in <b>minder, intensere</b> buien."},
+  {type:"fill",q:"Regenwater dat niet infiltreert maar over de oppervlakte wordt afgevoerd, noem je de … (Engelse term).",acc:["runoff","run-off","oppervlakteafvoer"],ans:"runoff (oppervlakteafvoer)"},
+  {type:"tf",q:"Door verharding van de bodem is de runoff hoger in de stad dan op het platteland.",cor:true,fb:"Correct — verharding houdt infiltratie tegen en verhoogt en versnelt de afvoer via de oppervlakte."},
+  {type:"mc",q:"Wat doet het IPCC?",opts:["Het bestuurt de Verenigde Naties","Het geeft klimaatadvies en publiceert wetenschappelijke rapporten","Het meet het dagelijkse weer in België","Het verbiedt CFK's"],cor:1,expl:"Het <b>IPCC</b> geeft advies over klimaatverandering en publiceert rapporten die de basis vormen voor de klimaatconferenties."},
+  {type:"fill",q:"Maatregelen om klimaatverandering te beperken of te voorkomen, noem je …",acc:["mitigatie"],ans:"mitigatie"},
+  {type:"mc",q:"Uit hoeveel lidstaten bestaat de VN?",opts:["27","100","193","250"],cor:2,expl:"De <b>Verenigde Naties</b> tellen <b>193</b> lidstaten."},
+  {type:"tf",q:"Adaptatie betekent je aanpassen aan de klimaatverandering.",cor:true,fb:"Correct — adaptatie = aanpassen; mitigatie = de klimaatverandering beperken of voorkomen."},
+  {type:"fill",q:"Bij een koudegolf liggen de minima op minstens 3 dagen lager dan … °C.",acc:["-10","10","min 10"],ans:"-10 °C"},
+  {type:"open",q:"Waarom leiden verharde steden vaker tot overstromingen bij intense regenval?",model:"In een verharde stad (asfalt, beton, daken) kan regenwater nauwelijks in de bodem infiltreren. Daardoor wordt veel meer water via de oppervlakte afgevoerd (runoff). Die afvoer is hoger én sneller dan op het platteland, waardoor waterlopen sneller buiten hun oevers treden en ook plaatsen overstromen die dat vroeger niet deden."}
+ ]
+},
+
+{key:"wrk",short:"H14",label:"Weerkaart",icon:"map",
+ theory:[
+  {num:"I",title:"Weerbericht",items:[
+   {id:"I.1",t:"Meteorologen en het KMI",body:`
+     <p><span class="kw">Meteorologen</span> stellen via modellen, berekeningen en voorspellingen het weerbericht op. Het <strong>KMI</strong> (Koninklijk Meteorologisch Instituut) verzamelt continu metingen in <strong>13 weerstations</strong>.</p>`},
+   {id:"I.2",t:"Belang en beperking",body:`
+     <p>Meteorologie is <strong>geen exacte wetenschap</strong>, maar vereist veel wetenschappelijke kennis. Per dag komt er ±<strong>10 % kans</strong> bij dat de voorspelling fouten bevat — je kan het weer dus geen weken vooruit voorspellen.</p>`}
+  ]},
+  {num:"II",title:"Weerkaart en fronten",items:[
+   {id:"II.1",t:"Wat staat er op een weerkaart?",body:`
+     <p>Op een weerkaart staan <strong>luchtdrukgebieden</strong>, <strong>isobaren</strong> en <strong>fronten</strong>. Uit de drukgebieden en isobaren lees je windrichting en -sterkte af. <span class="kw">Fronten</span> geven aan dat er neerslag aankomt.</p>`},
+   {id:"II.2",t:"Soorten fronten",body:`
+     <table class="vtable">
+       <tr><th>Front</th><th>Betekenis</th></tr>
+       <tr><td>Trog</td><td>Verticale opwaartse bewegingen → stortbuien / intensere onweersactiviteit.</td></tr>
+       <tr><td>Warmtefront</td><td>Aanvoer van warmere lucht → wolkenzone met neerslag (halve rode cirkels).</td></tr>
+       <tr><td>Koudefront</td><td>Aanvoer van koudere lucht → wolkenzone met neerslag (blauwe driehoekjes).</td></tr>
+       <tr><td>Occlusiefront</td><td>Fusie van warmte- en koudefront; uniek wolkensysteem, vaak bron van neerslag.</td></tr>
+       <tr><td>Stationair front</td><td>Stilstaande grens koude/warme luchtmassa → dikke bewolking, weinig/geen neerslag en wind.</td></tr>
+     </table>`}
+  ]}
+ ],
+ vocab:[
+  ["Meteoroloog","Wetenschapper die het weer voorspelt via modellen en metingen."],
+  ["KMI","Koninklijk Meteorologisch Instituut; verzamelt metingen in 13 weerstations."],
+  ["Weerkaart","Kaart met luchtdrukgebieden, isobaren en fronten."],
+  ["Front","Grens tussen luchtmassa's op een weerkaart; geeft aan dat er neerslag aankomt."],
+  ["Trog","Front dat verticale opwaartse bewegingen en stortbuien veroorzaakt."],
+  ["Warmtefront","Aanvoer van warmere lucht met een wolkenzone en neerslag (halve rode cirkels)."],
+  ["Koudefront","Aanvoer van koudere lucht met een wolkenzone en neerslag (blauwe driehoekjes)."],
+  ["Occlusiefront","Fusie van een warmte- en een koudefront."],
+  ["Stationair front","Stilstaande grens tussen koude en warme lucht; dikke bewolking, weinig neerslag/wind."]
+ ],
+ q:[
+  {type:"fill",q:"De afkorting KMI staat voor het Koninklijk … Instituut.",acc:["meteorologisch"],ans:"Meteorologisch"},
+  {type:"mc",q:"In hoeveel weerstations verzamelt het KMI continu metingen?",opts:["3","13","30","100"],cor:1,expl:"Het KMI verzamelt metingen in <b>13 weerstations</b>."},
+  {type:"tf",q:"Meteorologie is een exacte wetenschap waarmee je het weer weken vooruit kunt voorspellen.",cor:false,fb:"Fout. Meteorologie is géén exacte wetenschap; per dag komt er ±10 % kans op fouten bij, dus weken vooruit voorspellen kan niet."},
+  {type:"mc",q:"Wat lees je af uit de luchtdrukgebieden en isobaren op een weerkaart?",opts:["De temperatuur","De windrichting en windsterkte","De luchtvochtigheid","Het ozongehalte"],cor:1,expl:"Aan de hand van de drukgebieden en isobaren voorspel je de <b>windrichting en windsterkte</b>."},
+  {type:"mc",q:"Wat geven fronten op een weerkaart aan?",opts:["Een hittegolf","Dat er neerslag aankomt","De stand van de zon","Het albedo"],cor:1,expl:"<b>Fronten</b> geven aan dat er neerslag aankomt."},
+  {type:"mc",q:"Welk front ontstaat door de fusie van een warmte- en een koudefront?",opts:["Trog","Stationair front","Occlusiefront","Warmtefront"],cor:2,expl:"Een <b>occlusiefront</b> is het resultaat van de fusie van een warmte- en een koudefront."},
+  {type:"open",q:"Beschrijf het verschil tussen een warmtefront en een koudefront.",model:"Een warmtefront betekent de aanvoer van warmere lucht, die vaak een wolkenzone met neerslag vormt; op de kaart staat het met halve rode cirkels die de verplaatsingsrichting tonen. Een koudefront betekent de aanvoer van koudere lucht, eveneens met een wolkenzone en neerslag; op de kaart staat het met blauwe driehoekjes die de richting aangeven. Beide vormen de grens tussen de aangevoerde luchtmassa en de lucht waarvan ze de plaats inneemt."},
+  {type:"tf",q:"Een stationair front gaat meestal gepaard met dikke bewolking maar weinig of geen neerslag en wind.",cor:true,fb:"Correct — bij een stationair front (stilstaande grens) vormen er dikke bewolkingslagen met lichte of geen neerslag en weinig wind."},
+  {type:"mc",q:"Welk front veroorzaakt verticale opwaartse bewegingen en vaak stortbuien?",opts:["Warmtefront","Koudefront","Trog","Stationair front"],cor:2,expl:"Een <b>trog</b> veroorzaakt verticale opwaartse bewegingen en leidt vaak tot stortbuien of intensere onweersactiviteit."},
+  {type:"fill",q:"Een front op de weerkaart geeft aan dat er … aankomt.",acc:["neerslag"],ans:"neerslag"},
+  {type:"tf",q:"Een occlusiefront ontstaat doordat een koudefront een warmtefront inhaalt.",cor:true,fb:"Correct — een koudefront beweegt sneller en haalt het warmtefront in; samen vormen ze een occlusiefront."},
+  {type:"mc",q:"Met welk symbool wordt een koudefront op een weerkaart aangeduid?",opts:["Halve rode cirkels","Blauwe driehoekjes","Een paarse lijn","Een stippellijn"],cor:1,expl:"Een <b>koudefront</b> wordt aangeduid met <b>blauwe driehoekjes</b> die de verplaatsingsrichting tonen (warmtefront = halve rode cirkels)."}
+ ]
+}
+];
+
+/* afgeleide data */
+const KEYS=CHAPTERS.map(c=>c.key);
+const VOCAB=[];CHAPTERS.forEach((c,ci)=>(c.vocab||[]).forEach(([t,d])=>VOCAB.push([t,d,c.key,ci])));
+const ICONS={
+ layers:'<path d="M12 2 2 7l10 5 10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',
+ thermo:'<path d="M14 14.76V5a2 2 0 0 0-4 0v9.76a4 4 0 1 0 4 0z"/>',
+ wind:'<path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h9a3 3 0 1 1-3 3"/>',
+ cloud:'<path d="M6 17a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A4 4 0 0 1 18 17z"/>',
+ alert:'<path d="M12 2 1 21h22z"/><path d="M12 9v5M12 17h.01"/>',
+ map:'<path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3z"/><path d="M9 3v15M15 6v15"/>',
+ home:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+ mix:'<path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',
+ book:'<path d="M4 5h16v14H4z"/><path d="M4 9h16M9 9v10"/>'
+};
+function svg(name){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${ICONS[name]||ICONS.book}</svg>`;}
+
+/* ======================================================
+   STATE
+====================================================== */
+const STORE="aard_master";
+let S={best:{},vocMastered:[]};
+async function loadS(){try{const r=await window.storage.get(STORE);if(r&&r.value)S=Object.assign(S,JSON.parse(r.value));}catch(e){}S.best=S.best||{};S.vocMastered=S.vocMastered||[];}
+async function saveS(){try{await window.storage.set(STORE,JSON.stringify(S));}catch(e){}}
+const norm=s=>(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[\s\-–().]/g,"").replace(/[^a-z0-9]/g,"");
+
+/* ======================================================
+   BOUW DOM (nav + views)
+====================================================== */
+function ci(key){return KEYS.indexOf(key);}
+const nav=document.getElementById("mainNav");
+const viewsEl=document.getElementById("views");
+function navBtn(id,icon,label,sel){return `<button class="mnav-btn" id="nav-${id}" role="tab" aria-selected="${sel?'true':'false'}">${svg(icon)}${label}</button>`;}
+let navHtml=navBtn("home","home","Overzicht",true);
+CHAPTERS.forEach(c=>navHtml+=navBtn(c.key,c.icon,c.label,false));
+navHtml+=navBtn("mix","mix","Gemixte modus",false);
+navHtml+=navBtn("voc","book","Woordenschat",false);
+nav.innerHTML=navHtml;
+
+let viewsHtml=`<div class="view active" id="view-home"><div class="prog-grid" id="progGrid"></div>
+  <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow);max-width:720px">
+    <h3 style="margin-bottom:12px;font-size:17px">Studietips</h3>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;font-size:14.5px;color:var(--soft)">
+      <li>🌍 Werk per hoofdstuk: lees eerst de <strong>theorie</strong>, maak dan de <strong>oefenvragen</strong>.</li>
+      <li>🔀 Test je totale kennis met de <strong>gemixte modus</strong> — alle vragen door elkaar.</li>
+      <li>📚 Herhaal de <strong>woordenschat</strong> in beide richtingen tot je elk begrip vlot kunt uitleggen.</li>
+      <li>💾 Je voortgang en beste scores worden automatisch bewaard op dit toestel.</li>
+    </ul>
+  </div></div>`;
+CHAPTERS.forEach(c=>{
+  viewsHtml+=`<div class="view" id="view-${c.key}">
+    <div class="stabs" role="tablist">
+      <button class="stab" data-sub="${c.key}-theorie" aria-selected="true">Theorie</button>
+      <button class="stab" data-sub="${c.key}-oefen" aria-selected="false">Oefenen</button>
+    </div>
+    <div class="subview active" id="${c.key}-theorie"></div>
+    <div class="subview" id="${c.key}-oefen">
+      <div class="qwrap">
+        <div class="qbar"><span class="qpos mono" id="${c.key}-p"></span><span class="qsc" id="${c.key}-s"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="${c.key}-t"></div></div></div>
+        <div id="${c.key}-a"></div>
+      </div>
+    </div>
+  </div>`;
+});
+viewsHtml+=`<div class="view" id="view-mix">
+   <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;margin-bottom:18px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+     <div>
+       <div style="font:600 11px/1 'Spline Sans Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);margin-bottom:4px">Gemixte modus</div>
+       <div style="font-size:14px;color:var(--soft)">Alle vragen van alle hoofdstukken door elkaar — ideaal als laatste voorbereiding.</div>
+     </div>
+     <button class="btn btn-p" id="mixStart">Nieuwe ronde starten →</button>
+   </div>
+   <div class="qwrap"><div class="qbar"><span class="qpos mono" id="mix-p"></span><span class="qsc" id="mix-s"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="mix-t"></div></div></div><div id="mix-a"></div></div>
+ </div>`;
+viewsHtml+=`<div class="view" id="view-voc">
+   <div class="stabs" role="tablist">
+     <button class="stab" data-sub="voc-tabel" aria-selected="true">Tabel</button>
+     <button class="stab" data-sub="voc-leren" aria-selected="false">Leren</button>
+   </div>
+   <div class="subview active" id="voc-tabel">
+     <div style="color:var(--soft);font-size:14.5px;max-width:70ch;margin-bottom:16px">Alle begrippen uit de zeven hoofdstukken. Leer ze actief via het tabblad <em>Leren</em>.</div>
+     <table class="voc-table"><thead><tr><th>Begrip</th><th>Uitleg</th></tr></thead><tbody id="vocBody"></tbody></table>
+   </div>
+   <div class="subview" id="voc-leren">
+     <div class="voc-learn-wrap">
+       <div class="dir-btns">
+         <button class="dir-btn" id="d1" aria-pressed="true">Uitleg → typ het begrip</button>
+         <button class="dir-btn" id="d2" aria-pressed="false">Begrip → leg uit</button>
+         <button class="dir-btn" id="d3" aria-pressed="false">Alles door elkaar</button>
+       </div>
+       <div class="qbar"><span class="qpos mono" id="vp"></span><span class="qsc" id="vs"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="vt"></div></div></div>
+       <div id="va"></div>
+     </div>
+   </div>
+ </div>`;
+viewsEl.innerHTML=viewsHtml;
+
+/* ======================================================
+   THEORIE
+====================================================== */
+function renderTheory(c){
+  return c.theory.map(sec=>`
+    <div class="sec-head"><div class="snum">${c.short} · ${sec.num}</div><h2>${sec.title}</h2></div>
+    ${sec.items.map(it=>`
+      <div class="card">
+        <div class="card-top"><span class="cn">${it.id}</span><h3>${it.t}</h3><span class="badge bk">Kennen</span></div>
+        <div class="card-body">${it.body}</div>
+      </div>`).join("")}
+  `).join("");
+}
+
+/* ======================================================
+   VRAGENENGINE
+====================================================== */
+const sessions={};
+KEYS.forEach(k=>sessions[k]={qs:CHAPTERS[ci(k)].q,pos:0,score:0,_ans:false,ids:{p:k+"-p",s:k+"-s",t:k+"-t",a:k+"-a"}});
+sessions.mix={qs:[],pos:0,score:0,_ans:false,ids:{p:"mix-p",s:"mix-s",t:"mix-t",a:"mix-a"}};
+
+function chapBadge(key){if(!key)return "";const idx=ci(key);return `<span class="chap-badge cc${idx}">${CHAPTERS[idx].label}</span>`;}
+
+function renderQ(key){
+  const ss=sessions[key],ids=ss.ids;
+  if(ss.pos>=ss.qs.length){renderResult(key);return;}
+  const q=ss.qs[ss.pos];ss._ans=false;
+  document.getElementById(ids.p).textContent=`Vraag ${ss.pos+1} / ${ss.qs.length}`;
+  document.getElementById(ids.s).textContent=`Score ${ss.score}`;
+  document.getElementById(ids.t).style.width=(ss.pos/ss.qs.length*100)+"%";
+  const typeLabel={mc:"Meerkeuze",tf:"Waar of niet waar",fill:"Vul het woord in",open:"Open vraag"}[q.type]||q.type;
+  let h=`<div class="qcard"><div class="qtype-lbl"><span>${typeLabel}</span>${chapBadge(q.chap)}</div><div class="qtext">${q.q}</div>`;
+  if(q.type==="mc"){
+    h+=`<div class="opts">`+q.opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="mk">${String.fromCharCode(97+i)}</span><span>${o}</span></button>`).join("")+`</div>`;
+  }else if(q.type==="tf"){
+    h+=`<div class="opts tf"><button class="opt" data-v="true">Waar</button><button class="opt" data-v="false">Niet waar</button></div>`;
+  }else if(q.type==="fill"){
+    h+=`<div class="fill-wrap"><input type="text" id="fin-${key}" placeholder="Typ je antwoord…" autocomplete="off"></div>`;
+  }else if(q.type==="open"){
+    h+=`<textarea class="openq" id="oin-${key}" placeholder="Schrijf je antwoord, controleer dan met de verbetersleutel…"></textarea>`;
+  }
+  h+=`<div class="fb" id="fb-${key}"></div><div class="qactions" id="qa-${key}"></div></div>`;
+  document.getElementById(ids.a).innerHTML=h;
+  wireFeedback(key,q,ss);
+}
+
+function wireFeedback(key,q,ss){
+  const fb=document.getElementById("fb-"+key),act=document.getElementById("qa-"+key),aid=ss.ids.a;
+  const next=()=>{ss.pos++;renderQ(key);};
+  const nBtn=()=>{const b=document.createElement("button");b.className="btn btn-p";b.textContent=(ss.pos+1>=ss.qs.length)?"Toon resultaat →":"Volgende →";b.onclick=next;act.appendChild(b);};
+  if(q.type==="mc"){
+    document.querySelectorAll(`#${aid} .opt`).forEach(b=>b.onclick=()=>{
+      if(ss._ans)return;ss._ans=true;const i=+b.dataset.i,ok=i===q.cor;if(ok)ss.score++;
+      document.querySelectorAll(`#${aid} .opt`).forEach((o,j)=>{o.disabled=true;if(j===q.cor)o.classList.add(j===i?"pg":"pr");if(j===i&&!ok)o.classList.add("pb");});
+      fb.className="fb show "+(ok?"ok":"no");fb.innerHTML=`<b>${ok?"Juist!":"Niet juist."}</b> ${q.expl}`;nBtn();
+    });
+  }else if(q.type==="tf"){
+    document.querySelectorAll(`#${aid} .opt`).forEach(b=>b.onclick=()=>{
+      if(ss._ans)return;ss._ans=true;const p=b.dataset.v==="true",ok=p===q.cor;if(ok)ss.score++;
+      document.querySelectorAll(`#${aid} .opt`).forEach(o=>{o.disabled=true;const v=o.dataset.v==="true";if(v===q.cor)o.classList.add(v===p?"pg":"pr");if(v===p&&!ok)o.classList.add("pb");});
+      fb.className="fb show "+(ok?"ok":"no");fb.innerHTML=`<b>${ok?"Juist!":"Niet juist."}</b> ${q.fb}`;nBtn();
+    });
+  }else if(q.type==="fill"){
+    const chk=document.createElement("button");chk.className="btn btn-p";chk.textContent="Controleer";
+    chk.onclick=()=>{if(ss._ans)return;ss._ans=true;
+      const v=document.getElementById("fin-"+key).value,ok=(q.acc||[]).map(norm).includes(norm(v));if(ok)ss.score++;
+      fb.className="fb show "+(ok?"ok":"no");fb.innerHTML=ok?`<b>Juist!</b> Het antwoord is <b>${q.ans}</b>.`:`<b>Niet juist.</b> Correct: <span style="font-weight:600;color:var(--ink)">${q.ans}</span>`;
+      act.innerHTML="";nBtn();};
+    act.appendChild(chk);
+    setTimeout(()=>{const el=document.getElementById("fin-"+key);if(el)el.addEventListener("keydown",e=>{if(e.key==="Enter")chk.click();});},0);
+  }else if(q.type==="open"){
+    const show=document.createElement("button");show.className="btn btn-p";show.textContent="Toon verbetersleutel";
+    show.onclick=()=>{
+      fb.className="fb show key";fb.innerHTML=`<b>Verbetersleutel</b><div class="model">${q.model}</div>`;act.innerHTML="";
+      const w=document.createElement("div");w.className="self-check";w.innerHTML=`<span>Was je antwoord goed?</span>`;
+      const g=document.createElement("button");g.className="mini g";g.textContent="✓ Ja";
+      const b2=document.createElement("button");b2.className="mini b";b2.textContent="✗ Nog oefenen";
+      g.onclick=()=>{if(!ss._ans){ss._ans=true;ss.score++;}next();};
+      b2.onclick=()=>{ss._ans=true;next();};
+      w.appendChild(g);w.appendChild(b2);act.appendChild(w);
+    };
+    act.appendChild(show);
+  }
+}
+
+function renderResult(key){
+  const ss=sessions[key];
+  if(S.best[key]==null||ss.score>S.best[key]){S.best[key]=ss.score;saveS();}
+  document.getElementById(ss.ids.p).textContent="Resultaat";
+  document.getElementById(ss.ids.t).style.width="100%";
+  const n=ss.qs.length,pct=ss.score/n;
+  const stars=pct>=0.85?"⭐⭐⭐":pct>=0.65?"⭐⭐":"⭐";
+  const msg=pct>=0.85?"Uitstekend! Je beheerst dit hoofdstuk.":pct>=0.65?"Goed bezig — herhaal de vragen waar het misging.":"Neem de theorie opnieuw door en oefen dan opnieuw.";
+  document.getElementById(ss.ids.s).textContent=`Beste: ${S.best[key]}/${n}`;
+  document.getElementById(ss.ids.a).innerHTML=`<div class="qcard result-card"><div class="stars">${stars}</div><div class="big">${ss.score}/${n}</div><p>${msg}</p><button class="btn btn-p" id="rst-${key}">Opnieuw oefenen</button></div>`;
+  document.getElementById("rst-"+key).onclick=()=>resetSession(key);
+  updateProgress();
+}
+function resetSession(key){const ss=sessions[key];ss.pos=0;ss.score=0;ss._ans=false;if(key==="mix")buildMix();renderQ(key);}
+function buildMix(){
+  const all=[];CHAPTERS.forEach(c=>c.q.forEach(q=>all.push(Object.assign({chap:c.key},q))));
+  for(let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]];}
+  sessions.mix.qs=all;sessions.mix.pos=0;sessions.mix.score=0;sessions.mix._ans=false;
+}
+const MIXTOTAL=CHAPTERS.reduce((a,c)=>a+c.q.length,0);
+
+/* ======================================================
+   WOORDENSCHAT
+====================================================== */
+function renderVocTable(){
+  document.getElementById("vocBody").innerHTML=VOCAB.map(([t,d,key,idx])=>
+    `<tr><td>${t}<span class="vc cc${idx}">${CHAPTERS[idx].short}</span></td><td>${d}</td></tr>`).join("");
+}
+let vl={dir:1,order:[],pos:0,score:0,pool:VOCAB};
+function startVL(filtered){
+  const pool=filtered||VOCAB;vl.pool=pool;vl.order=pool.map((_,i)=>i);
+  for(let i=vl.order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vl.order[i],vl.order[j]]=[vl.order[j],vl.order[i]];}
+  vl.pos=0;vl.score=0;renderVL();
+}
+function renderVL(){
+  const el=document.getElementById("va");
+  document.getElementById("vs").textContent=`Score ${vl.score}/${vl.pool.length}`;
+  if(vl.pos>=vl.order.length){
+    document.getElementById("vp").textContent="Klaar!";document.getElementById("vt").style.width="100%";
+    el.innerHTML=`<div class="vlcard result-card"><div class="big">${vl.score}/${vl.pool.length}</div><p>Alle begrippen doorlopen.</p><button class="btn btn-p" id="vlr">Opnieuw</button></div>`;
+    document.getElementById("vlr").onclick=()=>startVL(vl.pool);return;
+  }
+  const [term,def,key,idx]=vl.pool[vl.order[vl.pos]];
+  const dir=vl.dir===3?(Math.random()<0.5?1:2):vl.dir;
+  document.getElementById("vp").textContent=`Begrip ${vl.pos+1} / ${vl.pool.length}`;
+  document.getElementById("vt").style.width=(vl.pos/vl.pool.length*100)+"%";
+  let h=`<div class="vlcard">`;
+  if(dir===1){
+    h+=`<div class="vl-prompt-lbl">Welk begrip hoort hierbij? <span class="vc cc${idx}">${CHAPTERS[idx].short}</span></div><div class="vl-prompt">${def}</div><div class="fill-wrap"><input type="text" id="vlin" placeholder="Typ het begrip…" autocomplete="off"></div>`;
+  }else{
+    h+=`<div class="vl-prompt-lbl">Leg dit begrip uit <span class="vc cc${idx}">${CHAPTERS[idx].short}</span></div><div class="vl-prompt big">${term}</div><textarea class="openq" id="vlta" placeholder="Geef je uitleg…"></textarea>`;
+  }
+  h+=`<div class="fb" id="vlfb"></div><div class="qactions" id="vlact"></div></div>`;el.innerHTML=h;
+  const fb=document.getElementById("vlfb"),act=document.getElementById("vlact");const adv=()=>{vl.pos++;renderVL();};
+  if(dir===1){
+    const chk=document.createElement("button");chk.className="btn btn-p";chk.textContent="Controleer";
+    chk.onclick=()=>{const v=document.getElementById("vlin").value,core=norm(term.split("(")[0]);
+      const ok=norm(v)===core||norm(v)===norm(term)||(core.length>4&&norm(v).includes(core));
+      if(ok){vl.score++;if(!S.vocMastered.includes(term)){S.vocMastered.push(term);saveS();updateProgress();}}
+      fb.className="fb show "+(ok?"ok":"no");
+      fb.innerHTML=ok?`<b>Juist!</b> Het begrip is <b>${term}</b>.`:`<b>Niet juist.</b> Het begrip is: <span style="font-weight:600;color:var(--ink)">${term}</span> — ${def}`;
+      act.innerHTML="";const n=document.createElement("button");n.className="btn btn-p";n.textContent="Volgende →";n.onclick=adv;act.appendChild(n);};
+    act.appendChild(chk);
+    setTimeout(()=>{const e2=document.getElementById("vlin");if(e2)e2.addEventListener("keydown",e=>{if(e.key==="Enter")chk.click();});},0);
+  }else{
+    const show=document.createElement("button");show.className="btn btn-p";show.textContent="Toon uitleg";
+    show.onclick=()=>{fb.className="fb show key";fb.innerHTML=`<b>Modeluitleg</b><div class="model">${def}</div>`;act.innerHTML="";
+      const w=document.createElement("div");w.className="self-check";w.innerHTML=`<span>Klopte jouw uitleg?</span>`;
+      const g=document.createElement("button");g.className="mini g";g.textContent="✓ Ja";
+      const b2=document.createElement("button");b2.className="mini b";b2.textContent="✗ Nee";
+      g.onclick=()=>{vl.score++;if(!S.vocMastered.includes(term)){S.vocMastered.push(term);saveS();updateProgress();}adv();};b2.onclick=adv;
+      w.appendChild(g);w.appendChild(b2);act.appendChild(w);};
+    act.appendChild(show);
+  }
+}
+
+/* ======================================================
+   VOORTGANG
+====================================================== */
+function updateProgress(){
+  const parts=CHAPTERS.map(c=>S.best[c.key]!=null?S.best[c.key]/c.q.length:0);
+  parts.push(S.best.mix!=null?S.best.mix/MIXTOTAL:0);
+  parts.push(VOCAB.length?Math.min(S.vocMastered.length/VOCAB.length,1):0);
+  const pct=Math.round(parts.reduce((a,b)=>a+b,0)/parts.length*100);
+  document.getElementById("ringAll").style.setProperty("--p",pct);
+  document.getElementById("ringPct").textContent=pct+"%";
+  document.getElementById("progLbl").textContent=pct>=85?"Je beheersing is sterk — succes! 💪":pct>=50?"Goede voortgang — blijf oefenen.":"Begin met oefenen — je voortgang wordt bewaard.";
+  document.getElementById("chapChips").innerHTML=CHAPTERS.map(c=>S.best[c.key]!=null?`<span class="chip">${c.short}: ${S.best[c.key]}/${c.q.length}</span>`:"").join("")+(S.best.mix!=null?`<span class="chip">Mix: ${S.best.mix}/${MIXTOTAL}</span>`:"");
+  let grid=CHAPTERS.map((c,i)=>{
+    const v=S.best[c.key]||0,t=c.q.length,p=t?Math.round(v/t*100):0;
+    return `<div class="prog-card"><h4>${c.short} · ${c.label}</h4><div class="prog-bar-wrap"><div class="prog-bar" style="width:${p}%"></div></div><div class="prog-lbl">${v}/${t} ${S.best[c.key]!=null?"(beste score)":""}</div></div>`;
+  }).join("");
+  const mv=S.best.mix||0,mp=MIXTOTAL?Math.round(mv/MIXTOTAL*100):0;
+  grid+=`<div class="prog-card"><h4>🔀 Gemixte modus</h4><div class="prog-bar-wrap"><div class="prog-bar" style="width:${mp}%"></div></div><div class="prog-lbl">${mv}/${MIXTOTAL} ${S.best.mix!=null?"(beste score)":""}</div></div>`;
+  const vv=S.vocMastered.length,vp=VOCAB.length?Math.round(vv/VOCAB.length*100):0;
+  grid+=`<div class="prog-card"><h4>📚 Woordenschat beheerst</h4><div class="prog-bar-wrap"><div class="prog-bar" style="width:${vp}%"></div></div><div class="prog-lbl">${vv}/${VOCAB.length} beheerst</div></div>`;
+  document.getElementById("progGrid").innerHTML=grid;
+}
+
+/* ======================================================
+   NAVIGATIE
+====================================================== */
+const allViews=["home",...KEYS,"mix","voc"];
+function goTo(id){
+  allViews.forEach(v=>{document.getElementById("nav-"+v).setAttribute("aria-selected",v===id);document.getElementById("view-"+v).classList.toggle("active",v===id);});
+  if(id==="mix"&&sessions.mix.qs.length===0){buildMix();renderQ("mix");}
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+allViews.forEach(v=>document.getElementById("nav-"+v).onclick=()=>goTo(v));
+document.getElementById("mixStart").onclick=()=>resetSession("mix");
+
+KEYS.forEach(key=>{
+  const view=document.getElementById("view-"+key);
+  view.querySelectorAll(".stab").forEach(b=>b.addEventListener("click",()=>{
+    view.querySelectorAll(".stab").forEach(x=>x.setAttribute("aria-selected",x===b));
+    const sub=b.dataset.sub;view.querySelectorAll(".subview").forEach(s=>s.classList.toggle("active",s.id===sub));
+    if(sub===key+"-oefen"&&sessions[key].pos===0)renderQ(key);
+  }));
+});
+document.querySelectorAll("#view-voc .stab").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("#view-voc .stab").forEach(x=>x.setAttribute("aria-selected",x===b));
+  const sub=b.dataset.sub;document.querySelectorAll("#view-voc .subview").forEach(s=>s.classList.toggle("active",s.id===sub));
+  if(sub==="voc-leren"&&vl.order.length===0)startVL();
+}));
+[["d1",1],["d2",2],["d3",3]].forEach(([id,d])=>document.getElementById(id).onclick=()=>{
+  vl.dir=d;["d1","d2","d3"].forEach(x=>document.getElementById(x).setAttribute("aria-pressed",x===id));startVL(vl.pool);
+});
+
+/* ======================================================
+   INIT
+====================================================== */
+(async()=>{
+  await loadS();
+  CHAPTERS.forEach(c=>document.getElementById(c.key+"-theorie").innerHTML=renderTheory(c));
+  renderVocTable();
+  updateProgress();
+})();
+</script>
+</body>
+</html>
