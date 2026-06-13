@@ -2,129 +2,17 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WeatherDeck | Astroleck</title>
-<meta name="description" content="WeatherDeck: live weerdashboard met een ingezoomde kaart van jouw adres, voorspellingen, luchtkwaliteit en zon/maan-cyclus.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="style.css?v=4">
+<meta http-equiv="refresh" content="0; url=../housedeck/index.html">
+<title>WeatherDeck → HouseDeck</title>
+<link rel="canonical" href="../housedeck/index.html">
+<style>
+  body { background:#06060f; color:#e8eaff; font-family:"JetBrains Mono",monospace;
+         display:flex; align-items:center; justify-content:center; height:100vh; margin:0; }
+  a { color:#22e0ff; }
+</style>
 </head>
 <body>
-<div class="bg-glow" aria-hidden="true"></div>
-<div class="stars" aria-hidden="true"></div>
-
-<div class="app">
-  <header class="topbar">
-    <a class="brand" href="../index.html">
-      <span class="brand-mark">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="3.2" fill="#6ea8fe"/>
-          <ellipse cx="12" cy="12" rx="10.5" ry="4.2" stroke="#6ea8fe" stroke-width="1.4" opacity="0.55"/>
-          <ellipse cx="12" cy="12" rx="4.2" ry="10.5" stroke="#ffb46b" stroke-width="1.2" opacity="0.4" transform="rotate(35 12 12)"/>
-        </svg>
-      </span>
-      <span class="brand-text">
-        <span class="name">Weather<span class="accent">Deck</span></span>
-        <span class="sub">Astroleck Systems</span>
-      </span>
-    </a>
-
-    <div class="search-wrap">
-      <span class="search-icon">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
-          <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </span>
-      <input id="addressInput" type="text" autocomplete="off" placeholder="Zoek je adres, plaats of postcode...">
-      <div id="suggestions" class="suggestions"></div>
-    </div>
-
-    <div class="topbar-actions">
-      <button id="gpsBtn" class="btn-deck" title="Gebruik mijn huidige locatie">📍 Mijn locatie</button>
-      <div class="clock" id="clock">--:--:--</div>
-    </div>
-  </header>
-
-  <div id="status" class="status-banner">
-    <span class="dot"></span> Voer een adres in of gebruik je huidige locatie om te beginnen
-  </div>
-
-  <main id="dashboard" class="dashboard hidden">
-
-    <section class="panel map-panel">
-      <div class="panel-head">
-        <span id="locName">--</span>
-        <span class="live"></span>
-      </div>
-      <div class="map-wrap">
-        <div id="map"></div>
-        <div class="map-readout">
-          <span id="coordReadout">LAT -- · LON --</span>
-        </div>
-        <div class="map-layer-toggle">
-          <button id="mapLayerDark" class="active" type="button">Dark</button>
-          <button id="mapLayerSat" type="button">Satelliet</button>
-        </div>
-      </div>
-    </section>
-
-    <aside class="panel now-panel">
-      <div class="panel-head"><span>Nu</span><span class="live"></span></div>
-      <div class="now-readout">
-        <div class="now-icon" id="nowIcon">--</div>
-        <div class="now-main">
-          <div class="now-temp" id="nowTemp">--°</div>
-          <div class="now-desc" id="nowDesc">Geen data</div>
-          <div class="now-feels" id="nowFeels">Voelt als --°</div>
-        </div>
-      </div>
-      <div class="stat-grid" id="statGrid"></div>
-    </aside>
-
-    <section class="panel window-panel">
-      <div class="panel-head"><span>Uitzicht</span><span class="live"></span></div>
-      <div class="window-view" id="windowView">
-        <div class="window-scene" id="windowScene"></div>
-        <p class="window-text" id="windowText">Wachten op data…</p>
-      </div>
-    </section>
-
-    <section class="panel sun-panel">
-      <div class="panel-head"><span>Zon &amp; maan</span><span class="live"></span></div>
-      <div id="sunInfo" class="sun-info"></div>
-    </section>
-
-    <section class="panel aq-panel">
-      <div class="panel-head"><span>Luchtkwaliteit</span><span class="live"></span></div>
-      <div id="aqInfo" class="aq-info"></div>
-    </section>
-
-    <section class="panel sys-panel">
-      <div class="panel-head"><span>Telemetrie</span><span class="live"></span></div>
-      <div id="sysInfo" class="sys-info"></div>
-    </section>
-
-    <section class="panel hourly-panel full-width">
-      <div class="panel-head"><span>Komende 24 uur</span><span class="live"></span></div>
-      <div class="hourly-track" id="hourly"></div>
-    </section>
-
-    <section class="panel daily-panel full-width">
-      <div class="panel-head"><span>16-daagse vooruitzichten</span><span class="live"></span></div>
-      <div class="daily-table" id="daily"></div>
-    </section>
-
-  </main>
-
-  <footer class="deck-footer">
-    Data: Open-Meteo · OpenStreetMap · Photon · CARTO &nbsp;|&nbsp; <a href="../index.html">← Terug naar portaal</a>
-  </footer>
-</div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="app.js?v=4"></script>
+<p>WeatherDeck is nu <strong>HouseDeck</strong> — <a href="../housedeck/index.html">doorsturen…</a></p>
+<script>location.replace("../housedeck/index.html");</script>
 </body>
 </html>

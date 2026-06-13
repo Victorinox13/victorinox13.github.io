@@ -47,16 +47,16 @@ const PROJECTS = [
     preview: { kind: "quiz", bg: "#f0f2f5", fg: "#1e3a5f", accent: "#173a5c", accent2: "#bfe0d8" }
   },
   {
-    title: "WeatherDeck",
+    title: "HouseDeck",
     emoji: "🛰️",
     category: "Tools",
-    tag: "Live Weerdashboard",
-    description: "Mission-control weerdashboard: zoek je adres en krijg direct een ingezoomde kaart van je huis, plus actuele condities, uurlijkse en 7-daagse voorspelling, luchtkwaliteit, zon/maan-cyclus en zicht-uit-je-raam.",
-    link: "weather/index.html",
-    linkLabel: "Open WeatherDeck →",
+    tag: "Surveillance Console",
+    description: "Cyberdeck-console die alles boven en rond je huis volgt: satellietbeelden en kaartlagen, live vliegtuigen overhead, het ISS, weer & luchtkwaliteit, sterren-index, nabije geschiedenis en seismiek — met een ingebouwde commandobalk en mobiele UI.",
+    link: "housedeck/index.html",
+    linkLabel: "Open HouseDeck →",
     highlight: true,
     date: "2026-06",
-    preview: { kind: "orbit", bg: "#0a0c11", fg: "#f3f5f8", accent: "#6ea8fe", accent2: "#ffb46b" }
+    preview: { kind: "orbit", bg: "#06060f", fg: "#e8eaff", accent: "#b14dff", accent2: "#22e0ff" }
   },
   {
     title: "Bio Studieplatform",

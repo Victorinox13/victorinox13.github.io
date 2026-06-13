@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>HouseDeck // Astroleck</title>
+<meta name="description" content="HouseDeck: een cyberdeck-console die alles boven en rond jouw huis volgt — live weer, satellietbeelden, vliegtuigen, het ISS, sterren, nabije geschiedenis en seismiek.">
+<meta name="theme-color" content="#06060f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHSrymmNleQNTTWyRgQ/EwCnbB6E=" crossorigin="">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- ambient FX layers -->
+<div class="fx fx-grid" aria-hidden="true"></div>
+<div class="fx fx-scan" aria-hidden="true"></div>
+<div class="fx fx-glow" aria-hidden="true"></div>
+<div class="fx fx-vignette" aria-hidden="true"></div>
+
+<!-- boot sequence -->
+<div id="boot" class="boot" aria-hidden="true">
+  <pre id="bootLog" class="boot-log"></pre>
+</div>
+
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="../index.html" title="Terug naar portaal">
+      <span class="brand-mark">
+        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 3 4 12v17h8v-9h8v9h8V12L16 3Z" stroke="url(#hg)" stroke-width="1.6" stroke-linejoin="round"/>
+          <circle cx="16" cy="11" r="2.4" fill="url(#hg)"/>
+          <ellipse cx="16" cy="11" rx="7" ry="2.6" stroke="#22e0ff" stroke-width="1" opacity="0.6" transform="rotate(-18 16 11)"/>
+          <defs><linearGradient id="hg" x1="4" y1="3" x2="28" y2="29"><stop stop-color="#c77dff"/><stop offset="1" stop-color="#22e0ff"/></linearGradient></defs>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="name">HOUSE<span class="accent">DECK</span></span>
+        <span class="sub">ASTROLECK SURVEILLANCE</span>
+      </span>
+    </a>
+
+    <div class="search-wrap">
+      <span class="search-icon">⌖</span>
+      <input id="addressInput" type="text" autocomplete="off" spellcheck="false" placeholder="Target lock — adres, plaats of postcode...">
+      <div id="suggestions" class="suggestions"></div>
+    </div>
+
+    <div class="topbar-actions">
+      <button id="gpsBtn" class="btn-deck" title="Gebruik mijn huidige locatie">◎ FIX</button>
+      <div class="clock" id="clock">--:--:--</div>
+    </div>
+  </header>
+
+  <!-- command bar -->
+  <section class="cmdbar">
+    <div class="cmd-line">
+      <span class="cmd-prompt">housedeck<span class="accent">@</span>astroleck<span class="accent">:~$</span></span>
+      <input id="cmdInput" type="text" autocomplete="off" spellcheck="false" placeholder="typ een commando — 'help' voor de lijst">
+      <button id="cmdLogToggle" class="cmd-toggle" title="Logboek tonen/verbergen">▾ LOG</button>
+    </div>
+    <pre id="cmdLog" class="cmd-log"></pre>
+  </section>
+
+  <main id="deck" class="deck hidden">
+
+    <!-- MAP -->
+    <section class="panel map-panel">
+      <div class="panel-head">
+        <span class="ph-title">▣ SURVEILLANCE // <span id="locName">--</span></span>
+        <span class="live"></span>
+      </div>
+      <div class="map-wrap">
+        <div id="map"></div>
+        <div class="map-layers">
+          <button class="lyr active" data-layer="aerial">AERIAL</button>
+          <button class="lyr" data-layer="dark">DARK</button>
+          <button class="lyr" data-layer="terrain">TERREIN</button>
+          <button class="lyr" data-layer="nasa">NASA</button>
+        </div>
+        <div class="map-readout">
+          <span id="coordReadout">LAT -- · LON --</span>
+          <span id="airCount" class="air-count">✈ --</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOW -->
+    <aside class="panel now-panel">
+      <div class="panel-head"><span class="ph-title">◐ CONDITIES // NU</span><span class="live"></span></div>
+      <div class="now-readout">
+        <div class="now-icon" id="nowIcon">--</div>
+        <div class="now-main">
+          <div class="now-temp" id="nowTemp">--°</div>
+          <div class="now-desc" id="nowDesc">geen data</div>
+          <div class="now-feels" id="nowFeels">voelt als --°</div>
+        </div>
+      </div>
+      <div class="stat-grid" id="statGrid"></div>
+    </aside>
+
+    <!-- SKY / ASTRONOMY -->
+    <section class="panel sky-panel">
+      <div class="panel-head"><span class="ph-title">✷ HEMEL // SKY-TRACK</span><span class="live"></span></div>
+      <div id="skyInfo" class="kv-list"></div>
+    </section>
+
+    <!-- AIR TRAFFIC -->
+    <section class="panel air-panel">
+      <div class="panel-head"><span class="ph-title">✈ LUCHTVERKEER // OVERHEAD</span><span class="live"></span></div>
+      <div id="airInfo" class="feed-list"></div>
+    </section>
+
+    <!-- ATMOSPHERE / AQ -->
+    <section class="panel aq-panel">
+      <div class="panel-head"><span class="ph-title">☁ ATMOSFEER // LUCHTKWALITEIT</span><span class="live"></span></div>
+      <div id="aqInfo" class="kv-list"></div>
+    </section>
+
+    <!-- INTEL / NEARBY -->
+    <section class="panel intel-panel">
+      <div class="panel-head"><span class="ph-title">⌬ INTEL // RONDOM</span><span class="live"></span></div>
+      <div id="intelInfo" class="feed-list"></div>
+    </section>
+
+    <!-- SEISMIC -->
+    <section class="panel seismic-panel">
+      <div class="panel-head"><span class="ph-title">⚠ SEISMIEK // REGIO</span><span class="live"></span></div>
+      <div id="seismicInfo" class="feed-list"></div>
+    </section>
+
+    <!-- WINDOW -->
+    <section class="panel window-panel">
+      <div class="panel-head"><span class="ph-title">▢ UITZICHT // OUT THE WINDOW</span><span class="live"></span></div>
+      <div class="window-view" id="windowView">
+        <div class="window-scene" id="windowScene"></div>
+        <p class="window-text" id="windowText">wachten op data…</p>
+      </div>
+    </section>
+
+    <!-- TELEMETRY -->
+    <section class="panel sys-panel">
+      <div class="panel-head"><span class="ph-title">⊞ TELEMETRIE // SYSTEM</span><span class="live"></span></div>
+      <div id="sysInfo" class="kv-list"></div>
+    </section>
+
+    <!-- HOURLY -->
+    <section class="panel hourly-panel full-width">
+      <div class="panel-head"><span class="ph-title">⌁ VOORSPELLING // 24U</span><span class="live"></span></div>
+      <div class="hourly-track" id="hourly"></div>
+    </section>
+
+    <!-- DAILY -->
+    <section class="panel daily-panel full-width">
+      <div class="panel-head"><span class="ph-title">▤ VOORSPELLING // 7 DAGEN</span><span class="live"></span></div>
+      <div class="daily-table" id="daily"></div>
+    </section>
+
+  </main>
+
+  <footer class="deck-footer">
+    FEEDS: OPEN-METEO · AIRPLANES.LIVE · WHERETHEISS · NASA-GIBS · ESRI · WIKIPEDIA · USGS &nbsp;|&nbsp; <a href="../index.html">← portaal</a>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="app.js"></script>
+</body>
+</html>
