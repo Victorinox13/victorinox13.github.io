@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>HouseDeck // Astroleck</title>
-<meta name="description" content="HouseDeck: een cyberdeck-console die alles boven en rond jouw huis volgt — live weer, satellietbeelden, vliegtuigen, het ISS, sterren, nabije geschiedenis en seismiek.">
+<meta name="description" content="HouseDeck: een cyberdeck-kaartenconsole die alles boven en rond jouw huis op één kaart toont — radar, satelliet, live vliegtuigen, het ISS, nabije intel en seismiek.">
 <meta name="theme-color" content="#06060f">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,13 +13,11 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- ambient FX layers -->
 <div class="fx fx-grid" aria-hidden="true"></div>
 <div class="fx fx-scan" aria-hidden="true"></div>
 <div class="fx fx-glow" aria-hidden="true"></div>
 <div class="fx fx-vignette" aria-hidden="true"></div>
 
-<!-- boot sequence -->
 <div id="boot" class="boot" aria-hidden="true">
   <pre id="bootLog" class="boot-log"></pre>
 </div>
@@ -53,7 +51,6 @@
     </div>
   </header>
 
-  <!-- command bar -->
   <section class="cmdbar">
     <div class="cmd-line">
       <span class="cmd-prompt">housedeck<span class="accent">@</span>astroleck<span class="accent">:~$</span></span>
@@ -65,20 +62,41 @@
 
   <main id="deck" class="deck hidden">
 
-    <!-- MAP -->
-    <section class="panel map-panel">
-      <div class="panel-head">
+    <!-- ===== THE MAP ===== -->
+    <section class="mapdeck">
+      <div class="map-titlebar">
         <span class="ph-title">▣ SURVEILLANCE // <span id="locName">--</span></span>
         <span class="live"></span>
       </div>
+
       <div class="map-wrap">
         <div id="map"></div>
-        <div class="map-layers">
-          <button class="lyr active" data-layer="aerial">AERIAL</button>
-          <button class="lyr" data-layer="dark">DARK</button>
-          <button class="lyr" data-layer="terrain">TERREIN</button>
-          <button class="lyr" data-layer="nasa">NASA</button>
+
+        <!-- base layer selector -->
+        <div class="map-bases">
+          <button class="base active" data-layer="aerial">AERIAL</button>
+          <button class="base" data-layer="dark">DARK</button>
+          <button class="base" data-layer="terrain">TERREIN</button>
+          <button class="base" data-layer="nasa">NASA</button>
         </div>
+
+        <!-- overlay toggles -->
+        <div class="map-overlays">
+          <button class="ovl" data-ovl="radar">☔ RADAR</button>
+          <button class="ovl active" data-ovl="planes">✈ VLIEGTUIGEN</button>
+          <button class="ovl" data-ovl="iss">🛰 ISS</button>
+          <button class="ovl" data-ovl="intel">⌬ INTEL</button>
+          <button class="ovl" data-ovl="seismic">⚠ SEISMIEK</button>
+        </div>
+
+        <!-- radar timeline (hidden until radar on) -->
+        <div id="radarBar" class="radar-bar hidden">
+          <button id="radarPlay" class="radar-play">⏸</button>
+          <input id="radarSlider" class="radar-slider" type="range" min="0" max="0" value="0">
+          <span id="radarTime" class="radar-time">--:--</span>
+          <span class="radar-legend"><i>licht</i><span class="grad"></span><i>zwaar</i></span>
+        </div>
+
         <div class="map-readout">
           <span id="coordReadout">LAT -- · LON --</span>
           <span id="airCount" class="air-count">✈ --</span>
@@ -86,73 +104,38 @@
       </div>
     </section>
 
-    <!-- NOW -->
-    <aside class="panel now-panel">
-      <div class="panel-head"><span class="ph-title">◐ CONDITIES // NU</span><span class="live"></span></div>
-      <div class="now-readout">
-        <div class="now-icon" id="nowIcon">--</div>
-        <div class="now-main">
-          <div class="now-temp" id="nowTemp">--°</div>
-          <div class="now-desc" id="nowDesc">geen data</div>
-          <div class="now-feels" id="nowFeels">voelt als --°</div>
+    <!-- ===== compact instrument strip (niet-kaartbare data) ===== -->
+    <section class="instruments">
+      <div class="ipanel now-panel">
+        <div class="ip-head">◐ NU</div>
+        <div class="now-readout">
+          <div class="now-icon" id="nowIcon">--</div>
+          <div class="now-main">
+            <div class="now-temp" id="nowTemp">--°</div>
+            <div class="now-desc" id="nowDesc">geen data</div>
+            <div class="now-feels" id="nowFeels">voelt als --°</div>
+          </div>
         </div>
+        <div class="stat-grid" id="statGrid"></div>
       </div>
-      <div class="stat-grid" id="statGrid"></div>
-    </aside>
 
-    <!-- SKY / ASTRONOMY -->
-    <section class="panel sky-panel">
-      <div class="panel-head"><span class="ph-title">✷ HEMEL // SKY-TRACK</span><span class="live"></span></div>
-      <div id="skyInfo" class="kv-list"></div>
-    </section>
+      <div class="ipanel sky-panel">
+        <div class="ip-head">✷ HEMEL</div>
+        <div id="skyInfo" class="kv-list"></div>
+      </div>
 
-    <!-- AIR TRAFFIC -->
-    <section class="panel air-panel">
-      <div class="panel-head"><span class="ph-title">✈ LUCHTVERKEER // OVERHEAD</span><span class="live"></span></div>
-      <div id="airInfo" class="feed-list"></div>
-    </section>
-
-    <!-- ATMOSPHERE / AQ -->
-    <section class="panel aq-panel">
-      <div class="panel-head"><span class="ph-title">☁ ATMOSFEER // LUCHTKWALITEIT</span><span class="live"></span></div>
-      <div id="aqInfo" class="kv-list"></div>
-    </section>
-
-    <!-- INTEL / NEARBY -->
-    <section class="panel intel-panel">
-      <div class="panel-head"><span class="ph-title">⌬ INTEL // RONDOM</span><span class="live"></span></div>
-      <div id="intelInfo" class="feed-list"></div>
-    </section>
-
-    <!-- SEISMIC -->
-    <section class="panel seismic-panel">
-      <div class="panel-head"><span class="ph-title">⚠ SEISMIEK // REGIO</span><span class="live"></span></div>
-      <div id="seismicInfo" class="feed-list"></div>
-    </section>
-
-    <!-- WINDOW -->
-    <section class="panel window-panel">
-      <div class="panel-head"><span class="ph-title">▢ UITZICHT // OUT THE WINDOW</span><span class="live"></span></div>
-      <div class="window-view" id="windowView">
-        <div class="window-scene" id="windowScene"></div>
-        <p class="window-text" id="windowText">wachten op data…</p>
+      <div class="ipanel aq-panel">
+        <div class="ip-head">☁ LUCHT</div>
+        <div id="aqInfo" class="kv-list"></div>
       </div>
     </section>
 
-    <!-- TELEMETRY -->
-    <section class="panel sys-panel">
-      <div class="panel-head"><span class="ph-title">⊞ TELEMETRIE // SYSTEM</span><span class="live"></span></div>
-      <div id="sysInfo" class="kv-list"></div>
-    </section>
-
-    <!-- HOURLY -->
-    <section class="panel hourly-panel full-width">
+    <section class="panel hourly-panel">
       <div class="panel-head"><span class="ph-title">⌁ VOORSPELLING // 24U</span><span class="live"></span></div>
       <div class="hourly-track" id="hourly"></div>
     </section>
 
-    <!-- DAILY -->
-    <section class="panel daily-panel full-width">
+    <section class="panel daily-panel">
       <div class="panel-head"><span class="ph-title">▤ VOORSPELLING // 7 DAGEN</span><span class="live"></span></div>
       <div class="daily-table" id="daily"></div>
     </section>
@@ -160,7 +143,7 @@
   </main>
 
   <footer class="deck-footer">
-    FEEDS: OPEN-METEO · AIRPLANES.LIVE · WHERETHEISS · NASA-GIBS · ESRI · WIKIPEDIA · USGS &nbsp;|&nbsp; <a href="../index.html">← portaal</a>
+    FEEDS: OPEN-METEO · RAINVIEWER · AIRPLANES.LIVE · WHERETHEISS · NASA-GIBS · ESRI · WIKIPEDIA · USGS &nbsp;|&nbsp; <a href="../index.html">← portaal</a>
   </footer>
 </div>
 
