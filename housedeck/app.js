@@ -100,6 +100,23 @@ function logLine(text, cls) { const s = document.createElement("span"); s.classN
 function openLog() { els.cmdLog.classList.add("open"); }
 els.cmdLogToggle.addEventListener("click", () => els.cmdLog.classList.toggle("open"));
 
+/* ---------- layout-stability gate ----------
+   Wait for web fonts to finish loading before building the map, so a late
+   font-driven reflow can't shift the map out from under its tiles. Uses
+   promises/timeouts (not requestAnimationFrame, which is throttled when the
+   tab/preview isn't in the foreground). */
+function whenLayoutStable(cb) {
+  let done = false;
+  const go = () => { if (done) return; done = true; setTimeout(cb, 60); };
+  const fonts = document.fonts;
+  if (fonts && fonts.ready && typeof fonts.ready.then === "function") {
+    fonts.ready.then(go);
+    setTimeout(go, 1500); // safety net if fonts.ready never resolves
+  } else {
+    setTimeout(go, 200);
+  }
+}
+
 /* ---------- boot ---------- */
 function boot() {
   const bootEl = document.getElementById("boot"), log = document.getElementById("bootLog");
@@ -120,9 +137,11 @@ function boot() {
     else setTimeout(() => {
       bootEl.classList.add("done"); els.deck.classList.remove("hidden");
       logLine("HouseDeck online. Typ 'help' voor commando's.", "out");
-      loadLocation(cur.lat, cur.lon, cur.label);
-      setTimeout(() => map && map.invalidateSize(), 200);
-    }, 350);
+      // CRITICAL: build the map only AFTER web fonts have loaded. Fonts loading
+      // late reflows the topbar/cmdbar, which shifts the map after its tiles are
+      // already placed → Leaflet keeps orphaned tiles at stale positions (glitch).
+      whenLayoutStable(() => loadLocation(cur.lat, cur.lon, cur.label));
+    }, 380);
   })();
 }
 
@@ -277,24 +296,34 @@ function stopRadarAnim() { if (radar.timer) { clearInterval(radar.timer); radar.
 function toggleRadarPlay() { radar.timer ? stopRadarAnim() : startRadarAnim(); }
 
 /* ---------- main load ---------- */
+// Build the map ONLY once the container has a real size. Building it at 0×0
+// (e.g. behind the boot overlay) and then spamming invalidateSize() leaves
+// Leaflet with tiles at inconsistent pixel origins → scattered/glitched tiles.
+function ensureMap(lat, lon, cb) {
+  if (map) { cb(); return; }
+  const el = document.getElementById("map");
+  const r = el.getBoundingClientRect();
+  if (r.width < 60 || r.height < 60) { setTimeout(() => ensureMap(lat, lon, cb), 60); return; }
+  initMap(lat, lon);
+  cb();
+}
 function loadLocation(lat, lon, label) {
   cur = { lat, lon, label };
   els.locName.textContent = label;
   els.coordReadout.textContent = `LAT ${lat.toFixed(4)} · LON ${lon.toFixed(4)}`;
-  initMap(lat, lon);
-  map.invalidateSize();
-  map.setView([lat, lon], HOUSE_ZOOM);
-  setMarker(lat, lon);
-  [80, 300, 700, 1400].forEach((t) => setTimeout(() => map.invalidateSize(), t));
 
-  loadWeather(lat, lon);
-  if (overlays.planes) loadAircraft();
-  if (overlays.iss) loadISS();
-  // always refresh intel/seismic data (cheap); markers only shown when overlay on
-  loadIntel(lat, lon); loadSeismic(lat, lon);
+  loadWeather(lat, lon); // no map needed — fire immediately
 
-  clearInterval(airTimer); airTimer = setInterval(() => overlays.planes && loadAircraft(), 20000);
-  clearInterval(issTimer); issTimer = setInterval(loadISS, 10000);
+  ensureMap(lat, lon, () => {
+    map.invalidateSize();          // single, once — container is correctly sized here
+    map.setView([lat, lon], HOUSE_ZOOM);
+    setMarker(lat, lon);
+    if (overlays.planes) loadAircraft();
+    if (overlays.iss) loadISS();
+    loadIntel(lat, lon); loadSeismic(lat, lon); // data cached; markers shown when overlay on
+    clearInterval(airTimer); airTimer = setInterval(() => overlays.planes && loadAircraft(), 20000);
+    clearInterval(issTimer); issTimer = setInterval(loadISS, 10000);
+  });
 }
 
 /* ---------- weather (instrument strip) ---------- */
