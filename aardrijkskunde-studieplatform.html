@@ -191,6 +191,7 @@ footer{max-width:1180px;margin:0 auto;padding:18px clamp(14px,4vw,40px) 60px;col
 .cc4{background:#dbe6f8;color:#244f9e}
 .cc5{background:#ece0f4;color:#693a9a}
 .cc6{background:#dcefdf;color:#1f6a3a}
+.cc7{background:#d3eef0;color:#0a6470}
 </style>
 <header>
   <div class="h-row">
@@ -215,7 +216,7 @@ footer{max-width:1180px;margin:0 auto;padding:18px clamp(14px,4vw,40px) 60px;col
 </main>
 
 <footer>
-  Bron: <em>Thema Atmosfeer (5D)</em> — samenvattingen hoofdstuk 7 t.e.m. 14 — ruim 100 oefenvragen en 73 begrippen. Theorie, vragen en woordenschat rechtstreeks uit je cursus. Voortgang wordt lokaal bewaard op dit toestel.
+  Bron: <em>Thema Atmosfeer (5D)</em> — samenvattingen hoofdstuk 7 t.e.m. 15 — 118 oefenvragen en 83 begrippen. Theorie, vragen en woordenschat rechtstreeks uit je cursus. Voortgang wordt lokaal bewaard op dit toestel.
 </footer>
 
 <script>
@@ -711,6 +712,95 @@ const CHAPTERS=[
   {type:"tf",q:"Een occlusiefront ontstaat doordat een koudefront een warmtefront inhaalt.",cor:true,fb:"Correct — een koudefront beweegt sneller en haalt het warmtefront in; samen vormen ze een occlusiefront."},
   {type:"mc",q:"Met welk symbool wordt een koudefront op een weerkaart aangeduid?",opts:["Halve rode cirkels","Blauwe driehoekjes","Een paarse lijn","Een stippellijn"],cor:1,expl:"Een <b>koudefront</b> wordt aangeduid met <b>blauwe driehoekjes</b> die de verplaatsingsrichting tonen (warmtefront = halve rode cirkels)."}
  ]
+},
+
+{key:"zee",short:"H15",label:"Oceanen & zeestromen",icon:"wave",
+ theory:[
+  {num:"I",title:"De vijf oceanen",items:[
+   {id:"I.1",t:"De vijf oceanen en hun grenzen",body:`
+     <p>De aarde telt <strong>vijf oceanen</strong>:</p>
+     <table class="vtable">
+       <tr><th>Oceaan</th><th>Grenzen</th></tr>
+       <tr><td>Stille (Grote) Oceaan</td><td>Noordelijke IJszee, westkust van Amerika, oostkusten van Azië en Oceanië</td></tr>
+       <tr><td>Atlantische Oceaan</td><td>Noordelijke IJszee, westkusten van Europa en Afrika, oostkust van Amerika</td></tr>
+       <tr><td>Indische Oceaan</td><td>zuidkust van Azië, westkust van Oceanië, oostkust van Afrika</td></tr>
+       <tr><td>Antarctische Oceaan</td><td>kusten van Antarctica, 60° Z</td></tr>
+       <tr><td>Arctische Oceaan</td><td>noordkusten van Eurazië en Amerika</td></tr>
+     </table>`}
+  ]},
+  {num:"II",title:"Soorten zeestromen",items:[
+   {id:"II.1",t:"Drie factoren en oceanische circulatie",body:`
+     <p>De beweging van zeestromen wordt bepaald door <strong>drie factoren</strong>:</p>
+     <ol class="steps">
+       <li>Dichtheidsverschillen <span>door het zoutgehalte en de temperatuur.</span></li>
+       <li>Het coriolis-effect en de wind.</li>
+       <li>De ligging van de continenten.</li>
+     </ol>
+     <p>Hierdoor ontstaat de <span class="kw">oceanische circulatie</span>: de zeestromen maken een cyclus doorheen alle wateren en eindigen weer waar ze oorspronkelijk vertrokken.</p>`},
+   {id:"II.2",t:"Oppervlaktezeestromen",body:`
+     <p><span class="kw">Oppervlaktezeestromen</span> komen voor tot een diepte van <strong>400 meter</strong> en worden vooral veroorzaakt door het <strong>coriolis-effect en de wind</strong>. Er zijn twee soorten:</p>
+     <table class="vtable">
+       <tr><th>Soort</th><th>Kenmerk</th><th>Voorbeeld</th></tr>
+       <tr><td>Warme zeestroom</td><td>uit warme gebieden rond de evenaar → brengt warmer water naar koudere gebieden</td><td>Golfstroom</td></tr>
+       <tr><td>Koude zeestroom</td><td>uit koude gebieden rond de polen → brengt kouder water naar warmere gebieden</td><td>Labradorstroom</td></tr>
+     </table>
+     <ul>
+       <li><strong>Warme zeestromen</strong> warmen de lucht op → meer vocht → beperken extreme temperaturen in winter en zomer.</li>
+       <li><strong>Koude zeestromen</strong> koelen de lucht af → weinig vocht → drogere gebieden (woestijnen langs warme kusten); kouder in de winter, warmer in de zomer dan normaal.</li>
+     </ul>`}
+  ]},
+  {num:"III",title:"Diepzeestromen en thermohaliene circulatie",items:[
+   {id:"III.1",t:"De thermohaliene circulatie",body:`
+     <p><span class="kw">Diepzeestromen</span> vinden plaats <strong>dieper dan 400 meter</strong>: dit is de <span class="kw">thermohaliene circulatie</span>. Ze worden veroorzaakt door <strong>dichtheidsverschillen</strong> (zoutgehalte en temperatuur).</p>
+     <ol class="steps">
+       <li>Warm water verdampt meer <span>→ wordt lichter en blijft aan het oppervlak drijven.</span></li>
+       <li>De stromen bewegen richting koudere gebieden.</li>
+       <li>Daar verdampt meer water <span>→ het water wordt zouter.</span></li>
+       <li>Afkoeling + meer zout <span>→ het water wordt zwaarder.</span></li>
+       <li>Het koude water zinkt naar de bodem <span>en stroomt over de oceaanbodem terug naar warmere gebieden.</span></li>
+     </ol>
+     <p>Deze 'transportband' van de oceaan heet de <span class="kw">Noord-Atlantische Diepwaterpomp (NADP)</span>. Het systeem geldt wereldwijd, maar werd voor het eerst waargenomen in de Atlantische Oceaan.</p>`}
+  ]},
+  {num:"IV",title:"De pelagische zone",items:[
+   {id:"IV.1",t:"Vijf zones op basis van diepte",body:`
+     <p>De waterkolom tussen het oppervlak en de oceaanbodem — de <span class="kw">pelagische zone</span> — is verticaal gelaagd en verdeelt de oceaan in <strong>vijf zones op basis van diepte</strong>:</p>
+     <table class="vtable">
+       <tr><th>Zone</th><th>Diepte</th></tr>
+       <tr><td>Epipelagische zone</td><td>0 – 200 m</td></tr>
+       <tr><td>Mesopelagische zone</td><td>200 – 1000 m</td></tr>
+       <tr><td>Bathypelagische zone</td><td>1000 – 4000 m</td></tr>
+       <tr><td>Abyssopelagische zone</td><td>4000 m – oceaanbodem</td></tr>
+       <tr><td>Hadopelagische zone</td><td>de diepste troggen</td></tr>
+     </table>`}
+  ]}
+ ],
+ vocab:[
+  ["Oceanische circulatie","De cyclus die zeestromen doorheen alle oceanen maken, bepaald door dichtheid, coriolis/wind en de ligging van de continenten."],
+  ["Oppervlaktezeestroom","Zeestroom tot 400 m diepte, vooral veroorzaakt door het coriolis-effect en de wind."],
+  ["Warme zeestroom","Stroom uit warme gebieden rond de evenaar die warmer water naar koudere gebieden brengt (bv. Golfstroom)."],
+  ["Koude zeestroom","Stroom uit koude gebieden rond de polen die kouder water naar warmere gebieden brengt (bv. Labradorstroom)."],
+  ["Dichtheidsverschil","Verschil in dichtheid door zoutgehalte en temperatuur; de drijvende kracht achter diepzeestromen."],
+  ["Diepzeestroom","Zeestroom dieper dan 400 m, veroorzaakt door dichtheidsverschillen."],
+  ["Thermohaliene circulatie","De wereldwijde circulatie van diepzeestromen op basis van temperatuur (thermo) en zoutgehalte (halien)."],
+  ["NADP (Noord-Atlantische Diepwaterpomp)","De 'transportband' van de oceaan die warm oppervlaktewater en koud diepwater wereldwijd rondvoert."],
+  ["Pelagische zone","De waterkolom tussen het oppervlak en de oceaanbodem, verdeeld in vijf dieptezones."],
+  ["Epipelagische zone","De bovenste oceaanzone (0-200 m)."]
+ ],
+ q:[
+  {type:"mc",q:"Hoeveel oceanen telt de aarde?",opts:["Drie","Vier","Vijf","Zeven"],cor:2,expl:"De aarde telt <b>vijf</b> oceanen: de Stille (Grote), Atlantische, Indische, Antarctische en Arctische Oceaan."},
+  {type:"fill",q:"De grootste oceaan ter wereld is de … (Grote) Oceaan.",acc:["stille","stille of grote","grote"],ans:"Stille (Grote) Oceaan"},
+  {type:"mc",q:"Welke drie factoren bepalen de beweging van zeestromen?",opts:["Maanstand, getijden en wind","Dichtheidsverschillen, het coriolis-effect/wind en de ligging van de continenten","Temperatuur, neerslag en luchtdruk","Zwaartekracht, zout en algen"],cor:1,expl:"De drie factoren zijn: <b>dichtheidsverschillen</b> (zout + temperatuur), het <b>coriolis-effect en de wind</b>, en de <b>ligging van de continenten</b>."},
+  {type:"tf",q:"Oppervlaktezeestromen komen voor tot een diepte van ongeveer 400 meter.",cor:true,fb:"Correct — oppervlaktezeestromen reiken tot ±400 m diep en worden vooral door wind en het coriolis-effect veroorzaakt."},
+  {type:"mc",q:"Wat doet een warme zeestroom met de lucht erboven?",opts:["Koelt ze af waardoor woestijnen ontstaan","Warmt ze op waardoor ze meer vocht vasthoudt en extreme temperaturen beperkt","Heeft geen effect","Maakt ze droger"],cor:1,expl:"Een <b>warme zeestroom</b> warmt de lucht op → meer vocht → extreme temperaturen in winter en zomer worden beperkt."},
+  {type:"fill",q:"De bekendste warme zeestroom die West-Europa beïnvloedt, is de …",acc:["golfstroom"],ans:"Golfstroom"},
+  {type:"mc",q:"Welke zeestroom kan zorgen voor drogere kustgebieden (woestijnen) in warme regio's?",opts:["Een warme zeestroom","Een koude zeestroom","De Golfstroom","Een diepzeestroom"],cor:1,expl:"Een <b>koude zeestroom</b> koelt de lucht af → weinig vocht → drogere gebieden zoals kustwoestijnen."},
+  {type:"fill",q:"Diepzeestromen (dieper dan 400 m) vormen samen de … circulatie.",acc:["thermohaliene","thermohalien"],ans:"thermohaliene"},
+  {type:"tf",q:"Diepzeestromen worden vooral veroorzaakt door dichtheidsverschillen door zoutgehalte en temperatuur.",cor:true,fb:"Correct — bij de thermohaliene circulatie zinkt koud, zout (dus zwaar) water naar de bodem."},
+  {type:"open",q:"Leg in eigen woorden uit hoe de thermohaliene circulatie werkt.",model:"Warm water aan het oppervlak verdampt meer, wordt daardoor lichter en blijft drijven; het stroomt richting koudere gebieden. Daar verdampt nog meer water, waardoor het zouter wordt. Door de combinatie van afkoeling en het hogere zoutgehalte wordt het water zwaarder, zinkt het naar de bodem en stroomt het over de oceaanbodem terug naar warmere gebieden. Deze wereldwijde 'transportband' heet de Noord-Atlantische Diepwaterpomp (NADP)."},
+  {type:"mc",q:"Hoe noemt men de 'transportband' van de oceaan?",opts:["De Golfstroom","De Noord-Atlantische Diepwaterpomp (NADP)","De pelagische zone","Het coriolis-effect"],cor:1,expl:"De wereldwijde transportband van warm en koud water heet de <b>Noord-Atlantische Diepwaterpomp (NADP)</b>, voor het eerst waargenomen in de Atlantische Oceaan."},
+  {type:"mc",q:"In hoeveel zones verdeelt de pelagische zone de oceaan?",opts:["Drie","Vier","Vijf","Zes"],cor:2,expl:"De pelagische zone verdeelt de oceaan in <b>vijf</b> dieptezones: epi-, meso-, bathy-, abysso- en hadopelagisch."},
+  {type:"fill",q:"De bovenste oceaanzone (0-200 m) heet de … zone.",acc:["epipelagische","epipelagisch","epipelagische zone"],ans:"epipelagische zone"}
+ ]
 }
 ];
 
@@ -725,6 +815,7 @@ const ICONS={
  cloud:'<path d="M6 17a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A4 4 0 0 1 18 17z"/>',
  alert:'<path d="M12 2 1 21h22z"/><path d="M12 9v5M12 17h.01"/>',
  map:'<path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3z"/><path d="M9 3v15M15 6v15"/>',
+ wave:'<path d="M2 8c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 13c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/>',
  home:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
  mix:'<path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',
  book:'<path d="M4 5h16v14H4z"/><path d="M4 9h16M9 9v10"/>'

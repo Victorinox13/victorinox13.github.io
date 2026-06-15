@@ -39,7 +39,7 @@ const PROJECTS = [
     emoji: "🌍",
     category: "Studietools",
     tag: "Studieplatform",
-    description: "Interactief oefenplatform voor het aardrijkskunde-examen, thema Atmosfeer (H7–H14): de atmosfeer, stralingsbalans, temperatuurverschillen, wind & luchtdruk, neerslag & wolken, extreem weer en de weerkaart. 73 vragen en 73 begrippen uit de cursus — met gemixte modus en woordenschattrainer.",
+    description: "Interactief oefenplatform voor het aardrijkskunde-examen (H7–H15): de atmosfeer, stralingsbalans, temperatuurverschillen, wind & luchtdruk, neerslag & wolken, extreem weer, de weerkaart en oceanen & zeestromen. 118 vragen en 83 begrippen uit de cursus — met gemixte modus en woordenschattrainer.",
     link: "aardrijkskunde-studieplatform.html",
     linkLabel: "Open het studieplatform →",
     highlight: true,
