@@ -956,6 +956,7 @@ let navHtml=navBtn("home","home","Overzicht",true);
 CHAPTERS.forEach(c=>navHtml+=navBtn(c.key,c.icon,c.label,false));
 navHtml+=navBtn("mix","mix","Gemixte modus",false);
 navHtml+=navBtn("voc","book","Woordenschat",false);
+navHtml+=navBtn("triv","flask","Triviale namen",false);
 nav.innerHTML=navHtml;
 
 let viewsHtml=`<div class="view active" id="view-home"><div class="prog-grid" id="progGrid"></div>
@@ -1011,6 +1012,27 @@ viewsHtml+=`<div class="view" id="view-voc">
        </div>
        <div class="qbar"><span class="qpos mono" id="vp"></span><span class="qsc" id="vs"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="vt"></div></div></div>
        <div id="va"></div>
+     </div>
+   </div>
+ </div>`;
+viewsHtml+=`<div class="view" id="view-triv">
+   <div class="stabs" role="tablist">
+     <button class="stab" data-tsub="triv-tabel" aria-selected="true">Tabel</button>
+     <button class="stab" data-tsub="triv-leren" aria-selected="false">Oefenen</button>
+   </div>
+   <div class="subview active" id="triv-tabel">
+     <div style="color:var(--soft);font-size:14.5px;max-width:74ch;margin-bottom:16px">De <strong>triviale namen</strong> die je voor het examen moet kennen (uit de tabel van je leerkracht). Oefen ze actief via het tabblad <em>Oefenen</em> — in beide richtingen.</div>
+     <table class="voc-table"><thead><tr><th>IUPAC-naam</th><th>Triviale naam</th><th>Formule</th><th>Toepassing</th></tr></thead><tbody id="trivBody"></tbody></table>
+   </div>
+   <div class="subview" id="triv-leren">
+     <div class="voc-learn-wrap">
+       <div class="dir-btns">
+         <button class="dir-btn" id="t1" aria-pressed="true">IUPAC → triviale naam</button>
+         <button class="dir-btn" id="t2" aria-pressed="false">Triviaal → IUPAC-naam</button>
+         <button class="dir-btn" id="t3" aria-pressed="false">Door elkaar</button>
+       </div>
+       <div class="qbar"><span class="qpos mono" id="tp"></span><span class="qsc" id="ts"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="tt"></div></div></div>
+       <div id="ta"></div>
      </div>
    </div>
  </div>`;
@@ -1216,7 +1238,7 @@ function updateProgress(){
 /* ======================================================
    NAVIGATIE
 ====================================================== */
-const allViews=["home",...KEYS,"mix","voc"];
+const allViews=["home",...KEYS,"mix","voc","triv"];
 function goTo(id){
   allViews.forEach(v=>{document.getElementById("nav-"+v).setAttribute("aria-selected",v===id);document.getElementById("view-"+v).classList.toggle("active",v===id);});
   if(id==="mix"&&sessions.mix.qs.length===0){buildMix();renderQ("mix");}
@@ -1243,12 +1265,85 @@ document.querySelectorAll("#view-voc .stab").forEach(b=>b.addEventListener("clic
 });
 
 /* ======================================================
+   TRIVIALE NAMEN — trainer
+   [iupac, triviaal, formule, toepassing]
+====================================================== */
+const TRIV=[
+ ["methanol","brandalcohol","CH<sub>3</sub>OH","Brandstof in fonduestellen en kampeerfornuisjes."],
+ ["ethanol","alcohol","CH<sub>3</sub>CH<sub>2</sub>OH","Zit in alcoholische dranken."],
+ ["propaan-1-ol","n-propylalcohol","CH<sub>3</sub>CH<sub>2</sub>CH<sub>2</sub>OH","Solvent in cosmetica."],
+ ["propaan-2-ol","isopropylalcohol (isopropanol)","CH<sub>3</sub>CH(OH)CH<sub>3</sub>","Reinigings- en desinfectiemiddel."],
+ ["ethoxyethaan","diëthylether (ether)","CH<sub>3</sub>CH<sub>2</sub>OCH<sub>2</sub>CH<sub>3</sub>","Goed oplosmiddel voor geurstoffen."],
+ ["methanal","formaldehyde","HCHO","Formol = formaldehyde opgelost in water."],
+ ["ethanal","aceetaldehyde","CH<sub>3</sub>CHO","Speelt een rol bij het krijgen van een kater."],
+ ["propanon","aceton","CH<sub>3</sub>COCH<sub>3</sub>","Oplosmiddel voor lijm, verf, vernis en nagellak."],
+ ["methaanzuur","mierenzuur","HCOOH","Komt voor in het gif van mieren en in brandnetelharen."],
+ ["ethaanzuur","azijnzuur","CH<sub>3</sub>COOH","Tafelazijn; bewaarmiddel/smaakstof (6–8 % in de handel)."],
+ ["propaanzuur","propionzuur","CH<sub>3</sub>CH<sub>2</sub>COOH","Voorkomt schimmelgroei op kaas."],
+ ["butaanzuur","boterzuur","CH<sub>3</sub>CH<sub>2</sub>CH<sub>2</sub>COOH","Huidbacteriën zetten vet, talg en zweet om in boterzuur."],
+ ["trichloormethaan","chloroform","CHCl<sub>3</sub>","Vroeger het verdovingsmiddel bij uitstek."],
+ ["tetrachloormethaan","tetra","CCl<sub>4</sub>","CFK-achtige stof; vroeger drijfgas/koelmiddel (tast ozonlaag aan)."]
+];
+function renderTrivTable(){
+  document.getElementById("trivBody").innerHTML=TRIV.map(([i,t,f,a])=>
+    `<tr><td>${i}</td><td style="font-weight:600;color:var(--sky-deep)">${t}</td><td class="mono">${f}</td><td style="font-weight:400;color:var(--soft);white-space:normal">${a}</td></tr>`).join("");
+}
+let tl={dir:1,order:[],pos:0,score:0};
+function startTL(){
+  tl.order=TRIV.map((_,i)=>i);
+  for(let i=tl.order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[tl.order[i],tl.order[j]]=[tl.order[j],tl.order[i]];}
+  tl.pos=0;tl.score=0;renderTL();
+}
+function stripTags(s){return (s||"").replace(/<[^>]*>/g,"");}
+function renderTL(){
+  const el=document.getElementById("ta");
+  document.getElementById("ts").textContent=`Score ${tl.score}/${TRIV.length}`;
+  if(tl.pos>=tl.order.length){
+    document.getElementById("tp").textContent="Klaar!";document.getElementById("tt").style.width="100%";
+    el.innerHTML=`<div class="vlcard result-card"><div class="big">${tl.score}/${TRIV.length}</div><p>Alle triviale namen doorlopen.</p><button class="btn btn-p" id="tlr">Opnieuw</button></div>`;
+    document.getElementById("tlr").onclick=startTL;return;
+  }
+  const [iupac,triv,form,toep]=TRIV[tl.order[tl.pos]];
+  const dir=tl.dir===3?(Math.random()<0.5?1:2):tl.dir;
+  document.getElementById("tp").textContent=`Stof ${tl.pos+1} / ${TRIV.length}`;
+  document.getElementById("tt").style.width=(tl.pos/TRIV.length*100)+"%";
+  const promptVal=dir===1?iupac:triv;
+  const answerVal=dir===1?triv:iupac;
+  const lbl=dir===1?"Geef de <strong>triviale naam</strong>":"Geef de <strong>IUPAC-naam</strong>";
+  let h=`<div class="vlcard"><div class="vl-prompt-lbl">${lbl} <span class="mono" style="color:var(--faint)">${form}</span></div><div class="vl-prompt big">${promptVal}</div><div class="fill-wrap"><input type="text" id="tin" placeholder="Typ je antwoord…" autocomplete="off"></div><div class="fb" id="tfb"></div><div class="qactions" id="tact"></div></div>`;
+  el.innerHTML=h;
+  const fb=document.getElementById("tfb"),act=document.getElementById("tact");const adv=()=>{tl.pos++;renderTL();};
+  // aanvaard hoofdnaam of de variant tussen haakjes
+  const accepts=stripTags(answerVal).split("(").map(s=>norm(s.replace(/\)/g,"")));
+  const chk=document.createElement("button");chk.className="btn btn-p";chk.textContent="Controleer";
+  chk.onclick=()=>{
+    const v=norm(document.getElementById("tin").value);
+    const ok=accepts.filter(Boolean).some(a=>v===a||(a.length>3&&v.includes(a)));
+    if(ok)tl.score++;
+    fb.className="fb show "+(ok?"ok":"no");
+    fb.innerHTML=(ok?`<b>Juist!</b> `:`<b>Niet juist.</b> `)+`${iupac} = <b>${triv}</b> (${form}).<div class="model" style="margin-top:6px">Toepassing: ${toep}</div>`;
+    act.innerHTML="";const n=document.createElement("button");n.className="btn btn-p";n.textContent=(tl.pos+1>=TRIV.length)?"Toon resultaat →":"Volgende →";n.onclick=adv;act.appendChild(n);
+  };
+  act.appendChild(chk);
+  setTimeout(()=>{const e2=document.getElementById("tin");if(e2)e2.addEventListener("keydown",e=>{if(e.key==="Enter")chk.click();});},0);
+}
+document.querySelectorAll("#view-triv .stab").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("#view-triv .stab").forEach(x=>x.setAttribute("aria-selected",x===b));
+  const sub=b.dataset.tsub;document.querySelectorAll("#view-triv .subview").forEach(s=>s.classList.toggle("active",s.id===sub));
+  if(sub==="triv-leren"&&tl.order.length===0)startTL();
+}));
+[["t1",1],["t2",2],["t3",3]].forEach(([id,d])=>document.getElementById(id).onclick=()=>{
+  tl.dir=d;["t1","t2","t3"].forEach(x=>document.getElementById(x).setAttribute("aria-pressed",x===id));startTL();
+});
+
+/* ======================================================
    INIT
 ====================================================== */
 (async()=>{
   await loadS();
   CHAPTERS.forEach(c=>document.getElementById(c.key+"-theorie").innerHTML=renderTheory(c));
   renderVocTable();
+  renderTrivTable();
   updateProgress();
 })();
 </script>
