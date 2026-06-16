@@ -39,7 +39,7 @@ const PROJECTS = [
     emoji: "🧪",
     category: "Studietools",
     tag: "Studieplatform",
-    description: "Interactief oefenplatform voor het chemie-examen (Focus Chemie 5): Thema 5 organische stoffen (indeling & voorstelling, hybridisatie, koolwaterstoffen, functionele groepen, biomoleculen, fysische eigenschappen & isomerie), Thema 6 materieaspecten (mol, gaswet, concentratie, stoichiometrie) en Thema 7 reactiesnelheid. 7 hoofdstukken met theorie, ~95 oefenvragen (meerkeuze, waar/niet-waar, invul, open vragen & combineer), gemixte modus en woordenschattrainer.",
+    description: "Interactief oefenplatform voor het chemie-examen (Focus Chemie 5 + leraren-PPT's): Thema 5 organische stoffen (indeling, hybridisatie & sterisch getal, koolwaterstoffen, functionele groepen + triviale namen, biomoleculen, fysische eigenschappen & isomerie), Thema 6 materieaspecten (mol, gaswet, concentratie, stoichiometrie) en Thema 7 reactiesnelheid. 7 hoofdstukken, 145 oefenvragen (meerkeuze, waar/niet-waar, invul, open & combineer) — met structuurformules uit de cursus in de vragen, gemixte modus en woordenschattrainer (108 begrippen).",
     link: "chemie-studieplatform.html",
     linkLabel: "Open het studieplatform →",
     highlight: true,
