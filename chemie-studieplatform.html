@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemie — Studieplatform · Thema 5-6-7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Spline+Sans+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e9eff6;--surface:#fff;--surface2:#f2f7fb;--surface3:#e8f0f8;
+  --ink:#13233c;--soft:#46566d;--faint:#8294a9;--line:#d3deec;--line2:#e7eef7;
+  --sky:#1685b2;--sky-deep:#0b6286;--sky-soft:#d3ecf6;
+  --sun:#e0892a;--sun-soft:#f7e6cf;
+  --coral:#d9533a;--coral-soft:#f7ddd4;
+  --storm:#5b54b8;--storm-soft:#e6e3f6;--space:#0b1a38;
+  --teal:#1685b2;--navy:#0f2c5c;--rose:#d9533a;--amber:#e0892a;
+  --good:#1a7a4a;--good-s:#d4edde;--bad:#b02828;--bad-s:#f5dcdc;
+  --shadow:0 1px 2px rgba(18,40,70,.05),0 14px 32px -16px rgba(16,60,104,.30);
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><g fill='none' stroke='%23b9cde0' stroke-width='1'><path d='M-20 60 C40 20 120 100 160 60 C200 20 240 80 300 50'/><path d='M-20 110 C40 70 120 150 160 110 C200 70 240 130 300 100'/><path d='M-20 165 C40 125 120 205 160 165 C200 125 240 185 300 155'/><path d='M-20 215 C40 175 120 255 160 215 C200 175 240 235 300 205'/></g></svg>")}
+main,header,footer{position:relative;z-index:1}
+h1,h2,h3,h4{font-family:"Sora",system-ui,sans-serif;line-height:1.14;font-weight:700;letter-spacing:-.01em}
+.mono{font-family:"Spline Sans Mono",ui-monospace,monospace;font-weight:600}
+
+/* HEADER (atmosfeer) */
+header{color:#eaf2fb;padding:30px clamp(16px,5vw,56px) 28px;position:relative;overflow:hidden;
+  background:linear-gradient(178deg,#0a1834 0%,#0f2c5c 30%,#1f5598 58%,#3f86c8 80%,#86b9e0 96%,#f0b878 118%)}
+header::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.6;
+  background-image:radial-gradient(1.4px 1.4px at 18% 22%,#fff 50%,transparent 0),radial-gradient(1.2px 1.2px at 42% 12%,#fff 50%,transparent 0),radial-gradient(1.6px 1.6px at 68% 26%,#fff 50%,transparent 0),radial-gradient(1.1px 1.1px at 82% 14%,#fff 50%,transparent 0),radial-gradient(1.3px 1.3px at 30% 34%,#fff 50%,transparent 0),radial-gradient(1px 1px at 90% 32%,#fff 50%,transparent 0);background-repeat:no-repeat}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:62%;pointer-events:none;opacity:.5;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='180'><g fill='none' stroke='%23ffffff' stroke-width='1.1' opacity='0.55'><path d='M-20 150 C80 110 160 150 240 120 C320 90 380 130 440 100'/><path d='M-20 170 C80 135 160 172 240 142 C320 112 380 152 440 122'/><path d='M-20 130 C80 88 160 128 240 96 C320 64 380 108 440 76'/></g></svg>") bottom/520px repeat-x}
+.h-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;position:relative}
+.h-left .eyebrow{font:600 11px/1 "Spline Sans Mono",monospace;letter-spacing:.22em;text-transform:uppercase;color:#bfe3d6;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.h-left .eyebrow::before{content:"";width:17px;height:17px;flex:none;background:no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bfe3d6' stroke-width='2'><circle cx='12' cy='12' r='9'/><path d='M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4'/></svg>")}
+.h-left h1{font-size:clamp(26px,4.8vw,46px);font-weight:800}
+.h-left h1 em{font-style:normal;font-weight:800;background:linear-gradient(95deg,#9fe0ff,#ffd9a0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.h-left p{margin-top:9px;max-width:62ch;color:#d2e2f2;font-size:14px}
+.h-stats{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px;position:relative}
+.ring{--p:0;width:58px;height:58px;border-radius:50%;background:conic-gradient(#7fdcff calc(var(--p)*1%),rgba(255,255,255,.16) 0);display:grid;place-items:center;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 4px 16px -4px rgba(0,0,0,.4)}
+.ring-inner{width:45px;height:45px;border-radius:50%;background:#0c1f44;display:grid;place-items:center}
+.ring-inner span{font:700 12px/1 "Spline Sans Mono",monospace;color:#eaf2fb}
+.h-stat-lbl{font-size:13px;color:#cfe0f1}
+.h-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.chip{font:600 11px/1 "Spline Sans Mono",monospace;letter-spacing:.05em;text-transform:uppercase;padding:6px 10px;border-radius:20px;background:rgba(255,255,255,.14);color:#e4eef8}
+
+/* MAIN NAV */
+main{max-width:1180px;margin:0 auto;padding:0 clamp(14px,4vw,40px) 90px}
+.main-nav{display:flex;gap:5px;margin:-22px 0 6px;z-index:5;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:6px;box-shadow:var(--shadow);width:max-content;max-width:100%;overflow-x:auto}
+.mnav-btn{appearance:none;border:0;background:transparent;cursor:pointer;white-space:nowrap;font:600 13.5px/1 "Inter",sans-serif;color:var(--soft);padding:10px 15px;border-radius:11px;display:flex;align-items:center;gap:7px;transition:.14s}
+.mnav-btn:hover{color:var(--ink);background:var(--surface2)}
+.mnav-btn[aria-selected="true"]{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:#fff;box-shadow:0 4px 14px -5px var(--sky)}
+.mnav-btn svg{width:15px;height:15px;flex:none}
+
+/* SUB TABS */
+.stabs{display:flex;gap:7px;margin:20px 0 20px;flex-wrap:wrap}
+.stab{appearance:none;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font:600 13px/1 "Inter",sans-serif;color:var(--soft);padding:9px 16px;border-radius:22px;transition:.14s}
+.stab:hover{border-color:var(--sky);color:var(--ink)}
+.stab[aria-selected="true"]{background:var(--sky);border-color:var(--sky);color:#fff}
+
+.view,.subview{display:none}
+.view.active,.subview.active{display:block;animation:fadein .28s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* THEORIE */
+.sec-head{margin:8px 0 14px}
+.sec-head .snum{font:600 11px/1 "Spline Sans Mono",monospace;color:var(--sky);letter-spacing:.12em;text-transform:uppercase}
+.sec-head h2{font-size:clamp(20px,3vw,28px);margin-top:6px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px 22px 27px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--sky),var(--sun))}
+.card-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.card-top .cn{font:600 11px/1.3 "Spline Sans Mono",monospace;color:var(--faint)}
+.card-top h3{font-size:18px;flex:1;min-width:160px}
+.badge{font:600 10px/1 "Spline Sans Mono",monospace;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:20px}
+.bk{background:var(--sky-soft);color:var(--sky-deep)}
+.bb{background:var(--sun-soft);color:#8a5712}
+.card-body{color:var(--soft);font-size:15px}
+.card-body p{margin-bottom:10px}
+.card-body strong{color:var(--ink);font-weight:600}
+.card-body em{color:var(--sky-deep);font-style:italic}
+.card-body ul{padding-left:0;list-style:none;margin-bottom:12px}
+.card-body li{padding-left:20px;position:relative;margin-bottom:6px}
+.card-body li::before{content:"";position:absolute;left:3px;top:7px;width:7px;height:7px;border-radius:50%;border:2px solid var(--sky)}
+.kw{background:linear-gradient(transparent 58%,#bfe6f4 0);font-weight:600;color:var(--sky-deep);padding:0 1px}
+figure{margin:13px 0 3px;text-align:center}
+figure img{max-width:100%;border:1px solid var(--line);border-radius:10px}
+figcaption{font-size:12px;color:var(--faint);margin-top:5px;font-style:italic}
+.vtable{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 12px;border-radius:10px;overflow:hidden}
+.vtable th,.vtable td{border:1px solid var(--line);padding:8px 11px;text-align:left}
+.vtable th{background:var(--surface3);font-weight:600;color:var(--ink)}
+.vtable td:first-child{font-weight:600;background:var(--surface2)}
+ol.steps{padding-left:22px;margin-bottom:12px}
+ol.steps li{margin-bottom:7px;font-weight:600;color:var(--ink)}
+ol.steps li span{font-weight:400;color:var(--soft)}
+
+/* VRAGEN */
+.qwrap{max-width:740px;margin:0 auto}
+.qbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.qbar .qpos,.qbar .qsc{font:600 13px/1 "Spline Sans Mono",monospace;color:var(--soft)}
+.qbar .qsc{color:var(--sky)}
+.qtrack-wrap{flex-basis:100%;height:6px;background:var(--line2);border-radius:3px;overflow:hidden;margin-top:1px}
+.qtrack-fill{height:100%;background:linear-gradient(90deg,var(--sky),var(--sun));width:0;transition:width .3s}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:var(--shadow)}
+.qtype-lbl{font:600 10.5px/1 "Spline Sans Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.chap-badge{font:600 9px/1 "Spline Sans Mono",monospace;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:10px}
+.qtext{font-family:"Sora",sans-serif;font-size:20px;font-weight:700;line-height:1.34;color:var(--ink);margin-bottom:4px}
+.qfig{margin:14px 0 4px;text-align:center}
+.qfig img{max-width:100%;max-height:280px;border:1px solid var(--line);border-radius:10px}
+.opts{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.opts.tf{flex-direction:row}
+.opt{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--surface2);font:500 15px/1.4 "Inter",sans-serif;color:var(--ink);padding:13px 15px;border-radius:12px;text-align:left;transition:.12s;display:flex;gap:9px;align-items:flex-start}
+.opts.tf .opt{flex:1;justify-content:center;font-weight:600;font-size:16px}
+.opt:hover:not(:disabled){border-color:var(--sky);background:#fff}
+.opt .mk{font:700 12px/1.3 "Spline Sans Mono",monospace;color:var(--faint);flex:none;margin-top:1px}
+.opt.pg{background:var(--good-s);border-color:var(--good);color:#0f4a28}
+.opt.pb{background:var(--bad-s);border-color:var(--bad);color:#6a1818}
+.opt.pr{border-color:var(--good);color:#0f4a28}
+.opt:disabled{cursor:default}
+.fill-wrap{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.fill-wrap input{flex:1;min-width:180px;font:500 16px/1 "Inter",sans-serif;padding:13px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--ink)}
+.fill-wrap input:focus{outline:none;border-color:var(--sky);background:#fff}
+.hint-txt{align-self:center;font-size:12.5px;color:var(--faint)}
+textarea.openq{width:100%;min-height:90px;margin-top:16px;font:400 15px/1.55 "Inter",sans-serif;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--ink);resize:vertical}
+textarea.openq:focus{outline:none;border-color:var(--sky);background:#fff}
+.fb{margin-top:16px;padding:13px 15px;border-radius:12px;font-size:14px;line-height:1.5;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-s);color:#0f4a28}
+.fb.no{background:var(--bad-s);color:#6a1818}
+.fb.key{background:var(--surface2);color:var(--soft);border:1px dashed var(--line)}
+.fb b{font-weight:600}
+.fb .model{margin-top:6px;color:var(--ink);font-weight:500}
+.self-check{display:flex;gap:9px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.self-check span{font-size:13px;color:var(--soft)}
+.mini{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--surface);font:600 13px/1 "Inter",sans-serif;padding:8px 13px;border-radius:9px;transition:.12s}
+.mini.g:hover{border-color:var(--good);color:var(--good)}
+.mini.b:hover{border-color:var(--bad);color:var(--bad)}
+.qactions{display:flex;gap:9px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
+.btn{appearance:none;cursor:pointer;border:0;font:600 15px/1 "Inter",sans-serif;padding:12px 20px;border-radius:11px;transition:.13s;display:inline-flex;align-items:center;gap:8px}
+.btn-p{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:#fff;box-shadow:0 6px 16px -6px var(--sky)}
+.btn-p:hover{filter:brightness(1.07)}
+.btn-g{background:transparent;border:1.5px solid var(--line);color:var(--ink)}.btn-g:hover{border-color:var(--sky)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.result-card{text-align:center;padding:8px 0}
+.result-card .big{font-family:"Sora",sans-serif;font-size:54px;font-weight:800;background:linear-gradient(120deg,var(--sky),var(--sun));-webkit-background-clip:text;background-clip:text;color:transparent}
+.result-card p{color:var(--soft);max-width:44ch;margin:8px auto 20px}
+.result-card .stars{font-size:28px;margin:4px 0 8px}
+
+/* WOORDENSCHAT */
+.voc-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.voc-table th{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:#fff;font:600 12.5px/1.3 "Inter",sans-serif;text-align:left;padding:12px 14px}
+.voc-table td{border-top:1px solid var(--line);padding:10px 14px;font-size:14px;vertical-align:top}
+.voc-table td:first-child{font-weight:600;color:var(--ink);width:35%;white-space:nowrap}
+.voc-table tr:nth-child(even) td{background:var(--surface2)}
+.vc{font:600 9px/1 "Spline Sans Mono",monospace;text-transform:uppercase;letter-spacing:.05em;padding:3px 6px;border-radius:9px;margin-left:6px;vertical-align:middle}
+.voc-learn-wrap{max-width:650px;margin:0 auto}
+.dir-btns{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.dir-btn{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--surface);font:600 13px/1.3 "Inter",sans-serif;color:var(--soft);padding:10px 14px;border-radius:11px;transition:.14s}
+.dir-btn[aria-pressed="true"]{background:var(--coral);border-color:var(--coral);color:#fff}
+.vlcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 24px;box-shadow:var(--shadow)}
+.vl-prompt-lbl{font:600 10px/1 "Spline Sans Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:10px}
+.vl-prompt{font-family:"Sora",sans-serif;font-size:19px;font-weight:600;line-height:1.4;color:var(--ink)}
+.vl-prompt.big{font-size:27px;font-weight:700}
+
+/* VOORTGANG */
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px}
+.prog-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)}
+.prog-card h4{font-size:14.5px;margin-bottom:8px}
+.prog-bar-wrap{height:8px;background:var(--line2);border-radius:4px;overflow:hidden;margin-top:6px}
+.prog-bar{height:100%;border-radius:4px;transition:width .4s;background:linear-gradient(90deg,var(--sky),var(--sun))}
+.prog-lbl{font:600 12px/1 "Spline Sans Mono",monospace;color:var(--faint);margin-top:5px}
+
+footer{max-width:1180px;margin:0 auto;padding:18px clamp(14px,4vw,40px) 60px;color:var(--faint);font-size:12.5px;line-height:1.6}
+@media(max-width:700px){.opts.tf{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2.5px solid var(--sun);outline-offset:2px;border-radius:5px}
+</style>
+</head>
+<body>
+<style>
+/* thematische hoofdstukkleuren — elk hoofdstuk een eigen atmosferische tint */
+.cc0{background:#e4e3f3;color:#3a3a8a}
+.cc1{background:#f7e7cf;color:#8a5712}
+.cc2{background:#f8ddd4;color:#a8381f}
+.cc3{background:#d2ecf5;color:#0b6488}
+.cc4{background:#dbe6f8;color:#244f9e}
+.cc5{background:#ece0f4;color:#693a9a}
+.cc6{background:#dcefdf;color:#1f6a3a}
+.cc7{background:#d3eef0;color:#0a6470}
+.match-grid{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.match-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.match-row .ml{font-weight:600;color:var(--ink)}
+select.msel{font:500 14px/1 "Inter",sans-serif;padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;background:var(--surface2);color:var(--ink);min-width:170px}
+select.msel:disabled{cursor:default}
+select.msel.ok{border-color:var(--good);background:var(--good-s)}
+select.msel.no{border-color:var(--bad);background:var(--bad-s)}
+@media(max-width:700px){.match-row{grid-template-columns:1fr}select.msel{width:100%}}
+
+/* ====== CHEMIE-THEMA (violet/teal) — overschrijft de atmosfeer-tinten ====== */
+:root{
+  --sky:#7c3aed;--sky-deep:#5b21b6;--sky-soft:#ede9fe;
+  --sun:#0d9488;--sun-soft:#cdf2ec;
+  --coral:#db2777;--coral-soft:#fbd9eb;
+  --teal:#0d9488;--navy:#3b1d8f;--rose:#db2777;--amber:#0d9488;
+}
+/* atmosfeer-decoraties (wolken/sterren) weg, schone moleculaire achtergrond */
+body::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><g fill='none' stroke='%23cbb9ef' stroke-width='1'><circle cx='40' cy='40' r='6'/><circle cx='120' cy='70' r='6'/><circle cx='80' cy='130' r='6'/><circle cx='160' cy='150' r='6'/><path d='M46 40h68M86 124l28-48M120 76l34 68'/></g></svg>");opacity:.4}
+header{background:linear-gradient(135deg,#2b0f54 0%,#4c1d95 38%,#6d28d9 64%,#0d9488 120%)}
+header::before{opacity:.35}
+header::after{display:none}
+.kw{background:linear-gradient(transparent 58%,#ddd0fb 0);color:var(--sky-deep)}
+.cc0{background:#ece0f8;color:#5b21b6}
+.cc1{background:#dcefe9;color:#0b5e54}
+.cc2{background:#fbd9eb;color:#9d174d}
+.cc3{background:#e6e0fb;color:#4c2da0}
+.cc4{background:#d9f2ee;color:#0d6e63}
+.cc5{background:#efe2f9;color:#6b21a8}
+.cc6{background:#e3def8;color:#4338ca}
+.cc7{background:#d6efea;color:#0a6a5e}
+</style>
+<header>
+  <div class="h-row">
+    <div class="h-left">
+      <div class="eyebrow">Thema 5-6-7 · 5TWE · Chemie</div>
+      <h1>Compleet <em>chemie-studieplatform</em></h1>
+      <p>Organische stoffen · koolwaterstoffen · functionele groepen · biomoleculen · isomerie · materieaspecten (mol &amp; concentratie) · reactiesnelheid — alle theorie, alle vragen, gemixte modus en woordenschat.</p>
+    </div>
+  </div>
+  <div class="h-stats">
+    <div class="ring" id="ringAll"><div class="ring-inner"><span id="ringPct">0%</span></div></div>
+    <div>
+      <div class="h-stat-lbl" id="progLbl">Je voortgang wordt automatisch bewaard.</div>
+      <div class="h-chips" id="chapChips"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <nav class="main-nav" id="mainNav" role="tablist" aria-label="Onderdeel"></nav>
+  <div id="views"></div>
+</main>
+
+<footer>
+  Bron: <em>Focus Chemie 5 — Thema 5 (Organische stoffen, p.122-171), Thema 6 (Materieaspecten, p.196-207) en Thema 7 (Reactiesnelheid, p.220-231; deel 3 snelheidsvergelijking valt buiten de leerstof)</em>. Theorie, vragen en woordenschat rechtstreeks uit je handboek. Voortgang wordt lokaal bewaard op dit toestel. Meenemen naar het examen: schrijfgerief + gewoon rekentoestel (TI-30x), geen grafisch rekentoestel.
+</footer>
+
+<script>
+/* ======================================================
+   DATA — alle hoofdstukken
+====================================================== */
+const FIGS={};
+const CHAPTERS=[
+
+/* =========================================================
+   THEMA 5 — A : INDELING EN VOORSTELLING + HYBRIDISATIE
+========================================================= */
+{key:"org1",short:"5A",label:"Indeling & voorstelling",icon:"atom",
+ theory:[
+  {num:"I",title:"Organische verbindingen en koolwaterstoffen",items:[
+   {id:"I.1",t:"Wat zijn organische verbindingen?",body:`
+     <p><span class="kw">Organische verbindingen</span> (of koolstofverbindingen) bevatten <strong>altijd</strong> het element koolstof. Een koolstofatoom gaat <strong>vier bindingen</strong> aan, wat leidt tot een enorme variatie aan verbindingen.</p>
+     <ul>
+       <li><span class="kw">Koolwaterstoffen</span> zijn verbindingen met <strong>uitsluitend koolstof- en waterstofatomen</strong>.</li>
+       <li>Volgens de lewisnotatie heeft een C-atoom vier ongepaarde valentie-elektronen, een H-atoom één valentie-elektron.</li>
+     </ul>`},
+   {id:"I.2",t:"Mono- en polyfunctionele verbindingen",body:`
+     <ul>
+       <li><span class="kw">Monofunctionele koolstofverbindingen</span> bevatten <strong>één</strong> functionele (karakteristieke) groep. Stoffen met dezelfde functionele groep vormen samen een <strong>stofklasse</strong> en hebben vergelijkbare chemische eigenschappen.</li>
+       <li><span class="kw">Polyfunctionele koolstofverbindingen</span> bevatten <strong>meerdere</strong>, al dan niet dezelfde, functionele groepen (bv. glycerol met drie hydroxylgroepen, melkzuur met een carboxyl- én een hydroxylgroep).</li>
+     </ul>`}
+  ]},
+  {num:"II",title:"Voorstellingsvormen van een koolstofverbinding",items:[
+   {id:"II.1",t:"Bruto-, structuur- en skeletformule",body:`
+     <ul>
+       <li><span class="kw">Brutoformule</span>: geeft enkel de elementen en hun aantal (eerst C, dan H, dan de overige elementen alfabetisch). Je kunt er <strong>niet</strong> uit afleiden hoe de atomen verbonden zijn. Bv. ethanol = C<sub>2</sub>H<sub>6</sub>O.</li>
+       <li><span class="kw">Structuurformule (lewisstructuur)</span>: tweedimensionale weergave met skelet, alle atoombindingen en eventueel vrije elektronenparen.</li>
+       <li><span class="kw">Verkorte structuurformule</span>: koolstofskelet met enkelvoudige/dubbele/drievoudige bindingen; C-H-bindingen genoteerd als CH, CH<sub>2</sub> of CH<sub>3</sub>. Bv. n-pentaan = CH<sub>3</sub>–(CH<sub>2</sub>)<sub>3</sub>–CH<sub>3</sub>.</li>
+       <li><span class="kw">Zaagtand- of skeletnotatie</span>: enkel de bindingen tussen C-atomen worden getekend (C- en H-atomen niet); functionele groepen noteer je wel. Bindingshoeken worden gerespecteerd.</li>
+     </ul>`},
+   {id:"II.2",t:"3D-voorstellingen en modellen",body:`
+     <ul>
+       <li><span class="kw">Driedimensionale skeletstructuur</span>: bindingen naar voren met een vol driehoekje, naar achteren met een streepjeslijn.</li>
+       <li><span class="kw">Bolstaafmodel</span>: de staafjes stellen de atoombindingen visueel voor.</li>
+       <li><span class="kw">Bolschilmodel</span>: de bindingen worden <strong>niet</strong> apart voorgesteld; de bollen raken elkaar.</li>
+     </ul>
+     <p>Een model is een vereenvoudigde voorstelling van de werkelijkheid; formules zijn modellen met informatie over samenstelling en bouw.</p>`}
+  ]},
+  {num:"III",title:"Hybridisatie bij koolstof",items:[
+   {id:"III.1",t:"Promotie en hybridisatie",body:`
+     <p>De elektronenconfiguratie van koolstof is <strong>1s² 2s² 2p²</strong>. Met slechts twee halfbezette p-orbitalen zou C maar twee bindingen kunnen vormen. Door <span class="kw">promotie</span> springt een 2s-elektron naar het lege 2p<sub>z</sub>-orbitaal: vier halfbezette orbitalen (aangeslagen toestand).</p>
+     <p>Experimenteel zijn alle vier bindingen identiek (bv. in methaan). Dat kan enkel als de orbitalen even veel energie hebben. Door <span class="kw">hybridisatie</span> combineren orbitalen tot identieke <strong>hybride orbitalen (mengorbitalen)</strong>. De energie-inhoud ligt tussen die van de oorspronkelijke 2s- en 2p-orbitalen.</p>`},
+   {id:"III.2",t:"sp³-, sp²- en sp-hybridisatie",body:`
+     <table class="vtable">
+       <tr><th>Hybridisatie</th><th>Combinatie</th><th>Ruimtelijke bouw</th><th>Hoek</th><th>Voorbeeld</th></tr>
+       <tr><td>sp³</td><td>1 s + 3 p → 4 sp³</td><td>tetraëder</td><td>109,5°</td><td>ethaan (enkele binding)</td></tr>
+       <tr><td>sp²</td><td>1 s + 2 p → 3 sp² (+1 p<sub>z</sub>)</td><td>vlakke driehoek</td><td>120°</td><td>etheen (dubbele binding)</td></tr>
+       <tr><td>sp</td><td>1 s + 1 p → 2 sp (+2 p)</td><td>lineair</td><td>180°</td><td>ethyn (drievoudige binding)</td></tr>
+     </table>
+     <p>De hybride orbitalen vormen <span class="kw">σ-bindingen</span> (kop-op-kop overlap). De overblijvende p-orbitalen vormen <span class="kw">π-bindingen</span> (zijdelingse overlap).</p>`},
+   {id:"III.3",t:"σ- en π-bindingen in meervoudige bindingen",body:`
+     <ul>
+       <li><strong>Enkelvoudige binding</strong> = 1 σ-binding.</li>
+       <li><strong>Dubbele binding</strong> = 1 σ-binding + 1 π-binding (sp²).</li>
+       <li><strong>Drievoudige binding</strong> = 1 σ-binding + 2 π-bindingen (sp).</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Organische verbinding","Koolstofverbinding; bevat altijd koolstof. Het C-atoom gaat vier bindingen aan."],
+  ["Koolwaterstof","Verbinding met uitsluitend koolstof- en waterstofatomen."],
+  ["Functionele (karakteristieke) groep","Atoomgroep die de chemische eigenschappen van een stofklasse bepaalt."],
+  ["Monofunctionele verbinding","Bevat één functionele groep."],
+  ["Polyfunctionele verbinding","Bevat meerdere (al dan niet dezelfde) functionele groepen."],
+  ["Brutoformule","Geeft enkel de elementen en hun aantal; niet hoe ze verbonden zijn (eerst C, dan H, dan alfabetisch)."],
+  ["Structuurformule (lewisstructuur)","2D-weergave met skelet, alle bindingen en eventuele vrije elektronenparen."],
+  ["Verkorte structuurformule","Koolstofskelet met bindingen; C-H als CH, CH₂ of CH₃."],
+  ["Skeletnotatie (zaagtand)","Enkel bindingen tussen C-atomen; C en H niet getekend, functionele groepen wel."],
+  ["Bolstaafmodel","3D-model waarbij staafjes de bindingen voorstellen."],
+  ["Bolschilmodel","3D-model zonder aparte voorstelling van de bindingen."],
+  ["Promotie","Een 2s-elektron springt naar het lege 2p-orbitaal (aangeslagen toestand)."],
+  ["Hybridisatie","Combineren van atoomorbitalen tot identieke hybride orbitalen."],
+  ["sp³-hybridisatie","1 s + 3 p → 4 sp³, tetraëder, 109,5°, enkelvoudige bindingen."],
+  ["sp²-hybridisatie","1 s + 2 p → 3 sp², vlak, 120°, dubbele binding."],
+  ["sp-hybridisatie","1 s + 1 p → 2 sp, lineair, 180°, drievoudige binding."],
+  ["σ-binding","Binding door kop-op-kop overlap van orbitalen."],
+  ["π-binding","Binding door zijdelingse overlap van p-orbitalen."]
+ ],
+ q:[
+  {type:"fill",q:"Welk element zit altijd in een organische verbinding?",acc:["koolstof","c"],ans:"koolstof (C)"},
+  {type:"mc",q:"Hoeveel bindingen gaat een koolstofatoom aan?",opts:["2","3","4","5"],cor:2,expl:"Koolstof gaat altijd <b>vier</b> bindingen aan."},
+  {type:"tf",q:"Koolwaterstoffen bevatten uitsluitend koolstof- en waterstofatomen.",cor:true,fb:"Correct — dat is net de definitie van een koolwaterstof."},
+  {type:"mc",q:"Wat is de brutoformule van ethanol?",opts:["C₂H₆O","C₂H₅OH","CH₃OH","C₂H₄O"],cor:0,expl:"De brutoformule geeft enkel de aantallen: <b>C₂H₆O</b> (2 C, 6 H, 1 O)."},
+  {type:"mc",q:"Welke voorstelling geeft de minste informatie over de bouw van de molecule?",opts:["Structuurformule","Brutoformule","Skeletnotatie","Bolstaafmodel"],cor:1,expl:"De <b>brutoformule</b> geeft enkel de elementen en aantallen, niet hoe de atomen verbonden zijn."},
+  {type:"tf",q:"In een bolstaafmodel stellen de staafjes de atoombindingen voor.",cor:true,fb:"Correct. In een bolschilmodel is dat niet zo."},
+  {type:"mc",q:"De elektronenconfiguratie van koolstof is …",opts:["1s² 2s² 2p²","1s² 2s² 2p⁴","1s² 2s¹ 2p³","1s² 2p⁴"],cor:0,expl:"Koolstof: <b>1s² 2s² 2p²</b> in de grondtoestand."},
+  {type:"mc",q:"Welke hybridisatie hoort bij een tetraëder met bindingshoeken van 109,5°?",opts:["sp","sp²","sp³","geen"],cor:2,expl:"<b>sp³</b>: vier identieke orbitalen gericht naar de hoekpunten van een tetraëder (109,5°)."},
+  {type:"mc",q:"Welke hybridisatie hoort bij een dubbele binding (etheen)?",opts:["sp³","sp²","sp","sp⁴"],cor:1,expl:"Bij een dubbele binding is C <b>sp²</b>-gehybridiseerd (vlak, 120°), met één overblijvend p-orbitaal voor de π-binding."},
+  {type:"fill",q:"De bindingshoek bij een sp-hybridisatie bedraagt … graden.",acc:["180","180°"],ans:"180°"},
+  {type:"mc",q:"Uit hoeveel bindingen bestaat een drievoudige binding?",opts:["3 σ-bindingen","1 σ + 2 π","2 σ + 1 π","3 π-bindingen"],cor:1,expl:"Een drievoudige binding = <b>1 σ-binding + 2 π-bindingen</b> (sp-hybridisatie)."},
+  {type:"tf",q:"Een dubbele binding bestaat uit twee σ-bindingen.",cor:false,fb:"Fout. Een dubbele binding = 1 σ-binding + 1 π-binding."},
+  {type:"open",q:"Leg uit waarom een koolstofatoom hybridiseert om vier identieke bindingen te kunnen vormen.",model:"In de grondtoestand (1s² 2s² 2p²) heeft koolstof maar twee halfbezette orbitalen. Door promotie van een 2s-elektron naar het lege 2p-orbitaal ontstaan vier halfbezette orbitalen, maar die hebben niet allemaal dezelfde energie (één s- en drie p-orbitalen). Experimenteel zijn alle vier bindingen in bv. methaan identiek. Dat kan enkel als de orbitalen even veel energie hebben. Door hybridisatie combineren het s-orbitaal en de p-orbitalen tot vier identieke hybride (sp³-)orbitalen met dezelfde energie-inhoud."},
+  {type:"match",q:"Combineer de hybridisatie met de juiste bindingshoek.",left:["sp³","sp²","sp"],opts:["109,5°","120°","180°"],key:[0,1,2],expl:"sp³ → 109,5° (tetraëder), sp² → 120° (vlak), sp → 180° (lineair)."},
+  {type:"mc",q:"Welk type binding ontstaat door zijdelingse overlap van twee p-orbitalen?",opts:["σ-binding","π-binding","ionbinding","waterstofbrug"],cor:1,expl:"Een <b>π-binding</b> ontstaat door zijdelingse overlap van p-orbitalen; een σ-binding door kop-op-kop overlap."}
+ ]
+},
+
+/* =========================================================
+   THEMA 5 — B : KOOLWATERSTOFFEN (verzadigd + onverzadigd)
+========================================================= */
+{key:"org2",short:"5B",label:"Koolwaterstoffen",icon:"ring",
+ theory:[
+  {num:"I",title:"Verzadigde koolwaterstoffen",items:[
+   {id:"I.1",t:"Alkanen en cycloalkanen",body:`
+     <ul>
+       <li><span class="kw">Alkanen</span>: verzadigde, acyclische koolwaterstoffen (elk C-atoom heeft vier bindingspartners, geen ring). Algemene formule <strong>C<sub>n</sub>H<sub>2n+2</sub></strong> (n &gt; 0).</li>
+       <li><span class="kw">n-alkanen</span> (normaal): elk C gebonden aan maximaal twee andere C-atomen (onvertakt).</li>
+       <li><span class="kw">Vertakte alkanen</span>: minstens één C gebonden aan meer dan twee C-atomen. De langste keten is de <strong>hoofdketen</strong>; de zijketens zijn <span class="kw">alkylgroepen</span> (één H minder dan het overeenkomstige alkaan, uitgang -yl).</li>
+       <li><span class="kw">Cycloalkanen</span>: verzadigde, cyclische koolwaterstoffen. Algemene formule <strong>C<sub>n</sub>H<sub>2n</sub></strong> (n ≥ 3) — twee H minder door de ringstructuur.</li>
+     </ul>`},
+   {id:"I.2",t:"IUPAC-naamgeving van alkanen",body:`
+     <ol class="steps">
+       <li><span>Zoek de <strong>hoofdketen</strong> (langste onvertakte keten) en geef de naam.</span></li>
+       <li><span>Geef de vertakkingen de naam van de alkylgroep (uitgang -aan → -yl). Vermeld ze <strong>alfabetisch</strong>; meerdere gelijke met di-, tri-, tetra-…</span></li>
+       <li><span>Schrijf voor elke naam het <strong>plaatsnummer</strong>. Nummer de hoofdketen zo dat de eerste zijketen het kleinste nummer krijgt.</span></li>
+     </ol>
+     <p>Eerste tien stamnamen: meth-, eth-, prop-, but-, pent-, hex-, hept-, oct-, non-, dec-. Cijfers en woorden worden gescheiden door een liggend streepje, plaatsnummers door een komma. Voor een onvertakte ring: voorvoegsel <strong>cyclo-</strong>.</p>`}
+  ]},
+  {num:"II",title:"Onverzadigde koolwaterstoffen",items:[
+   {id:"II.1",t:"Alkenen, alkynen en aromaten",body:`
+     <p><span class="kw">Onverzadigde koolwaterstoffen</span> bevatten minstens één meervoudige binding.</p>
+     <ul>
+       <li><span class="kw">Alkenen</span>: acyclisch, één dubbele binding. Formule <strong>C<sub>n</sub>H<sub>2n</sub></strong> (n &gt; 1).</li>
+       <li><span class="kw">Alkynen</span>: acyclisch, één drievoudige binding. Formule <strong>C<sub>n</sub>H<sub>2n-2</sub></strong> (n &gt; 1).</li>
+       <li><span class="kw">Cycloalkenen</span>: cyclisch met een dubbele binding. Formule C<sub>n</sub>H<sub>2n-2</sub> (n ≥ 3).</li>
+       <li><span class="kw">Benzeen</span> (C<sub>6</sub>H<sub>6</sub>): cyclische koolwaterstof met afwisselend enkele en dubbele bindingen (Kekulé, 1865). <span class="kw">Aromatische verbindingen</span> bevatten een benzeenring (bv. tolueen, fenol, aniline).</li>
+     </ul>`},
+   {id:"II.2",t:"IUPAC-naamgeving van onverzadigde koolwaterstoffen",body:`
+     <p><strong>Meervoudige binding in de hoofdketen:</strong></p>
+     <ol class="steps">
+       <li><span>Uitgang <strong>-een</strong> (dubbel) of <strong>-yn</strong> (drievoudig).</span></li>
+       <li><span>Geef de plaats van de meervoudige binding met het <strong>kleinste plaatsnummer</strong>.</span></li>
+       <li><span>Vermeld de alkylgroepen alfabetisch met plaatsnummer.</span></li>
+     </ol>
+     <p><strong>Meervoudige binding in een zijketen:</strong> uitgang van de hoofdketen blijft -aan; de onverzadigde zijketen krijgt naam alkenyl/alkynyl, of <strong>alkylideen</strong> als de dubbele binding rechtstreeks aan de hoofdketen vastzit.</p>`}
+  ]}
+ ],
+ vocab:[
+  ["Alkaan","Verzadigde acyclische koolwaterstof; CₙH₂ₙ₊₂."],
+  ["n-alkaan","Onvertakt alkaan; elk C aan max. twee andere C-atomen."],
+  ["Vertakt alkaan","Minstens één C gebonden aan meer dan twee C-atomen."],
+  ["Alkylgroep","Zijketen met één H minder dan het overeenkomstige alkaan (uitgang -yl)."],
+  ["Cycloalkaan","Verzadigde cyclische koolwaterstof; CₙH₂ₙ (n ≥ 3)."],
+  ["Hoofdketen","De langste koolstofketen, basis voor de naamgeving."],
+  ["Onverzadigde koolwaterstof","Koolwaterstof met minstens één meervoudige binding."],
+  ["Alkeen","Acyclische koolwaterstof met een dubbele binding; CₙH₂ₙ."],
+  ["Alkyn","Acyclische koolwaterstof met een drievoudige binding; CₙH₂ₙ₋₂."],
+  ["Benzeen","Cyclische koolwaterstof C₆H₆ met afwisselend enkele en dubbele bindingen."],
+  ["Aromatische verbinding","Verbinding die een benzeenring bevat (bv. tolueen, fenol)."],
+  ["Kekulé","Stelde in 1865 de ringstructuur van benzeen voor."]
+ ],
+ q:[
+  {type:"mc",q:"Wat is de algemene formule van de alkanen?",opts:["CₙH₂ₙ","CₙH₂ₙ₊₂","CₙH₂ₙ₋₂","CₙHₙ"],cor:1,expl:"Alkanen (verzadigd, acyclisch): <b>CₙH₂ₙ₊₂</b>."},
+  {type:"mc",q:"Wat is de brutoformule van n-butaan?",opts:["C₄H₈","C₄H₁₀","C₄H₆","C₄H₁₂"],cor:1,expl:"n = 4 → C₄H₂·₄₊₂ = <b>C₄H₁₀</b>."},
+  {type:"fill",q:"De algemene formule van de cycloalkanen is CₙH… (vul de index in).",acc:["2n"],ans:"CₙH₂ₙ"},
+  {type:"tf",q:"Een cycloalkaan bevat twee waterstofatomen minder dan het overeenkomstige acyclische alkaan.",cor:true,fb:"Correct — door de ringstructuur (CₙH₂ₙ i.p.v. CₙH₂ₙ₊₂)."},
+  {type:"mc",q:"Wat is de IUPAC-uitgang van een alkaan dat je vervangt voor een alkylgroep?",opts:["-aan → -een","-aan → -yl","-aan → -yn","-aan → -ol"],cor:1,expl:"Een alkylgroep krijgt de uitgang <b>-yl</b> (methaan → methyl)."},
+  {type:"mc",q:"Hoe nummer je de hoofdketen van een vertakt alkaan?",opts:["Willekeurig","Zo dat de eerste zijketen het kleinste plaatsnummer krijgt","Altijd van rechts","Zo dat het grootste nummer vooraan komt"],cor:1,expl:"De hoofdketen wordt zo genummerd dat de <b>eerste zijketen het kleinst mogelijke plaatsnummer</b> krijgt."},
+  {type:"mc",q:"Wat is de algemene formule van de alkenen?",opts:["CₙH₂ₙ₊₂","CₙH₂ₙ","CₙH₂ₙ₋₂","CₙH₂ₙ₋₄"],cor:1,expl:"Alkenen (één dubbele binding): <b>CₙH₂ₙ</b>."},
+  {type:"mc",q:"Welke uitgang krijgt een koolwaterstof met een drievoudige binding in de hoofdketen?",opts:["-een","-aan","-yn","-ol"],cor:2,expl:"Een drievoudige binding → uitgang <b>-yn</b> (bv. ethyn)."},
+  {type:"fill",q:"De brutoformule van benzeen is …",acc:["c6h6"],ans:"C₆H₆"},
+  {type:"tf",q:"Tolueen, fenol en aniline zijn aromatische verbindingen.",cor:true,fb:"Correct — ze bevatten alle drie een benzeenring."},
+  {type:"open",q:"Wat is het verschil tussen een alkeen en een alkyn qua bouw en algemene formule?",model:"Een alkeen is een acyclische koolwaterstof met één dubbele binding tussen twee koolstofatomen en heeft als algemene formule CₙH₂ₙ. Een alkyn is een acyclische koolwaterstof met één drievoudige binding en heeft als algemene formule CₙH₂ₙ₋₂. Een alkyn bevat dus twee waterstofatomen minder dan een alkeen met evenveel koolstofatomen."},
+  {type:"mc",q:"Het aantal H-atomen in cyclohexeen (C₆H?) bedraagt …",opts:["10","12","8","14"],cor:0,expl:"Cycloalkeen: CₙH₂ₙ₋₂ → 2·6−2 = <b>10</b> H-atomen (C₆H₁₀)."},
+  {type:"open",q:"Geef de drie stappen om een vertakt alkaan een IUPAC-naam te geven.",model:"1) Zoek de hoofdketen (langste onvertakte keten) en geef de bijbehorende stamnaam. 2) Benoem de vertakkingen als alkylgroepen (uitgang -yl), alfabetisch geordend, met di-/tri-/tetra- bij meerdere gelijke. 3) Schrijf voor elke alkylgroep het plaatsnummer, waarbij de hoofdketen zo genummerd wordt dat de eerste zijketen het kleinst mogelijke plaatsnummer krijgt."},
+  {type:"mc",q:"Welke naam hoort bij CH₃–CH(CH₃)–CH(CH₃)–CH₃?",opts:["2,3-dimethylbutaan","2-methylbutaan","2,3-dimethylpropaan","2,2-dimethylbutaan"],cor:0,expl:"Hoofdketen van 4 C (butaan) met twee methylgroepen op C2 en C3: <b>2,3-dimethylbutaan</b>."}
+ ]
+},
+
+/* =========================================================
+   THEMA 5 — C : FUNCTIONELE GROEPEN (mono + poly)
+========================================================= */
+{key:"org3",short:"5C",label:"Functionele groepen",icon:"flask",
+ theory:[
+  {num:"I",title:"De stofklassen en hun functionele groep",items:[
+   {id:"I.1",t:"Overzicht van de monofunctionele stofklassen",body:`
+     <table class="vtable">
+       <tr><th>Stofklasse</th><th>Functionele groep</th><th>Algemene formule</th></tr>
+       <tr><td>Halogeenalkaan</td><td>–F, –Cl, –Br, –I</td><td>R–X</td></tr>
+       <tr><td>Alcohol</td><td>hydroxylgroep –OH</td><td>R–OH</td></tr>
+       <tr><td>Ether</td><td>–O– tussen twee C's</td><td>R<sub>1</sub>–O–R<sub>2</sub></td></tr>
+       <tr><td>Aldehyde</td><td>eindstandige carbonylgroep –CHO</td><td>R–CHO</td></tr>
+       <tr><td>Keton</td><td>carbonylgroep tussen twee C's –CO–</td><td>R<sub>1</sub>–CO–R<sub>2</sub></td></tr>
+       <tr><td>Carbonzuur</td><td>carboxylgroep –COOH</td><td>R–COOH</td></tr>
+       <tr><td>Ester</td><td>estergroep –COO–</td><td>R<sub>1</sub>–COO–R<sub>2</sub></td></tr>
+       <tr><td>Amine</td><td>aminegroep –NH<sub>2</sub></td><td>R–NH<sub>2</sub></td></tr>
+       <tr><td>Amide</td><td>amidegroep –CONH<sub>2</sub></td><td>R–CONH<sub>2</sub></td></tr>
+     </table>`}
+  ]},
+  {num:"II",title:"IUPAC-naamgeving van monofunctionele verbindingen",items:[
+   {id:"II.1",t:"Achtervoegsels en regels",body:`
+     <p>Algemeen: <strong>[naam hoofdketen]-(plaatsnummer)-[achtervoegsel]</strong>. Het C-atoom van de carbonyl-, carboxyl- en amidegroep maakt deel uit van de hoofdketen.</p>
+     <table class="vtable">
+       <tr><th>Stofklasse</th><th>Achtervoegsel</th></tr>
+       <tr><td>alcohol</td><td>-ol</td></tr>
+       <tr><td>aldehyde</td><td>-al</td></tr>
+       <tr><td>keton</td><td>-on</td></tr>
+       <tr><td>carbonzuur</td><td>-zuur</td></tr>
+       <tr><td>amine</td><td>-amine</td></tr>
+       <tr><td>amide</td><td>-amide</td></tr>
+     </table>
+     <ul>
+       <li><strong>Halogeenalkaan</strong>: (plaatsnummer)-[naam halogeen]-[naam hoofdketen], bv. 3-chloorpentaan.</li>
+       <li><strong>Ether</strong>: [stam kortste keten]-oxy-[stam langste keten]-aan, bv. methoxyethaan.</li>
+       <li><strong>Ester</strong>: [naam alkylgroep]-[stam andere keten]-anoaat, bv. ethylpropanoaat.</li>
+     </ul>`}
+  ]},
+  {num:"III",title:"Polyfunctionele koolstofverbindingen",items:[
+   {id:"III.1",t:"Meerdere functionele groepen",body:`
+     <p><span class="kw">Polyfunctionele koolstofverbindingen</span> bevatten meerdere functionele groepen. Voorbeelden:</p>
+     <ul>
+       <li><strong>Citroenzuur</strong>: drie carboxylgroepen en één hydroxylgroep.</li>
+       <li><strong>Acetylsalicylzuur</strong> (aspirine): een carboxyl- en een estergroep.</li>
+       <li><strong>Morfine</strong>: hydroxyl-, ether- en aminegroep — een krachtige pijnstiller.</li>
+       <li><strong>Glycerol</strong> (propaan-1,2,3-triol): drie hydroxylgroepen.</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Halogeenalkaan","Verbinding met C, H en een halogeen (–F, –Cl, –Br, –I); R–X."],
+  ["Alcohol","Verbinding met een hydroxylgroep –OH; R–OH; achtervoegsel -ol."],
+  ["Ether","Verbinding met een zuurstofatoom tussen twee C-atomen; R₁–O–R₂."],
+  ["Aldehyde","Verbinding met een eindstandige carbonylgroep –CHO; achtervoegsel -al."],
+  ["Keton","Verbinding met een carbonylgroep tussen twee C-atomen –CO–; achtervoegsel -on."],
+  ["Carbonzuur","Verbinding met een carboxylgroep –COOH; achtervoegsel -zuur."],
+  ["Ester","Verbinding met een estergroep –COO–; R₁–COO–R₂."],
+  ["Amine","Verbinding met een aminegroep –NH₂; achtervoegsel -amine."],
+  ["Amide","Verbinding met een amidegroep –CONH₂; achtervoegsel -amide."],
+  ["Hydroxylgroep","Functionele groep –OH van de alcoholen."],
+  ["Carbonylgroep","C=O groep; eindstandig bij aldehyden, tussenstandig bij ketonen."],
+  ["Carboxylgroep","Functionele groep –COOH van de carbonzuren."],
+  ["Polyfunctionele verbinding","Verbinding met meerdere functionele groepen (bv. citroenzuur, morfine)."]
+ ],
+ q:[
+  {type:"mc",q:"Welke functionele groep heeft een alcohol?",opts:["–COOH","–OH","–CHO","–NH₂"],cor:1,expl:"Een alcohol heeft de <b>hydroxylgroep –OH</b>."},
+  {type:"mc",q:"Welk achtervoegsel hoort bij een keton?",opts:["-al","-ol","-on","-zuur"],cor:2,expl:"Keton → achtervoegsel <b>-on</b> (bv. propanon)."},
+  {type:"mc",q:"Wat onderscheidt een aldehyde van een keton?",opts:["Aldehyde heeft –OH, keton niet","De carbonylgroep is eindstandig bij een aldehyde, tussenstandig bij een keton","Een keton heeft geen zuurstof","Een aldehyde heeft een drievoudige binding"],cor:1,expl:"Bij een <b>aldehyde</b> is de carbonylgroep eindstandig (–CHO); bij een <b>keton</b> staat ze tussen twee C-atomen (–CO–)."},
+  {type:"fill",q:"De functionele groep van een carbonzuur is de … (verkort, met formule).",acc:["-cooh","cooh","carboxylgroep","carboxyl"],ans:"carboxylgroep –COOH"},
+  {type:"mc",q:"Welke stofklasse heeft als functionele groep –NH₂?",opts:["Amide","Amine","Ether","Ester"],cor:1,expl:"–NH₂ is de aminegroep → <b>amine</b>. Een amide heeft –CONH₂."},
+  {type:"mc",q:"Wat is de IUPAC-naam van CH₃–CH(OH)–CH₂–CH₃?",opts:["butaan-1-ol","butaan-2-ol","2-methylpropaan-1-ol","butanal"],cor:1,expl:"Hydroxylgroep op C2 van een keten van 4 C → <b>butaan-2-ol</b>."},
+  {type:"tf",q:"De algemene formule van een ester is R₁–COO–R₂.",cor:true,fb:"Correct — de estergroep is –COO– tussen twee koolstofketens."},
+  {type:"mc",q:"Hoe noem je een ether met de structuur CH₃–O–CH₂–CH₃?",opts:["ethoxymethaan","methoxyethaan","methoxymethaan","ethoxyethaan"],cor:1,expl:"Kortste keten (methyl) → methoxy, langste keten (ethaan): <b>methoxyethaan</b>."},
+  {type:"mc",q:"Welke verbinding is polyfunctioneel?",opts:["Ethanol","Propaanzuur","Citroenzuur","Chloormethaan"],cor:2,expl:"<b>Citroenzuur</b> bevat drie carboxylgroepen en een hydroxylgroep → polyfunctioneel."},
+  {type:"open",q:"Noem de functionele groepen die in morfine voorkomen.",model:"Morfine is een polyfunctionele verbinding met een hydroxylgroep (–OH), een ethergroep (–O–) en een aminegroep (–N–). Daardoor behoort het tot meerdere stofklassen tegelijk."},
+  {type:"fill",q:"De IUPAC-benaming van glycerol is propaan-1,2,3-…",acc:["triol","-triol"],ans:"propaan-1,2,3-triol"},
+  {type:"mc",q:"Welk achtervoegsel hoort bij een alcohol?",opts:["-al","-ol","-on","-amine"],cor:1,expl:"Alcohol → <b>-ol</b>."},
+  {type:"match",q:"Combineer elke stofklasse met de juiste functionele groep.",left:["Alcohol","Aldehyde","Carbonzuur","Amine"],opts:["–OH","–CHO","–COOH","–NH₂"],key:[0,1,2,3],expl:"Alcohol –OH, aldehyde –CHO, carbonzuur –COOH, amine –NH₂."}
+ ]
+},
+
+/* =========================================================
+   THEMA 5 — D : BIOMOLECULEN
+========================================================= */
+{key:"org4",short:"5D",label:"Biomoleculen",icon:"dna",
+ theory:[
+  {num:"I",title:"Suikers (sachariden)",items:[
+   {id:"I.1",t:"Mono-, di- en polysachariden",body:`
+     <p><span class="kw">Sachariden</span> hebben een brandstof- en bouwfunctie. In de open ketenvorm bevatten ze meerdere hydroxylgroepen en één of meer carbonylgroepen.</p>
+     <ul>
+       <li><span class="kw">Monosachariden</span>: de bouwstenen. Ingedeeld op aantal C-atomen (hexosen = 6 C, pentosen = 5 C) en op de carbonylgroep: <strong>aldose</strong> (eindstandige carbonyl, bv. glucose, galactose) of <strong>ketose</strong> (niet-eindstandig, bv. fructose).</li>
+       <li><span class="kw">Disachariden</span>: twee monosachariden, verbonden door een <span class="kw">glycosidebinding</span> (etherbinding) onder afsplitsing van water. Bv. sucrose = α-glucose + β-fructose; lactose = β-galactose + α-glucose.</li>
+       <li><span class="kw">Polysachariden</span>: vele monosachariden. Zetmeel (amylose + amylopectine, uit α-glucose), glycogeen (reservesuiker bij dieren, sterk vertakt), cellulose (lineair, uit β-glucose).</li>
+     </ul>`},
+   {id:"I.2",t:"Cellulose: structuur en functie",body:`
+     <p><strong>Cellulose</strong> is opgebouwd uit β-glucose-eenheden en is lineair. Waterstofbrugkrachten tussen de ketens vormen sterke <strong>microfibrillen</strong> (trekkracht vergelijkbaar met staal). Het is het hoofdbestanddeel van plantencelwanden, papier, karton en textiel; onoplosbaar in water.</p>`}
+  ]},
+  {num:"II",title:"Eiwitten (proteïnen)",items:[
+   {id:"II.1",t:"Aminozuren en peptidebinding",body:`
+     <p><span class="kw">Proteïnen</span> zijn opgebouwd uit <span class="kw">aminozuren</span>. Het lichaam heeft 20 verschillende aminozuren nodig. Elk aminozuur bevat een <strong>carboxylgroep</strong> en een <strong>aminegroep</strong> en verschilt enkel in de <strong>restgroep R</strong>. Aminozuren binden via amine + carbonzuur tot een amidegroep of <span class="kw">peptidebinding</span>.</p>`},
+   {id:"II.2",t:"De vier structuurniveaus",body:`
+     <ul>
+       <li><span class="kw">Primaire structuur</span>: de volgorde van de aminozuren in de keten.</li>
+       <li><span class="kw">Secundaire structuur</span>: plaatselijke ruimtelijke vorm door H-bruggen — <strong>α-helix</strong> (spiraal) of <strong>β-plaat</strong> (vouwblad). Delen zonder structuur = lussen/loops.</li>
+       <li><span class="kw">Tertiaire structuur</span>: complexe 3D-vorm door H-bruggen en bindingen tussen restgroepen (bv. globulaire eiwitten zoals myoglobine; hydrofobe delen naar binnen, hydrofiele naar buiten).</li>
+       <li><span class="kw">Quaternaire structuur</span>: meerdere peptideketens samen (bv. hemoglobine).</li>
+     </ul>`}
+  ]},
+  {num:"III",title:"Vetten en nucleïnezuren",items:[
+   {id:"III.1",t:"Lipiden (vetten)",body:`
+     <p><span class="kw">Lipiden</span> zijn onoplosbaar in water. De belangrijkste zijn <span class="kw">triglyceriden</span>: gevormd door esterbindingen tussen de drie hydroxylgroepen van <strong>glycerol</strong> en de carboxylgroepen van drie <span class="kw">vetzuren</span>.</p>
+     <ul>
+       <li><strong>Verzadigde vetzuren</strong>: enkel enkelvoudige bindingen → hoger smelttraject, vaak vast (bv. palmitinezuur, stearinezuur). Meer schadelijk voor hart en bloedvaten.</li>
+       <li><strong>Onverzadigde vetzuren</strong>: minstens één dubbele binding (bv. oliezuur, linolzuur = ω-6, linoleenzuur = ω-3).</li>
+     </ul>`},
+   {id:"III.2",t:"Nucleïnezuren (DNA en RNA)",body:`
+     <p><span class="kw">Nucleïnezuren</span> dragen de genetische informatie en zijn opgebouwd uit <span class="kw">nucleotiden</span>. Elk nucleotide = een <strong>pentose</strong> + een <strong>organische base</strong> + een <strong>fosfaatgroep</strong>.</p>
+     <ul>
+       <li>Pentose: <strong>desoxyribose</strong> in DNA, <strong>ribose</strong> in RNA.</li>
+       <li>Basen: cytosine (C), thymine (T, enkel DNA), uracil (U, enkel RNA), adenine (A), guanine (G).</li>
+       <li>De fosfaatgroep zorgt voor het zure karakter (negatieve lading).</li>
+       <li><strong>DNA-helix</strong>: twee complementaire strengen, H-bruggen tussen A–T (2 bruggen) en C–G (3 bruggen). RNA is enkelstrengig (A–U, C–G), bv. de klaverbladstructuur van tRNA.</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Sacharide (suiker)","Biomolecule met bouw-/brandstoffunctie; meerdere hydroxylgroepen en carbonylgroep(en)."],
+  ["Monosacharide","Bouwsteen van suikers (bv. glucose, fructose, galactose)."],
+  ["Aldose","Monosacharide met een eindstandige carbonylgroep (bv. glucose)."],
+  ["Ketose","Monosacharide met een niet-eindstandige carbonylgroep (bv. fructose)."],
+  ["Glycosidebinding","Etherbinding tussen twee monosachariden, met afsplitsing van water."],
+  ["Disacharide","Suiker uit twee monosachariden (bv. sucrose, lactose)."],
+  ["Polysacharide","Suiker uit vele monosachariden (zetmeel, glycogeen, cellulose)."],
+  ["Cellulose","Lineair polysacharide uit β-glucose; bouwstof plantencelwanden."],
+  ["Proteïne (eiwit)","Biomolecule opgebouwd uit aminozuren."],
+  ["Aminozuur","Bouwsteen van eiwitten; bevat carboxylgroep, aminegroep en restgroep R."],
+  ["Peptidebinding","Amidebinding tussen twee aminozuren."],
+  ["Primaire structuur","Volgorde van de aminozuren in een peptideketen."],
+  ["α-helix / β-plaat","Secundaire structuren door waterstofbruggen."],
+  ["Triglyceride","Lipide uit glycerol en drie vetzuren (esterbindingen)."],
+  ["Verzadigd vetzuur","Vetzuur met enkel enkelvoudige bindingen; hoger smeltpunt."],
+  ["Onverzadigd vetzuur","Vetzuur met minstens één dubbele binding (bv. ω-3, ω-6)."],
+  ["Nucleïnezuur","DNA of RNA; draagt genetische informatie; opgebouwd uit nucleotiden."],
+  ["Nucleotide","Pentose + organische base + fosfaatgroep."]
+ ],
+ q:[
+  {type:"mc",q:"Wat is het verschil tussen een aldose en een ketose?",opts:["Aantal C-atomen","De positie van de carbonylgroep (eindstandig vs. niet-eindstandig)","De aanwezigheid van stikstof","De lading"],cor:1,expl:"Een <b>aldose</b> heeft een eindstandige carbonylgroep (glucose), een <b>ketose</b> een niet-eindstandige (fructose)."},
+  {type:"mc",q:"Uit welke twee monosachariden is sucrose opgebouwd?",opts:["Twee glucosemoleculen","α-glucose en β-fructose","Glucose en galactose","Twee fructosemoleculen"],cor:1,expl:"Sucrose (sacharose) = <b>α-glucose + β-fructose</b>, verbonden door een glycosidebinding."},
+  {type:"fill",q:"De binding tussen twee monosachariden heet een … binding.",acc:["glycoside","glycosidebinding"],ans:"glycosidebinding"},
+  {type:"mc",q:"Cellulose is opgebouwd uit …",opts:["α-glucose","β-glucose","fructose","galactose"],cor:1,expl:"Cellulose bestaat uit <b>β-glucose</b>-eenheden (zetmeel uit α-glucose)."},
+  {type:"tf",q:"Eiwitten zijn opgebouwd uit aminozuren die via een peptidebinding aan elkaar geschakeld zijn.",cor:true,fb:"Correct — de peptidebinding is een amidegroep tussen twee aminozuren."},
+  {type:"mc",q:"Hoeveel verschillende aminozuren heeft het menselijk lichaam nodig?",opts:["10","16","20","26"],cor:2,expl:"Het lichaam heeft <b>20</b> verschillende aminozuren nodig."},
+  {type:"mc",q:"Welk structuurniveau van een eiwit bestaat uit meerdere peptideketens (bv. hemoglobine)?",opts:["Primair","Secundair","Tertiair","Quaternair"],cor:3,expl:"De <b>quaternaire structuur</b> bestaat uit meerdere peptideketens (bv. hemoglobine)."},
+  {type:"mc",q:"Een triglyceride wordt gevormd door esterbindingen tussen glycerol en …",opts:["drie aminozuren","drie vetzuren","drie monosachariden","drie nucleotiden"],cor:1,expl:"Een triglyceride = glycerol + <b>drie vetzuren</b> via esterbindingen."},
+  {type:"tf",q:"Onverzadigde vetten zijn over het algemeen schadelijker voor hart en bloedvaten dan verzadigde vetten.",cor:false,fb:"Fout. Net andersom: verzadigde vetten zijn schadelijker; onverzadigde vetten zijn minder schadelijk."},
+  {type:"mc",q:"Uit welke drie componenten bestaat een nucleotide?",opts:["Pentose, base en fosfaatgroep","Glucose, base en vetzuur","Aminozuur, base en fosfaat","Pentose, glycerol en base"],cor:0,expl:"Een nucleotide = <b>pentose + organische base + fosfaatgroep</b>."},
+  {type:"mc",q:"Welke base komt enkel in RNA voor (niet in DNA)?",opts:["Thymine","Uracil","Adenine","Guanine"],cor:1,expl:"<b>Uracil</b> komt enkel in RNA voor; thymine enkel in DNA."},
+  {type:"open",q:"Beschrijf hoe een DNA-helix tot stand komt en welke basen paren.",model:"Een DNA-helix ontstaat door waterstofbrugkrachten tussen stikstofhoudende basen van twee nucleotidestrengen. Adenine paart met thymine via twee waterstofbruggen, en cytosine paart met guanine via drie waterstofbruggen. De twee strengen zijn complementair en wentelen rond elkaar tot een dubbele spiraal (helix)."},
+  {type:"fill",q:"In DNA is de pentose desoxyribose; in RNA is dat …",acc:["ribose"],ans:"ribose"},
+  {type:"match",q:"Combineer elk polysacharide met zijn kenmerk.",left:["Zetmeel","Glycogeen","Cellulose"],opts:["mengsel amylose + amylopectine (α-glucose)","reservesuiker bij dieren, sterk vertakt","lineair, uit β-glucose, bouwstof planten"],key:[0,1,2],expl:"Zetmeel = amylose + amylopectine; glycogeen = vertakte dierlijke reservesuiker; cellulose = lineair β-glucose."}
+ ]
+},
+
+/* =========================================================
+   THEMA 5 — E : FYSISCHE EIGENSCHAPPEN + ISOMERIE
+========================================================= */
+{key:"org5",short:"5E",label:"Fysisch & isomerie",icon:"beaker",
+ theory:[
+  {num:"I",title:"Fysische eigenschappen en intermoleculaire krachten",items:[
+   {id:"I.1",t:"Smelt- en kookpunt",body:`
+     <p>De fysische eigenschappen worden bepaald door de <span class="kw">intermoleculaire krachten</span>. Koolwaterstoffen zijn <strong>apolair</strong> → enkel zwakke <span class="kw">londondispersiekrachten</span>. Functionele groepen kunnen polair zijn → <strong>dipoolkrachten</strong> en eventueel <strong>waterstofbrugkrachten</strong>.</p>
+     <ul>
+       <li>Sterkere intermoleculaire krachten → <strong>hoger</strong> kook- en smeltpunt.</li>
+       <li>Binnen eenzelfde stofklasse: kook-/smeltpunt stijgt met de <strong>moleculemassa</strong> (meer londondispersiekrachten).</li>
+       <li>Volgorde van stijgend kookpunt (zelfde C-aantal): alkaan &lt; ether &lt; aldehyde/keton ≈ amine &lt; alcohol &lt; carbonzuur/amide.</li>
+       <li>Alcoholen vormen sterkere H-bruggen dan aminen (O is electronegatiever dan N). Carbonzuren/amiden hebben de hoogste kook-/smeltpunten (meer en sterkere H-bruggen).</li>
+       <li>Bij gelijke brutoformule: <strong>weinig vertakkingen</strong> → hoger smelt-/kookpunt dan veel vertakkingen.</li>
+     </ul>`},
+   {id:"I.2",t:"Oplosbaarheid en geleidbaarheid",body:`
+     <ul>
+       <li>Koolwaterstoffen zijn apolair → <strong>onoplosbaar in water</strong>.</li>
+       <li>Korte verbindingen met O- of N-atomen lossen op in water (H-bruggen met watermoleculen). Stijgende moleculemassa (langere apolaire keten) → <strong>lagere</strong> oplosbaarheid.</li>
+       <li><span class="kw">Geleidbaarheid</span>: zuivere organische stoffen met atoombindingen geleiden geen stroom. Enkel carbonzuren, aminen en amiden zijn <strong>(zwakke) elektrolyten</strong>: ze ioniseren gedeeltelijk in water. Bv. CH<sub>3</sub>COOH + H<sub>2</sub>O → H<sub>3</sub>O<sup>+</sup> + CH<sub>3</sub>COO<sup>-</sup>.</li>
+     </ul>`}
+  ]},
+  {num:"II",title:"Isomerie",items:[
+   {id:"II.1",t:"Structuurisomerie",body:`
+     <p><span class="kw">Isomerie</span>: moleculen met dezelfde brutoformule maar verschillend door de manier waarop de atomen verbonden of ruimtelijk geschikt zijn → verschillende eigenschappen.</p>
+     <p><span class="kw">Structuurisomerie</span>: de atomen zijn in een andere volgorde gebonden.</p>
+     <ul>
+       <li><span class="kw">Ketenisomerie</span>: de vertakking van de keten verschilt (bv. n-butaan ↔ methylpropaan).</li>
+       <li><span class="kw">Plaatsisomerie</span>: de functionele groep of meervoudige binding staat op een andere plaats (bv. propaan-1-ol ↔ propaan-2-ol; but-1-een ↔ but-2-een).</li>
+       <li><span class="kw">Functie-isomerie</span>: de functionele groep verschilt (bv. propanal ↔ propanon).</li>
+     </ul>`},
+   {id:"II.2",t:"Stereo-isomerie",body:`
+     <p><span class="kw">Stereo-isomerie</span>: de bindingspartners zijn gelijk, maar de atomen zijn <strong>ruimtelijk</strong> anders georiënteerd.</p>
+     <ul>
+       <li><span class="kw">Cis-transisomerie (E-Z-notatie)</span>: bij een dubbele binding (de π-binding laat geen vrije rotatie toe). Aan elk C van de dubbele binding twee verschillende groepen. <strong>Z-configuratie</strong> (zusammen): substituenten aan dezelfde kant; <strong>E-configuratie</strong> (entgegen): tegenovergestelde kant.</li>
+       <li><span class="kw">Optische isomerie</span>: bij een <span class="kw">chiraal koolstofatoom</span> (vier verschillende groepen). Geeft twee spiegelbeeldisomeren die gepolariseerd licht in een verschillende richting verdraaien (meetbaar met een polarimeter).</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Intermoleculaire krachten","Krachten tussen moleculen; bepalen de fysische eigenschappen."],
+  ["Londondispersiekrachten","Zwakke krachten tussen (apolaire) moleculen."],
+  ["Dipoolkrachten","Krachten tussen polaire moleculen."],
+  ["Waterstofbrugkrachten","Sterke intermoleculaire krachten bij O–H en N–H."],
+  ["Elektrolyt","Stof die in water ioniseert en de oplossing geleidend maakt (carbonzuren, aminen, amiden = zwakke elektrolyten)."],
+  ["Isomerie","Moleculen met dezelfde brutoformule maar verschillende bouw/ruimtelijke schikking."],
+  ["Structuurisomerie","De atomen zijn in een andere volgorde gebonden."],
+  ["Ketenisomerie","Verschillende vertakking van de koolstofketen."],
+  ["Plaatsisomerie","Functionele groep of meervoudige binding op een andere plaats."],
+  ["Functie-isomerie","Verschillende functionele groep bij dezelfde brutoformule."],
+  ["Stereo-isomerie","Gelijke bindingspartners, maar ruimtelijk anders geschikt."],
+  ["Cis-transisomerie (E-Z)","Stereo-isomerie bij een dubbele binding (geen vrije rotatie)."],
+  ["Chiraal koolstofatoom","C-atoom met vier verschillende groepen; geeft optische isomerie."],
+  ["Optische isomerie","Spiegelbeeldisomeren die gepolariseerd licht anders verdraaien."]
+ ],
+ q:[
+  {type:"mc",q:"Welke intermoleculaire krachten werken tussen apolaire koolwaterstoffen?",opts:["Waterstofbrugkrachten","Dipoolkrachten","Londondispersiekrachten","Ionbindingen"],cor:2,expl:"Apolaire koolwaterstoffen ondervinden enkel zwakke <b>londondispersiekrachten</b>."},
+  {type:"tf",q:"Binnen eenzelfde stofklasse stijgt het kookpunt met de moleculemassa.",cor:true,fb:"Correct — meer londondispersiekrachten bij hogere moleculemassa."},
+  {type:"mc",q:"Waarom heeft propaan-1-ol een hoger kookpunt dan propanon (zelfde moleculemassa)?",opts:["Propanon is apolair","Tussen alcoholmoleculen treden waterstofbruggen op, tussen ketonmoleculen enkel dipoolkrachten","Propaan-1-ol is een gas","Propanon heeft een hogere moleculemassa"],cor:1,expl:"De hydroxylgroep van de alcohol geeft <b>waterstofbruggen</b> (sterker dan de dipoolkrachten tussen ketonmoleculen) → hoger kookpunt."},
+  {type:"tf",q:"Alkanen geleiden als zuivere stof geen elektrische stroom.",cor:true,fb:"Correct — organische stoffen met enkel atoombindingen geleiden niet. Enkel carbonzuren, aminen en amiden zijn (zwakke) elektrolyten."},
+  {type:"mc",q:"Welke organische stofklassen zijn (zwakke) elektrolyten?",opts:["Alkanen en alkenen","Alcoholen en ethers","Carbonzuren, aminen en amiden","Aldehyden en ketonen"],cor:2,expl:"Enkel <b>carbonzuren, aminen en amiden</b> ioniseren gedeeltelijk in water."},
+  {type:"mc",q:"Wat is isomerie?",opts:["Moleculen met een verschillende brutoformule","Moleculen met dezelfde brutoformule maar een verschillende bouw of ruimtelijke schikking","Moleculen met dezelfde naam","Moleculen die altijd identiek reageren"],cor:1,expl:"<b>Isomeren</b> hebben dezelfde brutoformule maar verschillen in bouw of ruimtelijke schikking."},
+  {type:"mc",q:"n-butaan en methylpropaan zijn voorbeelden van …",opts:["plaatsisomerie","ketenisomerie","functie-isomerie","cis-transisomerie"],cor:1,expl:"Ze verschillen in de vertakking van de keten → <b>ketenisomerie</b>."},
+  {type:"mc",q:"Propanal en propanon hebben dezelfde brutoformule maar een verschillende functionele groep. Dit is …",opts:["ketenisomerie","plaatsisomerie","functie-isomerie","optische isomerie"],cor:2,expl:"Verschillende functionele groep bij dezelfde brutoformule → <b>functie-isomerie</b>."},
+  {type:"mc",q:"Wanneer kan cis-transisomerie optreden?",opts:["Bij een chiraal koolstofatoom","Bij een dubbele binding met twee verschillende groepen aan elk C","Bij een drievoudige binding","Bij elke vertakte keten"],cor:1,expl:"<b>Cis-transisomerie</b> treedt op bij een dubbele binding (geen vrije rotatie) met aan elk C twee verschillende groepen."},
+  {type:"fill",q:"Een koolstofatoom met vier verschillende groepen heet een … koolstofatoom.",acc:["chiraal","asymmetrisch","chiraal koolstofatoom"],ans:"chiraal (asymmetrisch) koolstofatoom"},
+  {type:"tf",q:"Bij de Z-configuratie staan de substituenten aan dezelfde kant van de dubbele binding.",cor:true,fb:"Correct — Z (zusammen) = dezelfde kant; E (entgegen) = tegenovergestelde kant."},
+  {type:"open",q:"Leg uit waarom een ester met een ester met dezelfde brutoformule als een keton een voorbeeld kan zijn van functie-isomerie, en geef nog twee soorten structuurisomerie.",model:"Bij functie-isomerie hebben twee moleculen dezelfde brutoformule maar een verschillende functionele groep (bv. propanal, een aldehyde, en propanon, een keton — beide C₃H₆O). De andere twee soorten structuurisomerie zijn ketenisomerie (verschillende vertakking van de koolstofketen, bv. n-butaan en methylpropaan) en plaatsisomerie (de functionele groep of meervoudige binding staat op een andere plaats, bv. propaan-1-ol en propaan-2-ol)."},
+  {type:"mc",q:"Waarmee onderscheid je spiegelbeeldisomeren van elkaar?",opts:["Met een barometer","Met een polarimeter (verdraaiing van gepolariseerd licht)","Met een pluviometer","Met een thermometer"],cor:1,expl:"Spiegelbeeldisomeren verdraaien gepolariseerd licht in verschillende richting → meetbaar met een <b>polarimeter</b>."},
+  {type:"match",q:"Combineer elke vorm van structuurisomerie met het voorbeeld.",left:["Ketenisomerie","Plaatsisomerie","Functie-isomerie"],opts:["n-butaan / methylpropaan","propaan-1-ol / propaan-2-ol","propanal / propanon"],key:[0,1,2],expl:"Keten = vertakking, plaats = positie functionele groep, functie = andere functionele groep."}
+ ]
+},
+
+/* =========================================================
+   THEMA 6 — MATERIEASPECTEN
+========================================================= */
+{key:"mat",short:"T6",label:"Materieaspecten",icon:"layers",
+ theory:[
+  {num:"I",title:"Het begrip mol",items:[
+   {id:"I.1",t:"Hoeveelheid stof en het aantal deeltjes",body:`
+     <p>Een hoeveelheid stof druk je uit in <span class="kw">mol</span>: de verhouding van de massa tot de molaire massa.</p>
+     <p class="mono">n = m / M</p>
+     <ul>
+       <li>n = hoeveelheid stof (mol)</li>
+       <li>m = massa (g)</li>
+       <li>M = molaire massa (g/mol)</li>
+     </ul>
+     <p>De <span class="kw">constante van Avogadro</span> N<sub>A</sub> = 6,02 · 10<sup>23</sup> /mol is het aantal deeltjes in één mol. Het totaal aantal deeltjes:</p>
+     <p class="mono">N = N<sub>A</sub> · n</p>`}
+  ]},
+  {num:"II",title:"De algemene gaswet",items:[
+   {id:"II.1",t:"De ideale gaswet en het molair gasvolume",body:`
+     <p class="mono">p · V = n · R · T</p>
+     <ul>
+       <li>p = druk (Pa), V = volume (m³), n = mol, T = temperatuur (K)</li>
+       <li>R = universele gasconstante = 8,31 J/(mol·K) — of 0,082 l·atm/(mol·K)</li>
+     </ul>
+     <p>Het <span class="kw">molair gasvolume</span> is het volume van één mol gas bij een bepaalde T en p en hangt <strong>niet af van het soort gas</strong>.</p>
+     <ul>
+       <li><strong>STP</strong> (standaardomstandigheden): T = 273,15 K, p = 100 000 Pa → V<sub>m</sub> ≈ 22,7 l.</li>
+       <li><strong>NTP</strong> (normomstandigheden): T = 293,15 K, p = 101 325 Pa → V<sub>m</sub> ≈ 24,0 l.</li>
+     </ul>`}
+  ]},
+  {num:"III",title:"Concentratie",items:[
+   {id:"III.1",t:"Concentratie-uitdrukkingen",body:`
+     <ul>
+       <li><span class="kw">Molaire concentratie</span>: c = n<sub>stof</sub> / V<sub>opl</sub> (mol/l).</li>
+       <li><span class="kw">Massaconcentratie</span>: c<sub>m</sub> = m<sub>stof</sub> / V<sub>opl</sub> (g/l).</li>
+       <li><strong>Percentages</strong>: % (m/m) = m<sub>stof</sub>/m<sub>opl</sub> · 100 %; % (V/V) = V<sub>stof</sub>/V<sub>opl</sub> · 100 %; % (m/V) = m<sub>stof</sub>/V<sub>opl</sub> · 100 %.</li>
+       <li>Zeer lage concentraties: <strong>promille (‰)</strong>, <strong>ppm</strong> (·10<sup>6</sup>) en <strong>ppb</strong> (·10<sup>9</sup>).</li>
+     </ul>`},
+   {id:"III.2",t:"Verdunningsregel en omzettingen",body:`
+     <p>Bij <span class="kw">verdunnen (aanlengen)</span> blijft het aantal mol opgeloste stof gelijk:</p>
+     <p class="mono">c<sub>verd</sub> · V<sub>verd</sub> = c<sub>conc</sub> · V<sub>conc</sub></p>
+     <p>Omzettingen: c = c<sub>m</sub>/M (met molaire massa). Met de massadichtheid ρ<sub>opl</sub> van de oplossing: % (m/m) = (c · M / ρ<sub>opl</sub>) · 100 %.</p>`}
+  ]},
+  {num:"IV",title:"Stoichiometrische berekeningen",items:[
+   {id:"IV.1",t:"Molverhoudingen, limiterend reagens en overmaat",body:`
+     <p>De <strong>coëfficiënten</strong> in een reactievergelijking geven de <span class="kw">molverhoudingen</span>. Komen de reagentia in die verhouding voor, dan spreek je van <strong>stoichiometrische hoeveelheden</strong>.</p>
+     <ul>
+       <li><span class="kw">Limiterend reagens</span>: de stof die het eerst opgebruikt is.</li>
+       <li><span class="kw">Reagens in overmaat</span>: de stof die overblijft.</li>
+       <li>Bepaling: deel het aantal mol (of deeltjes) door de overeenkomstige coëfficiënt. Het <strong>kleinste</strong> getal = limiterend reagens.</li>
+     </ul>`},
+   {id:"IV.2",t:"Stappenplan stoichiometrische berekening",body:`
+     <ol class="steps">
+       <li><span>Druk alle gegevens uit in mol (n = m/M of n = c·V).</span></li>
+       <li><span>Schrijf de reactievergelijking; bepaal eventueel het limiterend reagens.</span></li>
+       <li><span>Bereken de gevraagde stof in mol via de molverhoudingen (vertrek van het limiterend reagens).</span></li>
+       <li><span>Herleid naar de gevraagde eenheid (g via n·M, of l via p·V = n·R·T).</span></li>
+     </ol>
+     <p>Let op: molverhoudingen ≠ massaverhoudingen, maar molverhoudingen blijven geldig op elke schaal.</p>`}
+  ]}
+ ],
+ vocab:[
+  ["Mol","Hoeveelheid stof; n = m/M."],
+  ["Molaire massa (M)","Massa van één mol stof, in g/mol."],
+  ["Constante van Avogadro (N_A)","6,02 · 10²³ /mol; aantal deeltjes in één mol."],
+  ["Algemene gaswet","p·V = n·R·T."],
+  ["Universele gasconstante (R)","8,31 J/(mol·K) of 0,082 l·atm/(mol·K)."],
+  ["Molair gasvolume","Volume van één mol gas bij gegeven T en p; onafhankelijk van het soort gas."],
+  ["STP","Standaardomstandigheden: 273,15 K en 100 000 Pa (V_m ≈ 22,7 l)."],
+  ["NTP","Normomstandigheden: 293,15 K en 101 325 Pa (V_m ≈ 24,0 l)."],
+  ["Molaire concentratie","c = n_stof / V_opl, in mol/l."],
+  ["Massaconcentratie","c_m = m_stof / V_opl, in g/l."],
+  ["Verdunningsregel","c_verd · V_verd = c_conc · V_conc."],
+  ["Molverhouding","Verhouding waarin stoffen reageren, gegeven door de coëfficiënten."],
+  ["Stoichiometrische hoeveelheden","Reagentia aanwezig in de verhouding van de coëfficiënten."],
+  ["Limiterend reagens","Het reagens dat het eerst opgebruikt is."],
+  ["Reagens in overmaat","Het reagens dat overblijft na de reactie."]
+ ],
+ q:[
+  {type:"mc",q:"Welke formule gebruik je voor de hoeveelheid stof?",opts:["n = m · M","n = m / M","n = M / m","n = m + M"],cor:1,expl:"<b>n = m / M</b> (massa gedeeld door molaire massa)."},
+  {type:"fill",q:"De constante van Avogadro is 6,02 · 10^… /mol (vul de exponent in).",acc:["23"],ans:"6,02 · 10²³ /mol"},
+  {type:"mc",q:"Hoeveel mol is 100 g goud (M = 197 g/mol)?",opts:["0,508 mol","1,97 mol","19,7 mol","0,197 mol"],cor:0,expl:"n = m/M = 100/197 = <b>0,508 mol</b>."},
+  {type:"mc",q:"Wat is de algemene gaswet?",opts:["p·V = n·R·T","p = n·R·T","V = n·R/T","p·n = V·R·T"],cor:0,expl:"De algemene (ideale) gaswet: <b>p·V = n·R·T</b>."},
+  {type:"mc",q:"Wat is de waarde van de universele gasconstante R in SI-eenheden?",opts:["0,082 J/(mol·K)","8,31 J/(mol·K)","6,02·10²³ J/(mol·K)","22,4 J/(mol·K)"],cor:1,expl:"<b>R = 8,31 J/(mol·K)</b> (of 0,082 l·atm/(mol·K))."},
+  {type:"tf",q:"Het molair gasvolume hangt af van het soort gas.",cor:false,fb:"Fout. Bij gegeven druk en temperatuur is het molair gasvolume voor elk gas hetzelfde."},
+  {type:"mc",q:"Wat geldt bij standaardomstandigheden (STP)?",opts:["T = 293,15 K en p = 101 325 Pa","T = 273,15 K en p = 100 000 Pa","T = 0 K en p = 1 Pa","T = 298 K en p = 100 000 Pa"],cor:1,expl:"STP: <b>T = 273,15 K, p = 100 000 Pa</b> (V_m ≈ 22,7 l)."},
+  {type:"mc",q:"Welke formule geeft de molaire concentratie?",opts:["c = m/V","c = n_stof / V_opl","c = V/n","c = n·V"],cor:1,expl:"Molaire concentratie: <b>c = n_stof / V_opl</b> (mol/l)."},
+  {type:"mc",q:"Hoeveel ml van een 5,0 mol/l oplossing heb je nodig voor 250 ml van 0,10 mol/l?",opts:["50 ml","25 ml","5,0 ml","0,5 ml"],cor:2,expl:"Verdunningsregel: V_conc = (c_verd·V_verd)/c_conc = (0,10·250)/5,0 = <b>5,0 ml</b>."},
+  {type:"fill",q:"In een chocoladekoek van 20,0 g zit 14,0 g koolhydraten. Het massaprocent is … %.",acc:["70","70,0","70%"],ans:"70,0 %"},
+  {type:"mc",q:"Hoe bepaal je het limiterend reagens?",opts:["De stof met de grootste massa","Deel het aantal mol door de coëfficiënt; het kleinste getal is het limiterend reagens","De stof met de kleinste molaire massa","De stof met de grootste coëfficiënt"],cor:1,expl:"Deel mol (of deeltjes) door de coëfficiënt; het <b>kleinste</b> resultaat geeft het limiterend reagens."},
+  {type:"tf",q:"De molverhoudingen in een reactie zijn gelijk aan de massaverhoudingen.",cor:false,fb:"Fout. Molverhoudingen zijn niet gelijk aan massaverhoudingen (massa hangt af van de molaire massa). Wel blijven molverhoudingen geldig op elke schaal."},
+  {type:"open",q:"Geef het stappenplan voor een stoichiometrische berekening.",model:"1) Druk alle gegevens uit in mol (n = m/M of n = c·V). 2) Schrijf de reactievergelijking en bepaal, indien meerdere reagentia gegeven zijn, het limiterend reagens. 3) Bereken de gevraagde stof in mol via de molverhoudingen (coëfficiënten), vertrekkend van het limiterend reagens. 4) Herleid de hoeveelheid van de gevraagde stof naar de gevraagde eenheid (massa via n·M, of volume via p·V = n·R·T)."},
+  {type:"mc",q:"Bij 2 H₂ + O₂ → 2 H₂O reageren 8 H₂-moleculen en 5 O₂-moleculen. Welk reagens is limiterend?",opts:["O₂","H₂","Geen van beide","Beide"],cor:1,expl:"8/2 = 4 (H₂) en 5/1 = 5 (O₂). Het kleinste getal is voor H₂ → <b>H₂ is limiterend</b>, O₂ in overmaat."}
+ ]
+},
+
+/* =========================================================
+   THEMA 7 — REACTIESNELHEID (deel 3 niet inbegrepen)
+========================================================= */
+{key:"snel",short:"T7",label:"Reactiesnelheid",icon:"gauge",
+ theory:[
+  {num:"I",title:"Systemen en het botsingsmodel",items:[
+   {id:"I.1",t:"Soorten systemen en inwendige energie",body:`
+     <ul>
+       <li><span class="kw">Open systeem</span>: overdracht van massa én energie (erlenmeyer).</li>
+       <li><span class="kw">Gesloten systeem</span>: enkel energie-overdracht (erlenmeyer met stop).</li>
+       <li><span class="kw">Geïsoleerd systeem</span>: geen overdracht van massa of energie (thermosfles).</li>
+     </ul>
+     <p>Elke stof heeft een <span class="kw">inwendige energie (U)</span> in joule: de som van de energie op atomair, intramoleculair (bindingsenergie, trilbewegingen) en intermoleculair niveau.</p>`},
+   {id:"I.2",t:"Elastische en effectieve botsingen",body:`
+     <p>Vóór deeltjes kunnen reageren, moet er een <strong>botsing</strong> plaatsvinden.</p>
+     <ul>
+       <li><span class="kw">Elastische botsing</span>: de deeltjes reageren niet (foute oriëntatie of te weinig kinetische energie).</li>
+       <li><span class="kw">Effectieve botsing</span>: de deeltjes botsen met de <strong>juiste oriëntatie</strong> én <strong>voldoende kinetische energie</strong> → er ontstaat een <span class="kw">geactiveerd complex</span> (tijdelijke overgangstoestand waarbij bindingen verbroken worden en nieuwe ontstaan).</li>
+     </ul>`}
+  ]},
+  {num:"II",title:"Reactie-energie en energiediagram",items:[
+   {id:"II.1",t:"Exo- en endo-energetische reacties",body:`
+     <p>De <span class="kw">reactie-energie</span> ΔU = U<sub>P</sub> − U<sub>R</sub> (producten min reagentia).</p>
+     <ul>
+       <li><span class="kw">Exo-energetisch</span>: energie komt vrij → ΔU &lt; 0 (negatief).</li>
+       <li><span class="kw">Endo-energetisch</span>: energie wordt opgenomen → ΔU &gt; 0 (positief).</li>
+     </ul>`},
+   {id:"II.2",t:"Activeringsenergie",body:`
+     <p>De <span class="kw">activeringsenergie E<sub>a</sub></span> is de minimale energie die nodig is om een geactiveerd complex te vormen: het verschil tussen de inwendige energie van het geactiveerd complex en die van de reagentia. In een energiediagram is dit de 'berg' die overwonnen moet worden.</p>`}
+  ]},
+  {num:"III",title:"Reactiesnelheid",items:[
+   {id:"III.1",t:"Begrip reactiesnelheid",body:`
+     <p>De <span class="kw">reactiesnelheid</span> geeft weer hoe snel reagentia reageren (en producten ontstaan). Ze hangt af van het aantal <strong>effectieve botsingen</strong> per volume en per tijdseenheid. Een <span class="kw">aflopende reactie</span> verloopt tot het limiterend reagens op is; de reactiesnelheid daalt dan tot 0.</p>`},
+   {id:"III.2",t:"Gemiddelde en ogenblikkelijke reactiesnelheid",body:`
+     <p class="mono">⟨v⟩ = (1/Q<sub>i</sub>) · |Δ[ ]<sub>i</sub>| / Δt</p>
+     <ul>
+       <li>Q<sub>i</sub> = coëfficiënt van de gekozen stof; [ ] = molaire concentratie.</li>
+       <li><span class="kw">Gemiddelde reactiesnelheid</span>: concentratieverandering over een tijdsinterval Δt (absolute waarde, gedeeld door de coëfficiënt).</li>
+       <li><span class="kw">Ogenblikkelijke reactiesnelheid</span> v<sub>t</sub>: de limiet als Δt → 0; grafisch de richtingscoëfficiënt van de raaklijn aan de concentratie-tijd-kromme.</li>
+     </ul>`}
+  ]},
+  {num:"IV",title:"Factoren die de reactiesnelheid beïnvloeden",items:[
+   {id:"IV.1",t:"Verdelingsgraad, concentratie, temperatuur en katalysator",body:`
+     <ul>
+       <li><span class="kw">Verdelingsgraad</span> (contactoppervlak): hoger → meer botsingen → hogere reactiesnelheid (bv. ijzerpoeder vs. ijzeren spijker).</li>
+       <li><span class="kw">Concentratie</span>: hoger → meer deeltjes per volume → meer effectieve botsingen → hogere snelheid.</li>
+       <li><span class="kw">Temperatuur</span>: hoger → hogere gemiddelde kinetische energie → meer deeltjes met de nodige activeringsenergie → hogere snelheid (verklaard met de boltzmannverdeling).</li>
+       <li><span class="kw">Katalysator</span>: verlaagt de activeringsenergie (komt onveranderd vrij, beïnvloedt ΔU niet). In organismen: <span class="kw">enzymen (biokatalysatoren)</span> via het sleutel-slotprincipe (enzym-substraatcomplex).</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Open systeem","Overdracht van massa én energie met de omgeving."],
+  ["Gesloten systeem","Enkel energie-overdracht, geen massa."],
+  ["Geïsoleerd systeem","Geen overdracht van massa of energie."],
+  ["Inwendige energie (U)","Som van energie op atomair, intramoleculair en intermoleculair niveau (J)."],
+  ["Elastische botsing","Botsing zonder reactie (foute oriëntatie of te weinig energie)."],
+  ["Effectieve botsing","Botsing met juiste oriëntatie én voldoende kinetische energie → reactie."],
+  ["Geactiveerd complex","Tijdelijke overgangstoestand waarbij bindingen verbroken en gevormd worden."],
+  ["Reactie-energie (ΔU)","ΔU = U_P − U_R."],
+  ["Exo-energetisch","Energie komt vrij; ΔU < 0."],
+  ["Endo-energetisch","Energie wordt opgenomen; ΔU > 0."],
+  ["Activeringsenergie (E_a)","Minimale energie nodig om een geactiveerd complex te vormen."],
+  ["Reactiesnelheid","Maat voor de concentratieverandering per tijdseenheid; aantal effectieve botsingen."],
+  ["Aflopende reactie","Reactie die verloopt tot het limiterend reagens op is (snelheid → 0)."],
+  ["Verdelingsgraad","Maat voor het contactoppervlak van de reagentia."],
+  ["Katalysator","Stof die de activeringsenergie verlaagt en onveranderd vrijkomt."],
+  ["Enzym (biokatalysator)","Katalysator in organismen; werkt via het sleutel-slotprincipe."],
+  ["Boltzmannverdeling","Grafiek van het aantal deeltjes in functie van hun kinetische energie."]
+ ],
+ q:[
+  {type:"mc",q:"Welk systeem laat geen overdracht van massa of energie toe?",opts:["Open systeem","Gesloten systeem","Geïsoleerd systeem","Erlenmeyer"],cor:2,expl:"Een <b>geïsoleerd systeem</b> (bv. thermosfles) laat geen overdracht van massa of energie toe."},
+  {type:"mc",q:"Wat is nodig voor een effectieve botsing?",opts:["Enkel de juiste oriëntatie","Enkel voldoende kinetische energie","De juiste oriëntatie én voldoende kinetische energie","Een lage temperatuur"],cor:2,expl:"Een <b>effectieve botsing</b> vereist de juiste oriëntatie én voldoende kinetische energie om een geactiveerd complex te vormen."},
+  {type:"fill",q:"De tijdelijke overgangstoestand bij een effectieve botsing heet het … complex.",acc:["geactiveerd","geactiveerd complex"],ans:"geactiveerd complex"},
+  {type:"mc",q:"Voor een exo-energetische reactie geldt …",opts:["ΔU > 0","ΔU = 0","ΔU < 0","ΔU = U_R"],cor:2,expl:"Exo-energetisch: er komt energie vrij, dus <b>ΔU < 0</b> (U_P < U_R)."},
+  {type:"tf",q:"Bij een endo-energetische reactie wordt energie opgenomen en is ΔU positief.",cor:true,fb:"Correct — endo-energetisch: ΔU = U_P − U_R > 0."},
+  {type:"mc",q:"Wat is de activeringsenergie?",opts:["De energie die vrijkomt bij de reactie","De minimale energie om een geactiveerd complex te vormen","Het verschil tussen producten en reagentia","De energie van de katalysator"],cor:1,expl:"De <b>activeringsenergie E_a</b> is de minimale energie die nodig is om een geactiveerd complex te vormen."},
+  {type:"mc",q:"Wat gebeurt er met de reactiesnelheid bij een aflopende reactie naarmate ze vordert?",opts:["Ze blijft constant","Ze stijgt","Ze daalt tot 0","Ze verdubbelt"],cor:2,expl:"De concentratie van de reagentia daalt → minder effectieve botsingen → de reactiesnelheid <b>daalt tot 0</b>."},
+  {type:"mc",q:"Welke factor verhoogt de reactiesnelheid NIET door meer deeltjes per volume?",opts:["Hogere concentratie","Hogere verdelingsgraad (groter contactoppervlak)","Hogere temperatuur (enkel meer botsingen)","Een katalysator die de activeringsenergie verlaagt"],cor:3,expl:"Een <b>katalysator</b> verhoogt de snelheid door de <b>activeringsenergie te verlagen</b>, niet door meer deeltjes/botsingen."},
+  {type:"tf",q:"Een katalysator wordt tijdens de reactie verbruikt.",cor:false,fb:"Fout. Een katalysator komt na de reactie onveranderd weer vrij en beïnvloedt de reactie-energie niet."},
+  {type:"mc",q:"Waarom verloopt de verbranding van ijzerpoeder sneller dan die van een ijzeren spijker?",opts:["Hogere temperatuur","Hogere concentratie","Hogere verdelingsgraad (groter contactoppervlak)","Aanwezigheid van een katalysator"],cor:2,expl:"IJzerpoeder heeft een veel groter contactoppervlak (hogere <b>verdelingsgraad</b>) → meer botsingen → hogere snelheid."},
+  {type:"mc",q:"Hoe werkt een enzym als biokatalysator?",opts:["Het verhoogt de temperatuur","Via het sleutel-slotprincipe vormt het een enzym-substraatcomplex en verlaagt het de activeringsenergie","Het verhoogt de concentratie van het substraat","Het verbruikt zichzelf na elke reactie"],cor:1,expl:"Een enzym bindt het substraat via het <b>sleutel-slotprincipe</b> (enzym-substraatcomplex) en verlaagt zo de activeringsenergie; het komt onveranderd vrij."},
+  {type:"open",q:"Leg uit waarom een hogere temperatuur de reactiesnelheid verhoogt (gebruik de boltzmannverdeling).",model:"Een hogere temperatuur zorgt voor een hogere gemiddelde kinetische energie van de deeltjes. In de boltzmannverdeling verschuift de curve, waardoor een grotere fractie van de deeltjes de minimale (activerings)energie bezit. Daardoor neemt de kans op een effectieve botsing toe, en dus ook de reactiesnelheid."},
+  {type:"tf",q:"Een katalysator verandert de reactie-energie ΔU van een reactie.",cor:false,fb:"Fout. Een katalysator verlaagt enkel de activeringsenergie; de reactie-energie ΔU blijft hetzelfde."},
+  {type:"match",q:"Combineer elke factor met de juiste verklaring.",left:["Verdelingsgraad","Concentratie","Temperatuur","Katalysator"],opts:["groter contactoppervlak → meer botsingen","meer deeltjes per volume → meer botsingen","hogere kinetische energie → meer deeltjes boven E_a","verlaagt de activeringsenergie"],key:[0,1,2,3],expl:"Elke factor verhoogt het aantal effectieve botsingen, behalve de katalysator die de activeringsenergie verlaagt."}
+ ]
+}
+
+];
+
+/* afgeleide data */
+const KEYS=CHAPTERS.map(c=>c.key);
+const VOCAB=[];CHAPTERS.forEach((c,ci)=>(c.vocab||[]).forEach(([t,d])=>VOCAB.push([t,d,c.key,ci])));
+const ICONS={
+ layers:'<path d="M12 2 2 7l10 5 10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',
+ thermo:'<path d="M14 14.76V5a2 2 0 0 0-4 0v9.76a4 4 0 1 0 4 0z"/>',
+ wind:'<path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h9a3 3 0 1 1-3 3"/>',
+ cloud:'<path d="M6 17a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A4 4 0 0 1 18 17z"/>',
+ alert:'<path d="M12 2 1 21h22z"/><path d="M12 9v5M12 17h.01"/>',
+ map:'<path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3z"/><path d="M9 3v15M15 6v15"/>',
+ wave:'<path d="M2 8c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 13c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/>',
+ home:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+ mix:'<path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',
+ book:'<path d="M4 5h16v14H4z"/><path d="M4 9h16M9 9v10"/>',
+ atom:'<circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/>',
+ ring:'<path d="M12 3l7 4v8l-7 4-7-4V7z"/><circle cx="12" cy="11" r="3.4"/>',
+ flask:'<path d="M9 3h6M10 3v6L5 19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1l-5-10V3M7.5 14h9"/>',
+ dna:'<path d="M6 3c0 6 12 6 12 12M18 3c0 6-12 6-12 12M7 6h10M7 18h10M9 9h6M9 15h6"/>',
+ beaker:'<path d="M6 3h12M8 3v5l-3 9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1l-3-9V3M6 13h12"/>',
+ gauge:'<path d="M3 18a9 9 0 1 1 18 0"/><path d="M12 13l4-3"/><circle cx="12" cy="13" r="1.3"/>'
+};
+function svg(name){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${ICONS[name]||ICONS.book}</svg>`;}
+
+/* ======================================================
+   STATE
+====================================================== */
+const STORE="chemie_master";
+let S={best:{},vocMastered:[]};
+async function loadS(){try{const r=await window.storage.get(STORE);if(r&&r.value)S=Object.assign(S,JSON.parse(r.value));}catch(e){}S.best=S.best||{};S.vocMastered=S.vocMastered||[];}
+async function saveS(){try{await window.storage.set(STORE,JSON.stringify(S));}catch(e){}}
+const norm=s=>(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[\s\-–().]/g,"").replace(/[^a-z0-9]/g,"");
+
+/* ======================================================
+   BOUW DOM (nav + views)
+====================================================== */
+function ci(key){return KEYS.indexOf(key);}
+const nav=document.getElementById("mainNav");
+const viewsEl=document.getElementById("views");
+function navBtn(id,icon,label,sel){return `<button class="mnav-btn" id="nav-${id}" role="tab" aria-selected="${sel?'true':'false'}">${svg(icon)}${label}</button>`;}
+let navHtml=navBtn("home","home","Overzicht",true);
+CHAPTERS.forEach(c=>navHtml+=navBtn(c.key,c.icon,c.label,false));
+navHtml+=navBtn("mix","mix","Gemixte modus",false);
+navHtml+=navBtn("voc","book","Woordenschat",false);
+nav.innerHTML=navHtml;
+
+let viewsHtml=`<div class="view active" id="view-home"><div class="prog-grid" id="progGrid"></div>
+  <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow);max-width:720px">
+    <h3 style="margin-bottom:12px;font-size:17px">Studietips</h3>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;font-size:14.5px;color:var(--soft)">
+      <li>🧪 Werk per hoofdstuk: lees eerst de <strong>theorie</strong>, maak dan de <strong>oefenvragen</strong>.</li>
+      <li>🔀 Test je totale kennis met de <strong>gemixte modus</strong> — alle vragen door elkaar.</li>
+      <li>📚 Herhaal de <strong>woordenschat</strong> in beide richtingen tot je elk begrip vlot kunt uitleggen.</li>
+      <li>💾 Je voortgang en beste scores worden automatisch bewaard op dit toestel.</li>
+    </ul>
+  </div></div>`;
+CHAPTERS.forEach(c=>{
+  viewsHtml+=`<div class="view" id="view-${c.key}">
+    <div class="stabs" role="tablist">
+      <button class="stab" data-sub="${c.key}-theorie" aria-selected="true">Theorie</button>
+      <button class="stab" data-sub="${c.key}-oefen" aria-selected="false">Oefenen</button>
+    </div>
+    <div class="subview active" id="${c.key}-theorie"></div>
+    <div class="subview" id="${c.key}-oefen">
+      <div class="qwrap">
+        <div class="qbar"><span class="qpos mono" id="${c.key}-p"></span><span class="qsc" id="${c.key}-s"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="${c.key}-t"></div></div></div>
+        <div id="${c.key}-a"></div>
+      </div>
+    </div>
+  </div>`;
+});
+viewsHtml+=`<div class="view" id="view-mix">
+   <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;margin-bottom:18px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+     <div>
+       <div style="font:600 11px/1 'Spline Sans Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);margin-bottom:4px">Gemixte modus</div>
+       <div style="font-size:14px;color:var(--soft)">Alle vragen van alle hoofdstukken door elkaar — ideaal als laatste voorbereiding.</div>
+     </div>
+     <button class="btn btn-p" id="mixStart">Nieuwe ronde starten →</button>
+   </div>
+   <div class="qwrap"><div class="qbar"><span class="qpos mono" id="mix-p"></span><span class="qsc" id="mix-s"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="mix-t"></div></div></div><div id="mix-a"></div></div>
+ </div>`;
+viewsHtml+=`<div class="view" id="view-voc">
+   <div class="stabs" role="tablist">
+     <button class="stab" data-sub="voc-tabel" aria-selected="true">Tabel</button>
+     <button class="stab" data-sub="voc-leren" aria-selected="false">Leren</button>
+   </div>
+   <div class="subview active" id="voc-tabel">
+     <div style="color:var(--soft);font-size:14.5px;max-width:70ch;margin-bottom:16px">Alle begrippen uit Thema 5, 6 en 7. Leer ze actief via het tabblad <em>Leren</em>.</div>
+     <table class="voc-table"><thead><tr><th>Begrip</th><th>Uitleg</th></tr></thead><tbody id="vocBody"></tbody></table>
+   </div>
+   <div class="subview" id="voc-leren">
+     <div class="voc-learn-wrap">
+       <div class="dir-btns">
+         <button class="dir-btn" id="d1" aria-pressed="true">Uitleg → typ het begrip</button>
+         <button class="dir-btn" id="d2" aria-pressed="false">Begrip → leg uit</button>
+         <button class="dir-btn" id="d3" aria-pressed="false">Alles door elkaar</button>
+       </div>
+       <div class="qbar"><span class="qpos mono" id="vp"></span><span class="qsc" id="vs"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="vt"></div></div></div>
+       <div id="va"></div>
+     </div>
+   </div>
+ </div>`;
+viewsEl.innerHTML=viewsHtml;
+
+/* ======================================================
+   THEORIE
+====================================================== */
+function figH(f,cap){if(!f||!FIGS[f])return "";return `<figure><img src="${FIGS[f]}" alt="${cap||f}" loading="lazy"><figcaption>${cap||""}</figcaption></figure>`;}
+function renderTheory(c){
+  return c.theory.map(sec=>`
+    <div class="sec-head"><div class="snum">${c.short} · ${sec.num}</div><h2>${sec.title}</h2></div>
+    ${sec.items.map(it=>`
+      <div class="card">
+        <div class="card-top"><span class="cn">${it.id}</span><h3>${it.t}</h3><span class="badge bk">Kennen</span></div>
+        <div class="card-body">${it.body}${figH(it.fig,it.cap)}</div>
+      </div>`).join("")}
+  `).join("");
+}
+
+/* ======================================================
+   VRAGENENGINE
+====================================================== */
+const sessions={};
+KEYS.forEach(k=>sessions[k]={qs:CHAPTERS[ci(k)].q,pos:0,score:0,_ans:false,ids:{p:k+"-p",s:k+"-s",t:k+"-t",a:k+"-a"}});
+sessions.mix={qs:[],pos:0,score:0,_ans:false,ids:{p:"mix-p",s:"mix-s",t:"mix-t",a:"mix-a"}};
+
+function chapBadge(key){if(!key)return "";const idx=ci(key);return `<span class="chap-badge cc${idx}">${CHAPTERS[idx].label}</span>`;}
+
+function renderQ(key){
+  const ss=sessions[key],ids=ss.ids;
+  if(ss.pos>=ss.qs.length){renderResult(key);return;}
+  const q=ss.qs[ss.pos];ss._ans=false;
+  document.getElementById(ids.p).textContent=`Vraag ${ss.pos+1} / ${ss.qs.length}`;
+  document.getElementById(ids.s).textContent=`Score ${ss.score}`;
+  document.getElementById(ids.t).style.width=(ss.pos/ss.qs.length*100)+"%";
+  const typeLabel={mc:"Meerkeuze",tf:"Waar of niet waar",fill:"Vul het woord in",open:"Open vraag",match:"Combineer / aanduiden"}[q.type]||q.type;
+  let h=`<div class="qcard"><div class="qtype-lbl"><span>${typeLabel}</span>${chapBadge(q.chap)}</div><div class="qtext">${q.q}</div>`;
+  if(q.fig&&FIGS[q.fig])h+=`<div class="qfig"><img src="${FIGS[q.fig]}" alt="figuur bij de vraag"></div>`;
+  if(q.type==="mc"){
+    h+=`<div class="opts">`+q.opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="mk">${String.fromCharCode(97+i)}</span><span>${o}</span></button>`).join("")+`</div>`;
+  }else if(q.type==="tf"){
+    h+=`<div class="opts tf"><button class="opt" data-v="true">Waar</button><button class="opt" data-v="false">Niet waar</button></div>`;
+  }else if(q.type==="fill"){
+    h+=`<div class="fill-wrap"><input type="text" id="fin-${key}" placeholder="Typ je antwoord…" autocomplete="off"></div>`;
+  }else if(q.type==="open"){
+    h+=`<textarea class="openq" id="oin-${key}" placeholder="Schrijf je antwoord, controleer dan met de verbetersleutel…"></textarea>`;
+  }else if(q.type==="match"){
+    h+=`<div class="match-grid">`+q.left.map((l,i)=>`<div class="match-row"><span class="ml">${l}</span><select class="msel" data-i="${i}"><option value="">— kies —</option>${q.opts.map((o,j)=>`<option value="${j}">${o}</option>`).join("")}</select></div>`).join("")+`</div>`;
+  }
+  h+=`<div class="fb" id="fb-${key}"></div><div class="qactions" id="qa-${key}"></div></div>`;
+  document.getElementById(ids.a).innerHTML=h;
+  wireFeedback(key,q,ss);
+}
+
+function wireFeedback(key,q,ss){
+  const fb=document.getElementById("fb-"+key),act=document.getElementById("qa-"+key),aid=ss.ids.a;
+  const next=()=>{ss.pos++;renderQ(key);};
+  const nBtn=()=>{const b=document.createElement("button");b.className="btn btn-p";b.textContent=(ss.pos+1>=ss.qs.length)?"Toon resultaat →":"Volgende →";b.onclick=next;act.appendChild(b);};
+  if(q.type==="mc"){
+    document.querySelectorAll(`#${aid} .opt`).forEach(b=>b.onclick=()=>{
+      if(ss._ans)return;ss._ans=true;const i=+b.dataset.i,ok=i===q.cor;if(ok)ss.score++;
+      document.querySelectorAll(`#${aid} .opt`).forEach((o,j)=>{o.disabled=true;if(j===q.cor)o.classList.add(j===i?"pg":"pr");if(j===i&&!ok)o.classList.add("pb");});
+      fb.className="fb show "+(ok?"ok":"no");fb.innerHTML=`<b>${ok?"Juist!":"Niet juist."}</b> ${q.expl}`;nBtn();
+    });
+  }else if(q.type==="tf"){
+    document.querySelectorAll(`#${aid} .opt`).forEach(b=>b.onclick=()=>{
+      if(ss._ans)return;ss._ans=true;const p=b.dataset.v==="true",ok=p===q.cor;if(ok)ss.score++;
+      document.querySelectorAll(`#${aid} .opt`).forEach(o=>{o.disabled=true;const v=o.dataset.v==="true";if(v===q.cor)o.classList.add(v===p?"pg":"pr");if(v===p&&!ok)o.classList.add("pb");});
+      fb.className="fb show "+(ok?"ok":"no");fb.innerHTML=`<b>${ok?"Juist!":"Niet juist."}</b> ${q.fb}`;nBtn();
+    });
+  }else if(q.type==="fill"){
+    const chk=document.createElement("button");chk.className="btn btn-p";chk.textContent="Controleer";
+    chk.onclick=()=>{if(ss._ans)return;ss._ans=true;
+      const v=document.getElementById("fin-"+key).value,ok=(q.acc||[]).map(norm).includes(norm(v));if(ok)ss.score++;
+      fb.className="fb show "+(ok?"ok":"no");fb.innerHTML=ok?`<b>Juist!</b> Het antwoord is <b>${q.ans}</b>.`:`<b>Niet juist.</b> Correct: <span style="font-weight:600;color:var(--ink)">${q.ans}</span>`;
+      act.innerHTML="";nBtn();};
+    act.appendChild(chk);
+    setTimeout(()=>{const el=document.getElementById("fin-"+key);if(el)el.addEventListener("keydown",e=>{if(e.key==="Enter")chk.click();});},0);
+  }else if(q.type==="open"){
+    const show=document.createElement("button");show.className="btn btn-p";show.textContent="Toon verbetersleutel";
+    show.onclick=()=>{
+      fb.className="fb show key";fb.innerHTML=`<b>Verbetersleutel</b><div class="model">${q.model}</div>`;act.innerHTML="";
+      const w=document.createElement("div");w.className="self-check";w.innerHTML=`<span>Was je antwoord goed?</span>`;
+      const g=document.createElement("button");g.className="mini g";g.textContent="✓ Ja";
+      const b2=document.createElement("button");b2.className="mini b";b2.textContent="✗ Nog oefenen";
+      g.onclick=()=>{if(!ss._ans){ss._ans=true;ss.score++;}next();};
+      b2.onclick=()=>{ss._ans=true;next();};
+      w.appendChild(g);w.appendChild(b2);act.appendChild(w);
+    };
+    act.appendChild(show);
+  }else if(q.type==="match"){
+    const chk=document.createElement("button");chk.className="btn btn-p";chk.textContent="Controleer";
+    chk.onclick=()=>{if(ss._ans)return;ss._ans=true;
+      const sels=[...document.querySelectorAll(`#${aid} select`)];let all=true;
+      sels.forEach((sel,i)=>{const ok=+sel.value===q.key[i];sel.classList.add(ok?"ok":"no");sel.disabled=true;if(!ok)all=false;});
+      if(all)ss.score++;
+      fb.className="fb show "+(all?"ok":"no");fb.innerHTML=`<b>${all?"Alles juist!":"Bekijk de juiste antwoorden."}</b> ${q.expl||""}`;
+      act.innerHTML="";nBtn();};
+    act.appendChild(chk);
+  }
+}
+
+function renderResult(key){
+  const ss=sessions[key];
+  if(S.best[key]==null||ss.score>S.best[key]){S.best[key]=ss.score;saveS();}
+  document.getElementById(ss.ids.p).textContent="Resultaat";
+  document.getElementById(ss.ids.t).style.width="100%";
+  const n=ss.qs.length,pct=ss.score/n;
+  const stars=pct>=0.85?"⭐⭐⭐":pct>=0.65?"⭐⭐":"⭐";
+  const msg=pct>=0.85?"Uitstekend! Je beheerst dit hoofdstuk.":pct>=0.65?"Goed bezig — herhaal de vragen waar het misging.":"Neem de theorie opnieuw door en oefen dan opnieuw.";
+  document.getElementById(ss.ids.s).textContent=`Beste: ${S.best[key]}/${n}`;
+  document.getElementById(ss.ids.a).innerHTML=`<div class="qcard result-card"><div class="stars">${stars}</div><div class="big">${ss.score}/${n}</div><p>${msg}</p><button class="btn btn-p" id="rst-${key}">Opnieuw oefenen</button></div>`;
+  document.getElementById("rst-"+key).onclick=()=>resetSession(key);
+  updateProgress();
+}
+function resetSession(key){const ss=sessions[key];ss.pos=0;ss.score=0;ss._ans=false;if(key==="mix")buildMix();renderQ(key);}
+function buildMix(){
+  const all=[];CHAPTERS.forEach(c=>c.q.forEach(q=>all.push(Object.assign({chap:c.key},q))));
+  for(let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]];}
+  sessions.mix.qs=all;sessions.mix.pos=0;sessions.mix.score=0;sessions.mix._ans=false;
+}
+const MIXTOTAL=CHAPTERS.reduce((a,c)=>a+c.q.length,0);
+
+/* ======================================================
+   WOORDENSCHAT
+====================================================== */
+function renderVocTable(){
+  document.getElementById("vocBody").innerHTML=VOCAB.map(([t,d,key,idx])=>
+    `<tr><td>${t}<span class="vc cc${idx}">${CHAPTERS[idx].short}</span></td><td>${d}</td></tr>`).join("");
+}
+let vl={dir:1,order:[],pos:0,score:0,pool:VOCAB};
+function startVL(filtered){
+  const pool=filtered||VOCAB;vl.pool=pool;vl.order=pool.map((_,i)=>i);
+  for(let i=vl.order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vl.order[i],vl.order[j]]=[vl.order[j],vl.order[i]];}
+  vl.pos=0;vl.score=0;renderVL();
+}
+function renderVL(){
+  const el=document.getElementById("va");
+  document.getElementById("vs").textContent=`Score ${vl.score}/${vl.pool.length}`;
+  if(vl.pos>=vl.order.length){
+    document.getElementById("vp").textContent="Klaar!";document.getElementById("vt").style.width="100%";
+    el.innerHTML=`<div class="vlcard result-card"><div class="big">${vl.score}/${vl.pool.length}</div><p>Alle begrippen doorlopen.</p><button class="btn btn-p" id="vlr">Opnieuw</button></div>`;
+    document.getElementById("vlr").onclick=()=>startVL(vl.pool);return;
+  }
+  const [term,def,key,idx]=vl.pool[vl.order[vl.pos]];
+  const dir=vl.dir===3?(Math.random()<0.5?1:2):vl.dir;
+  document.getElementById("vp").textContent=`Begrip ${vl.pos+1} / ${vl.pool.length}`;
+  document.getElementById("vt").style.width=(vl.pos/vl.pool.length*100)+"%";
+  let h=`<div class="vlcard">`;
+  if(dir===1){
+    h+=`<div class="vl-prompt-lbl">Welk begrip hoort hierbij? <span class="vc cc${idx}">${CHAPTERS[idx].short}</span></div><div class="vl-prompt">${def}</div><div class="fill-wrap"><input type="text" id="vlin" placeholder="Typ het begrip…" autocomplete="off"></div>`;
+  }else{
+    h+=`<div class="vl-prompt-lbl">Leg dit begrip uit <span class="vc cc${idx}">${CHAPTERS[idx].short}</span></div><div class="vl-prompt big">${term}</div><textarea class="openq" id="vlta" placeholder="Geef je uitleg…"></textarea>`;
+  }
+  h+=`<div class="fb" id="vlfb"></div><div class="qactions" id="vlact"></div></div>`;el.innerHTML=h;
+  const fb=document.getElementById("vlfb"),act=document.getElementById("vlact");const adv=()=>{vl.pos++;renderVL();};
+  if(dir===1){
+    const chk=document.createElement("button");chk.className="btn btn-p";chk.textContent="Controleer";
+    chk.onclick=()=>{const v=document.getElementById("vlin").value,core=norm(term.split("(")[0]);
+      const ok=norm(v)===core||norm(v)===norm(term)||(core.length>4&&norm(v).includes(core));
+      if(ok){vl.score++;if(!S.vocMastered.includes(term)){S.vocMastered.push(term);saveS();updateProgress();}}
+      fb.className="fb show "+(ok?"ok":"no");
+      fb.innerHTML=ok?`<b>Juist!</b> Het begrip is <b>${term}</b>.`:`<b>Niet juist.</b> Het begrip is: <span style="font-weight:600;color:var(--ink)">${term}</span> — ${def}`;
+      act.innerHTML="";const n=document.createElement("button");n.className="btn btn-p";n.textContent="Volgende →";n.onclick=adv;act.appendChild(n);};
+    act.appendChild(chk);
+    setTimeout(()=>{const e2=document.getElementById("vlin");if(e2)e2.addEventListener("keydown",e=>{if(e.key==="Enter")chk.click();});},0);
+  }else{
+    const show=document.createElement("button");show.className="btn btn-p";show.textContent="Toon uitleg";
+    show.onclick=()=>{fb.className="fb show key";fb.innerHTML=`<b>Modeluitleg</b><div class="model">${def}</div>`;act.innerHTML="";
+      const w=document.createElement("div");w.className="self-check";w.innerHTML=`<span>Klopte jouw uitleg?</span>`;
+      const g=document.createElement("button");g.className="mini g";g.textContent="✓ Ja";
+      const b2=document.createElement("button");b2.className="mini b";b2.textContent="✗ Nee";
+      g.onclick=()=>{vl.score++;if(!S.vocMastered.includes(term)){S.vocMastered.push(term);saveS();updateProgress();}adv();};b2.onclick=adv;
+      w.appendChild(g);w.appendChild(b2);act.appendChild(w);};
+    act.appendChild(show);
+  }
+}
+
+/* ======================================================
+   VOORTGANG
+====================================================== */
+function updateProgress(){
+  const parts=CHAPTERS.map(c=>S.best[c.key]!=null?S.best[c.key]/c.q.length:0);
+  parts.push(S.best.mix!=null?S.best.mix/MIXTOTAL:0);
+  parts.push(VOCAB.length?Math.min(S.vocMastered.length/VOCAB.length,1):0);
+  const pct=Math.round(parts.reduce((a,b)=>a+b,0)/parts.length*100);
+  document.getElementById("ringAll").style.setProperty("--p",pct);
+  document.getElementById("ringPct").textContent=pct+"%";
+  document.getElementById("progLbl").textContent=pct>=85?"Je beheersing is sterk — succes! 💪":pct>=50?"Goede voortgang — blijf oefenen.":"Begin met oefenen — je voortgang wordt bewaard.";
+  document.getElementById("chapChips").innerHTML=CHAPTERS.map(c=>S.best[c.key]!=null?`<span class="chip">${c.short}: ${S.best[c.key]}/${c.q.length}</span>`:"").join("")+(S.best.mix!=null?`<span class="chip">Mix: ${S.best.mix}/${MIXTOTAL}</span>`:"");
+  let grid=CHAPTERS.map((c,i)=>{
+    const v=S.best[c.key]||0,t=c.q.length,p=t?Math.round(v/t*100):0;
+    return `<div class="prog-card"><h4>${c.short} · ${c.label}</h4><div class="prog-bar-wrap"><div class="prog-bar" style="width:${p}%"></div></div><div class="prog-lbl">${v}/${t} ${S.best[c.key]!=null?"(beste score)":""}</div></div>`;
+  }).join("");
+  const mv=S.best.mix||0,mp=MIXTOTAL?Math.round(mv/MIXTOTAL*100):0;
+  grid+=`<div class="prog-card"><h4>🔀 Gemixte modus</h4><div class="prog-bar-wrap"><div class="prog-bar" style="width:${mp}%"></div></div><div class="prog-lbl">${mv}/${MIXTOTAL} ${S.best.mix!=null?"(beste score)":""}</div></div>`;
+  const vv=S.vocMastered.length,vp=VOCAB.length?Math.round(vv/VOCAB.length*100):0;
+  grid+=`<div class="prog-card"><h4>📚 Woordenschat beheerst</h4><div class="prog-bar-wrap"><div class="prog-bar" style="width:${vp}%"></div></div><div class="prog-lbl">${vv}/${VOCAB.length} beheerst</div></div>`;
+  document.getElementById("progGrid").innerHTML=grid;
+}
+
+/* ======================================================
+   NAVIGATIE
+====================================================== */
+const allViews=["home",...KEYS,"mix","voc"];
+function goTo(id){
+  allViews.forEach(v=>{document.getElementById("nav-"+v).setAttribute("aria-selected",v===id);document.getElementById("view-"+v).classList.toggle("active",v===id);});
+  if(id==="mix"&&sessions.mix.qs.length===0){buildMix();renderQ("mix");}
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+allViews.forEach(v=>document.getElementById("nav-"+v).onclick=()=>goTo(v));
+document.getElementById("mixStart").onclick=()=>resetSession("mix");
+
+KEYS.forEach(key=>{
+  const view=document.getElementById("view-"+key);
+  view.querySelectorAll(".stab").forEach(b=>b.addEventListener("click",()=>{
+    view.querySelectorAll(".stab").forEach(x=>x.setAttribute("aria-selected",x===b));
+    const sub=b.dataset.sub;view.querySelectorAll(".subview").forEach(s=>s.classList.toggle("active",s.id===sub));
+    if(sub===key+"-oefen"&&sessions[key].pos===0)renderQ(key);
+  }));
+});
+document.querySelectorAll("#view-voc .stab").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("#view-voc .stab").forEach(x=>x.setAttribute("aria-selected",x===b));
+  const sub=b.dataset.sub;document.querySelectorAll("#view-voc .subview").forEach(s=>s.classList.toggle("active",s.id===sub));
+  if(sub==="voc-leren"&&vl.order.length===0)startVL();
+}));
+[["d1",1],["d2",2],["d3",3]].forEach(([id,d])=>document.getElementById(id).onclick=()=>{
+  vl.dir=d;["d1","d2","d3"].forEach(x=>document.getElementById(x).setAttribute("aria-pressed",x===id));startVL(vl.pool);
+});
+
+/* ======================================================
+   INIT
+====================================================== */
+(async()=>{
+  await loadS();
+  CHAPTERS.forEach(c=>document.getElementById(c.key+"-theorie").innerHTML=renderTheory(c));
+  renderVocTable();
+  updateProgress();
+})();
+</script>
+</body>
+</html>
