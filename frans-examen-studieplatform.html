@@ -141,13 +141,12 @@
   <!-- ============ BÉNÉVOLAT ============ -->
   <section class="panel" id="bene">
     <div class="card">
-      <h2>Le Bénévolat <span class="badge warn">woordenlijst nog toe te voegen</span></h2>
+      <h2>Le Bénévolat <span class="badge">Trajet 2 · p.88</span></h2>
       <p class="lead">Op het examen: woordenschatoefeningen + een <b>videofragment</b> waar je vragen over moet beantwoorden.</p>
-      <div class="placeholder">
-        <b>Victor — stuur me de woordenschatlijst van het hoofdstuk Bénévolat</b> (foto van je boekpagina of getypte lijst FR→NL).
-        Ik vul daarna meteen de woordenschattrainer + invuloefeningen hier in. De structuur staat al klaar.
-      </div>
-      <div id="bene-voc" style="margin-top:14px"></div>
+      <h3>🃏 Woordenschattrainer (15 woorden)</h3>
+      <div id="bene-voc"></div>
+      <h3>✏️ Gatenzinnen</h3>
+      <div id="bene-fill"></div>
       <h3>🎥 Videofragment — aanpak</h3>
       <ul style="font-size:.9rem;color:var(--muted);padding-left:18px;line-height:1.7">
         <li>Lees <b>eerst de vragen</b> vóór je de video bekijkt — zo weet je waarop te letten.</li>
@@ -235,12 +234,14 @@
   <!-- ============ JALLÉ ============ -->
   <section class="panel" id="jalle">
     <div class="card">
-      <h2>Jallé <span class="badge warn">woordenlijst nog toe te voegen</span></h2>
+      <h2>Jallé <span class="badge">Trajet 3 · p.158</span></h2>
       <p class="lead">Op het examen: (1) reeks woorden → welk past niet, (2) volledige woordenschatoefening uit het boek, (3) korte schrijfopdracht (20 woorden): <i>« Et toi, voudrais-tu faire un séjour à l'étranger ? »</i></p>
-      <div class="placeholder">
-        <b>Victor — stuur me de woordenschat van Jallé</b> (boekpagina/lijst). Ik vul dan de intrus-oefening + woordenschattrainer in.
-      </div>
-      <div id="jalle-voc" style="margin-top:14px"></div>
+      <h3>🃏 Woordenschattrainer (30 woorden)</h3>
+      <div id="jalle-voc"></div>
+      <h3>🔍 Welk woord past niet? (l'intrus)</h3>
+      <div id="jalle-intrus"></div>
+      <h3>✏️ Gatenzinnen</h3>
+      <div id="jalle-fill"></div>
     </div>
 
     <div class="card">
@@ -394,7 +395,7 @@
   </section>
 
   <footer>
-    Gemaakt voor Victor · examen Frans · <span id="ver">v2</span> — voortgang wordt lokaal bewaard
+    Gemaakt voor Victor · examen Frans · <span id="ver">v3</span> — voortgang wordt lokaal bewaard
   </footer>
 </div>
 
@@ -452,6 +453,54 @@ const parisVoc = [
   ["faire une surprise à","iemand verrassen"],["le long de","langs"],["voyons…","eens kijken…"],
   ["bâtir","bouwen"],["séjourner","verblijven"],["une admiration","een bewondering"],
   ["une réunion","een samenkomst/vergadering"],["louer","huren"],["une installation","een installatie"]
+];
+
+// ---- BÉNÉVOLAT (Trajet 2, p.88) ----
+const beneVoc = [
+  ["l'émotion (f)","de emotie"],["l'espoir (m)","de hoop"],["l'état d'esprit (m)","de gemoedstoestand"],
+  ["la générosité","de vrijgevigheid"],["infantile","kinder-, kinderachtig"],["faire appel à","een beroep doen op"],
+  ["relever un défi","een uitdaging aangaan"],["en détresse","in nood"],["le bien-être","het welzijn"],
+  ["la pauvreté","de armoede"],["le réfugié, la réfugiée","de vluchteling(e)"],
+  ["défavorisé(e)","benadeeld, minder begunstigd"],["exclu(e)","uitgesloten"],
+  ["précaire","onzeker, kwetsbaar"],["vulnérable","kwetsbaar"]
+];
+const beneFill = [
+  {s:"Les élèves peuvent ___ à leurs profs pour organiser la soirée dansante.",a:["faire appel"],e:"faire appel à = een beroep doen op."},
+  {s:"Relevez le ___ ! Inscrivez-vous pour devenir animateur de radio.",a:["défi"],e:"relever un défi = een uitdaging aangaan."},
+  {s:"Les habitants des régions en ___ seront vite évacués.",a:["détresse"],e:"en détresse = in nood."},
+  {s:"La lutte contre la ___ est une priorité du gouvernement.",a:["pauvreté"],e:"la pauvreté = de armoede."},
+  {s:"L'ONU a construit des camps pour accueillir les ___ de la guerre.",a:["réfugiés","réfugiées","réfugié"],e:"le réfugié = de vluchteling."},
+  {s:"Les enfants pauvres sont plus ___ à être exclus de la société.",a:["vulnérables","vulnérable"],e:"vulnérable = kwetsbaar."}
+];
+
+// ---- JALLÉ (Trajet 3, p.158) ----
+const jalleVoc = [
+  ["le / la bénévole","de vrijwilliger, de vrijwilligster"],["la compétence","de competentie, de bekwaamheid"],
+  ["le cours de langue","de taalles, -cursus"],["le départ","het vertrek"],["la difficulté","de moeilijkheid"],
+  ["l'étranger (m), l'étrangère (f)","de buitenlander, de vreemdeling"],["la formation","de opleiding"],
+  ["l'habitude (f)","de gewoonte"],["le logement","het logement, het verblijf"],["le renseignement","de inlichting"],
+  ["le séjour","het verblijf"],["le stage","de stage"],["le tour du monde","de wereldreis"],
+  ["abordable","betaalbaar"],["délicieux, délicieuse","verrukkelijk"],["inattendu(e)","onverwacht"],
+  ["inoubliable","onvergetelijk"],["tolérant(e)","verdraagzaam"],["atterrir","landen"],
+  ["avoir du stress","stress hebben"],["avoir peur (de)","schrik hebben (van), bang zijn (voor)"],
+  ["développer","ontwikkelen"],["loger","logeren, overnachten"],
+  ["parler couramment","vlot (een taal) praten"],["participer à","deelnemen aan"],
+  ["se débrouiller","zich uit de slag trekken"],["se perdre","verloren lopen/rijden"],
+  ["s'intéresser à","geïnteresseerd zijn in"],["soutenir","(onder)steunen, bijstaan"],["à l'étranger","in het buitenland"]
+];
+const jalleIntrus = [
+  {l:["délicieux","inoubliable","abordable","tolérant","atterrir"],a:4,e:"« atterrir » — het enige werkwoord; de rest zijn adjectieven."},
+  {l:["le séjour","le logement","le départ","le stage","se débrouiller"],a:4,e:"« se débrouiller » — het enige werkwoord; de rest zijn substantieven rond reizen/verblijf."},
+  {l:["la formation","le cours de langue","la compétence","le stage","délicieux"],a:4,e:"« délicieux » — een adjectief; de rest hoort bij leren/opleiding."},
+  {l:["s'intéresser à","participer à","soutenir","développer","la difficulté"],a:4,e:"« la difficulté » — een substantief; de rest zijn werkwoorden."}
+];
+const jalleFill = [
+  {s:"Après dix heures de vol, l'avion va ___ à Paris.",a:["atterrir"],e:"atterrir = landen."},
+  {s:"Je voudrais faire un ___ à l'étranger pour améliorer mon français.",a:["séjour"],e:"le séjour = het verblijf."},
+  {s:"Mon correspondant parle ___ trois langues.",a:["couramment"],e:"parler couramment = vlot praten."},
+  {s:"Ce voyage était ___, je ne l'oublierai jamais.",a:["inoubliable"],e:"inoubliable = onvergetelijk."},
+  {s:"Pendant mon échange, je vais ___ chez une famille d'accueil.",a:["loger"],e:"loger = logeren, overnachten."},
+  {s:"Dans une ville inconnue, il faut savoir se ___.",a:["débrouiller"],e:"se débrouiller = zich uit de slag trekken."}
 ];
 
 const parisIntrus = [
@@ -563,7 +612,8 @@ const checklist = [
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 let answered=0, totalQ=eteMC.length+eteSubj.length+parisIntrus.length+parisFill.length+parisSubj.length
-  +gramAux.length+gramPP.length+gramAcc.length+gramPron.length+gramSubj1.length+gramCond.length+gramGer.length+gramSubj2.length+gramImp.length;
+  +gramAux.length+gramPP.length+gramAcc.length+gramPron.length+gramSubj1.length+gramCond.length+gramGer.length+gramSubj2.length+gramImp.length
+  +beneFill.length+jalleIntrus.length+jalleFill.length;
 
 function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?]+$/,"");}
 function bumpProgress(){answered++;localStorage.setItem("fr_answered",answered);$("#globalbar").style.width=Math.min(100,Math.round(answered/totalQ*100))+"%";}
@@ -654,6 +704,28 @@ function pfRender(){
 }
 function pfNext(){pfIdx=(pfIdx+1)%parisVoc.length;pfShown=false;pfRender();}
 
+// generieke flashcard-widget
+function buildFlashcards(host,deck){
+  const order=[...deck.keys()];shuffle(order);
+  let idx=0,dir=true,shown=false;
+  host.innerHTML=`
+    <div class="flash"><div class="word"></div><div class="answer"></div></div>
+    <div class="row">
+      <button class="btn b-show">Toon vertaling</button>
+      <button class="btn ghost b-next">Volgende →</button>
+      <button class="btn ghost b-dir">Richting: FR → NL</button>
+      <span class="scorebar b-count"></span>
+    </div>
+    <details><summary>📖 Volledige woordenlijst (tabel)</summary><div class="b-table"></div></details>`;
+  const wd=host.querySelector(".word"),an=host.querySelector(".answer"),ct=host.querySelector(".b-count");
+  function render(){const[fr,nl]=deck[order[idx]];wd.textContent=dir?fr:nl;an.textContent=shown?(dir?nl:fr):"";ct.textContent=`${idx+1} / ${deck.length}`;}
+  host.querySelector(".b-show").onclick=()=>{shown=!shown;render();};
+  host.querySelector(".b-next").onclick=()=>{idx=(idx+1)%deck.length;shown=false;render();};
+  host.querySelector(".b-dir").onclick=e=>{dir=!dir;shown=false;e.target.textContent="Richting: "+(dir?"FR → NL":"NL → FR");render();};
+  buildVocTable(host.querySelector(".b-table"),deck);
+  render();
+}
+
 // vocab table builder
 function buildVocTable(host,rows,h1="Frans",h2="Nederlands"){
   let html=`<table class="voc"><tr><th>${h1}</th><th>${h2}</th></tr>`;
@@ -717,9 +789,13 @@ window.addEventListener("DOMContentLoaded",()=>{
   renderFill($("#gram-subj2"),gramSubj2,"subj2");
   renderFill($("#gram-imp"),gramImp,"impératif");
 
-  // bénévolat / jallé placeholders blijven leeg tot vocab toegevoegd
-  $("#bene-voc").innerHTML='<p class="note">— woordenschat verschijnt hier zodra toegevoegd —</p>';
-  $("#jalle-voc").innerHTML='<p class="note">— woordenschat verschijnt hier zodra toegevoegd —</p>';
+  // bénévolat
+  buildFlashcards($("#bene-voc"),beneVoc);
+  renderFill($("#bene-fill"),beneFill,"invul");
+  // jallé
+  buildFlashcards($("#jalle-voc"),jalleVoc);
+  renderIntrus($("#jalle-intrus"),jalleIntrus);
+  renderFill($("#jalle-fill"),jalleFill,"invul");
 
   // checklist
   const ch=$("#checklist");
