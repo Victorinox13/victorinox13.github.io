@@ -143,7 +143,7 @@
     <div class="card">
       <h2>Le Bénévolat <span class="badge">Trajet 2 · p.88</span></h2>
       <p class="lead">Op het examen: woordenschatoefeningen + een <b>videofragment</b> waar je vragen over moet beantwoorden.</p>
-      <h3>🃏 Woordenschattrainer (15 woorden)</h3>
+      <h3>🃏 Woordenschattrainer (46 woorden — p.88-90)</h3>
       <div id="bene-voc"></div>
       <h3>✏️ Gatenzinnen</h3>
       <div id="bene-fill"></div>
@@ -236,7 +236,7 @@
     <div class="card">
       <h2>Jallé <span class="badge">Trajet 3 · p.158</span></h2>
       <p class="lead">Op het examen: (1) reeks woorden → welk past niet, (2) volledige woordenschatoefening uit het boek, (3) korte schrijfopdracht (20 woorden): <i>« Et toi, voudrais-tu faire un séjour à l'étranger ? »</i></p>
-      <h3>🃏 Woordenschattrainer (30 woorden)</h3>
+      <h3>🃏 Woordenschattrainer (72 woorden — p.158-161)</h3>
       <div id="jalle-voc"></div>
       <h3>🔍 Welk woord past niet? (l'intrus)</h3>
       <div id="jalle-intrus"></div>
@@ -395,7 +395,7 @@
   </section>
 
   <footer>
-    Gemaakt voor Victor · examen Frans · <span id="ver">v3</span> — voortgang wordt lokaal bewaard
+    Gemaakt voor Victor · examen Frans · <span id="ver">v4</span> — voortgang wordt lokaal bewaard
   </footer>
 </div>
 
@@ -462,7 +462,21 @@ const beneVoc = [
   ["relever un défi","een uitdaging aangaan"],["en détresse","in nood"],["le bien-être","het welzijn"],
   ["la pauvreté","de armoede"],["le réfugié, la réfugiée","de vluchteling(e)"],
   ["défavorisé(e)","benadeeld, minder begunstigd"],["exclu(e)","uitgesloten"],
-  ["précaire","onzeker, kwetsbaar"],["vulnérable","kwetsbaar"]
+  ["précaire","onzeker, kwetsbaar"],["vulnérable","kwetsbaar"],
+  // p.89 — Venir en aide
+  ["l'action caritative","de liefdadigheidsactie"],["la collecte d'argent","de geldinzameling"],
+  ["la contribution","de bijdrage"],["le don","de gift"],["l'engagement (m)","het engagement, de inzet"],
+  ["la lutte","de strijd"],["la mobilisation","de mobilisatie, de inzet"],["le soutien","de steun, de ondersteuning"],
+  ["agir","handelen"],["collecter des fonds","geld inzamelen"],["combattre","bestrijden, vechten tegen"],
+  ["contribuer à","bijdragen tot"],["faire un don","een gift doen"],["intervenir","tussenkomen, handelen"],
+  ["lutter contre / pour","vechten tegen / voor"],["parrainer","sponsoren"],["se mobiliser","zich mobiliseren"],
+  ["s'engager","zich engageren, zich inzetten"],["soutenir","(onder)steunen"],["sponsoriser","sponsoren"],
+  // p.90 — Associations et organisations
+  ["la banque alimentaire","de voedselbank"],["le bénévolat","het vrijwilligerswerk (spontaan)"],
+  ["le / la bénévole","de vrijwilliger(ster) (spontaan)"],["la bonne cause","het goede doel"],
+  ["la charité","de goede werken, het liefdadigheidswerk"],["l'ONG","de ngo (niet-gouvernementele organisatie)"],
+  ["le / la volontaire","de vrijwilliger(ster) (gevraagd)"],["caritatif, caritative","liefdadigheids-"],
+  ["humanitaire","humanitair"],["faire du bénévolat","vrijwilligerswerk doen"],["mettre sur pied","op poten zetten"]
 ];
 const beneFill = [
   {s:"Les élèves peuvent ___ à leurs profs pour organiser la soirée dansante.",a:["faire appel"],e:"faire appel à = een beroep doen op."},
@@ -486,7 +500,26 @@ const jalleVoc = [
   ["développer","ontwikkelen"],["loger","logeren, overnachten"],
   ["parler couramment","vlot (een taal) praten"],["participer à","deelnemen aan"],
   ["se débrouiller","zich uit de slag trekken"],["se perdre","verloren lopen/rijden"],
-  ["s'intéresser à","geïnteresseerd zijn in"],["soutenir","(onder)steunen, bijstaan"],["à l'étranger","in het buitenland"]
+  ["s'intéresser à","geïnteresseerd zijn in"],["soutenir","(onder)steunen, bijstaan"],["à l'étranger","in het buitenland"],
+  // p.159 — On découvre : un séjour à l'étranger
+  ["la coutume","de gewoonte, het gebruik"],["l'échange (m)","de uitwisseling"],["l'esprit d'équipe (m)","de teamgeest"],
+  ["la famille d'accueil","het gastgezin"],["l'itinéraire (m)","de reisweg"],["la notion","de notie"],
+  ["le participant, la participante","de deelnemer, de deelneemster"],["les préparatifs (m)","de voorbereidingen"],
+  ["le programme d'échange","het uitwisselingsprogramma"],["le trajet","het traject"],["le visa","het visum"],
+  ["financier, financière","financieel"],["typique de","typisch voor"],["séjourner","verblijven"],
+  ["se renseigner","inlichtingen inwinnen"],["dans les environs","in de omgeving, in de buurt"],
+  // p.160 — Les avantages
+  ["l'expérience (f)","de ervaring"],["la maîtrise","de beheersing, de bekwaamheid"],
+  ["l'opportunité (f)","de gelegenheid, de kans"],["le progrès","de vooruitgang"],
+  ["autonome","onafhankelijk, zelfstandig"],["confiant(e)","zelfzeker"],["enrichissant(e)","verrijkend"],
+  ["mature","volwassen, rijp"],["améliorer","verbeteren"],["conseiller","aanraden, adviseren"],
+  ["devenir (plus autonome…)","(autonomer…) worden"],["être attiré(e) par","aangetrokken worden door"],
+  ["faire connaissance avec","kennismaken met"],["maîtriser","beheersen"],["progresser","vorderen, vooruitgaan"],
+  ["recommander","aanraden, aanbevelen"],["s'épanouir","zich ontplooien"],
+  // p.161 — Les désavantages et les défis
+  ["l'aventurier, l'aventurière","de avonturier(ster)"],["le défi","de uitdaging"],["le désavantage","het nadeel"],
+  ["l'objectif (m)","het doel"],["le préjugé","het vooroordeel"],["inquiétant(e)","zorgwekkend, verontrustend"],
+  ["faire face à","het hoofd bieden aan"],["s'habituer (à)","wennen aan"],["s'intégrer (à)","zich integreren (in)"]
 ];
 const jalleIntrus = [
   {l:["délicieux","inoubliable","abordable","tolérant","atterrir"],a:4,e:"« atterrir » — het enige werkwoord; de rest zijn adjectieven."},
