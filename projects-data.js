@@ -35,6 +35,18 @@
  */
 const PROJECTS = [
   {
+    title: "Frans Studieplatform",
+    emoji: "🇫🇷",
+    category: "Studietools",
+    tag: "Studieplatform",
+    description: "Interactief oefenplatform voor het examen Frans (5 TWE): de vier examenonderdelen — Été 89 (leesfragmenten + inhoudsvragen in examenstijl & EE-standpunt met subjonctif), Le Bénévolat (woordenschat + aanpak videofragment), Paris (volledige woordenschattrainer met flashcards, l'intrus, gatenzinnen, subjonctif & begeleide schrijfopdracht van 100-120 woorden met prent-elementen) en Jallé (intrus + korte schrijfopdracht). Plus gedeelde tools: subjonctif-spiekkaart, structuurwoorden en een schrijfchecklist. Voortgang wordt lokaal bewaard.",
+    link: "frans-examen-studieplatform.html",
+    linkLabel: "Open het studieplatform →",
+    highlight: true,
+    date: "2026-06",
+    preview: { kind: "quiz", bg: "#16161c", fg: "#e8e8f0", accent: "#7c6fef", accent2: "#6fefd4" }
+  },
+  {
     title: "Chemie Studieplatform",
     emoji: "🧪",
     category: "Studietools",

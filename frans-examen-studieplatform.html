@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frans Examen – Oefenplatform (Été 89 · Bénévolat · Paris · Jallé)</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e0e12; --surface:#16161c; --surface2:#1e1e28; --border:#2a2a38;
+    --accent:#7c6fef; --accent2:#ef6f9a; --accent3:#6fefd4;
+    --text:#e8e8f0; --muted:#8a8a9a;
+    --correct:#4ade80; --wrong:#f87171; --warning:#fbbf24;
+    --blue:#3b82f6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5}
+  a{color:var(--accent3)}
+  .wrap{max-width:920px;margin:0 auto;padding:24px 16px 80px}
+  header.top{text-align:center;padding:28px 0 18px}
+  header.top h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.02em}
+  header.top h1 .fr{color:var(--accent)}
+  header.top p{color:var(--muted);margin-top:6px;font-family:'DM Mono',monospace;font-size:.85rem}
+  .progress-global{margin:14px auto 0;max-width:420px;background:var(--surface);border:1px solid var(--border);border-radius:999px;height:10px;overflow:hidden}
+  .progress-global span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));width:0;transition:width .4s}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:22px 0 10px}
+  .tab{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:12px;cursor:pointer;font-family:'Syne';font-weight:600;font-size:.92rem;transition:.2s}
+  .tab:hover{border-color:var(--accent)}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .tab small{display:block;font-weight:400;font-size:.66rem;opacity:.7;font-family:'DM Mono'}
+  .panel{display:none;animation:fade .3s}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;margin:16px 0}
+  .card h2{font-size:1.25rem;margin-bottom:4px}
+  .card h3{font-size:1.02rem;margin:18px 0 8px;color:var(--accent3)}
+  .lead{color:var(--muted);font-size:.9rem;margin-bottom:6px}
+  .badge{display:inline-block;font-family:'DM Mono';font-size:.68rem;background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:3px 8px;border-radius:6px;margin-right:6px}
+  .badge.warn{color:var(--warning);border-color:#5a4a12}
+  .recap{background:var(--surface2);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;font-size:.92rem;margin:12px 0}
+  .recap b{color:var(--accent3)}
+  details{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:10px 0}
+  details summary{cursor:pointer;font-weight:600}
+  details[open] summary{margin-bottom:8px;color:var(--accent3)}
+  /* quiz */
+  .q{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;margin:12px 0}
+  .q .qnum{font-family:'DM Mono';font-size:.72rem;color:var(--muted)}
+  .q .qtext{font-weight:600;margin:4px 0 10px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:9px 12px;cursor:pointer;transition:.15s;font-size:.92rem}
+  .opt:hover{border-color:var(--accent)}
+  .opt.correct{border-color:var(--correct);background:rgba(74,222,128,.12)}
+  .opt.wrong{border-color:var(--wrong);background:rgba(248,113,113,.12)}
+  .opt.disabled{pointer-events:none;opacity:.85}
+  .explain{margin-top:10px;font-size:.85rem;color:var(--muted);border-top:1px dashed var(--border);padding-top:8px;display:none}
+  .explain.show{display:block}
+  .explain b{color:var(--accent3)}
+  input.txt{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:9px;color:var(--text);padding:9px 12px;font-family:'DM Mono';font-size:.9rem}
+  input.txt:focus{outline:none;border-color:var(--accent)}
+  textarea.txt{width:100%;min-height:140px;background:var(--surface);border:1px solid var(--border);border-radius:9px;color:var(--text);padding:11px;font-family:'DM Mono';font-size:.88rem;resize:vertical}
+  .btn{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-family:'Syne';font-weight:600;cursor:pointer;font-size:.85rem;transition:.2s}
+  .btn:hover{filter:brightness(1.1)}
+  .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .feedback{font-family:'DM Mono';font-size:.82rem;margin-top:8px}
+  .feedback.ok{color:var(--correct)} .feedback.no{color:var(--wrong)}
+  table.voc{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+  table.voc th,table.voc td{border:1px solid var(--border);padding:7px 10px;text-align:left;vertical-align:top}
+  table.voc th{background:var(--surface2);color:var(--accent3);font-weight:600}
+  .flash{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:26px 18px;text-align:center;min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+  .flash .word{font-size:1.5rem;font-weight:700}
+  .flash .answer{font-size:1.15rem;color:var(--accent3);min-height:1.4em}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .chip{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:5px 11px;font-size:.8rem;font-family:'DM Mono'}
+  .chip.fr{border-color:var(--accent2);color:var(--accent2)}
+  .checkitem{display:flex;gap:9px;align-items:flex-start;padding:6px 0;font-size:.9rem}
+  .checkitem input{margin-top:4px}
+  .note{font-size:.82rem;color:var(--muted);font-family:'DM Mono'}
+  .scorebar{font-family:'DM Mono';font-size:.8rem;color:var(--muted);margin-top:10px}
+  footer{text-align:center;color:var(--muted);font-size:.75rem;font-family:'DM Mono';margin-top:40px}
+  .placeholder{border:1px dashed var(--accent2);border-radius:12px;padding:18px;background:rgba(239,111,154,.06);font-size:.9rem}
+  .word-elements{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .we{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:7px 11px;font-size:.84rem;cursor:pointer;user-select:none;transition:.15s}
+  .we.used{border-color:var(--correct);background:rgba(74,222,128,.12);text-decoration:line-through;opacity:.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Examen <span class="fr">Français</span> — Oefenplatform</h1>
+    <p>été 89 · le bénévolat · paris · jallé — 5 TWE</p>
+    <div class="progress-global"><span id="globalbar"></span></div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="ete"> Été 89 <small>lezen · subjonctif</small></button>
+    <button class="tab" data-tab="bene"> Bénévolat <small>woordenschat · video</small></button>
+    <button class="tab" data-tab="paris"> Paris <small>vocab · schrijven</small></button>
+    <button class="tab" data-tab="jalle"> Jallé <small>intrus · schrijven</small></button>
+    <button class="tab" data-tab="tools"> Tools <small>subjonctif · checklist</small></button>
+  </div>
+
+  <!-- ============ ÉTÉ 89 ============ -->
+  <section class="panel active" id="ete">
+    <div class="card">
+      <h2>Été 89 — <span class="lead" style="display:inline">Caroline Wlomainck</span></h2>
+      <p class="lead">Op het examen: ±16 inhoudsvragen uit het boekje (eerst meerkeuze). Je mag je boekje meenemen. Hieronder eerst een korte recap, daarna oefenvragen in examenstijl.</p>
+
+      <div class="recap">
+        <b>Waar gaat het over?</b> Twee jongens van ±11 jaar, <b>Charlie</b> en <b>François</b>, ontmoeten elkaar elk jaar op dezelfde camping in de <b>Lubéron</b> (juli). Ze geven elkaar bijnamen: Charlie noemt François <b>Tyson</b> (zoals bokser Mike Tyson, want hij had een toegetakeld gezicht), François noemt Charlie <b>Merrick</b> (zoals <i>Elephant Man</i>, na de wespensteken).<br><br>
+        • <b>Charlie / Merrick</b>: warme, normale familie. Zijn papa is doodziek — <b>kanker door asbest</b> (<i>amiante → mésothéliome</i>) opgelopen in de fabriek. Charlie droomt ervan <b>biologist</b> te worden (hamster Gizmo, mieren → myrmécologue).<br>
+        • <b>François / Tyson</b>: zit thuis in een gewelddadig gezin — zijn vader <b>slaat hem en zijn moeder</b> (riem, vuisten), drinkt. 's Nachts draait François zijn hoofd heen en weer op het kussen om de ruzies niet te horen (somnambulisme).<br><br>
+        • De jongens verkennen de streek met geleende <b>BMX-fietsen</b>, spelen <i>Chips</i> (Ponch & Jon) en ontdekken een <b>verlaten fabriek</b>. Tyson wordt prikkelbaarder en wil er per se binnen → spanning groeit naar het drama van 1989.
+      </div>
+
+      <h3>📋 Inhoudsvragen — meerkeuze</h3>
+      <div id="ete-mc"></div>
+      <h3>✍️ Open inhoudsvragen</h3>
+      <div id="ete-open"></div>
+    </div>
+
+    <div class="card">
+      <h2>EE — Standpunt (mondeling/schriftelijk)</h2>
+      <p class="lead">Op het examen vragen ze je <b>mening</b>: hoe heb je dit concept (het boek/het thema) ervaren — positief of negatief? Je mening drukt vaak een <b>subjonctif</b> uit. Oefen hieronder zinnen op jouw mening.</p>
+      <div class="chips">
+        <span class="chip fr">Je trouve que… (indicatif)</span>
+        <span class="chip fr">Je ne pense pas que… + subj</span>
+        <span class="chip fr">Il est important que… + subj</span>
+        <span class="chip fr">Bien que… + subj</span>
+        <span class="chip fr">Je suis content(e) que… + subj</span>
+      </div>
+      <div id="ete-subj"></div>
+      <details>
+        <summary>💡 Voorbeeld-standpunt (model)</summary>
+        <p style="font-size:.9rem"><i>« J'ai trouvé ce livre touchant. Bien que l'histoire soit dure, il est important qu'on parle de la violence et de la maladie. Je ne pense pas qu'on puisse rester indifférent. C'était une expérience positive pour moi, même si certains passages sont difficiles. »</i></p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ BÉNÉVOLAT ============ -->
+  <section class="panel" id="bene">
+    <div class="card">
+      <h2>Le Bénévolat <span class="badge warn">woordenlijst nog toe te voegen</span></h2>
+      <p class="lead">Op het examen: woordenschatoefeningen + een <b>videofragment</b> waar je vragen over moet beantwoorden.</p>
+      <div class="placeholder">
+        <b>Victor — stuur me de woordenschatlijst van het hoofdstuk Bénévolat</b> (foto van je boekpagina of getypte lijst FR→NL).
+        Ik vul daarna meteen de woordenschattrainer + invuloefeningen hier in. De structuur staat al klaar.
+      </div>
+      <div id="bene-voc" style="margin-top:14px"></div>
+      <h3>🎥 Videofragment — aanpak</h3>
+      <ul style="font-size:.9rem;color:var(--muted);padding-left:18px;line-height:1.7">
+        <li>Lees <b>eerst de vragen</b> vóór je de video bekijkt — zo weet je waarop te letten.</li>
+        <li>Noteer kernwoorden: <i>qui ? quoi ? où ? pourquoi ? combien ?</i></li>
+        <li>Let op cijfers, namen en redenen waarom mensen vrijwilligerswerk doen (<i>aider, donner de son temps, gratuitement, une association, une cause</i>).</li>
+        <li>Antwoord in korte, correcte Franse zinnen.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PARIS ============ -->
+  <section class="panel" id="paris">
+    <div class="card">
+      <h2>Paris — Woordenschattrainer</h2>
+      <p class="lead">Volledige examenwoordenschat uit het boekje. Klik op de kaart om de vertaling te zien, of test jezelf.</p>
+      <div class="flash" id="paris-flash">
+        <div class="word" id="pf-word">—</div>
+        <div class="answer" id="pf-answer"></div>
+      </div>
+      <div class="row">
+        <button class="btn" id="pf-show">Toon vertaling</button>
+        <button class="btn ghost" id="pf-next">Volgende →</button>
+        <button class="btn ghost" id="pf-dir">Richting: FR → NL</button>
+        <span class="scorebar" id="pf-count"></span>
+      </div>
+      <details>
+        <summary>📖 Volledige woordenlijst (tabel)</summary>
+        <div id="paris-table"></div>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Welk woord past niet? (l'intrus)</h2>
+      <p class="lead">Examenoefening: kies het woord dat niet in de reeks past en zie waarom.</p>
+      <div id="paris-intrus"></div>
+    </div>
+
+    <div class="card">
+      <h2>Gatenzinnen (invul)</h2>
+      <p class="lead">Vul het juiste woord in (zoals oefening 3 uit het boekje).</p>
+      <div id="paris-fill"></div>
+    </div>
+
+    <div class="card">
+      <h2>Subjonctif — « Paris ervaren »</h2>
+      <p class="lead">In je schrijfopdracht moet je zeggen hoe je Parijs ervaren hebt, met de subjonctif. Oefen de vormen.</p>
+      <div id="paris-subj"></div>
+    </div>
+
+    <div class="card">
+      <h2>✍️ Schrijfopdracht — bericht aan je Franstalige vriend</h2>
+      <p class="lead">100–120 woorden. Eerst: hoe heb jij Parijs ervaren (<b>subjonctif</b>). Dan: wat heb je gedaan/gezien — gebruik <b>minstens 5 elementen</b> van de prent. Structuurwoorden gebruiken. Goede slotzin.</p>
+      <h3>Stap 1 — kies 5 elementen die je gebruikt</h3>
+      <div class="word-elements" id="paris-elements"></div>
+      <h3>Stap 2 — structuurwoorden (gebruik er enkele)</h3>
+      <div class="chips">
+        <span class="chip fr">D'abord</span><span class="chip fr">Ensuite</span><span class="chip fr">Puis</span>
+        <span class="chip fr">Après</span><span class="chip fr">De plus</span><span class="chip fr">Aussi</span>
+        <span class="chip fr">Enfin</span><span class="chip fr">Cependant</span><span class="chip fr">Donc</span>
+      </div>
+      <h3>Stap 3 — schrijf je tekst</h3>
+      <textarea class="txt" id="paris-write" placeholder="Salut ! Tu vas bientôt aller à Paris avec ton école, c'est génial !..."></textarea>
+      <div class="row">
+        <span class="scorebar" id="paris-wc">0 woorden · 0/5 elementen gebruikt</span>
+        <button class="btn ghost" id="paris-clear">Wissen</button>
+      </div>
+      <div class="placeholder" style="margin-top:14px">
+        <b>Samen opbouwen:</b> we stellen jouw modeltekst stap voor stap op in de chat, op jouw niveau. Schrijf hier je poging en kopieer ze in de chat — ik geef je bouwstenen, verbeter, en jij oefent door de finale versie een paar keer over te schrijven.
+      </div>
+      <details>
+        <summary>🗂️ Voorbeeldzinnen (bouwstenen om uit te kiezen)</summary>
+        <ul style="font-size:.88rem;line-height:1.8;padding-left:18px">
+          <li><i>Je suis tellement content que tu ailles à Paris !</i></li>
+          <li><i>Bien que la ville soit grande, il faut que tu prennes le métro.</i></li>
+          <li><i>D'abord, nous avons admiré la Tour Eiffel et la vue était magnifique.</i></li>
+          <li><i>Ensuite, on a pris un bateau-mouche pour voir la Seine et ses ponts.</i></li>
+          <li><i>Puis, nous avons visité le Louvre où j'ai vu La Joconde, une œuvre d'art célèbre.</i></li>
+          <li><i>Enfin, on s'est perdus dans les rues du Quartier Latin.</i></li>
+          <li><i>J'espère que tu profiteras autant que moi. Bon voyage !</i></li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ JALLÉ ============ -->
+  <section class="panel" id="jalle">
+    <div class="card">
+      <h2>Jallé <span class="badge warn">woordenlijst nog toe te voegen</span></h2>
+      <p class="lead">Op het examen: (1) reeks woorden → welk past niet, (2) volledige woordenschatoefening uit het boek, (3) korte schrijfopdracht (20 woorden): <i>« Et toi, voudrais-tu faire un séjour à l'étranger ? »</i></p>
+      <div class="placeholder">
+        <b>Victor — stuur me de woordenschat van Jallé</b> (boekpagina/lijst). Ik vul dan de intrus-oefening + woordenschattrainer in.
+      </div>
+      <div id="jalle-voc" style="margin-top:14px"></div>
+    </div>
+
+    <div class="card">
+      <h2>✍️ Schrijfopdracht — 20 woorden</h2>
+      <p class="lead">Vanuit je eigen perspectief: zou jij graag een verblijf in het buitenland doen? Gebruik o.a. <i>j'aimerais, je voudrais, parce que, découvrir, une autre culture, apprendre</i>.</p>
+      <textarea class="txt" id="jalle-write" placeholder="Oui, j'aimerais bien faire un séjour à l'étranger parce que..." style="min-height:90px"></textarea>
+      <div class="row">
+        <span class="scorebar" id="jalle-wc">0 / ±20 woorden</span>
+        <button class="btn ghost" id="jalle-clear">Wissen</button>
+      </div>
+      <details>
+        <summary>💡 Model (±20 woorden)</summary>
+        <p style="font-size:.9rem"><i>« Oui, j'aimerais faire un séjour à l'étranger parce que je voudrais découvrir une autre culture et améliorer mon français en parlant tous les jours. »</i></p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ TOOLS ============ -->
+  <section class="panel" id="tools">
+    <div class="card">
+      <h2>Subjonctif — spiekkaart</h2>
+      <p class="lead">De subjonctif komt terug bij Été 89 (mening) én Paris (ervaring). Ken de triggers + vormen.</p>
+      <h3>Vorming (présent du subjonctif)</h3>
+      <p style="font-size:.9rem">Stam = <b>3e pers. mv. (ils)</b> van de tegenwoordige tijd zonder <i>-ent</i>, + uitgangen <b>-e, -es, -e, -ions, -iez, -ent</b>.<br>
+      <i>parler → ils parl<u>ent</u> → que je parl<b>e</b></i></p>
+      <table class="voc">
+        <tr><th>Infinitief</th><th>que je…</th><th>que nous…</th></tr>
+        <tr><td>être</td><td>sois</td><td>soyons</td></tr>
+        <tr><td>avoir</td><td>aie</td><td>ayons</td></tr>
+        <tr><td>aller</td><td>aille</td><td>allions</td></tr>
+        <tr><td>faire</td><td>fasse</td><td>fassions</td></tr>
+        <tr><td>pouvoir</td><td>puisse</td><td>puissions</td></tr>
+        <tr><td>prendre</td><td>prenne</td><td>prenions</td></tr>
+        <tr><td>venir</td><td>vienne</td><td>venions</td></tr>
+        <tr><td>savoir</td><td>sache</td><td>sachions</td></tr>
+      </table>
+      <h3>Triggers (→ subjonctif)</h3>
+      <div class="chips">
+        <span class="chip fr">il faut que</span><span class="chip fr">il est important que</span>
+        <span class="chip fr">je veux que</span><span class="chip fr">je ne pense pas que</span>
+        <span class="chip fr">je ne crois pas que</span><span class="chip fr">bien que</span>
+        <span class="chip fr">pour que</span><span class="chip fr">avant que</span>
+        <span class="chip fr">je suis content que</span><span class="chip fr">je doute que</span>
+        <span class="chip fr">il est possible que</span>
+      </div>
+      <p class="note">⚠️ <i>je pense que / je crois que / j'espère que</i> → <b>indicatif</b> (geen subjonctif!).</p>
+    </div>
+
+    <div class="card">
+      <h2>Structuurwoorden (mots de structure)</h2>
+      <table class="voc">
+        <tr><th>Frans</th><th>Nederlands</th></tr>
+        <tr><td>d'abord</td><td>eerst</td></tr>
+        <tr><td>ensuite / puis</td><td>vervolgens / dan</td></tr>
+        <tr><td>après</td><td>daarna</td></tr>
+        <tr><td>de plus / aussi</td><td>bovendien / ook</td></tr>
+        <tr><td>cependant / mais</td><td>echter / maar</td></tr>
+        <tr><td>parce que / car</td><td>omdat / want</td></tr>
+        <tr><td>donc / alors</td><td>dus / dan</td></tr>
+        <tr><td>enfin / pour finir</td><td>tenslotte</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Schrijfchecklist ✅</h2>
+      <p class="lead">Overloop dit telkens vóór je je tekst inlevert (let op de fouten van je onverwachte schrijftest).</p>
+      <div id="checklist"></div>
+    </div>
+  </section>
+
+  <footer>
+    Gemaakt voor Victor · examen Frans · <span id="ver">v1</span> — voortgang wordt lokaal bewaard
+  </footer>
+</div>
+
+<script>
+/* =================== DATA =================== */
+
+// ---- ÉTÉ 89 meerkeuze ----
+const eteMC = [
+  {q:"In welke streek gaan Charlie en François elk jaar op vakantie?",o:["La Bretagne","Le Lubéron","La Côte d'Azur","Les Alpes"],a:1,e:"« cap sur le Lubéron pour tout le mois de juillet »."},
+  {q:"Welke bijnaam geeft Charlie aan François, en waarom?",o:["Merrick — door de wespensteken","Gizmo — naar zijn hamster","Tyson — door zijn toegetakelde gezicht","Ponch — naar de serie Chips"],a:2,e:"Naar bokser Mike Tyson: François had bij hun eerste ontmoeting een 'gueule défoncée'."},
+  {q:"Waarom heet Charlie 'Merrick'?",o:["Door wespensteken die zijn gezicht vervormden","Omdat hij sterk is","Naar een voetballer","Omdat hij ziek is"],a:0,e:"Na de wespensteken leek hij op John Merrick, 'Elephant Man'."},
+  {q:"Wat is er aan de hand met de papa van Charlie?",o:["Hij is werkloos","Hij heeft kanker door asbest (amiante)","Hij is gescheiden","Hij zit in de gevangenis"],a:1,e:"Mésothéliome / plaques pleurales door 'amiante' opgelopen in de fabriek."},
+  {q:"Hoe is de thuissituatie van François (Tyson)?",o:["Een warme, liefdevolle familie","Zijn vader slaat hem en zijn moeder","Zijn ouders zijn gescheiden","Hij woont bij zijn grootouders"],a:1,e:"Zijn vader is gewelddadig (riem, vuisten) en drinkt."},
+  {q:"Wat doet François 's nachts om de ruzies van zijn ouders niet te horen?",o:["Hij zet muziek op","Hij draait zijn hoofd heen en weer op het kussen","Hij gaat naar buiten","Hij belt Charlie"],a:1,e:"Een soort zelf-sussende beweging; Merrick denkt dat hij slaapwandelt."},
+  {q:"Welk huisdier heeft Charlie en hoe noemt het?",o:["Een kat","Een hamster genaamd Gizmo","Een hond","Een konijn"],a:1,e:"Hamster Gizmo; Charlie is ook gefascineerd door mieren (myrmécologue)."},
+  {q:"Wat wil Charlie later worden?",o:["Bokser","Biologist","Voetballer","Politieagent"],a:1,e:"« Son rêve à Tyson, c'est de devenir biologiste. »"},
+  {q:"Wat ontdekken de jongens met hun BMX-fietsen?",o:["Een verlaten fabriek","Een grot","Een meer","Een kasteel"],a:0,e:"Ze maken er hun Q.G.; Tyson wil er per se binnen."},
+  {q:"In welk jaar speelt het verhaal zich af?",o:["1979","1989","1999","2009"],a:1,e:"« C'était en 1989. » (de titel: Été 89)."}
+];
+
+const eteOpen = [
+  {q:"Leg uit waarom de handen van François' vader hem 'twee keer pijn doen'.",a:"Dezelfde handen die hem slaan, strelen hem daarna als de vader spijt heeft. Daardoor doen ze fysiek én emotioneel pijn."},
+  {q:"Hoe is de vriendschap tussen Charlie en François ontstaan?",a:"Op de camping bij het zwembad: François deed de clown en maakte een 'plat' bij het duiken, Charlie moest lachen. Daarna leerden ze elkaar kennen ('Salut, moi c'est Charlie...')."},
+  {q:"Waarom is Tyson jaloers/verdrietig als hij het gezin van Merrick ziet?",a:"Merrick heeft een 'normale', liefdevolle familie (knuffels, ontbijt, tederheid) — net wat Tyson thuis mist."},
+  {q:"Wat gebeurde er met de hamster Gizmo?",a:"De vader van François gooide de kooi uit het raam van de eerste verdieping; de hamster stierf op de terras. De vader zocht een excuus om te roepen."},
+  {q:"Waarom wordt Tyson naar het einde toe prikkelbaarder?",a:"Hij draagt zijn zware thuissituatie mee ('à fleur de peau'); hij vindt Merrick een 'poule mouillée' en wil de fabriek in — de spanning bouwt op naar het drama."},
+  {q:"Geef je mening: was dit boek/thema voor jou positief of negatief? (gebruik subjonctif)",a:"Vrij antwoord. Bv.: « Bien que l'histoire soit triste, je trouve qu'il est important qu'on parle de ces sujets. »"}
+];
+
+// subjonctif zinnen (Été standpunt) — vul de juiste vorm in
+const eteSubj = [
+  {s:"Il faut qu'on ___ (parler) de la violence.",a:["parle"],e:"il faut que + subjonctif → que l'on parle."},
+  {s:"Je ne pense pas qu'on ___ (pouvoir) rester indifférent.",a:["puisse"],e:"je ne pense pas que + subj → puisse."},
+  {s:"Bien que l'histoire ___ (être) dure, elle est belle.",a:["soit"],e:"bien que + subj → soit."},
+  {s:"Il est important que les jeunes ___ (savoir) ça.",a:["sachent"],e:"savoir au subj 3e pers. mv → sachent."}
+];
+
+// ---- PARIS woordenschat ----
+const parisVoc = [
+  ["le bateau-mouche","de rondvaartboot"],["le bâtiment","het gebouw"],["le cachet","de stempel"],
+  ["le cimetière","het kerkhof"],["l'espace vert / le parc","de groene zone, het park"],["le fer","het ijzer"],
+  ["le loyer","de huur"],["le pont","de brug"],["le quartier","de wijk, de buurt"],["le siècle","de eeuw"],
+  ["le tableau / la peinture","het schilderij"],["l'aile (f)","de vleugel"],["le capital","het kapitaal, de geldsom"],
+  ["la capitale","de hoofdstad"],["la construction","het bouwwerk"],["l'île (f)","het eiland"],
+  ["l'œuvre d'art (f)","het kunstwerk"],["la place","het plein"],["la rive","de oever"],["la statue","het standbeeld"],
+  ["le tour","de ronde"],["la tour","de toren"],["la vue","het zicht"],
+  ["s'adresser à","zich richten tot"],["admirer","bewonderen"],["descendre","uitstappen / afdalen"],
+  ["embarquer","inschepen"],["enlever","uitdoen, afzetten"],["s'installer","plaats nemen"],
+  ["longer","gaan/rijden langs"],["mener","leiden naar"],["participer (à)","deelnemen (aan)"],
+  ["se perdre","verloren lopen"],["se réunir","samenkomen"],
+  ["agréable","aangenaam"],["bienvenu(e)","welgekomen"],["célèbre","beroemd"],["fortuné(e)","rijk"],
+  ["universel(le)","wereld-, universeel"],
+  ["à bord (de)","aan boord (van)"],["à (ta/votre) gauche","aan je/uw linkerkant, links"],
+  ["à (ta/votre) droite","aan je/uw rechterkant, rechts"],["à l'occasion de","ter gelegenheid van"],
+  ["faire une surprise à","iemand verrassen"],["le long de","langs"],["voyons…","eens kijken…"],
+  ["bâtir","bouwen"],["séjourner","verblijven"],["une admiration","een bewondering"],
+  ["une réunion","een samenkomst/vergadering"],["louer","huren"],["une installation","een installatie"]
+];
+
+const parisIntrus = [
+  {l:["un musée","une statue","un cachet","une œuvre d'art","un tableau"],a:2,e:"« un cachet » (stempel) — de rest hoort bij kunst/museum."},
+  {l:["à l'occasion de","au centre de","à droite de","en face de"],a:0,e:"« à l'occasion de » (ter gelegenheid van) — de rest zijn plaatsbepalingen."},
+  {l:["monter","embarquer","s'installer","descendre","se réunir"],a:4,e:"« se réunir » (samenkomen) — de rest hoort bij in-/uitstappen van een voertuig."},
+  {l:["un cimetière","un pont","un bateau-mouche","embarquer","une rive"],a:3,e:"« embarquer » — het enige werkwoord; de rest zijn substantieven (en bij de Seine)."},
+  {l:["un bâtiment","une construction","une tour","une rive","un hôtel particulier"],a:3,e:"« une rive » (oever) — de rest zijn gebouwen/bouwwerken."}
+];
+
+const parisFill = [
+  {s:"Il fait chaud. Je vais ___ mon pull.",a:["enlever"],e:"enlever = uitdoen."},
+  {s:"Il doit quitter sa maison puisqu'il ne paie plus ___.",a:["le loyer"],e:"le loyer = de huur."},
+  {s:"On va restaurer l'___ droite du bâtiment.",a:["aile"],e:"l'aile = de vleugel."},
+  {s:"___ au médecin si vous avez des questions.",a:["adressez-vous","adresse-toi"],e:"s'adresser à (impératif)."},
+  {s:"Ce bâtiment date du 16e ___.",a:["siècle"],e:"le siècle = de eeuw."},
+  {s:"Gustave Eiffel a construit plusieurs ponts en ___.",a:["fer","métal"],e:"le fer = het ijzer."},
+  {s:"De Bruyne est un joueur de foot ___.",a:["célèbre"],e:"célèbre = beroemd."},
+  {s:"On doit être ___ si on veut une maison à Paris.",a:["fortuné","fortuné(e)","fortunée"],e:"fortuné = rijk."}
+];
+
+const parisSubj = [
+  {s:"Je suis content que tu ___ (aller) à Paris.",a:["ailles"],e:"aller au subj → ailles."},
+  {s:"Il faut que tu ___ (prendre) le métro.",a:["prennes"],e:"prendre au subj → prennes."},
+  {s:"Bien que la ville ___ (être) grande, c'est agréable.",a:["soit"],e:"être au subj → soit."},
+  {s:"Je veux que nous ___ (faire) un tour en bateau-mouche.",a:["fassions"],e:"faire au subj nous → fassions."},
+  {s:"Il est possible qu'il ___ (pleuvoir) à Paris.",a:["pleuve"],e:"pleuvoir au subj → pleuve."}
+];
+
+const parisElements = ["la Tour Eiffel","la Seine / un bateau-mouche","le Louvre / La Joconde","Notre-Dame","l'Arc de Triomphe","les Champs-Élysées","le Quartier Latin","Montmartre / le Sacré-Cœur","un pont","une statue / une œuvre d'art"];
+
+const checklist = [
+  "Subjonctif na de juiste triggers (il faut que, bien que, je ne pense pas que…)?",
+  "Werkwoorden correct vervoegd (juiste persoon + tijd)?",
+  "Accord: adjectieven aangepast aan geslacht/getal (-e, -s)?",
+  "Lidwoorden juist (le/la/un/une) en samentrekkingen (du, des, au, aux)?",
+  "Accenten geplaatst (é, è, ê, à, ç)?",
+  "Structuurwoorden gebruikt (d'abord, ensuite, enfin…)?",
+  "Minstens 5 elementen van de prent verwerkt (Paris)?",
+  "Goede aanhef én slotzin?",
+  "Aantal woorden gecontroleerd (Paris 100–120 / Jallé ±20)?"
+];
+
+/* =================== ENGINE =================== */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+let answered=0, totalQ=eteMC.length+eteSubj.length+parisIntrus.length+parisFill.length+parisSubj.length;
+
+function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?]+$/,"");}
+function bumpProgress(){answered++;localStorage.setItem("fr_answered",answered);$("#globalbar").style.width=Math.min(100,Math.round(answered/totalQ*100))+"%";}
+
+// MC renderer
+function renderMC(host,data,prefix){
+  data.forEach((item,i)=>{
+    const q=document.createElement("div");q.className="q";
+    q.innerHTML=`<div class="qnum">${prefix} ${i+1}</div><div class="qtext">${item.q}</div>`;
+    const opts=document.createElement("div");opts.className="opts";
+    item.o.forEach((o,j)=>{
+      const el=document.createElement("div");el.className="opt";el.textContent=o;
+      el.onclick=()=>{
+        if(q.dataset.done)return;q.dataset.done=1;
+        $$(".opt",opts).forEach((x,k)=>{x.classList.add("disabled");if(k===item.a)x.classList.add("correct");});
+        if(j!==item.a)el.classList.add("wrong");
+        $(".explain",q).classList.add("show");
+        bumpProgress();
+      };
+      opts.appendChild(el);
+    });
+    q.appendChild(opts);
+    const ex=document.createElement("div");ex.className="explain";ex.innerHTML=`<b>Uitleg:</b> ${item.e}`;
+    q.appendChild(ex);host.appendChild(q);
+  });
+}
+
+// open questions
+function renderOpen(host,data){
+  data.forEach((item,i)=>{
+    const q=document.createElement("div");q.className="q";
+    q.innerHTML=`<div class="qnum">open ${i+1}</div><div class="qtext">${item.q}</div>`;
+    const d=document.createElement("details");
+    d.innerHTML=`<summary>Toon modelantwoord</summary><div style="font-size:.9rem;color:var(--muted)">${item.a}</div>`;
+    q.appendChild(d);host.appendChild(q);
+  });
+}
+
+// fill / subjonctif (text input)
+function renderFill(host,data,prefix){
+  data.forEach((item,i)=>{
+    const q=document.createElement("div");q.className="q";
+    q.innerHTML=`<div class="qnum">${prefix} ${i+1}</div><div class="qtext">${item.s}</div>`;
+    const inp=document.createElement("input");inp.className="txt";inp.placeholder="jouw antwoord…";
+    const btn=document.createElement("button");btn.className="btn";btn.textContent="Check";btn.style.marginTop="8px";
+    const fb=document.createElement("div");fb.className="feedback";
+    const check=()=>{
+      const ok=item.a.some(a=>norm(a)===norm(inp.value));
+      fb.className="feedback "+(ok?"ok":"no");
+      fb.innerHTML=ok?`✓ Juist! ${item.e}`:`✗ Antwoord: <b>${item.a[0]}</b> — ${item.e}`;
+      if(!inp.dataset.done){inp.dataset.done=1;bumpProgress();}
+    };
+    btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+    q.appendChild(inp);q.appendChild(btn);q.appendChild(fb);host.appendChild(q);
+  });
+}
+
+// intrus
+function renderIntrus(host,data){
+  data.forEach((item,i)=>{
+    const q=document.createElement("div");q.className="q";
+    q.innerHTML=`<div class="qnum">intrus ${i+1}</div><div class="qtext">Welk woord past niet?</div>`;
+    const opts=document.createElement("div");opts.className="opts";
+    item.l.forEach((o,j)=>{
+      const el=document.createElement("div");el.className="opt";el.textContent=o;
+      el.onclick=()=>{
+        if(q.dataset.done)return;q.dataset.done=1;
+        $$(".opt",opts).forEach((x,k)=>{x.classList.add("disabled");if(k===item.a)x.classList.add("correct");});
+        if(j!==item.a)el.classList.add("wrong");
+        $(".explain",q).classList.add("show");bumpProgress();
+      };
+      opts.appendChild(el);
+    });
+    q.appendChild(opts);
+    const ex=document.createElement("div");ex.className="explain";ex.innerHTML=`<b>Waarom:</b> ${item.e}`;
+    q.appendChild(ex);host.appendChild(q);
+  });
+}
+
+// Paris flashcards
+let pfIdx=0, pfDir=true, pfShown=false, pfOrder=[...parisVoc.keys()];
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pfRender(){
+  const [fr,nl]=parisVoc[pfOrder[pfIdx]];
+  $("#pf-word").textContent=pfDir?fr:nl;
+  $("#pf-answer").textContent=pfShown?(pfDir?nl:fr):"";
+  $("#pf-count").textContent=`${pfIdx+1} / ${parisVoc.length}`;
+}
+function pfNext(){pfIdx=(pfIdx+1)%parisVoc.length;pfShown=false;pfRender();}
+
+// vocab table builder
+function buildVocTable(host,rows,h1="Frans",h2="Nederlands"){
+  let html=`<table class="voc"><tr><th>${h1}</th><th>${h2}</th></tr>`;
+  rows.forEach(r=>html+=`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`);
+  html+="</table>";host.innerHTML=html;
+}
+
+/* =================== INIT =================== */
+window.addEventListener("DOMContentLoaded",()=>{
+  // tabs
+  $$(".tab").forEach(t=>t.onclick=()=>{
+    $$(".tab").forEach(x=>x.classList.remove("active"));
+    $$(".panel").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");$("#"+t.dataset.tab).classList.add("active");
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+
+  renderMC($("#ete-mc"),eteMC,"meerkeuze");
+  renderOpen($("#ete-open"),eteOpen);
+  renderFill($("#ete-subj"),eteSubj,"subjonctif");
+
+  shuffle(pfOrder);pfRender();
+  $("#pf-show").onclick=()=>{pfShown=!pfShown;pfRender();};
+  $("#pf-next").onclick=pfNext;
+  $("#pf-dir").onclick=()=>{pfDir=!pfDir;pfShown=false;$("#pf-dir").textContent="Richting: "+(pfDir?"FR → NL":"NL → FR");pfRender();};
+  buildVocTable($("#paris-table"),parisVoc);
+  renderIntrus($("#paris-intrus"),parisIntrus);
+  renderFill($("#paris-fill"),parisFill,"invul");
+  renderFill($("#paris-subj"),parisSubj,"subjonctif");
+
+  // paris elements
+  const eh=$("#paris-elements");
+  parisElements.forEach(e=>{
+    const el=document.createElement("div");el.className="we";el.textContent=e;
+    el.onclick=()=>{el.classList.toggle("used");updateWC();};
+    eh.appendChild(el);
+  });
+  function updateWC(){
+    const txt=$("#paris-write").value.trim();
+    const w=txt?txt.split(/\s+/).length:0;
+    const used=$$(".we.used").length;
+    $("#paris-wc").textContent=`${w} woorden · ${used}/5 elementen gebruikt`+(w>=100&&w<=120?" ✓ goede lengte":"");
+    $("#paris-wc").style.color=(w>=100&&w<=120&&used>=5)?"var(--correct)":"var(--muted)";
+  }
+  $("#paris-write").addEventListener("input",updateWC);
+  $("#paris-clear").onclick=()=>{$("#paris-write").value="";$$(".we").forEach(x=>x.classList.remove("used"));updateWC();localStorage.removeItem("fr_paris");};
+
+  // jallé writer
+  function jwc(){const t=$("#jalle-write").value.trim();const w=t?t.split(/\s+/).length:0;$("#jalle-wc").textContent=`${w} / ±20 woorden`;$("#jalle-wc").style.color=(w>=15&&w<=28)?"var(--correct)":"var(--muted)";}
+  $("#jalle-write").addEventListener("input",jwc);
+  $("#jalle-clear").onclick=()=>{$("#jalle-write").value="";jwc();localStorage.removeItem("fr_jalle");};
+
+  // bénévolat / jallé placeholders blijven leeg tot vocab toegevoegd
+  $("#bene-voc").innerHTML='<p class="note">— woordenschat verschijnt hier zodra toegevoegd —</p>';
+  $("#jalle-voc").innerHTML='<p class="note">— woordenschat verschijnt hier zodra toegevoegd —</p>';
+
+  // checklist
+  const ch=$("#checklist");
+  checklist.forEach((c,i)=>{
+    const id="ck"+i;
+    const d=document.createElement("label");d.className="checkitem";
+    d.innerHTML=`<input type="checkbox" id="${id}"><span>${c}</span>`;
+    ch.appendChild(d);
+    const box=d.querySelector("input");
+    box.checked=localStorage.getItem(id)==="1";
+    box.onchange=()=>localStorage.setItem(id,box.checked?"1":"0");
+  });
+
+  // persist writing
+  ["paris-write","jalle-write"].forEach(id=>{
+    const key="fr_"+id.split("-")[0];
+    const el=document.getElementById(id);
+    el.value=localStorage.getItem(key)||"";
+    el.addEventListener("input",()=>localStorage.setItem(key,el.value));
+  });
+  $("#paris-write").dispatchEvent(new Event("input"));
+  $("#jalle-write").dispatchEvent(new Event("input"));
+
+  // restore progress bar
+  answered=parseInt(localStorage.getItem("fr_answered")||"0");
+  $("#globalbar").style.width=Math.min(100,Math.round(answered/totalQ*100))+"%";
+});
+</script>
+</body>
+</html>
