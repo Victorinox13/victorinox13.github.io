@@ -35,6 +35,18 @@
  */
 const PROJECTS = [
   {
+    title: "Engels Studieplatform",
+    emoji: "🇬🇧",
+    category: "Studietools",
+    tag: "Studieplatform",
+    description: "Interactief oefenplatform voor het examen Engels (New Strike 5, units 3·4·5·6·8): woordenschat van Click & buy, Modern times, Say it with pictures, Art works en Save it or waste it. Flashcards (klik = vertaling), woordtraining als invuloefening één-voor-één, en een grammatica-tabblad (present perfect simple & continuous, comparatives, -ed/-ing-adjectieven, verbs of certainty, zero & first conditional, relative clauses). Plus de échte examenoefeningen (p97 oef. 3 & p98 oef. 4 'Buying Online For Beginners', Alan Turing/Enigma, getallen) en schrijfoefeningen met modelantwoord (klachtenmail, gebouw beschrijven, schilderij beschrijven, mening over kunst). 383 woorden.",
+    link: "engels-studieplatform.html",
+    linkLabel: "Open het studieplatform →",
+    highlight: true,
+    date: "2026-06",
+    preview: { kind: "quiz", bg: "#f3f5fa", fg: "#1b1e2a", accent: "#4f6ef7", accent2: "#0fb89a" }
+  },
+  {
     title: "Geschiedenis Studieplatform",
     emoji: "📜",
     category: "Studietools",

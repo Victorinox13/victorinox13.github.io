@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engels Leren – New Strike 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f5fa; --surface:#ffffff; --surface2:#eef1f8; --border:#dce0ec;
+    --accent:#4f6ef7; --accent2:#ff5c8a; --accent3:#0fb89a;
+    --text:#1b1e2a; --muted:#6b7180; --correct:#16a34a; --wrong:#dc2626; --warning:#d97706;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.25}
+  .shell{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 18px 60px}
+  header{padding:30px 0 22px;display:flex;align-items:center;gap:15px;border-bottom:1px solid var(--border);margin-bottom:22px}
+  .logo{width:46px;height:46px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+  header h1{font-size:22px;font-weight:800;letter-spacing:-.5px}
+  header span{color:var(--muted);font-size:12.5px;font-weight:400;display:block;font-family:'DM Mono',monospace;margin-top:2px}
+  .stats{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:9px 15px;font-family:'DM Mono',monospace;font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .stat b{color:var(--text);font-size:17px;font-family:'Syne';font-weight:700}
+  .stat.green b{color:var(--correct)} .stat.red b{color:var(--wrong)} .stat.blue b{color:var(--accent)}
+  /* filters */
+  .filterbar{margin-bottom:18px}
+  .filterbar .lbl{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:7px 14px;border-radius:20px;font-family:'DM Mono',monospace;font-size:12px;cursor:pointer;transition:.15s;user-select:none}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  /* tabs */
+  .tabs{display:flex;gap:6px;margin-bottom:20px;border-bottom:1px solid var(--border)}
+  .tab{background:none;border:none;color:var(--muted);padding:11px 16px;font-family:'Syne';font-weight:700;font-size:14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+  .tab.active{color:var(--text);border-bottom-color:var(--accent)}
+  .panel{display:none} .panel.active{display:block}
+  /* flashcard */
+  .fc-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+  .btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:9px 16px;border-radius:9px;font-family:'Syne';font-weight:600;font-size:13px;cursor:pointer;transition:.15s}
+  .btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn:disabled{opacity:.35;cursor:not-allowed}
+  .card{background:linear-gradient(160deg,#fff,var(--surface2));border:1px solid var(--border);border-radius:18px;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:34px 26px;cursor:pointer;text-align:center;position:relative;transition:.2s;box-shadow:0 6px 20px rgba(40,50,90,.06)}
+  .card:hover{border-color:var(--accent)}
+  .card .tag{position:absolute;top:14px;left:16px;font-family:'DM Mono',monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .card .qword{font-size:30px;font-weight:800;letter-spacing:-.5px;line-height:1.25}
+  .card .aword{font-size:23px;font-weight:600;color:var(--accent3);margin-top:18px;padding-top:18px;border-top:1px dashed var(--border);width:100%}
+  .card .hint{position:absolute;bottom:14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
+  .progress{height:6px;background:var(--surface);border-radius:6px;overflow:hidden;margin:16px 0 6px}
+  .progress>div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));transition:.3s;width:0}
+  .counter{text-align:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:14px}
+  /* fill-in exercise */
+  .ex-prompt{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+  .ex-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:30px 26px;box-shadow:0 6px 20px rgba(40,50,90,.06)}
+  .ex-q{font-size:25px;font-weight:800;line-height:1.4;margin-bottom:8px;letter-spacing:-.3px}
+  .ex-sub{font-family:'DM Mono',monospace;font-size:12.5px;color:var(--muted);margin-bottom:20px}
+  .ex-input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:11px;color:var(--text);font-family:'Syne';font-weight:600;font-size:19px;padding:14px 16px;outline:none}
+  .ex-input:focus{border-color:var(--accent)}
+  .ex-input.ok{border-color:var(--correct)} .ex-input.bad{border-color:var(--wrong)}
+  .ex-fb{margin-top:14px;font-size:14px;min-height:22px;font-weight:600}
+  .ex-fb.ok{color:var(--correct)} .ex-fb.bad{color:var(--wrong)}
+  .ex-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .done-box{text-align:center;padding:46px 20px}
+  .done-box .big{font-size:42px;font-weight:800;margin-bottom:8px}
+  .done-box p{color:var(--muted);margin-bottom:20px;font-family:'DM Mono',monospace;font-size:13px}
+  .small{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
+  .wordbank{display:flex;gap:7px;flex-wrap:wrap;margin:4px 0 18px}
+  .wb{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:5px 11px;font-family:'DM Mono',monospace;font-size:12px;color:var(--text)}
+  .wr-block{background:#fff;border:1px solid var(--border);border-radius:18px;padding:26px;margin-bottom:18px;box-shadow:0 6px 20px rgba(40,50,90,.06)}
+  .wr-block h3{font-size:19px;font-weight:800;margin-bottom:4px}
+  .wr-task{background:var(--surface2);border-left:3px solid var(--accent);padding:12px 14px;border-radius:8px;font-size:14px;line-height:1.5;margin:12px 0}
+  .wr-area{width:100%;min-height:140px;background:var(--bg);border:1.5px solid var(--border);border-radius:11px;color:var(--text);font-family:'Syne';font-size:15px;padding:14px;outline:none;resize:vertical;line-height:1.5}
+  .wr-area:focus{border-color:var(--accent)}
+  .reveal{margin-top:14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.6;display:none}
+  .reveal.show{display:block}
+  .reveal h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px;font-family:'DM Mono',monospace}
+  .reveal .model{white-space:pre-line}
+  .tiprow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  @media(max-width:560px){.card .qword{font-size:25px}.ex-q{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="logo">🇬🇧</div>
+    <div><h1>Engels Leren</h1><span>New Strike 5 · units 3-4-5-6-8 · proefexamen</span></div>
+  </header>
+
+  <div class="stats">
+    <div class="stat blue">🃏 <b id="st-total">0</b> woorden</div>
+    <div class="stat green">✅ <b id="st-correct">0</b> goed</div>
+    <div class="stat red">❌ <b id="st-wrong">0</b> fout</div>
+    <div class="stat">🔥 <b id="st-streak">0</b> streak</div>
+  </div>
+
+  <div class="filterbar">
+    <div class="lbl">Units</div>
+    <div class="chips" id="unit-chips"></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('fc')">🃏 Flashcards</button>
+    <button class="tab" onclick="switchTab('vt')">✍️ Woordtraining</button>
+    <button class="tab" onclick="switchTab('gr')">📚 Grammatica</button>
+    <button class="tab" onclick="switchTab('ex')">📝 Examenoefeningen</button>
+    <button class="tab" onclick="switchTab('wr')">✏️ Schrijven</button>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="panel-fc" class="panel active">
+    <div class="fc-controls">
+      <button class="btn" id="fc-dir" onclick="toggleDir()">EN → NL</button>
+      <button class="btn" onclick="shuffleFC()">🔀 Shuffle</button>
+      <span class="small">Klik op de kaart om de vertaling te tonen</span>
+    </div>
+    <div class="progress"><div id="fc-bar"></div></div>
+    <div class="counter" id="fc-counter"></div>
+    <div class="card" id="fc-card" onclick="flipCard()">
+      <span class="tag" id="fc-tag"></span>
+      <div class="qword" id="fc-q"></div>
+      <div class="aword" id="fc-a" style="display:none"></div>
+      <span class="hint" id="fc-hint">👆 klik om te tonen</span>
+    </div>
+    <div class="fc-controls" style="margin-top:16px;justify-content:space-between">
+      <button class="btn" id="fc-prev" onclick="prevCard()">← Vorige</button>
+      <button class="btn primary" id="fc-next" onclick="nextCard()">Volgende →</button>
+    </div>
+  </div>
+
+  <!-- WOORDTRAINING -->
+  <div id="panel-vt" class="panel">
+    <div class="fc-controls">
+      <button class="btn" id="vt-dir" onclick="toggleVtDir()">EN → NL</button>
+      <button class="btn" onclick="startVt()">🔄 Herstart</button>
+    </div>
+    <div class="progress"><div id="vt-bar"></div></div>
+    <div class="counter" id="vt-counter"></div>
+    <div id="vt-body"></div>
+  </div>
+
+  <!-- GRAMMATICA -->
+  <div id="panel-gr" class="panel">
+    <div class="fc-controls">
+      <div class="chips" id="gr-topics"></div>
+    </div>
+    <div class="progress"><div id="gr-bar"></div></div>
+    <div class="counter" id="gr-counter"></div>
+    <div id="gr-body"></div>
+  </div>
+
+  <!-- EXAMENOEFENINGEN -->
+  <div id="panel-ex" class="panel">
+    <div class="fc-controls">
+      <div class="chips" id="ex-sets"></div>
+    </div>
+    <div class="progress"><div id="ex-bar"></div></div>
+    <div class="counter" id="ex-counter"></div>
+    <div id="ex-body"></div>
+  </div>
+
+  <!-- SCHRIJVEN -->
+  <div id="panel-wr" class="panel">
+    <p class="small" style="margin-bottom:14px">Schrijfoefeningen zoals op het examen. Schrijf je tekst, gebruik de tips, en vergelijk daarna met het modelantwoord.</p>
+    <div id="wr-body"></div>
+  </div>
+</div>
+
+<script>
+/* ===================== DATA ===================== */
+const UNITS = {u3:'Unit 3 · Click & buy', u4:'Unit 4 · Modern times', u5:'Unit 5 · Say it with pictures', u6:'Unit 6 · Art works', u8:'Unit 8 · Save it or waste it'};
+function w(en,nl,u){return {en,nl,u};}
+const WORDS = [
+// ---- UNIT 3 ----
+w("a wish list","een verlanglijst","u3"),w("a web shop","een webshop","u3"),w("to log in","zich aanmelden","u3"),w("to log off","zich afmelden","u3"),w("to register","zich registreren","u3"),w("to sign in","zich aanmelden","u3"),w("to sign out","zich afmelden","u3"),w("to sign up for an account","een account aanmaken","u3"),w("to create an account","een account aanmaken","u3"),w("an item","een artikel","u3"),w("a one-year guarantee","een garantie van één jaar","u3"),w("a price","een prijs","u3"),w("a quantity","een hoeveelheid","u3"),w("VAT","btw","u3"),w("currently out of stock","momenteel niet op voorraad","u3"),w("in stock","op voorraad","u3"),w("a basket","een winkelmandje","u3"),w("a cart","een winkelwagen","u3"),w("the checkout","de kassa","u3"),w("click and collect","online bestellen en in de winkel afhalen","u3"),w("a credit card","een kredietkaart","u3"),w("a delivery address","een afleveradres","u3"),w("a gift card","een geschenkkaart","u3"),w("an order","een bestelling","u3"),w("an order number","een bestelnummer","u3"),w("a payment method","een betaalmethode","u3"),w("a return policy","een retourbeleid","u3"),w("shipping costs","verzendkosten","u3"),w("to add an item to your basket","een artikel aan je winkelmandje toevoegen","u3"),w("to cancel an order","een bestelling annuleren","u3"),w("to get a refund","je geld terugkrijgen","u3"),w("to pay by credit card","met kredietkaart betalen","u3"),w("to place an order","een bestelling plaatsen","u3"),w("to proceed to checkout","naar de kassa gaan","u3"),w("to purchase an item","een artikel kopen","u3"),w("to return an order","een bestelling terugzenden","u3"),w("to select a delivery address","een afleveradres selecteren","u3"),w("to select a payment method","een betaalmethode selecteren","u3"),w("to use a gift card","een cadeaukaart gebruiken","u3"),w("to view your basket","je winkelmandje bekijken","u3"),
+w("buy one get one free","één kopen, één gratis","u3"),w("clearance","uitverkoop","u3"),w("a coupon","een waardebon","u3"),w("a discount","een korting","u3"),w("a loyalty card","een getrouwheidskaart","u3"),w("a promotional code","een kortingscode","u3"),w("a voucher","een waardebon","u3"),
+w("a courier","een koeriersdienst","u3"),w("a delivery email","een leveringsmail","u3"),w("a delivery note","een leveringsbewijs","u3"),w("an attempted delivery","een afleverpoging","u3"),w("a parcel","een pakje","u3"),w("to accept delivery","de levering aanvaarden","u3"),w("to deliver a parcel","een pakje afleveren","u3"),w("to track your order","je bestelling volgen","u3"),
+w("a broken screen","een kapot scherm","u3"),w("a blurry screen","een wazig scherm","u3"),w("a damaged box","een beschadigde doos","u3"),w("a faulty parcel","een defect pakket","u3"),w("an incomplete set","een onvolledige set","u3"),w("a missing cable","een ontbrekende kabel","u3"),w("a punctured tyre","een lekke band","u3"),w("a scratched car","een gekraste auto","u3"),w("a torn sheet","een gescheurd laken","u3"),w("to go off","bederven","u3"),w("past its sell-by date","over de houdbaarheidsdatum","u3"),w("too big","te groot","u3"),w("too long","te lang","u3"),w("too loose","te wijd","u3"),w("too short","te kort","u3"),w("too small","te klein","u3"),w("too tight","te strak","u3"),
+w("a coffee maker","een koffiezetapparaat","u3"),w("a cooker","een fornuis","u3"),w("a deep fryer","een friteuse","u3"),w("a dishwasher","een vaatwasser","u3"),w("a dryer","een droogkast","u3"),w("a freezer","een diepvriezer","u3"),w("a fridge","een koelkast","u3"),w("a hairdryer","een haardroger","u3"),w("a hob","een kookplaat","u3"),w("a kettle","een waterkoker","u3"),w("a microwave","een microgolfoven","u3"),w("an oven","een oven","u3"),w("a stand mixer","een keukenrobot","u3"),w("a shaver","een scheerapparaat","u3"),w("a pair of straighteners","een stijltang","u3"),w("a toaster","een broodrooster","u3"),w("a toothbrush","een tandenborstel","u3"),w("a vacuum cleaner","een stofzuiger","u3"),w("a washing machine","een wasmachine","u3"),
+w("to contact customer services","de klantendienst contacteren","u3"),w("to file a complaint","een klacht neerleggen","u3"),w("to be refunded","je geld terugkrijgen","u3"),w("to get a credit note","een tegoedbon krijgen","u3"),w("to exchange an item","een artikel omruilen","u3"),w("to repair an item","een artikel herstellen","u3"),w("to replace an item","een artikel vervangen","u3"),w("to return an item","een artikel terugbrengen","u3"),w("to show the receipt","het kassaticket tonen","u3"),
+w("Dear Sir or Madam","Geachte heer/mevrouw","u3"),w("I am writing to complain about my order","Ik mail u met een klacht over mijn bestelling","u3"),w("I look forward to hearing from you","Ik kijk uit naar uw antwoord","u3"),w("Kind regards","Vriendelijke groeten","u3"),
+// ---- UNIT 4 ----
+w("to achieve","bereiken","u4"),w("an achievement","een prestatie","u4"),w("to assemble","monteren","u4"),w("an assembly","een montage","u4"),w("to create","creëren","u4"),w("a creation","een creatie","u4"),w("to design","ontwerpen","u4"),w("a design","een ontwerp","u4"),w("to develop","ontwikkelen","u4"),w("a development","een ontwikkeling","u4"),w("to devise","bedenken","u4"),w("a device","een toestel","u4"),w("to improve","verbeteren","u4"),w("an improvement","een verbetering","u4"),w("to invent","uitvinden","u4"),w("an invention","een uitvinding","u4"),w("to crack codes","codes kraken","u4"),w("to come up with an idea","een idee bedenken","u4"),w("to dream up an idea","een idee verzinnen","u4"),w("to carry out calculations","berekeningen uitvoeren","u4"),w("to construct a device","een toestel bouwen","u4"),w("to program a computer","een computer programmeren","u4"),w("to adjust","aanpassen","u4"),w("to allow","toestaan","u4"),w("to avoid","vermijden","u4"),w("to enable","in staat stellen","u4"),w("to generate","voortbrengen","u4"),w("to grant funding","financieren","u4"),w("to perform","uitvoeren","u4"),w("to resemble","lijken op","u4"),
+w("a rectangle","een rechthoek","u4"),w("rectangular","rechthoekig","u4"),w("a rectangular prism","een balk","u4"),w("a circle","een cirkel","u4"),w("circular","rond","u4"),w("a sphere","een bol","u4"),w("spherical","bolvormig","u4"),w("a square","een vierkant","u4"),w("a cube","een kubus","u4"),w("a cuboid","een balk","u4"),w("a triangle","een driehoek","u4"),w("triangular","driehoekig","u4"),w("a pyramid","een piramide","u4"),w("a pentagon","een vijfhoek","u4"),w("a cone","een kegel","u4"),w("conical","kegelvormig","u4"),w("a hexagon","een zeshoek","u4"),w("a cylinder","een cilinder","u4"),w("cylindrical","cilindrisch","u4"),w("an octagon","een achthoek","u4"),w("a triangular prism","een driehoekig prisma","u4"),
+w("steel","staal","u4"),w("concrete","beton","u4"),w("glass","glas","u4"),
+w("high","hoog","u4"),w("height","de hoogte","u4"),w("wide","breed","u4"),w("width","de breedte","u4"),w("deep","diep","u4"),w("depth","de diepte","u4"),w("long","lang","u4"),w("length","de lengte","u4"),w("to weigh","wegen","u4"),w("weight","het gewicht","u4"),w("to measure","meten","u4"),w("area","de oppervlakte","u4"),w("volume","het volume","u4"),
+// ---- UNIT 5 ----
+w("amazing","verbazingwekkend","u5"),w("beautiful","mooi","u5"),w("breathtaking","adembenemend","u5"),w("exciting","boeiend, spannend","u5"),w("fantastic","fantastisch","u5"),w("fascinating","boeiend","u5"),w("inspiring","inspirerend","u5"),w("wonderful","prachtig","u5"),w("angry","boos","u5"),w("infuriated","woedend","u5"),w("infuriating","ergerlijk","u5"),w("confused","verward","u5"),w("confusing","verwarrend","u5"),w("mixed up","in de war","u5"),w("dreadful","verschrikkelijk","u5"),w("cruel","wreed","u5"),w("ridiculous","belachelijk","u5"),w("stupid","dwaas, dom","u5"),w("sick and tired of","grondig beu","u5"),w("embarrassing","gênant","u5"),w("embarrassed","gegeneerd","u5"),w("to cringe","in elkaar krimpen","u5"),w("haunting","beklemmend","u5"),w("terrifying","angstaanjagend","u5"),w("terrified","doodsbang","u5"),w("to give goosebumps","kippenvel geven","u5"),w("amusing","grappig, leuk","u5"),w("excited","opgewonden","u5"),w("moving","ontroerend","u5"),w("moved","ontroerd","u5"),w("sad","triest","u5"),w("miserable","ellendig","u5"),w("depressed","depressief","u5"),w("depressing","deprimerend","u5"),w("upsetting","verontrustend","u5"),w("upset","overstuur","u5"),w("shocked","geschokt","u5"),w("shocking","schokkend","u5"),w("speechless","sprakeloos","u5"),w("devastating","vernietigend","u5"),w("influential","invloedrijk","u5"),w("a giant leap","een reusachtige sprong","u5"),
+w("in the foreground","op de voorgrond","u5"),w("in the background","op de achtergrond","u5"),w("in the middle","in het midden","u5"),w("in the top left-hand corner","in de linkerbovenhoek","u5"),w("in the bottom right-hand corner","in de rechteronderhoek","u5"),
+// ---- UNIT 6 ----
+w("to take inspiration from","inspiratie halen uit","u6"),w("to express","uitdrukken","u6"),w("to depict","voorstellen","u6"),w("to represent","voorstellen","u6"),w("to show","tonen","u6"),w("to symbolise","symboliseren","u6"),w("an artwork","een kunstwerk","u6"),w("a work of art","een kunstwerk","u6"),w("architecture","architectuur","u6"),w("a cut-out","een uitgeknipte figuur","u6"),w("a drawing","een tekening","u6"),w("installation art","installatiekunst","u6"),w("a landscape","een landschap","u6"),w("a mural","een muurschildering","u6"),w("a painting","een schilderij","u6"),w("a portrait","een portret","u6"),w("a print","een print","u6"),w("a sculpture","een beeldhouwwerk","u6"),w("a sketch","een schets","u6"),w("a still life","een stilleven","u6"),w("indoor","binnen","u6"),w("outdoor","buiten","u6"),w("a brush","een penseel","u6"),w("a canvas","een doek","u6"),w("ink","inkt","u6"),w("paint","verf","u6"),w("oil paint","olieverf","u6"),w("a palette","een palet","u6"),w("pastels","pastels","u6"),w("a coloured pencil","een kleurpotlood","u6"),w("watercolours","waterverf","u6"),w("chalk","krijt","u6"),w("a brush stroke","een penseelstreek","u6"),w("an outline","een omtrek","u6"),w("curved","gebogen","u6"),w("diagonal","diagonaal","u6"),w("horizontal","horizontaal","u6"),w("straight","recht","u6"),w("symmetrical","symmetrisch","u6"),w("vertical","verticaal","u6"),w("two-dimensional","tweedimensionaal","u6"),w("three-dimensional","driedimensionaal","u6"),w("bright","fel","u6"),w("contrasting","contrasterend","u6"),w("warm","warm","u6"),w("cool","koel","u6"),w("dark","donker","u6"),w("light","licht","u6"),w("black-and-white","zwart-wit","u6"),w("a detail","een detail","u6"),w("an everyday object","een alledaags voorwerp","u6"),w("a figure","een figuur","u6"),w("a series","een reeks","u6"),w("a symbol","een symbool","u6"),
+w("an ankle","een enkel","u6"),w("a belly button","een navel","u6"),w("a calf","een kuit","u6"),w("an elbow","een elleboog","u6"),w("a chest","een borst","u6"),w("a finger","een vinger","u6"),w("a foot","een voet","u6"),w("a hand","een hand","u6"),w("a heel","een hiel","u6"),w("a hip","een heup","u6"),w("a knee","een knie","u6"),w("a leg","een been","u6"),w("a shoulder","een schouder","u6"),w("a stomach","een buik","u6"),w("a thigh","een dij","u6"),w("a thumb","een duim","u6"),w("a waist","een taille","u6"),w("a wrist","een pols","u6"),w("the lower back","de onderrug","u6"),w("the upper back","de bovenrug","u6"),w("a collar bone","een sleutelbeen","u6"),w("a forearm","een onderarm","u6"),w("a knuckle","een knokkel","u6"),w("a ribcage","een ribbenkast","u6"),w("a shoulder blade","een schouderblad","u6"),w("a sole","een voetzool","u6"),w("a cheek","een wang","u6"),w("a chin","een kin","u6"),w("an ear","een oor","u6"),w("an earlobe","een oorlel","u6"),w("an eye","een oog","u6"),w("an eyebrow","een wenkbrauw","u6"),w("an eyelid","een ooglid","u6"),w("a forehead","een voorhoofd","u6"),w("a jaw","een kaak","u6"),w("a lip","een lip","u6"),w("a mouth","een mond","u6"),w("a neck","een nek","u6"),w("a nose","een neus","u6"),w("a temple","een slaap","u6"),w("a tongue","een tong","u6"),w("a tooth","een tand","u6"),
+w("In my opinion","Volgens mij","u6"),w("Personally, I think that","Persoonlijk denk ik dat","u6"),w("I totally agree","Ik ga helemaal akkoord","u6"),w("I disagree","Ik ga niet akkoord","u6"),w("On the contrary","Integendeel","u6"),w("I partly agree","Ik ben het gedeeltelijk eens","u6"),
+// ---- UNIT 8 ----
+w("a cloud","een wolk","u8"),w("to cloud over","bewolken","u8"),w("cloudy","bewolkt","u8"),w("a heatwave","een hittegolf","u8"),w("to heat up","opwarmen","u8"),w("hot","heet","u8"),w("a storm","een storm","u8"),w("to blow","waaien","u8"),w("windy","winderig","u8"),w("the rain","de regen","u8"),w("a shower","een bui","u8"),w("a flood","een overstroming","u8"),w("to flood","overstromen","u8"),w("rainy","regenachtig","u8"),w("flooded","overstroomd","u8"),w("the sun","de zon","u8"),w("to shine","schijnen","u8"),w("sunny","zonnig","u8"),w("snow","sneeuw","u8"),w("frost","vorst","u8"),w("to freeze","vriezen","u8"),w("freezing","vriezend","u8"),w("severe","ernstig","u8"),w("tidal","getij-","u8"),w("the authorities","de overheid","u8"),w("disruption","ontwrichting","u8"),w("the onslaught","de aanval","u8"),w("to batter","toetakelen","u8"),w("to board up","dichtspijkeren","u8"),w("to cancel","annuleren","u8"),w("to collapse","instorten","u8"),w("to cut","afsnijden","u8"),w("to evacuate","evacueren","u8"),w("to be grounded","aan de grond blijven","u8"),w("to gust","in vlagen waaien","u8"),w("to hit","raken","u8"),w("to issue","uitvaardigen","u8"),w("to litter","bezaaien","u8"),w("to sever","verbreken","u8"),
+w("an avalanche","een lawine","u8"),w("a blizzard","een sneeuwstorm","u8"),w("a cyclone","een cycloon","u8"),w("a dust storm","een zandstorm","u8"),w("drought","droogte","u8"),w("an earthquake","een aardbeving","u8"),w("a windgust","een windstoot","u8"),w("hail","hagel","u8"),w("a hurricane","een orkaan","u8"),w("a landslide","een aardverschuiving","u8"),w("lightning","bliksem","u8"),w("the melting of the ice caps","het smelten van de ijskappen","u8"),w("a thunderstorm","een onweer","u8"),w("a tornado","een tornado","u8"),w("a tsunami","een tsunami","u8"),w("a typhoon","een tyfoon","u8"),w("a volcanic eruption","een vulkaanuitbarsting","u8"),w("a wildfire","een bosbrand","u8"),
+w("according to","volgens","u8"),w("to order","bevelen","u8"),w("to suggest","voorstellen","u8"),w("to argue","argumenteren","u8"),w("to claim","beweren","u8"),w("to deny","ontkennen","u8"),
+];
+
+/* ===== GRAMMAR (fill-in) ===== */
+function g(topic,q,sub,a){return {topic,q,sub,a};}
+const GRAMMAR = [
+// present perfect (u3)
+g("Present perfect","I ___ my homework. (just / finish)","Present perfect simple",["have just finished","i have just finished"]),
+g("Present perfect","She ___ in London for ten years. (live)","Present perfect simple",["has lived","she has lived"]),
+g("Present perfect","They ___ for the bus for an hour. (wait)","Present perfect continuous",["have been waiting","they have been waiting"]),
+g("Present perfect","He ___ that film yet. (not / see)","Present perfect simple",["hasn't seen","has not seen","he hasn't seen","he has not seen"]),
+g("Present perfect","How long ___ you ___ English? (learn)","Present perfect continuous",["have been learning","have you been learning"]),
+g("Present perfect","We ___ all the new vocabulary already. (study)","Present perfect simple",["have studied","we have studied","have already studied"]),
+// comparatives
+g("Comparatives","This phone is ___ that one. (expensive)","Vergrotende trap",["more expensive than"]),
+g("Comparatives","A cheetah is ___ a lion. (fast)","Vergrotende trap",["faster than"]),
+g("Comparatives","This is ___ shop in town. (good)","Overtreffende trap",["the best"]),
+g("Comparatives","My bag is ___ yours. (heavy)","Vergrotende trap",["heavier than"]),
+g("Comparatives","A pyramid is ___ a cube. (tall)","Vergrotende trap",["taller than"]),
+g("Comparatives","Gold is one of ___ metals. (precious)","Overtreffende trap",["the most precious"]),
+// ed/ing adjectives (u5)
+g("Ed / ing adjectieven","The film was so ___. I fell asleep. (bore)","-ing = eigenschap van iets",["boring"]),
+g("Ed / ing adjectieven","I'm really ___ in art. (interest)","-ed = hoe jij je voelt",["interested"]),
+g("Ed / ing adjectieven","The news was ___. (shock)","-ing",["shocking"]),
+g("Ed / ing adjectieven","She felt ___ when she fell. (embarrass)","-ed",["embarrassed"]),
+g("Ed / ing adjectieven","It was a ___ experience. (terrify)","-ing",["terrifying"]),
+g("Ed / ing adjectieven","The children were ___ by the magic show. (amaze)","-ed",["amazed"]),
+// verbs of certainty (u5)
+g("Verbs of certainty","That ___ be John; he's on holiday. (onmogelijk)","zekerheid",["can't","cannot","can not"]),
+g("Verbs of certainty","She ___ be at home; the lights are on. (bijna zeker)","zekerheid",["must"]),
+g("Verbs of certainty","It ___ rain later, but I'm not sure. (mogelijk)","zekerheid",["might","may","could"]),
+g("Verbs of certainty","He ___ be tired after that long trip. (waarschijnlijk)","zekerheid",["must"]),
+// conditionals (u8)
+g("Conditionals","If you heat ice, it ___. (melt)","Zero conditional",["melts"]),
+g("Conditionals","If it ___ tomorrow, we will stay home. (rain)","First conditional",["rains"]),
+g("Conditionals","Water boils if you ___ it to 100°C. (heat)","Zero conditional",["heat"]),
+g("Conditionals","If I ___ her, I will tell her. (see)","First conditional",["see"]),
+g("Conditionals","If you don't water plants, they ___. (die)","Zero conditional",["die"]),
+g("Conditionals","If we recycle more, we ___ the planet. (help)","First conditional",["will help","help"]),
+// relative clauses (u6)
+g("Relative clauses","The artist ___ painted this is famous.","persoon",["who","that"]),
+g("Relative clauses","This is the museum ___ we visited last year.","ding",["which","that"]),
+g("Relative clauses","That's the woman ___ dog won the prize.","bezit",["whose"]),
+g("Relative clauses","The painting ___ hangs there is very old.","ding",["which","that"]),
+g("Relative clauses","Picasso is the painter ___ created Guernica.","persoon",["who","that"]),
+];
+
+/* ===================== STATE ===================== */
+let activeUnits = new Set(Object.keys(UNITS));
+let correct=0, wrong=0, streak=0;
+
+function pool(){ return WORDS.filter(x=>activeUnits.has(x.u)); }
+function norm(s){
+  s=s.toLowerCase().trim().replace(/[.,!?;]/g,'').replace(/\s+/g,' ');
+  return s;
+}
+function stripArt(s){ return norm(s).replace(/^(de |het |een |the |a |an |to )/,''); }
+function matchAns(input, answer){
+  const i=norm(input); if(!i) return false;
+  // answer may contain comma/slash alternatives
+  const alts = answer.split(/[\/,]| of /).map(a=>norm(a)).filter(Boolean);
+  alts.push(norm(answer));
+  for(const a of alts){
+    if(i===a) return true;
+    if(stripArt(i)===stripArt(a)) return true;
+  }
+  return false;
+}
+function updStats(){
+  document.getElementById('st-total').textContent=pool().length;
+  document.getElementById('st-correct').textContent=correct;
+  document.getElementById('st-wrong').textContent=wrong;
+  document.getElementById('st-streak').textContent=streak;
+}
+
+/* ===================== UNIT CHIPS ===================== */
+const uc=document.getElementById('unit-chips');
+Object.entries(UNITS).forEach(([k,v])=>{
+  const b=document.createElement('div'); b.className='chip on'; b.textContent=v; b.dataset.u=k;
+  b.onclick=()=>{ if(activeUnits.has(k)){ if(activeUnits.size>1){activeUnits.delete(k);b.classList.remove('on');} } else {activeUnits.add(k);b.classList.add('on');}
+    shuffleFC(); startVt(); updStats(); };
+  uc.appendChild(b);
+});
+
+/* ===================== TABS ===================== */
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-'+t).classList.add('active');
+}
+
+/* ===================== FLASHCARDS ===================== */
+let fcDeck=[], fcI=0, fcDir='en', fcFlip=false;
+function shuffleFC(){ fcDeck=[...pool()].sort(()=>Math.random()-0.5); fcI=0; fcFlip=false; renderFC(); }
+function toggleDir(){ fcDir = fcDir==='en'?'nl':'en'; document.getElementById('fc-dir').textContent = fcDir==='en'?'EN → NL':'NL → EN'; fcFlip=false; renderFC(); }
+function flipCard(){ fcFlip=!fcFlip; renderFC(); }
+function nextCard(){ if(fcI<fcDeck.length-1){fcI++;fcFlip=false;renderFC();} }
+function prevCard(){ if(fcI>0){fcI--;fcFlip=false;renderFC();} }
+function renderFC(){
+  if(!fcDeck.length){ document.getElementById('fc-q').textContent='—'; return; }
+  const c=fcDeck[fcI];
+  const q = fcDir==='en'? c.en : c.nl;
+  const a = fcDir==='en'? c.nl : c.en;
+  document.getElementById('fc-tag').textContent=UNITS[c.u];
+  document.getElementById('fc-q').textContent=q;
+  const ae=document.getElementById('fc-a');
+  ae.textContent=a; ae.style.display=fcFlip?'block':'none';
+  document.getElementById('fc-hint').style.display=fcFlip?'none':'block';
+  document.getElementById('fc-counter').textContent=`${fcI+1} / ${fcDeck.length}`;
+  document.getElementById('fc-bar').style.width=((fcI+1)/fcDeck.length*100)+'%';
+  document.getElementById('fc-prev').disabled=fcI===0;
+  document.getElementById('fc-next').disabled=fcI===fcDeck.length-1;
+}
+
+/* ===================== WOORDTRAINING (one-at-a-time fill-in) ===================== */
+let vtDeck=[], vtI=0, vtDir='en', vtSolved=[];
+function toggleVtDir(){ vtDir = vtDir==='en'?'nl':'en'; document.getElementById('vt-dir').textContent = vtDir==='en'?'EN → NL':'NL → EN'; startVt(); }
+function startVt(){ vtDeck=[...pool()].sort(()=>Math.random()-0.5); vtI=0; vtSolved=[]; renderVt(); }
+function renderVt(){
+  const body=document.getElementById('vt-body');
+  if(!vtDeck.length){ body.innerHTML='<p class="small">Geen woorden geselecteerd.</p>'; return; }
+  if(vtI>=vtDeck.length){ renderVtDone(); return; }
+  const c=vtDeck[vtI];
+  const q = vtDir==='en'? c.en : c.nl;
+  const answer = vtDir==='en'? c.nl : c.en;
+  document.getElementById('vt-counter').textContent=`Woord ${vtI+1} / ${vtDeck.length}`;
+  document.getElementById('vt-bar').style.width=(vtI/vtDeck.length*100)+'%';
+  body.innerHTML=`
+    <div class="ex-card">
+      <div class="ex-prompt">${UNITS[c.u]} · vertaal naar het ${vtDir==='en'?'Nederlands':'Engels'}</div>
+      <div class="ex-q">${q}</div>
+      <input class="ex-input" id="vt-in" autocomplete="off" placeholder="Typ de vertaling..." />
+      <div class="ex-fb" id="vt-fb"></div>
+      <div class="ex-actions">
+        <button class="btn" onclick="vtBack()" ${vtI===0?'disabled':''}>← Vorige</button>
+        <button class="btn" onclick="vtReveal()">👁 Toon antwoord</button>
+        <button class="btn primary" id="vt-check" onclick="vtCheck()">Controleer</button>
+      </div>
+    </div>`;
+  const inp=document.getElementById('vt-in'); inp.focus();
+  inp.dataset.answer=answer;
+  inp.onkeydown=e=>{ if(e.key==='Enter') vtCheck(); };
+}
+function vtCheck(){
+  const inp=document.getElementById('vt-in'); const fb=document.getElementById('vt-fb');
+  const ans=inp.dataset.answer;
+  if(matchAns(inp.value, ans)){
+    inp.classList.add('ok'); fb.className='ex-fb ok'; fb.textContent='✅ Juist!';
+    correct++; streak++; updStats();
+    document.getElementById('vt-check').disabled=true;
+    setTimeout(()=>{ vtI++; document.getElementById('vt-bar').style.width=(vtI/vtDeck.length*100)+'%'; renderVt(); }, 650);
+  } else {
+    inp.classList.add('bad'); fb.className='ex-fb bad'; fb.textContent='❌ Probeer opnieuw (of toon antwoord)';
+    wrong++; streak=0; updStats();
+    setTimeout(()=>inp.classList.remove('bad'),600);
+  }
+}
+function vtReveal(){
+  const inp=document.getElementById('vt-in'); const fb=document.getElementById('vt-fb');
+  fb.className='ex-fb'; fb.style.color='var(--warning)'; fb.textContent='💡 '+inp.dataset.answer;
+}
+function vtBack(){ if(vtI>0){ vtI--; renderVt(); } }
+function renderVtDone(){
+  document.getElementById('vt-bar').style.width='100%';
+  document.getElementById('vt-counter').textContent='Klaar!';
+  document.getElementById('vt-body').innerHTML=`<div class="done-box"><div class="big">🎉</div><p>Alle ${vtDeck.length} woorden doorlopen.</p><button class="btn primary" onclick="startVt()">Opnieuw oefenen</button></div>`;
+}
+
+/* ===================== GRAMMATICA ===================== */
+let grTopics = [...new Set(GRAMMAR.map(x=>x.topic))];
+let grActive = new Set(grTopics);
+let grDeck=[], grI=0;
+const gt=document.getElementById('gr-topics');
+grTopics.forEach(t=>{
+  const b=document.createElement('div'); b.className='chip on'; b.textContent=t;
+  b.onclick=()=>{ if(grActive.has(t)){ if(grActive.size>1){grActive.delete(t);b.classList.remove('on');} } else {grActive.add(t);b.classList.add('on');} startGr(); };
+  gt.appendChild(b);
+});
+function startGr(){ grDeck=GRAMMAR.filter(x=>grActive.has(x.topic)).sort(()=>Math.random()-0.5); grI=0; renderGr(); }
+function renderGr(){
+  const body=document.getElementById('gr-body');
+  if(!grDeck.length){ body.innerHTML='<p class="small">Geen onderwerp geselecteerd.</p>'; return; }
+  if(grI>=grDeck.length){ document.getElementById('gr-bar').style.width='100%'; document.getElementById('gr-counter').textContent='Klaar!'; body.innerHTML=`<div class="done-box"><div class="big">🎓</div><p>Alle ${grDeck.length} grammatica-oefeningen gedaan.</p><button class="btn primary" onclick="startGr()">Opnieuw</button></div>`; return; }
+  const c=grDeck[grI];
+  document.getElementById('gr-counter').textContent=`Oefening ${grI+1} / ${grDeck.length}`;
+  document.getElementById('gr-bar').style.width=(grI/grDeck.length*100)+'%';
+  body.innerHTML=`
+    <div class="ex-card">
+      <div class="ex-prompt">${c.topic} · ${c.sub}</div>
+      <div class="ex-q">${c.q.replace('___','<span style="color:var(--accent)">_____</span>')}</div>
+      <input class="ex-input" id="gr-in" autocomplete="off" placeholder="Vul in..." />
+      <div class="ex-fb" id="gr-fb"></div>
+      <div class="ex-actions">
+        <button class="btn" onclick="grBack()" ${grI===0?'disabled':''}>← Vorige</button>
+        <button class="btn" onclick="grReveal()">👁 Toon antwoord</button>
+        <button class="btn primary" id="gr-check" onclick="grCheck()">Controleer</button>
+      </div>
+    </div>`;
+  const inp=document.getElementById('gr-in'); inp.focus();
+  inp.onkeydown=e=>{ if(e.key==='Enter') grCheck(); };
+}
+function grCheck(){
+  const c=grDeck[grI]; const inp=document.getElementById('gr-in'); const fb=document.getElementById('gr-fb');
+  const ok = c.a.some(a=>matchAns(inp.value,a));
+  if(ok){
+    inp.classList.add('ok'); fb.className='ex-fb ok'; fb.textContent='✅ Juist!';
+    correct++; streak++; updStats(); document.getElementById('gr-check').disabled=true;
+    setTimeout(()=>{ grI++; renderGr(); }, 700);
+  } else {
+    inp.classList.add('bad'); fb.className='ex-fb bad'; fb.textContent='❌ Nog niet juist';
+    wrong++; streak=0; updStats(); setTimeout(()=>inp.classList.remove('bad'),600);
+  }
+}
+function grReveal(){ const c=grDeck[grI]; const fb=document.getElementById('gr-fb'); fb.className='ex-fb'; fb.style.color='var(--warning)'; fb.textContent='💡 '+c.a[0]; }
+function grBack(){ if(grI>0){ grI--; renderGr(); } }
+
+/* ===================== EXAMENOEFENINGEN ===================== */
+function it(q,a){return {q,a};}
+const EXAM = [
+{
+  id:'ex3', title:'U3 · Online bestellen (p97, oef. 3)',
+  intro:'Vul de stappen aan die je volgt om iets te kopen in een webshop (JLanes). Typ telkens het ontbrekende woord.',
+  bank:null,
+  items:[
+    it("Add items to your ___ .",["basket","cart","your basket","your cart","a basket"]),
+    it("View your ___ to see the price and quantity of your products.",["basket","cart"]),
+    it("View your basket to see the ___ and quantity of your products.",["price"]),
+    it("View your basket to see the price and ___ of your products.",["quantity"]),
+    it("Proceed to ___ .",["checkout","the checkout"]),
+    it("___ or complete your delivery address details.",["sign in","register","log in"]),
+    it("Sign in or complete your ___ details.",["delivery address"]),
+    it("Enter ___ if any.",["a discount code","a promotional code","a coupon","a voucher","discount code","promotional code","promo code"]),
+    it("Select ___ : PayPal or credit card.",["a payment method","payment method"]),
+    it("Place your ___ .",["order","an order"]),
+  ]
+},
+{
+  id:'ex4', title:'U3 · Buying Online For Beginners (p98, oef. 4)',
+  intro:"Vul de tekst aan met de juiste woorden uit de lijst (elk woord één keer).",
+  bank:["a wish list","a coupon","to register","a gift card","a cart/basket","to create","to sign up","to purchase","buy one get one free (BOGOF)","delivery address details","a credit card","an item","a checkout","discounts","a voucher","to sign in"],
+  items:[
+    it("You can choose ___ and add it to your virtual shopping cart.",["an item","item"]),
+    it("...and add it to your virtual shopping ___ .",["a cart","a basket","cart","basket","a cart/basket"]),
+    it("When you want to ___ the product you've chosen, ...",["to purchase","purchase"]),
+    it("...you have to ___ to your account before you can pay.",["to sign in","sign in"]),
+    it("You will be prompted during ___ to create an account.",["a checkout","checkout","the checkout"]),
+    it("If you don't have an account, you will be prompted to ___ one.",["to create","create"]),
+    it("An account allows you to save your ___ for quicker checkout next time.",["delivery address details","delivery address"]),
+    it("...and gives you access to features like 'My ___', where you can save items for later.",["a wish list","wish list"]),
+    it("On websites like Groupon, shoppers can view ___ on a wide range of products.",["discounts"]),
+    it("...free shipping, free extra nights, or ___ deals.",["buy one get one free (BOGOF)","buy one get one free","bogof"]),
+    it("You can redeem the deal using the screen as a ___ .",["a voucher","voucher"]),
+    it("There are various ways to pay: you can pay with ___ , ...",["a credit card","credit card"]),
+    it("...or use a ___ , ...",["a gift card","gift card"]),
+    it("...or a ___ .",["a coupon","coupon"]),
+    it("You can ___ for a PayPal account during the payment process, ...",["to sign up","sign up"]),
+    it("...or you can ___ beforehand via the form on their website.",["to register","register"]),
+  ]
+},
+{
+  id:'turing', title:'U4 · Modern times — weetjes',
+  intro:'Kennisvragen over Unit 4 (Modern times). Let op: Alan Turing!',
+  bank:null,
+  items:[
+    it("What was Alan Turing's biggest achievement? (he cracked the ___ )",["enigma code","the enigma code","enigma","enigma-code"]),
+    it("Turing is seen as the father of modern computer science and artificial ___ .",["intelligence","artificial intelligence"]),
+  ]
+},
+{
+  id:'numbers', title:'U4 · Numbers (voluit schrijven)',
+  intro:'Schrijf het getal voluit in het Engels.',
+  bank:null,
+  items:[
+    it("1,000,000",["one million","a million"]),
+    it("3/4",["three quarters","three-quarters"]),
+    it("2.5",["two point five"]),
+    it("1969  (jaartal)",["nineteen sixty-nine","nineteen sixty nine"]),
+    it("21st",["twenty-first","twenty first"]),
+    it("1/2",["a half","one half","half"]),
+    it("0.75",["zero point seven five","nought point seven five","point seven five","oh point seven five"]),
+  ]
+},
+];
+let exSet=0, exI=0;
+const exChips=document.getElementById('ex-sets');
+EXAM.forEach((s,i)=>{
+  const b=document.createElement('div'); b.className='chip'+(i===0?' on':''); b.textContent=s.title.split('·')[0].trim()+' '+s.id;
+  b.dataset.i=i; b.onclick=()=>{ exChips.querySelectorAll('.chip').forEach(c=>c.classList.remove('on')); b.classList.add('on'); exSet=i; exI=0; renderEx(); };
+  exChips.appendChild(b);
+});
+function renderEx(){
+  const s=EXAM[exSet]; const body=document.getElementById('ex-body');
+  document.getElementById('ex-counter').textContent=`${s.title} — ${Math.min(exI+1,s.items.length)} / ${s.items.length}`;
+  document.getElementById('ex-bar').style.width=(exI/s.items.length*100)+'%';
+  if(exI>=s.items.length){
+    document.getElementById('ex-bar').style.width='100%';
+    body.innerHTML=`<div class="done-box"><div class="big">✅</div><p>Oefening "${s.title}" volledig ingevuld!</p><button class="btn primary" onclick="exI=0;renderEx()">Opnieuw</button></div>`;
+    return;
+  }
+  const c=s.items[exI];
+  let bankHtml='';
+  if(s.bank){ bankHtml='<div class="ex-prompt">Woordenlijst</div><div class="wordbank">'+s.bank.map(w=>`<span class="wb">${w}</span>`).join('')+'</div>'; }
+  body.innerHTML=`
+    <div class="ex-card">
+      <div class="ex-prompt">${s.intro}</div>
+      ${bankHtml}
+      <div class="ex-q">${c.q.replace('___','<span style="color:var(--accent)">_____</span>')}</div>
+      <input class="ex-input" id="ex-in" autocomplete="off" placeholder="Vul in..." />
+      <div class="ex-fb" id="ex-fb"></div>
+      <div class="ex-actions">
+        <button class="btn" onclick="exBack()" ${exI===0?'disabled':''}>← Vorige</button>
+        <button class="btn" onclick="exReveal()">👁 Toon antwoord</button>
+        <button class="btn primary" id="ex-check" onclick="exCheck()">Controleer</button>
+      </div>
+    </div>`;
+  const inp=document.getElementById('ex-in'); inp.focus();
+  inp.onkeydown=e=>{ if(e.key==='Enter') exCheck(); };
+}
+function exCheck(){
+  const s=EXAM[exSet]; const c=s.items[exI]; const inp=document.getElementById('ex-in'); const fb=document.getElementById('ex-fb');
+  if(c.a.some(a=>matchAns(inp.value,a))){
+    inp.classList.add('ok'); fb.className='ex-fb ok'; fb.textContent='✅ Juist!';
+    correct++; streak++; updStats(); document.getElementById('ex-check').disabled=true;
+    setTimeout(()=>{ exI++; renderEx(); }, 650);
+  } else {
+    inp.classList.add('bad'); fb.className='ex-fb bad'; fb.textContent='❌ Nog niet juist';
+    wrong++; streak=0; updStats(); setTimeout(()=>inp.classList.remove('bad'),600);
+  }
+}
+function exReveal(){ const s=EXAM[exSet]; const c=s.items[exI]; const fb=document.getElementById('ex-fb'); fb.className='ex-fb'; fb.style.color='var(--warning)'; fb.textContent='💡 '+c.a[0]; }
+function exBack(){ if(exI>0){ exI--; renderEx(); } }
+
+/* ===================== SCHRIJVEN ===================== */
+const WRITING = [
+{
+  unit:'Unit 3 · Click & buy', title:'✉️ Schrijf een klachtenmail',
+  task:"Je hebt een toestel of product online besteld, maar er is iets mis (bv. het is kapot, beschadigd of verkeerd geleverd). Schrijf een e-mail (of iets dat erop lijkt) naar de klantendienst. Beschrijf het probleem met de <b>present perfect</b> en vraag een oplossing.",
+  phrases:["Dear Sir or Madam","I am writing to complain about my order","I have received a damaged / faulty ...","I have been waiting for ... for two weeks","Unfortunately, the product doesn't work","I would like a refund / a replacement","Please find a picture attached","I look forward to hearing from you","Kind regards"],
+  model:"Dear Sir or Madam,\n\nI am writing to complain about an order I placed on your website last week (order number WS67039). I have received a coffee maker, but unfortunately the product is faulty: the screen is broken and it does not heat up.\n\nI have been waiting for a working appliance for two weeks now, and I am very disappointed. I have attached a picture of the damage. I would like a refund or a replacement as soon as possible.\n\nI look forward to hearing from you.\n\nKind regards,\nVictor"
+},
+{
+  unit:'Unit 4 · Modern times', title:'🏛️ Beschrijf een gebouw',
+  task:"Beschrijf een gebouw. Gebruik <b>vormen</b> (shapes), <b>materialen</b> en <b>afmetingen</b>, en <b>vergelijk</b> onderdelen (comparatives).",
+  phrases:["It is a tall building made of glass and steel","The tower is 120 metres high and 40 metres wide","The roof is triangular / The base is rectangular","It is shaped like a cube / a cylinder","The new wing is wider than the old one","It is one of the most impressive buildings in the city"],
+  model:"The Atomium is one of the most famous buildings in Brussels. It is made of steel and is about 102 metres high. The structure is shaped like a giant cube standing on one of its corners, and it is built from nine spheres connected by long tubes.\n\nEach sphere is spherical, of course, while the connecting tubes are cylindrical. The whole building is taller than most of the surrounding houses and is much heavier than a normal monument. In my opinion, it is more impressive than any other building in the area."
+},
+{
+  unit:'Unit 5 · Say it with pictures', title:'🖼️ Beschrijf een (historische) foto of schilderij',
+  task:"Beschrijf een historische foto of een schilderij. Gebruik <b>gevoelens (-ed / -ing bijvoeglijke naamwoorden)</b>, de <b>positie op de foto</b>, en <b>verbs of certainty</b> (must / might / can't be).",
+  phrases:["In the foreground / background, there is ...","In the top left-hand corner, you can see ...","In the middle of the picture, ...","It is a haunting / moving / shocking image","The man must be a soldier","This might have been taken during the war","I feel moved / shocked when I look at it","It gives me goosebumps"],
+  model:"This is a black-and-white photograph that must have been taken during the Second World War. In the foreground, there is a young soldier who looks exhausted. In the background, you can see a destroyed city.\n\nThe image is very moving and even a little haunting. The soldier might be writing a letter home, or he could be reading bad news – it is hard to tell. When I look at it, I feel sad and it almost gives me goosebumps. It must have been a terrifying time to live in."
+},
+{
+  unit:'Unit 6 · Art works', title:'🎨 Geef je mening over kunst (tattoos)',
+  task:"Geef je mening: <b>zijn tattoos kunst?</b> Gebruik <b>meningszinnen</b> en <b>defining / relative clauses</b> (who / which / that / whose).",
+  phrases:["In my opinion, ...","Personally, I think that ...","A tattoo is a work of art which is drawn on the skin","The artist who designs the tattoo ...","On the one hand ... on the other hand ...","I partly agree, but ...","To sum up, I believe that ..."],
+  model:"In my opinion, tattoos are definitely a form of art. A tattoo is a work of art which is drawn directly on the skin, and the artist who designs it needs as much talent as a painter who works on a canvas.\n\nOn the one hand, some people think that tattoos are not 'real' art because they are not shown in a museum. On the other hand, a tattoo, whose design is often very personal, can express emotions just like a painting or a sculpture. I partly agree that not every tattoo is great art, but the best ones are certainly works of art that deserve respect."
+},
+];
+function renderWriting(){
+  const body=document.getElementById('wr-body');
+  body.innerHTML=WRITING.map((b,i)=>`
+    <div class="wr-block">
+      <div class="ex-prompt">${b.unit}</div>
+      <h3>${b.title}</h3>
+      <div class="wr-task">${b.task}</div>
+      <textarea class="wr-area" placeholder="Schrijf hier je tekst..."></textarea>
+      <div class="tiprow">
+        <button class="btn" onclick="toggleReveal('tips-${i}')">💡 Nuttige zinnen</button>
+        <button class="btn primary" onclick="toggleReveal('model-${i}')">📄 Toon modelantwoord</button>
+      </div>
+      <div class="reveal" id="tips-${i}"><h4>Nuttige zinnen & woordenschat</h4>${b.phrases.map(p=>'• '+p).join('<br>')}</div>
+      <div class="reveal" id="model-${i}"><h4>Modelantwoord</h4><div class="model">${b.model}</div></div>
+    </div>`).join('');
+}
+function toggleReveal(id){ document.getElementById(id).classList.toggle('show'); }
+
+/* ===================== INIT ===================== */
+shuffleFC(); startVt(); startGr(); renderEx(); renderWriting(); updStats();
+</script>
+</body>
+</html>
