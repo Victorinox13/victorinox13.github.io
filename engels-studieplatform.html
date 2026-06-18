@@ -76,6 +76,14 @@
   .reveal h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px;font-family:'DM Mono',monospace}
   .reveal .model{white-space:pre-line}
   .tiprow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .th-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:14px;box-shadow:0 6px 20px rgba(40,50,90,.06)}
+  .th-card h3{font-size:17px;font-weight:800;margin-bottom:10px;color:var(--accent)}
+  .th-card p{font-size:14px;line-height:1.6;margin-bottom:9px}
+  .th-card ul{margin:0 0 9px 18px} .th-card li{font-size:14px;line-height:1.6;margin-bottom:3px}
+  .th-card .rule{background:var(--surface2);border-radius:8px;padding:9px 12px;font-family:'DM Mono',monospace;font-size:12.5px;margin:8px 0;line-height:1.6}
+  .th-card .ex{color:var(--accent3);font-style:italic}
+  .th-card b{color:var(--text)}
+  .th-card .warn{border-left:3px solid var(--warning);background:#fff8ec;padding:8px 12px;border-radius:6px;font-size:13.5px;margin:8px 0}
   @media(max-width:560px){.card .qword{font-size:25px}.ex-q{font-size:21px}}
 </style>
 </head>
@@ -143,6 +151,11 @@
     <div class="fc-controls">
       <div class="chips" id="gr-topics"></div>
     </div>
+    <div class="fc-controls">
+      <button class="btn" id="gr-theory-btn" onclick="toggleTheory()">📖 Toon theorie</button>
+      <span class="small">Lees eerst de regels, oefen daarna hieronder.</span>
+    </div>
+    <div id="gr-theory" style="margin-bottom:18px"></div>
     <div class="progress"><div id="gr-bar"></div></div>
     <div class="counter" id="gr-counter"></div>
     <div id="gr-body"></div>
@@ -369,7 +382,7 @@ let grDeck=[], grI=0;
 const gt=document.getElementById('gr-topics');
 grTopics.forEach(t=>{
   const b=document.createElement('div'); b.className='chip on'; b.textContent=t;
-  b.onclick=()=>{ if(grActive.has(t)){ if(grActive.size>1){grActive.delete(t);b.classList.remove('on');} } else {grActive.add(t);b.classList.add('on');} startGr(); };
+  b.onclick=()=>{ if(grActive.has(t)){ if(grActive.size>1){grActive.delete(t);b.classList.remove('on');} } else {grActive.add(t);b.classList.add('on');} startGr(); renderTheory(); };
   gt.appendChild(b);
 });
 function startGr(){ grDeck=GRAMMAR.filter(x=>grActive.has(x.topic)).sort(()=>Math.random()-0.5); grI=0; renderGr(); }
@@ -570,6 +583,68 @@ function renderWriting(){
     </div>`).join('');
 }
 function toggleReveal(id){ document.getElementById(id).classList.toggle('show'); }
+
+/* ===================== GRAMMATICA THEORIE ===================== */
+const THEORY = {
+"Present perfect":`
+<p>De <b>present perfect</b> verbindt het verleden met het heden: iets is gebeurd, maar je voelt het gevolg <b>nu</b> nog. In het Nederlands vaak met 'heb/heeft ... ge-'.</p>
+<p><b>1. Present perfect simple</b> — <span class="ex">have/has + voltooid deelwoord</span> (3e kolom of regelmatig + -ed).</p>
+<div class="rule">I <b>have finished</b> my homework. · She <b>has lived</b> here for ten years. · We <b>haven't seen</b> that film yet.</div>
+<p>Gebruik voor: een afgesloten handeling met gevolg nu, ervaring (<i>ever/never</i>), of iets dat <b>nog steeds bezig is</b> met <i>for</i> / <i>since</i>.</p>
+<p><b>2. Present perfect continuous</b> — <span class="ex">have/has been + werkwoord-ing</span>. Benadrukt de <b>duur</b> of dat de actie nog <b>aan de gang</b> is.</p>
+<div class="rule">They <b>have been waiting</b> for an hour. · How long <b>have</b> you <b>been learning</b> English?</div>
+<p><b>Signaalwoorden:</b> <i>already, yet, just, ever, never, for, since, how long</i>.</p>
+<div class="warn">⚠️ Simple = <b>resultaat / aantal</b> (I've written three emails). Continuous = <b>duur / bezig</b> (I've been writing emails all morning).</div>`,
+"Comparatives":`
+<p>Met de <b>vergrotende</b> (comparative) en <b>overtreffende trap</b> (superlative) vergelijk je dingen.</p>
+<p><b>Korte bijvoeglijke naamwoorden</b> (1 lettergreep): + <span class="ex">-er / -est</span>.</p>
+<div class="rule">fast → <b>faster than</b> → the <b>fastest</b> · tall → <b>taller than</b> → the <b>tallest</b></div>
+<p>Eindigt op <b>-y</b>? → y wordt <b>i</b>: heavy → <b>heavier</b>, the <b>heaviest</b>.</p>
+<p><b>Lange bijvoeglijke naamwoorden</b> (2+ lettergrepen): met <span class="ex">more / the most</span>.</p>
+<div class="rule">expensive → <b>more expensive than</b> → the <b>most expensive</b></div>
+<p><b>Onregelmatig:</b> good → <b>better</b> → the <b>best</b> · bad → <b>worse</b> → the <b>worst</b> · far → <b>further</b> → the <b>furthest</b>.</p>
+<div class="warn">⚠️ Na de comparative komt <b>than</b> (My bag is heavier <b>than</b> yours). Voor de superlative komt <b>the</b> (the best shop).</div>`,
+"Ed / ing adjectieven":`
+<p>Veel gevoelens kun je als bijvoeglijk naamwoord op <b>-ed</b> of <b>-ing</b> schrijven. Het verschil is belangrijk!</p>
+<p><b>-ed</b> = hoe <b>iemand zich voelt</b>.</p>
+<div class="rule">I am <b>bored</b>. · She felt <b>embarrassed</b>. · The children were <b>amazed</b>.</div>
+<p><b>-ing</b> = de <b>eigenschap van iets/iemand</b> dat dat gevoel <b>veroorzaakt</b>.</p>
+<div class="rule">The film is <b>boring</b>. · It was an <b>embarrassing</b> moment. · The show was <b>amazing</b>.</div>
+<div class="warn">💡 Truc: <i>"I am bored"</i> (ik verveel me) ≠ <i>"I am boring"</i> (ik ben saai!). Een persoon die <b>-ing</b> is, veroorzaakt het gevoel bij anderen.</div>`,
+"Verbs of certainty":`
+<p>Met <b>modale werkwoorden</b> druk je uit <b>hoe zeker</b> je bent over iets in het heden. Daarna komt altijd het <b>hele werkwoord</b> (be, have, ...).</p>
+<ul>
+<li><b>must</b> = bijna zeker dat het <b>wél</b> zo is — <span class="ex">She <b>must</b> be at home; the lights are on.</span></li>
+<li><b>might / may / could</b> = misschien, mogelijk — <span class="ex">It <b>might</b> rain later.</span></li>
+<li><b>can't / cannot</b> = bijna zeker dat het <b>niet</b> zo is — <span class="ex">That <b>can't</b> be John; he's on holiday.</span></li>
+</ul>
+<div class="warn">⚠️ Het tegengestelde van <b>must</b> (zeker wel) is hier <b>can't</b> (zeker niet) — niet 'mustn't'.</div>`,
+"Conditionals":`
+<p>Een <b>conditional</b> (als-zin) heeft een <b>if-deel</b> (voorwaarde) en een <b>hoofddeel</b> (gevolg).</p>
+<p><b>Zero conditional</b> — algemene waarheden / feiten die <b>altijd</b> kloppen. Beide delen in de <b>present simple</b>.</p>
+<div class="rule">If you <b>heat</b> ice, it <b>melts</b>. · Water <b>boils</b> if you <b>heat</b> it to 100°C.</div>
+<p><b>First conditional</b> — een <b>reële</b> mogelijkheid in de toekomst. If-deel = <b>present simple</b>, hoofddeel = <b>will + werkwoord</b>.</p>
+<div class="rule">If it <b>rains</b> tomorrow, we <b>will stay</b> home. · If I <b>see</b> her, I <b>will tell</b> her.</div>
+<div class="warn">⚠️ <b>Nooit 'will' na 'if'</b>! Schrijf <i>If it rains</i>, niet <i>If it will rain</i>. De komma komt alleen als de zin met <i>if</i> begint.</div>`,
+"Relative clauses":`
+<p><b>Relative clauses</b> (betrekkelijke bijzinnen) geven extra info over een persoon of ding, met een <b>relative pronoun</b>.</p>
+<ul>
+<li><b>who</b> / <b>that</b> → personen — <span class="ex">The artist <b>who</b> painted this is famous.</span></li>
+<li><b>which</b> / <b>that</b> → dingen of dieren — <span class="ex">This is the museum <b>which</b> we visited.</span></li>
+<li><b>whose</b> → bezit (van wie) — <span class="ex">That's the woman <b>whose</b> dog won.</span></li>
+<li><b>where</b> → plaats · <b>when</b> → tijd</li>
+</ul>
+<p><b>Defining</b> relative clause = noodzakelijk om te weten <b>welke</b> je bedoelt → <b>geen komma's</b>. <b>Non-defining</b> = extra, weglaatbare info → <b>met komma's</b> (en geen 'that').</p>
+<div class="rule">Defining: The painting <b>that</b> hangs there is old.<br>Non-defining: Picasso, <b>who</b> was Spanish, painted Guernica.</div>`,
+};
+let theoryOpen=false;
+function toggleTheory(){ theoryOpen=!theoryOpen; document.getElementById('gr-theory-btn').textContent = theoryOpen?'📖 Verberg theorie':'📖 Toon theorie'; renderTheory(); }
+function renderTheory(){
+  const box=document.getElementById('gr-theory');
+  if(!theoryOpen){ box.innerHTML=''; return; }
+  const topics = grTopics.filter(t=>grActive.has(t));
+  box.innerHTML = topics.map(t=>`<div class="th-card"><h3>${t}</h3>${THEORY[t]||'<p>—</p>'}</div>`).join('');
+}
 
 /* ===================== INIT ===================== */
 shuffleFC(); startVt(); startGr(); renderEx(); renderWriting(); updStats();
