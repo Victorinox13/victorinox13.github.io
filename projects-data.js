@@ -40,7 +40,7 @@ const PROJECTS = [
     emoji: "📜",
     category: "Studietools",
     tag: "Studieplatform",
-    description: "Oefenplatform voor het examen geschiedenis (5 TWE, H6–H12): ideologieën van de 19de eeuw, modern imperialisme & Congo, en de Eerste Wereldoorlog. 7 hoofdstukken, 97 vragen, 83 begrippen — rechtstreeks uit je samenvattingen.",
+    description: "Oefenplatform voor het examen geschiedenis (5 TWE, H6–H12): ideologieën van de 19de eeuw, modern imperialisme & Congo, en de Eerste Wereldoorlog. 7 hoofdstukken, 134 vragen, 89 begrippen, met kaarten en historische beelden uit de cursus — rechtstreeks uit je samenvattingen.",
     link: "geschiedenis-studieplatform.html",
     linkLabel: "Open het studieplatform",
     highlight: true,
