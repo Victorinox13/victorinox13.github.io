@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "housedeck",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8127"],
+      "port": 8127
+    },
+    {
+      "name": "site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8128"],
+      "port": 8128,
+      "url": "http://localhost:8128/index.html"
+    }
+  ]
+}
