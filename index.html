@@ -73,13 +73,8 @@ a { color: inherit; text-decoration: none; }
   margin-top: 26px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 26px; align-items: stretch;
 }
 .hero-main {
-  padding: 38px; border-radius: 28px; position: relative; overflow: hidden;
-  background: linear-gradient(165deg, rgba(15,28,49,0.9), rgba(8,15,28,0.92));
-  border: 1px solid var(--panel-line); box-shadow: var(--shadow);
-}
-.hero-main::after {
-  content: ""; position: absolute; width: 360px; height: 360px; right: -110px; top: -130px;
-  border-radius: 50%; background: radial-gradient(circle, rgba(126,215,255,0.26), transparent 66%); filter: blur(8px);
+  padding: 40px; border-radius: 24px; position: relative;
+  background: var(--panel); border: 1px solid var(--panel-line); backdrop-filter: blur(12px);
 }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 9px; padding: 8px 13px; border-radius: 999px;
@@ -91,7 +86,7 @@ h1 {
   margin: 20px 0 16px; max-width: 13ch;
   font-size: clamp(2.7rem, 7vw, 5.2rem); line-height: 0.92; letter-spacing: -0.05em; font-weight: 800;
 }
-h1 .grad { background: linear-gradient(120deg, var(--accent), var(--warm)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+h1 .grad { color: var(--accent); }
 .lead { margin: 0; max-width: 54ch; color: var(--muted); font-size: 1.06rem; line-height: 1.75; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 28px; }
 .btn {
