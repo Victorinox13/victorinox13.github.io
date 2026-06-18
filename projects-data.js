@@ -35,6 +35,18 @@
  */
 const PROJECTS = [
   {
+    title: "Geschiedenis Studieplatform",
+    emoji: "📜",
+    category: "Studietools",
+    tag: "Studieplatform",
+    description: "Interactief oefenplatform voor het examen geschiedenis (5 TWE, H6–H12): de ideologieën van de 19de eeuw (liberalisme & nationalisme, socialisme, christendemocratie), het modern imperialisme & de Onafhankelijke Congostaat van Leopold II, en de oorzaken, het verloop en de gevolgen van de Eerste Wereldoorlog. 7 hoofdstukken, 97 oefenvragen (meerkeuze, waar/niet-waar, invul, open & combineer) en 83 begrippen — met theorie per hoofdstuk, gemixte modus en woordenschattrainer. Rechtstreeks uit je samenvattingen. Voortgang wordt lokaal bewaard.",
+    link: "geschiedenis-studieplatform.html",
+    linkLabel: "Open het studieplatform →",
+    highlight: true,
+    date: "2026-06",
+    preview: { kind: "quiz", bg: "#f3ead9", fg: "#7a2820", accent: "#a23b2d", accent2: "#e8c79a" }
+  },
+  {
     title: "Frans Studieplatform",
     emoji: "🇫🇷",
     category: "Studietools",

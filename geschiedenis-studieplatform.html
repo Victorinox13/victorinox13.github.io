@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geschiedenis — Studieplatform · De lange 19de eeuw &amp; WO I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Spline+Sans+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#efe6d8;--surface:#fffdf8;--surface2:#f6efe2;--surface3:#efe4d2;
+  --ink:#2c211a;--soft:#5a4a3c;--faint:#9b8a76;--line:#ddccb4;--line2:#ece1cf;
+  --sky:#a23b2d;--sky-deep:#7a2820;--sky-soft:#f0d9d2;
+  --sun:#b3851f;--sun-soft:#f3e6c5;
+  --coral:#b5472f;--coral-soft:#f3ddd3;
+  --storm:#6b5b3e;--storm-soft:#ece0c8;--space:#241a12;
+  --teal:#a23b2d;--navy:#4a2a1c;--rose:#b5472f;--amber:#b3851f;
+  --good:#3a6b35;--good-s:#dcebd4;--bad:#a8321f;--bad-s:#f3dcd4;
+  --shadow:0 1px 2px rgba(60,40,20,.06),0 14px 32px -16px rgba(90,55,20,.30);
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.40;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><g fill='none' stroke='%23cdb98f' stroke-width='1'><path d='M30 30h180M30 80h180M30 130h180M30 180h180'/><path d='M60 20v200M120 20v200M180 20v200'/></g></svg>")}
+main,header,footer{position:relative;z-index:1}
+h1,h2,h3,h4{font-family:"Sora",system-ui,sans-serif;line-height:1.14;font-weight:700;letter-spacing:-.01em}
+.mono{font-family:"Spline Sans Mono",ui-monospace,monospace;font-weight:600}
+
+/* HEADER */
+header{color:#f3e9da;padding:30px clamp(16px,5vw,56px) 28px;position:relative;overflow:hidden;
+  background:linear-gradient(170deg,#241109 0%,#4a1d12 28%,#7a2820 56%,#a23b2d 78%,#b3851f 110%)}
+header::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(1.4px 1.4px at 18% 22%,#ffe9c0 50%,transparent 0),radial-gradient(1.2px 1.2px at 42% 12%,#ffe9c0 50%,transparent 0),radial-gradient(1.6px 1.6px at 68% 26%,#ffe9c0 50%,transparent 0),radial-gradient(1.1px 1.1px at 82% 14%,#ffe9c0 50%,transparent 0),radial-gradient(1.3px 1.3px at 30% 34%,#ffe9c0 50%,transparent 0),radial-gradient(1px 1px at 90% 32%,#ffe9c0 50%,transparent 0);background-repeat:no-repeat}
+.h-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;position:relative}
+.h-left .eyebrow{font:600 11px/1 "Spline Sans Mono",monospace;letter-spacing:.22em;text-transform:uppercase;color:#e8c79a;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.h-left .eyebrow::before{content:"";width:17px;height:17px;flex:none;background:no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e8c79a' stroke-width='2'><path d='M4 19V6a2 2 0 0 1 2-2h11a1 1 0 0 1 1 1v13M6 17h12a1 1 0 0 1 0 4H6a2 2 0 0 1 0-4z'/></svg>")}
+.h-left h1{font-size:clamp(26px,4.8vw,46px);font-weight:800}
+.h-left h1 em{font-style:normal;font-weight:800;background:linear-gradient(95deg,#ffd9a0,#ffb58a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.h-left p{margin-top:9px;max-width:62ch;color:#ecdcc8;font-size:14px}
+.h-stats{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px;position:relative}
+.ring{--p:0;width:58px;height:58px;border-radius:50%;background:conic-gradient(#ffcf8a calc(var(--p)*1%),rgba(255,255,255,.16) 0);display:grid;place-items:center;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 4px 16px -4px rgba(0,0,0,.4)}
+.ring-inner{width:45px;height:45px;border-radius:50%;background:#3a1810;display:grid;place-items:center}
+.ring-inner span{font:700 12px/1 "Spline Sans Mono",monospace;color:#f3e9da}
+.h-stat-lbl{font-size:13px;color:#e6d6c2}
+.h-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.chip{font:600 11px/1 "Spline Sans Mono",monospace;letter-spacing:.05em;text-transform:uppercase;padding:6px 10px;border-radius:20px;background:rgba(255,255,255,.14);color:#f1e6d6}
+
+/* MAIN NAV */
+main{max-width:1180px;margin:0 auto;padding:0 clamp(14px,4vw,40px) 90px}
+.main-nav{display:flex;gap:5px;margin:-22px 0 6px;z-index:5;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:6px;box-shadow:var(--shadow);width:max-content;max-width:100%;overflow-x:auto}
+.mnav-btn{appearance:none;border:0;background:transparent;cursor:pointer;white-space:nowrap;font:600 13.5px/1 "Inter",sans-serif;color:var(--soft);padding:10px 15px;border-radius:11px;display:flex;align-items:center;gap:7px;transition:.14s}
+.mnav-btn:hover{color:var(--ink);background:var(--surface2)}
+.mnav-btn[aria-selected="true"]{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:#fff;box-shadow:0 4px 14px -5px var(--sky)}
+.mnav-btn svg{width:15px;height:15px;flex:none}
+
+/* SUB TABS */
+.stabs{display:flex;gap:7px;margin:20px 0 20px;flex-wrap:wrap}
+.stab{appearance:none;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font:600 13px/1 "Inter",sans-serif;color:var(--soft);padding:9px 16px;border-radius:22px;transition:.14s}
+.stab:hover{border-color:var(--sky);color:var(--ink)}
+.stab[aria-selected="true"]{background:var(--sky);border-color:var(--sky);color:#fff}
+
+.view,.subview{display:none}
+.view.active,.subview.active{display:block;animation:fadein .28s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* THEORIE */
+.sec-head{margin:8px 0 14px}
+.sec-head .snum{font:600 11px/1 "Spline Sans Mono",monospace;color:var(--sky);letter-spacing:.12em;text-transform:uppercase}
+.sec-head h2{font-size:clamp(20px,3vw,28px);margin-top:6px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px 22px 27px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--sky),var(--sun))}
+.card-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.card-top .cn{font:600 11px/1.3 "Spline Sans Mono",monospace;color:var(--faint)}
+.card-top h3{font-size:18px;flex:1;min-width:160px}
+.badge{font:600 10px/1 "Spline Sans Mono",monospace;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:20px}
+.bk{background:var(--sky-soft);color:var(--sky-deep)}
+.bb{background:var(--sun-soft);color:#7a5a12}
+.card-body{color:var(--soft);font-size:15px}
+.card-body p{margin-bottom:10px}
+.card-body strong{color:var(--ink);font-weight:600}
+.card-body em{color:var(--sky-deep);font-style:italic}
+.card-body ul{padding-left:0;list-style:none;margin-bottom:12px}
+.card-body li{padding-left:20px;position:relative;margin-bottom:6px}
+.card-body li::before{content:"";position:absolute;left:3px;top:7px;width:7px;height:7px;border-radius:50%;border:2px solid var(--sky)}
+.kw{background:linear-gradient(transparent 58%,#f1d6a6 0);font-weight:600;color:var(--sky-deep);padding:0 1px}
+figure{margin:13px 0 3px;text-align:center}
+figure img{max-width:100%;border:1px solid var(--line);border-radius:10px}
+figcaption{font-size:12px;color:var(--faint);margin-top:5px;font-style:italic}
+.vtable{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 12px;border-radius:10px;overflow:hidden}
+.vtable th,.vtable td{border:1px solid var(--line);padding:8px 11px;text-align:left}
+.vtable th{background:var(--surface3);font-weight:600;color:var(--ink)}
+.vtable td:first-child{font-weight:600;background:var(--surface2)}
+ol.steps{padding-left:22px;margin-bottom:12px}
+ol.steps li{margin-bottom:7px;font-weight:600;color:var(--ink)}
+ol.steps li span{font-weight:400;color:var(--soft)}
+.note-card{background:var(--surface2);border:1px dashed var(--line);border-radius:12px;padding:12px 16px;font-size:13.5px;color:var(--soft);margin-bottom:14px}
+
+/* VRAGEN */
+.qwrap{max-width:740px;margin:0 auto}
+.qbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.qbar .qpos,.qbar .qsc{font:600 13px/1 "Spline Sans Mono",monospace;color:var(--soft)}
+.qbar .qsc{color:var(--sky)}
+.qtrack-wrap{flex-basis:100%;height:6px;background:var(--line2);border-radius:3px;overflow:hidden;margin-top:1px}
+.qtrack-fill{height:100%;background:linear-gradient(90deg,var(--sky),var(--sun));width:0;transition:width .3s}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:var(--shadow)}
+.qtype-lbl{font:600 10.5px/1 "Spline Sans Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.chap-badge{font:600 9px/1 "Spline Sans Mono",monospace;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:10px}
+.qtext{font-family:"Sora",sans-serif;font-size:20px;font-weight:700;line-height:1.34;color:var(--ink);margin-bottom:4px}
+.qfig{margin:14px 0 4px;text-align:center}
+.qfig img{max-width:100%;max-height:280px;border:1px solid var(--line);border-radius:10px}
+.opts{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.opts.tf{flex-direction:row}
+.opt{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--surface2);font:500 15px/1.4 "Inter",sans-serif;color:var(--ink);padding:13px 15px;border-radius:12px;text-align:left;transition:.12s;display:flex;gap:9px;align-items:flex-start}
+.opts.tf .opt{flex:1;justify-content:center;font-weight:600;font-size:16px}
+.opt:hover:not(:disabled){border-color:var(--sky);background:#fff}
+.opt .mk{font:700 12px/1.3 "Spline Sans Mono",monospace;color:var(--faint);flex:none;margin-top:1px}
+.opt.pg{background:var(--good-s);border-color:var(--good);color:#234a18}
+.opt.pb{background:var(--bad-s);border-color:var(--bad);color:#6a1818}
+.opt.pr{border-color:var(--good);color:#234a18}
+.opt:disabled{cursor:default}
+.fill-wrap{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.fill-wrap input{flex:1;min-width:180px;font:500 16px/1 "Inter",sans-serif;padding:13px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--ink)}
+.fill-wrap input:focus{outline:none;border-color:var(--sky);background:#fff}
+.hint-txt{align-self:center;font-size:12.5px;color:var(--faint)}
+textarea.openq{width:100%;min-height:90px;margin-top:16px;font:400 15px/1.55 "Inter",sans-serif;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--ink);resize:vertical}
+textarea.openq:focus{outline:none;border-color:var(--sky);background:#fff}
+.fb{margin-top:16px;padding:13px 15px;border-radius:12px;font-size:14px;line-height:1.5;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-s);color:#234a18}
+.fb.no{background:var(--bad-s);color:#6a1818}
+.fb.key{background:var(--surface2);color:var(--soft);border:1px dashed var(--line)}
+.fb b{font-weight:600}
+.fb .model{margin-top:6px;color:var(--ink);font-weight:500}
+.self-check{display:flex;gap:9px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.self-check span{font-size:13px;color:var(--soft)}
+.mini{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--surface);font:600 13px/1 "Inter",sans-serif;padding:8px 13px;border-radius:9px;transition:.12s}
+.mini.g:hover{border-color:var(--good);color:var(--good)}
+.mini.b:hover{border-color:var(--bad);color:var(--bad)}
+.qactions{display:flex;gap:9px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
+.btn{appearance:none;cursor:pointer;border:0;font:600 15px/1 "Inter",sans-serif;padding:12px 20px;border-radius:11px;transition:.13s;display:inline-flex;align-items:center;gap:8px}
+.btn-p{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:#fff;box-shadow:0 6px 16px -6px var(--sky)}
+.btn-p:hover{filter:brightness(1.07)}
+.btn-g{background:transparent;border:1.5px solid var(--line);color:var(--ink)}.btn-g:hover{border-color:var(--sky)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.result-card{text-align:center;padding:8px 0}
+.result-card .big{font-family:"Sora",sans-serif;font-size:54px;font-weight:800;background:linear-gradient(120deg,var(--sky),var(--sun));-webkit-background-clip:text;background-clip:text;color:transparent}
+.result-card p{color:var(--soft);max-width:44ch;margin:8px auto 20px}
+.result-card .stars{font-size:28px;margin:4px 0 8px}
+
+/* WOORDENSCHAT */
+.voc-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.voc-table th{background:linear-gradient(135deg,var(--sky-deep),var(--sky));color:#fff;font:600 12.5px/1.3 "Inter",sans-serif;text-align:left;padding:12px 14px}
+.voc-table td{border-top:1px solid var(--line);padding:10px 14px;font-size:14px;vertical-align:top}
+.voc-table td:first-child{font-weight:600;color:var(--ink);width:35%;white-space:nowrap}
+.voc-table tr:nth-child(even) td{background:var(--surface2)}
+.vc{font:600 9px/1 "Spline Sans Mono",monospace;text-transform:uppercase;letter-spacing:.05em;padding:3px 6px;border-radius:9px;margin-left:6px;vertical-align:middle}
+.voc-learn-wrap{max-width:650px;margin:0 auto}
+.dir-btns{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.dir-btn{appearance:none;cursor:pointer;border:1.5px solid var(--line);background:var(--surface);font:600 13px/1.3 "Inter",sans-serif;color:var(--soft);padding:10px 14px;border-radius:11px;transition:.14s}
+.dir-btn[aria-pressed="true"]{background:var(--coral);border-color:var(--coral);color:#fff}
+.vlcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 24px;box-shadow:var(--shadow)}
+.vl-prompt-lbl{font:600 10px/1 "Spline Sans Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:10px}
+.vl-prompt{font-family:"Sora",sans-serif;font-size:19px;font-weight:600;line-height:1.4;color:var(--ink)}
+.vl-prompt.big{font-size:27px;font-weight:700}
+
+/* VOORTGANG */
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px}
+.prog-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)}
+.prog-card h4{font-size:14.5px;margin-bottom:8px}
+.prog-bar-wrap{height:8px;background:var(--line2);border-radius:4px;overflow:hidden;margin-top:6px}
+.prog-bar{height:100%;border-radius:4px;transition:width .4s;background:linear-gradient(90deg,var(--sky),var(--sun))}
+.prog-lbl{font:600 12px/1 "Spline Sans Mono",monospace;color:var(--faint);margin-top:5px}
+
+footer{max-width:1180px;margin:0 auto;padding:18px clamp(14px,4vw,40px) 60px;color:var(--faint);font-size:12.5px;line-height:1.6}
+@media(max-width:700px){.opts.tf{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2.5px solid var(--sun);outline-offset:2px;border-radius:5px}
+/* thematische hoofdstukkleuren */
+.cc0{background:#dbe6f8;color:#244f9e}
+.cc1{background:#f7ddd4;color:#a8381f}
+.cc2{background:#ece0c8;color:#7a5a14}
+.cc3{background:#dcefdf;color:#1f6a3a}
+.cc4{background:#ece0f4;color:#693a9a}
+.cc5{background:#f8e2c9;color:#9a5712}
+.cc6{background:#d6dde8;color:#3a4a6a}
+.match-grid{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.match-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.match-row .ml{font-weight:600;color:var(--ink)}
+select.msel{font:500 14px/1 "Inter",sans-serif;padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;background:var(--surface2);color:var(--ink);min-width:170px}
+select.msel:disabled{cursor:default}
+select.msel.ok{border-color:var(--good);background:var(--good-s)}
+select.msel.no{border-color:var(--bad);background:var(--bad-s)}
+@media(max-width:700px){.match-row{grid-template-columns:1fr}select.msel{width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-row">
+    <div class="h-left">
+      <div class="eyebrow">5 TWE · Geschiedenis · De lange 19de eeuw &amp; WO I</div>
+      <h1>Compleet <em>studieplatform</em></h1>
+      <p>Liberalisme &amp; nationalisme · socialisme · christendemocratie · modern imperialisme · de Onafhankelijke Congostaat · oorzaken &amp; aanleiding van WO I · het verloop en de gevolgen van de Groote Oorlog — alle theorie, alle vragen, gemixte modus en woordenschat, rechtstreeks uit je samenvattingen (H6–H12).</p>
+    </div>
+  </div>
+  <div class="h-stats">
+    <div class="ring" id="ringAll"><div class="ring-inner"><span id="ringPct">0%</span></div></div>
+    <div>
+      <div class="h-stat-lbl" id="progLbl">Je voortgang wordt automatisch bewaard.</div>
+      <div class="h-chips" id="chapChips"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <nav class="main-nav" id="mainNav" role="tablist" aria-label="Onderdeel"></nav>
+  <div id="views"></div>
+</main>
+
+<footer>
+  Bron: samenvattingen <em>Geschiedenis 5 (TWE)</em> — hoofdstuk 6 t.e.m. 12: de ideologieën van de 19de eeuw (liberalisme, nationalisme, socialisme, christendemocratie), het modern imperialisme &amp; de Onafhankelijke Congostaat, en de oorzaken, het verloop en de gevolgen van de Eerste Wereldoorlog. Theorie, oefenvragen en woordenschat rechtstreeks uit je cursus. Voortgang wordt lokaal bewaard op dit toestel.
+</footer>
+
+<script>
+/* localStorage-shim zodat voortgang werkt op de statische site */
+window.storage=window.storage||{get:async k=>({value:localStorage.getItem(k)}),set:async(k,v)=>{localStorage.setItem(k,v);}};
+const FIGS={};
+/* ======================================================
+   DATA — alle hoofdstukken
+====================================================== */
+const CHAPTERS=[
+{key:"libnat",short:"H6",label:"Liberalisme & nationalisme",icon:"scale",
+ theory:[
+  {num:"I",title:"Streven naar vrijheid van het individu = LIBERALISME",items:[
+   {id:"I.1",t:"Wat is liberalisme?",body:`
+     <p>Het <span class="kw">liberalisme</span> ontstond als een typisch fenomeen van de 19de eeuw en volgde de ideeën van de 18de-eeuwse <span class="kw">Verlichting</span>.</p>
+     <ul>
+       <li>Volgens de liberalen is elk individu een <strong>uniek wezen</strong> dat zich in alle <strong>vrijheid</strong> moet kunnen ontplooien — voordelig voor de hele samenleving.</li>
+       <li><span class="kw">Economisch liberalisme</span>: de overheid mag zich niet te veel met de economie bemoeien.</li>
+       <li><span class="kw">Politiek liberalisme</span>: de liberale burgerij wil de individuele vrijheden bij <strong>wet</strong> vastleggen (op economisch, politiek, sociaal én cultureel vlak).</li>
+     </ul>`},
+   {id:"I.2",t:"Kenmerken van de democratische rechtsstaat België (vanaf 1831)",body:`
+     <ol class="steps">
+       <li><span class="kw">De grondwet</span> <span>— basisdocument met (a) de grondrechten van de burgers en (b) de manier waarop de staat georganiseerd wordt.</span></li>
+       <li><span class="kw">Scheiding der machten</span> <span>— de staatsmacht is verdeeld over de wetgevende, de uitvoerende en de rechterlijke macht. Elke macht controleert én beperkt de andere.</span></li>
+       <li><span class="kw">Het parlement</span> <span>— de wetgevende macht waarin de volksvertegenwoordigers zetelen; hun belangrijkste taak is de regering controleren.</span></li>
+       <li><span class="kw">Scheiding van kerk en staat</span> <span>— kerkelijke en staatsmacht liggen niet in dezelfde handen en oefenen geen invloed op elkaar uit.</span></li>
+     </ol>`},
+   {id:"I.3",t:"De drie machten",body:`
+     <table class="vtable">
+       <tr><th>Macht</th><th>Instelling</th><th>Bevoegdheid</th></tr>
+       <tr><td>Wetgevende</td><td>Het parlement (verkozen volksvertegenwoordigers)</td><td>Wetten maken + de uitvoerende macht controleren</td></tr>
+       <tr><td>Uitvoerende</td><td>De regering (ministers én de koning)</td><td>Dagelijks bestuur van het land + wetten uitvoeren</td></tr>
+       <tr><td>Rechterlijke</td><td>Onafhankelijke hoven en rechtbanken</td><td>Uitspraak doen over wetsovertredingen + de uitvoerende macht controleren</td></tr>
+     </table>
+     <p>België werd in 1831 opgericht als een <span class="kw">grondwettelijke, parlementaire monarchie</span> en was een voorbeeld van een moderne, liberale staat. Door het <span class="kw">cijnskiesrecht</span> (enkel wie genoeg belasting betaalde, mocht stemmen) hield de liberale burgerij tot aan WO I de touwtjes in handen.</p>`}
+  ]},
+  {num:"II",title:"Streven naar de vrijheid van een volk/natie = NATIONALISME",items:[
+   {id:"II.1",t:"Natie en nationale identiteit",body:`
+     <ul>
+       <li><span class="kw">Natie (volk)</span>: een groep mensen die zich verbonden voelt door gemeenschappelijke kenmerken zoals <strong>taal, geschiedenis, tradities, grondgebied</strong> en soms godsdienst.</li>
+       <li><span class="kw">Nationale identiteit</span>: het gevoel tot dezelfde natie te behoren (bv. zich Belg, Vlaming of Nederlander voelen).</li>
+     </ul>`},
+   {id:"II.2",t:"Politiek nationalisme",body:`
+     <p>Het <span class="kw">politiek nationalisme</span> is een typisch fenomeen van de 19de eeuw: bepaalde mensen binnen een volk (meestal intellectuelen uit de burgerij) eisten dat hun volk een eigen staat moest hebben.</p>
+     <p>Zij streefden naar een <span class="kw">natiestaat</span>: een staat met duidelijke grenzen waarin één volk dominant aanwezig is. Het idee dat elk volk vrij over zijn eigen staat moet beschikken, ontstond óók tijdens de Verlichting. Daarom waren veel 19de-eeuwse liberalen tegelijk nationalistisch gezind.</p>`}
+  ]},
+  {num:"III",title:"Besluit: nationalisme is niet altijd onschuldig",items:[
+   {id:"III.1",t:"De keerzijde van het nationalisme",body:`
+     <p>Opkomen voor de rechten van het eigen volk lijkt logisch, maar nationalisme is een <strong>krachtig fenomeen dat extreme vormen kan aannemen</strong>. Het kan leiden tot <strong>minachting</strong> voor iedereen die niet tot de eigen natiestaat behoort.</p>
+     <p>In naam van het nationalisme zijn talloze conflicten uitgebroken, oorlogen gevoerd, miljoenen slachtoffers gevallen en gruwelijke misdaden gepleegd.</p>`}
+  ]}
+ ],
+ vocab:[
+  ["Liberalisme","19de-eeuwse ideologie (uit de Verlichting) die streeft naar zo veel mogelijk vrijheid voor het individu."],
+  ["Verlichting","18de-eeuwse stroming die de rede en de vrijheid van het individu centraal stelde; inspiratiebron voor liberalisme en nationalisme."],
+  ["Economisch liberalisme","Idee dat de overheid zich niet te veel met de economie mag bemoeien."],
+  ["Politiek liberalisme","Streven om de individuele vrijheden bij wet vast te leggen (economisch, politiek, sociaal, cultureel)."],
+  ["Grondwet","Basisdocument met de grondrechten van de burgers en de organisatie van de staat."],
+  ["Scheiding der machten","Verdeling van de staatsmacht over de wetgevende, uitvoerende en rechterlijke macht, die elkaar controleren."],
+  ["Wetgevende macht","Het parlement: maakt de wetten en controleert de regering."],
+  ["Uitvoerende macht","De regering (ministers + koning): het dagelijks bestuur en de uitvoering van de wetten."],
+  ["Rechterlijke macht","De onafhankelijke hoven en rechtbanken die uitspraak doen over wetsovertredingen."],
+  ["Scheiding van kerk en staat","Kerkelijke en staatsmacht liggen niet in dezelfde handen en beïnvloeden elkaar niet."],
+  ["Cijnskiesrecht","Kiessysteem waarbij enkel wie voldoende belasting betaalde mocht stemmen."],
+  ["Parlementaire monarchie","Staatsvorm met een koning, maar waarin een verkozen parlement de macht uitoefent (België vanaf 1831)."],
+  ["Nationalisme","Streven naar vrijheid en een eigen staat voor een volk/natie."],
+  ["Natie (volk)","Groep mensen verbonden door taal, geschiedenis, tradities, grondgebied en soms godsdienst."],
+  ["Nationale identiteit","Het gevoel tot dezelfde natie te behoren."],
+  ["Natiestaat","Staat met duidelijke grenzen waarin één volk dominant aanwezig is."]
+ ],
+ q:[
+  {type:"mc",q:"Op welke 18de-eeuwse stroming bouwde het liberalisme verder?",opts:["De Romantiek","De Verlichting","De Reformatie","De Renaissance"],cor:1,expl:"De liberalen volgden de ideeën van de 18de-eeuwse <b>Verlichting</b>, die de vrijheid van het individu centraal stelde."},
+  {type:"mc",q:"Wat houdt het economisch liberalisme in?",opts:["De overheid moet de economie strak sturen","De overheid mag zich niet te veel met de economie bemoeien","De staat bezit alle bedrijven","De kerk controleert de handel"],cor:1,expl:"In het <b>economisch liberalisme</b> mag de overheid zich niet te veel met de economie bemoeien."},
+  {type:"fill",q:"De stroming die de individuele vrijheden bij wét wil vastleggen, heet het … liberalisme.",acc:["politiek","politieke"],ans:"politiek liberalisme"},
+  {type:"tf",q:"De grondwet bevat zowel de grondrechten van de burgers als de manier waarop de staat georganiseerd wordt.",cor:true,fb:"Correct — dat zijn de twee delen van de grondwet."},
+  {type:"mc",q:"Welke instelling vormt in België de wetgevende macht?",opts:["De regering","Het parlement","De rechtbanken","De koning alleen"],cor:1,expl:"De <b>wetgevende macht</b> ligt bij het parlement, waarin de volksvertegenwoordigers zetelen."},
+  {type:"mc",q:"Welke bevoegdheid hoort bij de uitvoerende macht?",opts:["Wetten maken","Het dagelijks bestuur van het land en de wetten uitvoeren","Uitspraak doen over wetsovertredingen","Het parlement verkiezen"],cor:1,expl:"De <b>uitvoerende macht</b> (regering: ministers + koning) zorgt voor het dagelijks bestuur en voert de wetten uit."},
+  {type:"match",q:"Combineer elke macht met de juiste instelling.",left:["Wetgevende macht","Uitvoerende macht","Rechterlijke macht"],opts:["Het parlement","De regering (ministers + koning)","Hoven en rechtbanken"],key:[0,1,2],expl:"Wetgevend = parlement, uitvoerend = regering, rechterlijk = hoven en rechtbanken."},
+  {type:"tf",q:"Door de scheiding der machten controleert en beperkt elke macht de andere machten.",cor:true,fb:"Correct — dat is precies de bedoeling van de machtenscheiding."},
+  {type:"mc",q:"Wat was het gevolg van het cijnskiesrecht in de 19de eeuw?",opts:["Iedereen mocht stemmen","Enkel wie genoeg belasting betaalde, mocht stemmen","Enkel vrouwen mochten stemmen","Niemand mocht stemmen"],cor:1,expl:"Door het <b>cijnskiesrecht</b> mocht enkel wie voldoende belasting betaalde stemmen; zo hield de liberale burgerij de macht tot WO I."},
+  {type:"fill",q:"België werd in 1831 opgericht als een grondwettelijke, parlementaire … (staatsvorm met een koning).",acc:["monarchie"],ans:"(parlementaire) monarchie"},
+  {type:"open",q:"Wat is een natie/volk volgens de cursus? Geef minstens drie kenmerken.",model:"Een natie of volk is een groep mensen die zich met elkaar verbonden voelt door een aantal gemeenschappelijke kenmerken, zoals dezelfde taal, geschiedenis, tradities en grondgebied (en soms ook dezelfde godsdienst)."},
+  {type:"mc",q:"Waar streeft het politiek nationalisme naar?",opts:["Een wereld zonder grenzen","Een eigen natiestaat voor een volk","Een gemeenschappelijke Europese staat","De afschaffing van de monarchie"],cor:1,expl:"Het <b>politiek nationalisme</b> streeft naar een eigen natiestaat: een staat met duidelijke grenzen waarin één volk dominant aanwezig is."},
+  {type:"fill",q:"Een staat met duidelijke grenzen waarin één volk dominant aanwezig is, noemt men een …",acc:["natiestaat"],ans:"natiestaat"},
+  {type:"tf",q:"Veel 19de-eeuwse liberalen waren tegelijk ook nationalistisch gezind.",cor:true,fb:"Correct — beide ideeën (vrijheid van individu én van volk) komen uit de Verlichting, daarom gingen ze vaak samen."},
+  {type:"mc",q:"Waarom is nationalisme volgens het besluit 'niet altijd onschuldig'?",opts:["Het kost veel geld","Het kan leiden tot minachting voor iedereen die niet tot de eigen natiestaat behoort","Het verbiedt verkiezingen","Het schaft de grondwet af"],cor:1,expl:"Nationalisme kan extreme vormen aannemen en leiden tot minachting, conflicten, oorlogen en zelfs gruwelijke misdaden."},
+  {type:"open",q:"Leg in je eigen woorden uit wat het verschil is tussen liberalisme en nationalisme.",model:"Liberalisme streeft naar vrijheid voor het individu: elk mens moet zich vrij kunnen ontplooien en die vrijheden worden bij wet beschermd. Nationalisme streeft naar vrijheid voor een volk/natie: een groep mensen die zich verbonden voelt (taal, geschiedenis, tradities…) eist een eigen staat. Het ene gaat dus over de vrijheid van de persoon, het andere over de vrijheid van een gemeenschap."},
+  {type:"mc",q:"Welke macht heeft als taak uitspraak te doen over wetsovertredingen?",opts:["De wetgevende macht","De uitvoerende macht","De rechterlijke macht","De koninklijke macht"],cor:2,expl:"De <b>rechterlijke macht</b> (onafhankelijke hoven en rechtbanken) doet uitspraak over wetsovertredingen."},
+  {type:"tf",q:"Volgens de scheiding van kerk en staat oefenen de kerkelijke macht en de staatsmacht invloed op elkaar uit.",cor:false,fb:"Fout. Door de scheiding van kerk en staat liggen beide machten net níét in dezelfde handen en oefenen ze géén invloed op elkaar uit."}
+ ]
+},
+
+{key:"soc",short:"H7",label:"Socialisme",icon:"users",
+ theory:[
+  {num:"I",title:"Streven naar een gelijke verdeling van rijkdom = SOCIALISME",items:[
+   {id:"I.1",t:"Een reactie op het industriële kapitalisme",body:`
+     <p>Het <span class="kw">socialisme</span> ontstond op het einde van de 18de eeuw (vooral tijdens de Franse Revolutie) en groeide in de 19de eeuw. Sociaal voelende mensen uit de burgerij reageerden op:</p>
+     <ul>
+       <li>het <strong>kapitalistische systeem</strong> waar winst maken op de eerste plaats kwam;</li>
+       <li>de ongelijke <strong>klassensamenleving</strong> sinds de Industriële Revolutie;</li>
+       <li>de ellendige werk-, woon- en leefomstandigheden van de <strong>proletariërs</strong>.</li>
+     </ul>
+     <p>Het socialisme is een verzamelnaam voor alle ideologieën die streven naar <strong>sociale rechtvaardigheid</strong> en een <span class="kw">gelijke verdeling van rijkdom en bezit</span>. De twee belangrijkste stromingen zijn het <strong>communisme</strong> en de <strong>sociaaldemocratie</strong>.</p>`}
+  ]},
+  {num:"II",title:"Streven naar een klasseloze maatschappij = COMMUNISME",items:[
+   {id:"II.1",t:"Karl Marx",body:`
+     <p><span class="kw">Karl Marx</span>, een Duits filosoof uit de burgerij, was de grondlegger van het communisme. Hij zag de geschiedenis als een <span class="kw">klassenstrijd</span> tussen rijk en arm.</p>`},
+   {id:"II.2",t:"Een extreme ideologie",body:`
+     <p>Omdat de burgerij haar rijkdom en macht niet wilde delen, riep Marx de proletariërs op zich te verenigen en een <strong>wereldwijde revolutie</strong> te ontketenen. Het einddoel was een <span class="kw">klasseloze maatschappij</span>:</p>
+     <ul>
+       <li>zonder staatsgrenzen en zonder privébezit;</li>
+       <li>alle rijkdom, eigendom én <strong>productiemiddelen</strong> in handen van de gemeenschap;</li>
+       <li>daarna eerlijk verdeeld volgens de <strong>behoeften</strong> van de mensen.</li>
+     </ul>`}
+  ]},
+  {num:"III",title:"Streven naar democratische sociale hervormingen = SOCIAALDEMOCRATIE",items:[
+   {id:"III.1",t:"De minder radicale stroming",body:`
+     <p>De <span class="kw">sociaaldemocraten</span> vonden het verstandiger om via <strong>betogingen en het parlement</strong> sociale hervormingen af te dwingen. Door samen te werken met andere partijen (zoals de christendemocraten) brachten ze <span class="kw">sociale wetgeving</span> tot stand:</p>
+     <ul>
+       <li>de <strong>achtenveertigurenweek</strong>;</li>
+       <li>verbod op arbeid voor jonge kinderen;</li>
+       <li>invoering van de schoolplicht;</li>
+       <li>recht op ouderdomspensioen, zondagsrust en een wet op arbeidsongevallen.</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Socialisme","Verzamelnaam voor alle ideologieën die streven naar sociale rechtvaardigheid en een gelijke verdeling van rijkdom en bezit."],
+  ["Kapitalisme","Economisch systeem waarin het maken van winst op de eerste plaats komt."],
+  ["Klassensamenleving","Ongelijke samenleving met scherpe verschillen tussen sociale klassen, ontstaan sinds de Industriële Revolutie."],
+  ["Proletariër","Arbeider die enkel zijn arbeidskracht bezit en in ellendige omstandigheden leeft en werkt."],
+  ["Communisme","Stroming van het socialisme die streeft naar een klasseloze maatschappij zonder privébezit."],
+  ["Karl Marx","Duits filosoof uit de burgerij; grondlegger van het communisme."],
+  ["Klassenstrijd","Maatschappelijk conflict tussen de onderdrukten (arm) en de onderdrukkers (rijk)."],
+  ["Klasseloze maatschappij","Einddoel van het communisme: een samenleving zonder klassen, staatsgrenzen of privébezit."],
+  ["Productiemiddelen","Middelen om goederen te produceren (fabrieken, machines, grond); in het communisme in handen van de gemeenschap."],
+  ["Sociaaldemocratie","Minder radicale stroming van het socialisme die via betogingen en het parlement hervormingen afdwingt."],
+  ["Sociale wetten","Wetten die het leven van de zwakkeren (proletariërs) in de samenleving verbeteren."],
+  ["Achtenveertigurenweek","Sociale wet die de werkweek beperkte tot 48 uur."]
+ ],
+ q:[
+  {type:"mc",q:"Als reactie waarop ontstond het socialisme in de 19de eeuw?",opts:["Op de Verlichting","Op het industriële kapitalisme","Op de scheiding van kerk en staat","Op het nationalisme"],cor:1,expl:"Het socialisme ontstond als reactie op het <b>industriële kapitalisme</b> en de ongelijke klassensamenleving."},
+  {type:"open",q:"Noem de drie zaken waartegen sociaal voelende mensen uit de burgerij reageerden bij het ontstaan van het socialisme.",model:"1) Het kapitalistische systeem, waar winst maken op de eerste plaats kwam. 2) De ongelijke klassensamenleving die ontstond sinds de Industriële Revolutie. 3) De ellendige werk-, woon- en leefomstandigheden van de proletariërs."},
+  {type:"fill",q:"Het socialisme streeft naar een gelijke verdeling van rijkdom en … onder de samenleving.",acc:["bezit"],ans:"bezit"},
+  {type:"mc",q:"Wat zijn de twee belangrijkste stromingen van het socialisme?",opts:["Liberalisme en nationalisme","Communisme en sociaaldemocratie","Conservatisme en progressisme","Kapitalisme en imperialisme"],cor:1,expl:"De twee belangrijkste stromingen zijn het <b>communisme</b> en de <b>sociaaldemocratie</b>."},
+  {type:"fill",q:"De grondlegger van het communisme was de Duitse filosoof …",acc:["karl marx","marx"],ans:"Karl Marx"},
+  {type:"mc",q:"Hoe zag Karl Marx de geschiedenis?",opts:["Als een opeenvolging van koningen","Als een klassenstrijd tussen rijk en arm","Als de evolutie van de techniek","Als de strijd tussen naties"],cor:1,expl:"Marx zag de geschiedenis als een <b>klassenstrijd</b> tussen rijk en arm."},
+  {type:"tf",q:"Het einddoel van het communisme was een klasseloze maatschappij zonder privébezit.",cor:true,fb:"Correct — zonder staatsgrenzen en zonder privébezit, met de productiemiddelen in handen van de gemeenschap."},
+  {type:"mc",q:"In een communistische maatschappij komen de productiemiddelen in handen van …",opts:["de koning","de gemeenschap","de fabriekseigenaars","de kerk"],cor:1,expl:"Alle rijkdom, eigendom én <b>productiemiddelen</b> moesten in handen komen van de gemeenschap en verdeeld worden volgens de behoeften."},
+  {type:"mc",q:"Hoe wilden de sociaaldemocraten hun doelen bereiken?",opts:["Met een wereldwijde gewapende revolutie","Via betogingen en het parlement","Door de monarchie af te schaffen","Door kolonies te veroveren"],cor:1,expl:"De <b>sociaaldemocraten</b> waren minder radicaal en kozen voor betogingen en het parlement om sociale hervormingen af te dwingen."},
+  {type:"tf",q:"De sociaaldemocraten werkten onder meer samen met de christendemocraten om sociale wetten in te voeren.",cor:true,fb:"Correct — door samen te werken met andere partijen, zoals de christendemocraten, brachten ze sociale wetgeving tot stand."},
+  {type:"open",q:"Geef drie voorbeelden van sociale wetgeving die mede dankzij de sociaaldemocraten tot stand kwam.",model:"Mogelijke voorbeelden: de invoering van de achtenveertigurenweek, het verbod op arbeid voor jonge kinderen, de invoering van de schoolplicht, het recht op ouderdomspensioen, de zondagsrust en de wet op arbeidsongevallen."},
+  {type:"mc",q:"Wat is het belangrijkste verschil tussen communisme en sociaaldemocratie?",opts:["Het communisme is een gematigde, het sociaaldemocratie een radicale stroming","Het communisme is radicaal (revolutie), de sociaaldemocratie gematigd (hervorming via het parlement)","Ze zijn volledig identiek","De sociaaldemocratie wil de monarchie versterken"],cor:1,expl:"Het <b>communisme</b> is radicaal en wil een revolutie; de <b>sociaaldemocratie</b> is gematigder en werkt via betogingen en het parlement."},
+  {type:"fill",q:"Een arbeider die in ellendige omstandigheden leeft en enkel zijn arbeidskracht bezit, noemt men een …",acc:["proletarier","proletariër","proletariers","proletariërs"],ans:"proletariër"},
+  {type:"tf",q:"Karl Marx was zelf afkomstig uit de arbeidersklasse.",cor:false,fb:"Fout. Karl Marx was een Duits filosoof uit de <b>burgerij</b>."},
+  {type:"open",q:"Verklaar waarom het socialisme een 'verzamelnaam' wordt genoemd.",model:"Het socialisme is een verzamelnaam omdat het verschillende ideologieën omvat die allemaal streven naar sociale rechtvaardigheid en een gelijke verdeling van rijkdom en bezit. De belangrijkste stromingen zijn het communisme en de sociaaldemocratie, die hetzelfde doel hebben maar een verschillende aanpak."}
+ ]
+},
+
+{key:"chr",short:"H8",label:"Christendemocratie",icon:"heart",
+ theory:[
+  {num:"I",title:"De Katholieke Kerk en de groeiende sociale ongelijkheid",items:[
+   {id:"I.1",t:"Van liefdadigheid naar een reactie op het socialisme",body:`
+     <ul>
+       <li>Tijdens het grootste deel van de 19de eeuw hadden de katholieke Kerk en de katholieke partijen weinig aandacht voor de groeiende sociale ongelijkheid. Met <span class="kw">liefdadigheid</span> probeerden ze de ergste noden te lenigen.</li>
+       <li>Door het <strong>succes van het socialisme</strong> groeide de aandacht. De progressieven waarschuwden dat de arbeiders massaal naar het 'goddeloze' socialisme zouden overlopen.</li>
+     </ul>
+     <p>Binnen de Belgische katholieke partij ontstonden twee stromingen: de <strong>progressieven</strong> en de <strong>conservatieven</strong>.</p>`}
+  ]},
+  {num:"II",title:"Progressieve en conservatieve katholieken",items:[
+   {id:"II.1",t:"Twee stromingen",body:`
+     <table class="vtable">
+       <tr><th>Conservatieve katholieken</th><th>Progressieve katholieken</th></tr>
+       <tr><td>Geen voorstander van de emancipatie van de arbeiders. De ondernemer moest zich als een vader over zijn arbeiders ontfermen — enkel liefdadigheid, geen extra rechten.</td><td>Wél voorstander van de <span class="kw">emancipatie</span> van de arbeiders. Eisten dat arbeiders en werkgevers samenwerkten en samen naar oplossingen zochten.</td></tr>
+     </table>`}
+  ]},
+  {num:"III",title:"Rerum Novarum: de basis van de christendemocratie",items:[
+   {id:"III.1",t:"Paus Leo XIII zorgt voor een 'oplossing'",body:`
+     <p>In de brief <span class="kw">Rerum Novarum</span> wees <span class="kw">paus Leo XIII</span> zowel het socialisme als de misbruiken van het liberalisme/kapitalisme af. Hij pleitte voor de 'gulden middenweg':</p>
+     <ol class="steps">
+       <li><span class="kw">Corporatisme</span> <span>— samenwerking tussen werknemers en werkgevers met wederzijdse rechten en plichten.</span></li>
+       <li><span class="kw">Sociale wetten</span> <span>— de overheid moet wetten maken die het leven van de zwakkeren verbeteren.</span></li>
+     </ol>
+     <p>Zo werd de basis gelegd van de <span class="kw">christendemocratie</span>: een ideologie gebaseerd op christelijke waarden die het lot van de arbeiders/armen wil verbeteren door samenwerking tussen klassen.</p>`}
+  ]},
+  {num:"IV",title:"De rol van priester Daens",items:[
+   {id:"IV.1",t:"De eerste christendemocratische partij",body:`
+     <ul>
+       <li>Op het einde van de 19de eeuw ontstond de <span class="kw">Christene Volkspartij</span> onder leiding van <span class="kw">priester Daens</span> — de eerste christendemocratische partij.</li>
+       <li>De partij liet zich inspireren door <em>Rerum Novarum</em> en was voorstander van sociale wetten.</li>
+       <li>Ze kreeg veel tegenkanting van de katholieke partij én van de katholieke Kerk in Rome. Uiteindelijk veroordeelde de paus het <span class="kw">Daensisme</span>; Daens mocht niet meer in het parlement zetelen en stierf een jaar later.</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Liefdadigheid","Hulp aan de armen waarmee de katholieke Kerk de ergste noden probeerde te lenigen (zonder structurele rechten)."],
+  ["Conservatief","Behoudsgezind: niet te snel willen veranderen; wat altijd goed is geweest moet behouden blijven."],
+  ["Progressief","Vooruitstrevend: voorstander van vooruitgang en modernisering van de samenleving."],
+  ["Emancipatie","Het verwerven van meer rechten en zelfstandigheid (hier: voor de arbeiders)."],
+  ["Rerum Novarum","Pauselijke brief (van Leo XIII) die het socialisme én de misbruiken van het kapitalisme afwees; basis van de christendemocratie."],
+  ["Paus Leo XIII","Paus die met Rerum Novarum pleitte voor de 'gulden middenweg' tussen socialisme en kapitalisme."],
+  ["Corporatisme","Samenwerking tussen werknemers en werkgevers met wederzijdse rechten en plichten."],
+  ["Sociale wetten","Wetten die het leven van de zwakkeren in de samenleving verbeteren."],
+  ["Christendemocratie","Ideologie gebaseerd op christelijke waarden die het lot van arbeiders/armen wil verbeteren via samenwerking tussen klassen."],
+  ["Priester Daens","Leider van de Christene Volkspartij, de eerste Belgische christendemocratische partij."],
+  ["Christene Volkspartij","Eerste christendemocratische partij in België, opgericht onder leiding van priester Daens."],
+  ["Daensisme","De beweging rond priester Daens; werd door de paus veroordeeld."]
+ ],
+ q:[
+  {type:"mc",q:"Waarmee probeerde de katholieke Kerk tijdens het grootste deel van de 19de eeuw de noden van de armen te lenigen?",opts:["Met sociale wetten","Met liefdadigheid","Met stakingen","Met het cijnskiesrecht"],cor:1,expl:"De Kerk gebruikte vooral <b>liefdadigheid</b> en had weinig aandacht voor de structurele sociale ongelijkheid."},
+  {type:"mc",q:"Door welk fenomeen groeide de aandacht van de katholieken voor de arbeiders?",opts:["Het succes van het socialisme","De Verlichting","Het imperialisme","De Frans-Duitse Oorlog"],cor:0,expl:"Door het <b>succes van het socialisme</b> vreesden de progressieven dat arbeiders zouden overlopen naar het 'goddeloze' socialisme."},
+  {type:"tf",q:"De conservatieve katholieken waren voorstander van de emancipatie van de arbeiders.",cor:false,fb:"Fout. De <b>conservatieve</b> katholieken waren géén voorstander van emancipatie; zij wilden enkel met liefdadigheid helpen. De progressieven waren wél voor emancipatie."},
+  {type:"match",q:"Combineer elke stroming met haar standpunt.",left:["Conservatieve katholieken","Progressieve katholieken"],opts:["Enkel liefdadigheid, geen extra rechten voor arbeiders","Voorstander van emancipatie en samenwerking arbeiders-werkgevers"],key:[0,1],expl:"Conservatieven: enkel liefdadigheid. Progressieven: emancipatie en samenwerking."},
+  {type:"fill",q:"De pauselijke brief die de basis legde voor de christendemocratie heet …",acc:["rerum novarum"],ans:"Rerum Novarum"},
+  {type:"mc",q:"Welke paus schreef Rerum Novarum?",opts:["Paus Pius IX","Paus Leo XIII","Paus Johannes XXIII","Paus Franciscus"],cor:1,expl:"<b>Paus Leo XIII</b> schreef Rerum Novarum en pleitte voor de gulden middenweg."},
+  {type:"open",q:"Welke twee oplossingen ('gulden middenweg') stelde paus Leo XIII voor in Rerum Novarum?",model:"1) Corporatisme: samenwerking tussen werknemers en werkgevers met wederzijdse rechten en plichten. 2) Sociale wetten: de overheid moet wetten maken die het leven van de zwakkeren in de samenleving verbeteren."},
+  {type:"fill",q:"De samenwerking tussen werknemers en werkgevers met wederzijdse rechten en plichten heet …",acc:["corporatisme"],ans:"corporatisme"},
+  {type:"tf",q:"Rerum Novarum wees zowel het socialisme als de misbruiken van het liberalisme/kapitalisme af.",cor:true,fb:"Correct — daarom spreekt men van de 'gulden middenweg'."},
+  {type:"mc",q:"Wie leidde de eerste Belgische christendemocratische partij?",opts:["Karl Marx","Priester Daens","Paus Leo XIII","Leopold II"],cor:1,expl:"<b>Priester Daens</b> leidde de Christene Volkspartij, de eerste christendemocratische partij."},
+  {type:"mc",q:"Hoe liep het af met priester Daens?",opts:["Hij werd paus","De paus veroordeelde het Daensisme; hij mocht niet meer zetelen en stierf een jaar later","Hij werd eerste minister","Hij sloot zich aan bij de socialisten"],cor:1,expl:"De paus veroordeelde het <b>Daensisme</b>. Daens mocht niet meer in het parlement zetelen en stierf een jaar later."},
+  {type:"open",q:"Wat is de christendemocratie? Geef een korte definitie.",model:"De christendemocratie is een ideologie die zich baseert op de christelijke waarden en het lot van de arbeiders/armen wil verbeteren door samenwerking tussen de verschillende klassen. Ze ontstond uit Rerum Novarum als een 'gulden middenweg' tussen socialisme en kapitalisme."},
+  {type:"tf",q:"De Christene Volkspartij van Daens kreeg de volledige steun van de katholieke partij en van Rome.",cor:false,fb:"Fout. De partij kreeg net veel <b>tegenkanting</b> van de katholieke partij én van de Kerk in Rome."}
+ ]
+},
+
+{key:"imp",short:"H9",label:"Modern imperialisme",icon:"globe",
+ theory:[
+  {num:"I",title:"Het eurocentrisch denken over Afrika",items:[
+   {id:"I.1",t:"Afrika als 'donker continent'?",body:`
+     <p>In de 19de en tot ver in de 20ste eeuw nam men aan dat Afrika geïsoleerd en afgesloten was: een '<strong>donker continent</strong>' dat bijna uitsluitend uit natuur bestond. Deze manier van denken heet <span class="kw">eurocentrisme</span>: het benadrukken van de Europese cultuur en westerse ideeën, zonder rekening te houden met andere culturen.</p>
+     <p>Nochtans waren er in Afrika al samenlevingen met <strong>eigen machtsstructuren</strong> (koninkrijken), <strong>handelsnetwerken</strong> en een <strong>eigen, soms eeuwenoude cultuur</strong>.</p>`}
+  ]},
+  {num:"II",title:"Het modern imperialisme: kenmerken en oorzaken",items:[
+   {id:"II.1",t:"Definitie",body:`
+     <p><span class="kw">Modern imperialisme</span> = het streven van (vooral Europese) staten naar een groot overzees rijk <strong>met heerschappij over andere volkeren en gebieden</strong>, ongeveer tussen 1870 en 1914.</p>`},
+   {id:"II.2",t:"De drie oorzaken",body:`
+     <ol class="steps">
+       <li><span class="kw">Economisch motief</span> <span>— zoektocht naar kostbare grondstoffen (rubber, katoen, ertsen, mineralen, tropisch hout) en naar nieuwe afzetmarkten voor de overproductie van de industrie. Kapitalistische investeerders zagen er grote winstmogelijkheden.</span></li>
+       <li><span class="kw">Politiek motief</span> <span>— uitbreiding van het grondgebied vergrootte de nationale macht en het aanzien. (Zo leidde nationalisme tot imperialisme.) Kolonies boden ook strategische militaire bases en controle over zeeroutes → een sterkere geopolitieke positie.</span></li>
+       <li><span class="kw">Cultureel motief</span> <span>— Europeanen vonden hun samenleving moderner en zagen het als hun plicht 'beschaving' en het christendom te brengen naar 'minder ontwikkelde' volkeren (<span class="kw">cultuursuprematie</span>).</span></li>
+     </ol>`}
+  ]},
+  {num:"III",title:"De Conferentie van Berlijn (1885)",items:[
+   {id:"III.1",t:"Afrika verdeeld op de kaart",body:`
+     <p>Op de <span class="kw">Conferentie van Berlijn (1885)</span> besloten de Europese landen hoe ze Afrika onderling zouden verdelen. Daarbij trokken ze <span class="kw">kunstmatige grenzen</span> dwars door eeuwenoude gebieden van <span class="kw">etnische groepen</span>.</p>
+     <p>Gevolg: landen met heel diverse etnische groepen binnen hun grenzen, wat later tot conflicten leidde. De erfenis van die kunstmatige grenzen is vandaag nog voelbaar in de geopolitiek en etnische relaties in Afrika.</p>`}
+  ]}
+ ],
+ vocab:[
+  ["Eurocentrisme","Het benadrukken van de Europese cultuur en westerse ideeën, zonder rekening te houden met andere culturen en beschavingen."],
+  ["Modern imperialisme","Streven van (Europese) staten naar een groot overzees rijk met heerschappij over andere volkeren en gebieden (ca. 1870-1914)."],
+  ["Koloniseren","Een overzees gebied in bezit nemen en besturen om er grondstoffen en afzetmarkten uit te halen."],
+  ["Afzetmarkt","Markt waar de industrie haar producten kan verkopen."],
+  ["Overproductie","Het produceren van meer goederen dan men in eigen land kan verkopen."],
+  ["Geopolitiek","Manier om te kijken hoe landen met elkaar omgaan op basis van hun ligging en politieke invloed."],
+  ["Cultuursuprematie","Het idee dat de eigen (Europese) cultuur superieur is en dat men 'primitieve' volkeren moet beschaven en bekeren."],
+  ["Conferentie van Berlijn (1885)","Bijeenkomst waar de Europese landen beslisten hoe ze Afrika onderling zouden verdelen."],
+  ["Kunstmatige grenzen","Grenzen die op de kaart werden getrokken zonder rekening te houden met bestaande etnische gebieden."],
+  ["Etnische groep","Culturele of sociale groep die door religie, taal of cultuur met elkaar verbonden is."]
+ ],
+ q:[
+  {type:"fill",q:"Het benadrukken van de Europese cultuur zonder rekening te houden met andere culturen, noemt men …",acc:["eurocentrisme"],ans:"eurocentrisme"},
+  {type:"tf",q:"In de 19de eeuw bestonden er in Afrika al samenlevingen met eigen machtsstructuren, handelsnetwerken en cultuur.",cor:true,fb:"Correct — ondanks het eurocentrische beeld van een 'donker continent' waren er al koninkrijken, handelsnetwerken en eeuwenoude culturen."},
+  {type:"mc",q:"Tussen welke periode situeert men het modern imperialisme ongeveer?",opts:["1500-1600","1789-1815","1870-1914","1939-1945"],cor:2,expl:"Het <b>modern imperialisme</b> situeert men ongeveer tussen 1870 en 1914."},
+  {type:"open",q:"Geef de drie oorzaken (motieven) van het modern imperialisme.",model:"1) Het economisch motief: zoektocht naar grondstoffen (rubber, katoen, ertsen…) en naar nieuwe afzetmarkten voor de overproductie. 2) Het politiek motief: uitbreiding van het grondgebied om de nationale macht en het aanzien te vergroten, plus strategische militaire bases en controle over zeeroutes. 3) Het cultureel motief: het gevoel als plicht 'beschaving' en het christendom te brengen naar 'minder ontwikkelde' volkeren (cultuursuprematie)."},
+  {type:"mc",q:"Welke grondstoffen zochten de Europese industrielanden in hun kolonies?",opts:["Steenkool en ijzer uit eigen land","Rubber, katoen, ertsen, mineralen en tropisch hout","Enkel goud","Aardolie en gas"],cor:1,expl:"Het <b>economisch motief</b>: men zocht onder meer rubber, katoen, ertsen, mineralen en tropisch hout."},
+  {type:"tf",q:"Het nationalisme leidde mee tot het imperialisme.",cor:true,fb:"Correct — uitbreiding van het grondgebied vergrootte de nationale macht; zo leidde nationalisme tot imperialisme."},
+  {type:"mc",q:"Wat houdt het cultureel motief van het imperialisme in?",opts:["Het verzamelen van Afrikaanse kunst","Het idee dat men 'beschaving' en het christendom moest brengen naar 'minder ontwikkelde' volkeren","Het bouwen van scholen in Europa","Het verspreiden van het socialisme"],cor:1,expl:"Het <b>cultureel motief</b> berust op cultuursuprematie: Europeanen voelden het als hun plicht 'primitieve' volkeren te beschaven en te bekeren."},
+  {type:"fill",q:"Het idee dat de eigen Europese cultuur superieur is en andere volkeren 'beschaafd' moeten worden, heet …",acc:["cultuursuprematie"],ans:"cultuursuprematie"},
+  {type:"mc",q:"Wat werd beslist op de Conferentie van Berlijn (1885)?",opts:["Het einde van de slavernij","Hoe de Europese landen Afrika onderling zouden verdelen","De oprichting van de Volkenbond","De onafhankelijkheid van België"],cor:1,expl:"Op de <b>Conferentie van Berlijn (1885)</b> besloten de Europese landen hoe ze Afrika onder elkaar zouden verdelen."},
+  {type:"tf",q:"Bij de verdeling van Afrika hielden de Europese landen zorgvuldig rekening met de bestaande grenzen tussen etnische groepen.",cor:false,fb:"Fout. Men trok net <b>kunstmatige grenzen</b> dwars door eeuwenoude etnische gebieden, wat later tot conflicten leidde."},
+  {type:"open",q:"Waarom zorgen de kunstmatige grenzen uit 1885 vandaag nog voor problemen?",model:"Bij de Conferentie van Berlijn werden grenzen getrokken zonder rekening te houden met de bestaande etnische gebieden. Daardoor ontstonden landen met heel diverse etnische groepen binnen dezelfde grenzen, terwijl samenhorende groepen soms gescheiden werden. Dit veroorzaakte (en veroorzaakt nog steeds) conflicten tussen etnische gemeenschappen; de erfenis is nog voelbaar in de hedendaagse geopolitiek en etnische relaties in Afrika."},
+  {type:"mc",q:"Waarom konden kolonies de geopolitieke positie van een land versterken?",opts:["Door meer toeristen aan te trekken","Door strategische militaire bases en controle over belangrijke zeeroutes","Door lagere belastingen","Door een groter parlement"],cor:1,expl:"In kolonies konden staten <b>militaire bases</b> opzetten en zo belangrijke zeeroutes controleren, wat hun geopolitieke positie versterkte."}
+ ]
+},
+
+{key:"congo",short:"H10",label:"Onafhankelijke Congostaat",icon:"flag",
+ theory:[
+  {num:"I",title:"Situering in tijd en ruimte",items:[
+   {id:"I.1",t:"De Onafhankelijke Congostaat van Leopold II",body:`
+     <p>De <span class="kw">Onafhankelijke Congostaat</span> (ook <em>Congo Vrijstaat</em>) was een staat in <strong>Midden-Afrika</strong> waar de Belgische koning <span class="kw">Leopold II</span> aan de macht was als kolonisator, in de periode <span class="kw">1885–1908</span>.</p>
+     <p>De staat ontstond in de context van het <strong>modern imperialisme</strong> en de <strong>Conferentie van Berlijn (1885)</strong>, waar de Europese landen Afrika onderling verdeelden (zie hoofdstuk 9).</p>`}
+  ]},
+  {num:"II",title:"Aandachtspunt bij dit hoofdstuk",items:[
+   {id:"II.1",t:"Studietip",body:`
+     <div class="note-card">In je samenvatting is dit hoofdstuk vooral een <strong>beknopte situering</strong> (tijdlijn 1885–1908) en steunt het op kaart- en beeldmateriaal. De oefenvragen hieronder toetsen de kernfeiten die in de samenvatting staan: <strong>wie, waar en wanneer</strong>, en de link met de Conferentie van Berlijn. Vul aan met je les- en kaartmateriaal voor de details.</div>`}
+  ]}
+ ],
+ vocab:[
+  ["Onafhankelijke Congostaat","Staat in Midden-Afrika waar Leopold II als kolonisator aan de macht was (1885-1908); ook Congo Vrijstaat genoemd."],
+  ["Congo Vrijstaat","Andere naam voor de Onafhankelijke Congostaat van Leopold II."],
+  ["Leopold II","Belgische koning die als kolonisator persoonlijk over de Onafhankelijke Congostaat heerste (1885-1908)."],
+  ["Midden-Afrika","Het gebied waar de Onafhankelijke Congostaat gelegen was."]
+ ],
+ q:[
+  {type:"fill",q:"De Belgische koning die over de Onafhankelijke Congostaat heerste, was …",acc:["leopold ii","leopold 2","leopold de tweede","koning leopold ii"],ans:"Leopold II"},
+  {type:"mc",q:"In welke periode bestond de Onafhankelijke Congostaat van Leopold II?",opts:["1830-1885","1885-1908","1908-1960","1914-1918"],cor:1,expl:"De Onafhankelijke Congostaat bestond van <b>1885 tot 1908</b>."},
+  {type:"mc",q:"In welk deel van Afrika lag de Onafhankelijke Congostaat?",opts:["Noord-Afrika","Zuid-Afrika","Midden-Afrika","Oost-Afrika"],cor:2,expl:"De Onafhankelijke Congostaat lag in <b>Midden-Afrika</b>."},
+  {type:"fill",q:"Een andere benaming voor de Onafhankelijke Congostaat is Congo …",acc:["vrijstaat"],ans:"Congo Vrijstaat"},
+  {type:"tf",q:"De Onafhankelijke Congostaat ontstond in de context van de Conferentie van Berlijn (1885) en het modern imperialisme.",cor:true,fb:"Correct — op de Conferentie van Berlijn (1885) verdeelden de Europese landen Afrika; in die context kwam de Congostaat onder Leopold II tot stand."},
+  {type:"open",q:"Situeer de Onafhankelijke Congostaat in tijd en ruimte (wie, waar, wanneer).",model:"De Onafhankelijke Congostaat (of Congo Vrijstaat) was een staat in Midden-Afrika waar de Belgische koning Leopold II als kolonisator aan de macht was, in de periode 1885 tot 1908. Ze ontstond in de context van het modern imperialisme en de Conferentie van Berlijn."}
+ ]
+},
+
+{key:"oorz",short:"H11",label:"WO I — oorzaken & aanleiding",icon:"alert",
+ theory:[
+  {num:"I",title:"De OORZAKEN van Wereldoorlog I",items:[
+   {id:"I.1",t:"1) De Frans-Duitse Oorlog (1870-1871)",body:`
+     <p>Duitsland won in 1870 de <span class="kw">Frans-Duitse Oorlog</span> en annexeerde het Franse gebied <span class="kw">Elzas-Lotharingen</span> (met belangrijke grondstoffen). De Fransen voelden zich zwaar vernederd en wilden <strong>wraak</strong> voor de nederlaag én het gebiedsverlies.</p>`},
+   {id:"I.2",t:"2) Nationalisme",body:`
+     <ul>
+       <li>Het nationalisme zorgde voor spanningen tussen de grootmachten (Frankrijk, Duitsland, Rusland, Oostenrijk-Hongarije), vooral tussen Frankrijk en Duitsland.</li>
+       <li>Op de <span class="kw">Balkan</span> wilden enkele volkeren zich losmaken van het verzwakte <span class="kw">Osmaanse Rijk</span> en een eigen natiestaat vormen. Zo kwamen ze in conflict met Oostenrijk-Hongarije en Rusland, die er ook invloed wilden behouden.</li>
+     </ul>`},
+   {id:"I.3",t:"3) Imperialisme",body:`
+     <p>Door het nationalisme wilden veel landen hun koloniaal gebied uitbreiden en droomden ze van een <strong>wereldrijk/imperium</strong> (vooral Duitsland). De imperialistische ambities veroorzaakten onderlinge spanningen: de landen wedijverden om de beste kolonies.</p>`},
+   {id:"I.4",t:"4) Bewapeningswedloop",body:`
+     <p>De grootmachten produceerden massaal wapens en investeerden zwaar in leger en marine. De technologische vooruitgang van de industriële revolutie leidde tot een <span class="kw">bewapeningswedloop</span>: landen probeerden elkaar te overtreffen in wapentechnologie en aantallen.</p>`},
+   {id:"I.5",t:"5) Allianties of bondgenootschappen",body:`
+     <p>Om hun veiligheid te versterken sloten landen <span class="kw">allianties</span>: bij een oorlogsverklaring zouden de bondgenoten elkaar te hulp schieten. Zo ontstonden twee grote bondgenootschappen:</p>
+     <ul>
+       <li>de <span class="kw">Triple Alliantie</span> (ook Driebond of Centralen);</li>
+       <li>de <span class="kw">Triple Entente</span> (ook de Geallieerden).</li>
+     </ul>`}
+  ]},
+  {num:"II",title:"De AANLEIDING van Wereldoorlog I",items:[
+   {id:"II.1",t:"De moord in Sarajevo",body:`
+     <ul>
+       <li>De spanningen op de Balkan liepen verder op. Het koninkrijk <strong>Servië</strong> steunde nationalisten in <span class="kw">Bosnië-Herzegovina</span>, dat door Oostenrijk-Hongarije was geannexeerd.</li>
+       <li>Op <span class="kw">28 juni 1914</span> schoot een Bosnisch-Servische nationalist de Oostenrijkse troonopvolger <span class="kw">Franz Ferdinand</span> en zijn echtgenote dood in <span class="kw">Sarajevo</span>. Die dubbele moord vormde de <strong>aanleiding</strong>.</li>
+       <li>Oostenrijk-Hongarije wilde afrekenen met Servië; Servië zocht steun bij Rusland. Toen Oostenrijk-Hongarije een maand later de oorlog verklaarde aan Servië, kwam de <span class="kw">kettingreactie</span> van de bondgenootschappen op gang → Wereldoorlog I was begonnen.</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Frans-Duitse Oorlog (1870-1871)","Oorlog die Duitsland won; het annexeerde Elzas-Lotharingen, wat bij Frankrijk wraakgevoelens opwekte."],
+  ["Elzas-Lotharingen","Frans grensgebied met grondstoffen dat Duitsland in 1871 annexeerde."],
+  ["Balkan","Zuidoost-Europa, waar spanningen ontstonden tussen volkeren, Oostenrijk-Hongarije en Rusland."],
+  ["Osmaanse Rijk","Verzwakt rijk waarvan enkele Balkanvolkeren zich wilden losmaken."],
+  ["Bewapeningswedloop","Landen die elkaar proberen te overtreffen in wapentechnologie en aantallen wapens."],
+  ["Allianties (bondgenootschappen)","Afspraken tussen landen om elkaar te hulp te schieten bij oorlog."],
+  ["Triple Alliantie","Ook Driebond of Centralen genoemd; een van de twee grote bondgenootschappen."],
+  ["Triple Entente","Ook de Geallieerden genoemd; het andere grote bondgenootschap."],
+  ["Aanleiding","De directe gebeurtenis die een oorlog doet uitbreken (hier: de moord in Sarajevo)."],
+  ["Franz Ferdinand","Oostenrijkse troonopvolger die in 1914 in Sarajevo werd vermoord."],
+  ["Sarajevo","Bosnische stad waar Franz Ferdinand en zijn echtgenote werden doodgeschoten."],
+  ["Bosnië-Herzegovina","Gebied dat door Oostenrijk-Hongarije was geannexeerd; Servië steunde er de nationalisten."],
+  ["Kettingreactie (bondgenootschappen)","Het mechanisme waardoor één oorlogsverklaring de bondgenoten meesleepte in WO I."]
+ ],
+ q:[
+  {type:"mc",q:"Welk gebied annexeerde Duitsland na de Frans-Duitse Oorlog (1870-1871)?",opts:["De Elzas-Lotharingen","De Balkan","Bosnië-Herzegovina","De Rijnprovincie"],cor:0,expl:"Duitsland annexeerde <b>Elzas-Lotharingen</b>, een gebied met belangrijke grondstoffen; Frankrijk wilde daarop wraak."},
+  {type:"tf",q:"Na de Frans-Duitse Oorlog wilden de Fransen wraak nemen op Duitsland.",cor:true,fb:"Correct — de Fransen voelden zich vernederd door de nederlaag en het gebiedsverlies."},
+  {type:"open",q:"Som de vijf oorzaken van Wereldoorlog I op.",model:"1) De Frans-Duitse Oorlog (1870-1871) en de Franse wraakgevoelens. 2) Het nationalisme (spanningen tussen de grootmachten en op de Balkan). 3) Het imperialisme (wedijver om kolonies en een wereldrijk). 4) De bewapeningswedloop. 5) De allianties of bondgenootschappen (Triple Alliantie en Triple Entente)."},
+  {type:"mc",q:"Waarom was de situatie op de Balkan zo gespannen?",opts:["Door een aardbeving","Omdat enkele volkeren zich wilden losmaken van het verzwakte Osmaanse Rijk en zo botsten met Oostenrijk-Hongarije en Rusland","Door een hongersnood","Omdat het socialisme er aan de macht kwam"],cor:1,expl:"Op de <b>Balkan</b> wilden volkeren zich losmaken van het Osmaanse Rijk, wat tot conflict leidde met Oostenrijk-Hongarije en Rusland."},
+  {type:"fill",q:"De wapenwedloop tussen landen om de meest geavanceerde wapens noemt men de …",acc:["bewapeningswedloop","wapenwedloop"],ans:"bewapeningswedloop"},
+  {type:"mc",q:"Welke twee grote bondgenootschappen ontstonden vóór WO I?",opts:["NAVO en Warschaupact","De Triple Alliantie (Driebond) en de Triple Entente","De Volkenbond en de Centralen","De Geallieerden en de As"],cor:1,expl:"De <b>Triple Alliantie</b> (Driebond/Centralen) en de <b>Triple Entente</b> (Geallieerden)."},
+  {type:"match",q:"Combineer elk bondgenootschap met zijn andere benaming.",left:["Triple Alliantie","Triple Entente"],opts:["Driebond / Centralen","Geallieerden"],key:[0,1],expl:"Triple Alliantie = Driebond/Centralen; Triple Entente = Geallieerden."},
+  {type:"tf",q:"Door de allianties zouden bondgenoten elkaar te hulp schieten bij een oorlogsverklaring.",cor:true,fb:"Correct — dat is net het gevaar van de bondgenootschappen: een lokaal conflict kon zo uitgroeien tot een wereldoorlog."},
+  {type:"fill",q:"De directe aanleiding van WO I was de moord op troonopvolger Franz Ferdinand in de stad …",acc:["sarajevo"],ans:"Sarajevo"},
+  {type:"mc",q:"Op welke datum werd Franz Ferdinand vermoord?",opts:["11 november 1918","28 juni 1914","1 augustus 1914","14 juli 1789"],cor:1,expl:"Op <b>28 juni 1914</b> werd Franz Ferdinand met zijn echtgenote doodgeschoten in Sarajevo."},
+  {type:"open",q:"Leg uit hoe de moord in Sarajevo leidde tot het uitbreken van WO I.",model:"Servië steunde de nationalisten in Bosnië-Herzegovina, dat door Oostenrijk-Hongarije was geannexeerd. Na de moord op Franz Ferdinand zag Oostenrijk-Hongarije een reden om af te rekenen met Servië. Servië zocht steun bij Rusland. Toen Oostenrijk-Hongarije een maand later de oorlog verklaarde aan Servië, traden de bondgenootschappen in werking: door de kettingreactie van de allianties werden steeds meer landen meegesleept en brak Wereldoorlog I uit."},
+  {type:"mc",q:"Wat is het verschil tussen een oorzaak en de aanleiding van WO I?",opts:["Er is geen verschil","De oorzaken (nationalisme, imperialisme…) bouwden de spanning op over een lange periode; de aanleiding (moord in Sarajevo) was de directe vonk die de oorlog deed uitbreken","De aanleiding duurde jaren, de oorzaak één dag","De aanleiding kwam vóór de oorzaken"],cor:1,expl:"De <b>oorzaken</b> zijn de dieperliggende spanningen die zich opbouwden; de <b>aanleiding</b> is de directe gebeurtenis (de moord in Sarajevo) die de oorlog deed losbarsten."},
+  {type:"tf",q:"Vooral Duitsland droomde van een groot wereldrijk en wilde ernstig genomen worden in de wereldpolitiek.",cor:true,fb:"Correct — de imperialistische ambities, vooral van Duitsland, vergrootten de onderlinge spanningen."}
+ ]
+},
+
+{key:"verloop",short:"H12",label:"WO I — verloop & gevolgen",icon:"shield",
+ theory:[
+  {num:"I",title:"Naar de slachtbank",items:[
+   {id:"I.1",t:"Van bewegingsoorlog naar loopgravenoorlog",body:`
+     <ul>
+       <li>De legerleiding dacht dat de oorlog 'slechts' enkele maanden zou duren, maar de offensieve oorlog kreeg al snel een <strong>defensief karakter</strong>.</li>
+       <li>Vanaf 1915-1916 groeven de troepen zich in: de <span class="kw">loopgravenoorlog</span>, vooral aan het <span class="kw">Westelijk front</span> (Noord-Frankrijk en West-Vlaanderen). Tot 1918 was er nauwelijks doorbraak in wat een <span class="kw">stellingenoorlog</span> werd.</li>
+       <li>Het aantal slachtoffers was gigantisch: ongeveer de helft van de troepen van de Triple Entente en meer dan 60% van de Driebond werd gedood, gewond, gevangengenomen of vermist. Om te kunnen blijven strijden, haalden landen als Groot-Brittannië en Frankrijk nieuwe rekruten uit hun <strong>kolonies</strong>.</li>
+     </ul>`}
+  ]},
+  {num:"II",title:"Scharniermoment: 'primitieve' vs. 'moderne' oorlogsvoering",items:[
+   {id:"II.1",t:"Nieuwe en krachtiger wapens",body:`
+     <ol class="steps">
+       <li><span class="kw">Tanks</span> <span>— de Britten zetten de eerste tanks in om het niemandsland over te steken.</span></li>
+       <li>Vliegtuigen en zeppelins <span>— voor verkenningsvluchten en bombardementen.</span></li>
+       <li>Vlammenwerpers <span>— om loopgraven en bunkers te ontruimen.</span></li>
+       <li><span class="kw">Gasaanvallen</span> <span>— met chloorgas en later mosterdgas: de eerste chemische oorlogsvoering op grote schaal.</span></li>
+       <li><span class="kw">Duikboten</span> <span>— vooral door de Duitsers, als reactie op de Britse zeeblokkade die de handel met Duitsland verhinderde.</span></li>
+     </ol>`},
+   {id:"II.2",t:"Primitieve wapens en uitrusting",body:`
+     <p>Tegelijk pasten generaals nog technieken van vóór de industriële revolutie toe: in het begin werden nog <strong>paarden</strong> gebruikt, droegen soldaten <strong>opvallende uniformen</strong> en gebruikte men knuppels, dolken en harnassen — niet meer geschikt tegen de moderne wapens.</p>`}
+  ]},
+  {num:"III",title:"Amerika in de oorlog",items:[
+   {id:"III.1",t:"De VSA geeft het isolationisme op",body:`
+     <p>Door de duikbotenoorlog raakten ook Amerikaanse handelsschepen betrokken. Daarop gaf de VSA haar politiek van <span class="kw">isolationisme</span> op, verklaarde de oorlog aan Duitsland en stuurde massaal fitte, goedgetrainde troepen naar Europa.</p>`}
+  ]},
+  {num:"IV",title:"Verzet tegen de oorlog",items:[
+   {id:"IV.1",t:"Rusland verlaat de oorlog (1917)",body:`
+     <ul>
+       <li>Het Russische leger was slecht uitgerust en de verliezen stapelden zich op; er ontstond onvrede. Tijdens de <span class="kw">Russische Revolutie</span> veroverden de communisten de macht en sloten ze vrede met Duitsland.</li>
+       <li>Gevolgen van de <span class="kw">Vrede van Brest-Litovsk</span>: (1) Duitsland verkreeg grote delen van het Russische Rijk; (2) Duitsland kon zijn troepen van het oostfront naar het westen verplaatsen — tot grote woede van Frankrijk en Groot-Brittannië.</li>
+     </ul>`},
+   {id:"IV.2",t:"Muiterijen",body:`
+     <p>Ook in het westen kwam er verzet: soldaten begonnen te <span class="kw">muiten</span> tegen hun oversten. De legerleiding trad hardhandig op, soms met executies.</p>`}
+  ]},
+  {num:"V",title:"Laatste stuiptrekkingen",items:[
+   {id:"V.1",t:"De wapenstilstand (11/11/1918)",body:`
+     <p>Vanaf juli 1918 volgde de ene Duitse nederlaag na de andere. Op <span class="kw">11 november 1918</span> (om 11u) tekende Duitsland de <span class="kw">wapenstilstand</span>, waarna de Duitse keizer troonsafstand deed. Let op: op dat moment was er nog géén <strong>vrede</strong> ondertekend.</p>`}
+  ]},
+  {num:"VI",title:"Gevolgen van Wereldoorlog I",items:[
+   {id:"VI.1",t:"Op politiek vlak",body:`
+     <ul>
+       <li>Het <span class="kw">Verdrag van Versailles</span>: Duitsland moest volledig ontwapenen, delen van zijn grondgebied en al zijn kolonies afstaan en oorlogsschade betalen. Dit '<span class="kw">Diktat van Versailles</span>' leidde bij veel Duitsers tot frustraties en bracht een tweede wereldoorlog dichterbij.</li>
+       <li>Oostenrijk-Hongarije werd verdeeld in republieken: elk volk had recht op <span class="kw">zelfbeschikking</span>.</li>
+       <li>Er werd een <span class="kw">Volkenbond</span> opgericht om voortaan over de vrede te waken en conflicten vreedzaam op te lossen.</li>
+     </ul>`},
+   {id:"VI.2",t:"Op sociaal-economisch en cultureel vlak",body:`
+     <ul>
+       <li>Sociaal-economisch: verwoeste steden, landbouw- en industriegebieden, en een massaal aantal slachtoffers: <strong>15 miljoen doden en 35 miljoen gewonden</strong>. Op termijn ondermijnde dit de macht van Europa in de wereld.</li>
+       <li>Cultureel: na vier jaar spanning stond ontspanning centraal in de jaren '20. De massa (het 'kanonnenvlees') kwam op voor haar belangen, wat de macht van de burgerij ondermijnde.</li>
+     </ul>`}
+  ]}
+ ],
+ vocab:[
+  ["Loopgravenoorlog","Oorlog waarbij troepen zich ingroeven in loopgraven (vanaf 1915-1916, vooral aan het Westelijk front)."],
+  ["Stellingenoorlog","Oorlog zonder veel doorbraak waarbij beide partijen hun stellingen vasthouden."],
+  ["Westelijk front","Frontlijn in Noord-Frankrijk en West-Vlaanderen waar de loopgravenoorlog woedde."],
+  ["Tank","Nieuw wapen dat de Britten inzetten om het niemandsland over te steken."],
+  ["Gasaanvallen","Aanvallen met chloorgas en later mosterdgas: de eerste chemische oorlogsvoering op grote schaal."],
+  ["Duikboot","Wapen (vooral Duits) om vijandelijke schepen op zee te treffen, als reactie op de Britse zeeblokkade."],
+  ["Zeeblokkade","Britse blokkade die de handel met Duitsland verhinderde."],
+  ["Isolationisme","Politiek waarbij een staat zich van de buitenwereld afkeert; de VSA gaf dit op om in de oorlog te treden."],
+  ["Russische Revolutie","Omwenteling (1917) waarbij de communisten in Rusland de macht veroverden en vrede sloten met Duitsland."],
+  ["Vrede van Brest-Litovsk","Vredesverdrag waarbij Rusland uit de oorlog stapte; Duitsland kreeg grondgebied en kon troepen naar het westen sturen."],
+  ["Muiterij","Het zich verzetten van soldaten tegen hun oversten."],
+  ["Wapenstilstand (11/11/1918)","De staking van de gevechten die Duitsland op 11 november 1918 tekende (nog geen vrede)."],
+  ["Verdrag van Versailles","Verdrag dat Duitsland streng strafte: ontwapenen, gebied en kolonies afstaan, oorlogsschade betalen."],
+  ["Diktat van Versailles","Het als vernederend ervaren karakter van het Verdrag van Versailles, dat bij Duitsers frustraties opwekte."],
+  ["Zelfbeschikkingsrecht","Het recht van elk volk om zijn eigen lot te bepalen; leidde tot de opdeling van Oostenrijk-Hongarije."],
+  ["Volkenbond","Internationale organisatie na WO I die over de vrede moest waken en conflicten vreedzaam oplossen."]
+ ],
+ q:[
+  {type:"mc",q:"Hoe lang dacht de legerleiding dat de oorlog zou duren?",opts:["Enkele jaren","Slechts enkele maanden","Tien jaar","Eén dag"],cor:1,expl:"De legerleiding was ervan overtuigd dat de oorlog 'slechts' enkele maanden zou duren, maar het werd een jarenlange loopgravenoorlog."},
+  {type:"fill",q:"Vanaf 1915-1916 groeven de troepen zich in: men spreekt dan van een …",acc:["loopgravenoorlog"],ans:"loopgravenoorlog"},
+  {type:"mc",q:"Waar lag het Westelijk front vooral?",opts:["In Rusland","In Noord-Frankrijk en West-Vlaanderen","Op de Balkan","In Noord-Afrika"],cor:1,expl:"Het <b>Westelijk front</b> lag in Noord-Frankrijk en West-Vlaanderen."},
+  {type:"tf",q:"Landen als Groot-Brittannië en Frankrijk haalden nieuwe rekruten uit hun kolonies.",cor:true,fb:"Correct — om te kunnen blijven strijden, gingen ze nieuwe soldaten halen in hun kolonies."},
+  {type:"mc",q:"Welk land zette als eerste tanks in om het niemandsland over te steken?",opts:["Duitsland","Frankrijk","Groot-Brittannië (de Britten)","Rusland"],cor:2,expl:"De <b>Britten</b> zetten de allereerste tanks in."},
+  {type:"open",q:"Noem drie nieuwe, moderne wapens die in WO I werden ingezet.",model:"Mogelijke voorbeelden: tanks (om het niemandsland over te steken), vliegtuigen en zeppelins (verkenning en bombardementen), vlammenwerpers (loopgraven en bunkers ontruimen), gasaanvallen met chloor- en mosterdgas (eerste chemische oorlogsvoering op grote schaal) en duikboten (om schepen op zee te treffen)."},
+  {type:"fill",q:"De gasaanvallen met chloorgas en mosterdgas waren de eerste vorm van … oorlogsvoering op grote schaal.",acc:["chemische","chemisch"],ans:"chemische (oorlogsvoering)"},
+  {type:"mc",q:"Waarom zette Duitsland vooral duikboten in?",opts:["Om kolonies te veroveren","Als reactie op de Britse zeeblokkade die de handel met Duitsland verhinderde","Om troepen te vervoeren","Om vissersboten te beschermen"],cor:1,expl:"De Duitsers reageerden met <b>duikboten</b> tegen de Britse zeeblokkade, die de invoer van producten en grondstoffen verhinderde."},
+  {type:"mc",q:"Waarom gaf de VSA haar politiek van isolationisme op?",opts:["Door een aanval op New York","Doordat door de duikbotenoorlog ook Amerikaanse handelsschepen betrokken raakten","Om kolonies in Afrika te krijgen","Door de Russische Revolutie"],cor:1,expl:"Door de duikbotenoorlog raakten Amerikaanse handelsschepen betrokken; daarop gaf de VSA het <b>isolationisme</b> op en verklaarde ze de oorlog aan Duitsland."},
+  {type:"tf",q:"Door de Russische Revolutie van 1917 sloot Rusland vrede met Duitsland.",cor:true,fb:"Correct — de communisten veroverden de macht en sloten de Vrede van Brest-Litovsk."},
+  {type:"open",q:"Wat waren de twee gevolgen van de Vrede van Brest-Litovsk?",model:"1) Duitsland verkreeg grote delen van het Russische Rijk. 2) Duitsland kon zijn troepen verplaatsen van het oostfront naar het westen. Dit gebeurde tot grote woede van Frankrijk en Groot-Brittannië, omdat het oostelijk front verdween en de nederlaag dreigde voor de Geallieerden."},
+  {type:"fill",q:"Soldaten die zich verzetten tegen hun oversten, pleegden …",acc:["muiterij","muiterijen","muiten"],ans:"muiterij"},
+  {type:"mc",q:"Wat gebeurde er op 11 november 1918?",opts:["De oorlog werd verklaard","Duitsland tekende de wapenstilstand en de keizer deed troonsafstand","Het Verdrag van Versailles werd getekend","De VSA trad in de oorlog"],cor:1,expl:"Op <b>11 november 1918</b> tekende Duitsland de wapenstilstand; de keizer deed troonsafstand. Er was toen nog géén vrede ondertekend."},
+  {type:"tf",q:"Met de wapenstilstand van 11 november 1918 was meteen ook de vrede getekend.",cor:false,fb:"Fout. De wapenstilstand stopte de gevechten, maar de <b>vrede</b> was op dat moment nog niet ondertekend (dat gebeurde later met het Verdrag van Versailles)."},
+  {type:"open",q:"Geef drie politieke gevolgen van Wereldoorlog I.",model:"1) Het Verdrag van Versailles strafte Duitsland streng: ontwapenen, grondgebied en kolonies afstaan, oorlogsschade betalen ('Diktat van Versailles'). 2) Oostenrijk-Hongarije werd verdeeld in republieken op basis van het zelfbeschikkingsrecht. 3) Er werd een Volkenbond opgericht om over de vrede te waken en conflicten vreedzaam op te lossen."},
+  {type:"mc",q:"Welk verdrag strafte Duitsland zwaar en wekte er frustraties op?",opts:["De Vrede van Brest-Litovsk","Het Verdrag van Versailles","Het Verdrag van Berlijn","De Triple Entente"],cor:1,expl:"Het <b>Verdrag van Versailles</b> ('Diktat van Versailles') verplichtte Duitsland te ontwapenen, gebied en kolonies af te staan en oorlogsschade te betalen."},
+  {type:"fill",q:"De internationale organisatie die na WO I over de vrede moest waken, heette de …",acc:["volkenbond"],ans:"Volkenbond"},
+  {type:"mc",q:"Hoeveel doden en gewonden vielen er ongeveer tijdens WO I?",opts:["1 miljoen doden en 2 miljoen gewonden","15 miljoen doden en 35 miljoen gewonden","100.000 doden","50 miljoen doden"],cor:1,expl:"Op sociaal-economisch vlak vielen er ongeveer <b>15 miljoen doden en 35 miljoen gewonden</b>."},
+  {type:"open",q:"Verklaar waarom het 'Diktat van Versailles' een tweede wereldoorlog dichterbij bracht.",model:"Het Verdrag van Versailles legde Duitsland heel zware straffen op: volledig ontwapenen, grondgebied en alle kolonies afstaan en hoge oorlogsschade betalen. Veel Duitsers ervoeren dit als een vernederend 'dictaat' en raakten erdoor gefrustreerd. Die frustratie en het gevoel van onrecht zouden later mee de voedingsbodem vormen voor een nieuwe oorlog, de Tweede Wereldoorlog."},
+  {type:"tf",q:"Op termijn ondermijnde WO I de machtspositie van Europa in de wereld.",cor:true,fb:"Correct — de enorme verwoesting en het massale aantal slachtoffers ondermijnden op termijn de macht van Europa."}
+ ]
+}
+];
+
+/* afgeleide data */
+const KEYS=CHAPTERS.map(c=>c.key);
+const VOCAB=[];CHAPTERS.forEach((c,ci)=>(c.vocab||[]).forEach(([t,d])=>VOCAB.push([t,d,c.key,ci])));
+const ICONS={
+ scale:'<path d="M12 3v18M7 21h10"/><path d="M6 7h12M6 7l-3 6a3 3 0 0 0 6 0zM18 7l-3 6a3 3 0 0 0 6 0z"/>',
+ users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+ heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 21l7.8-8.6a5.5 5.5 0 0 0 1-7.8z"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
+ flag:'<path d="M4 22V4M4 4h13l-2 4 2 4H4"/>',
+ alert:'<path d="M12 2 1 21h22z"/><path d="M12 9v5M12 17h.01"/>',
+ shield:'<path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5z"/>',
+ home:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+ mix:'<path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',
+ book:'<path d="M4 5h16v14H4z"/><path d="M4 9h16M9 9v10"/>'
+};
+function svg(name){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${ICONS[name]||ICONS.book}</svg>`;}
+
+/* ======================================================
+   STATE
+====================================================== */
+const STORE="gesch_master";
+let S={best:{},vocMastered:[]};
+async function loadS(){try{const r=await window.storage.get(STORE);if(r&&r.value)S=Object.assign(S,JSON.parse(r.value));}catch(e){}S.best=S.best||{};S.vocMastered=S.vocMastered||[];}
+async function saveS(){try{await window.storage.set(STORE,JSON.stringify(S));}catch(e){}}
+const norm=s=>(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[\s\-–().]/g,"").replace(/[^a-z0-9]/g,"");
+
+/* ======================================================
+   BOUW DOM (nav + views)
+====================================================== */
+function ci(key){return KEYS.indexOf(key);}
+const nav=document.getElementById("mainNav");
+const viewsEl=document.getElementById("views");
+function navBtn(id,icon,label,sel){return `<button class="mnav-btn" id="nav-${id}" role="tab" aria-selected="${sel?'true':'false'}">${svg(icon)}${label}</button>`;}
+let navHtml=navBtn("home","home","Overzicht",true);
+CHAPTERS.forEach(c=>navHtml+=navBtn(c.key,c.icon,c.label,false));
+navHtml+=navBtn("mix","mix","Gemixte modus",false);
+navHtml+=navBtn("voc","book","Woordenschat",false);
+nav.innerHTML=navHtml;
+
+let viewsHtml=`<div class="view active" id="view-home"><div class="prog-grid" id="progGrid"></div>
+  <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow);max-width:720px">
+    <h3 style="margin-bottom:12px;font-size:17px">Studietips</h3>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;font-size:14.5px;color:var(--soft)">
+      <li>📜 Werk per hoofdstuk: lees eerst de <strong>theorie</strong>, maak dan de <strong>oefenvragen</strong>.</li>
+      <li>🔀 Test je totale kennis met de <strong>gemixte modus</strong> — alle vragen door elkaar.</li>
+      <li>📚 Herhaal de <strong>woordenschat</strong> (begrippen &amp; jaartallen) in beide richtingen.</li>
+      <li>💾 Je voortgang en beste scores worden automatisch bewaard op dit toestel.</li>
+    </ul>
+  </div></div>`;
+CHAPTERS.forEach(c=>{
+  viewsHtml+=`<div class="view" id="view-${c.key}">
+    <div class="stabs" role="tablist">
+      <button class="stab" data-sub="${c.key}-theorie" aria-selected="true">Theorie</button>
+      <button class="stab" data-sub="${c.key}-oefen" aria-selected="false">Oefenen</button>
+    </div>
+    <div class="subview active" id="${c.key}-theorie"></div>
+    <div class="subview" id="${c.key}-oefen">
+      <div class="qwrap">
+        <div class="qbar"><span class="qpos mono" id="${c.key}-p"></span><span class="qsc" id="${c.key}-s"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="${c.key}-t"></div></div></div>
+        <div id="${c.key}-a"></div>
+      </div>
+    </div>
+  </div>`;
+});
+viewsHtml+=`<div class="view" id="view-mix">
+   <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;margin-bottom:18px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+     <div>
+       <div style="font:600 11px/1 'Spline Sans Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);margin-bottom:4px">Gemixte modus</div>
+       <div style="font-size:14px;color:var(--soft)">Alle vragen van alle hoofdstukken door elkaar — ideaal als laatste voorbereiding.</div>
+     </div>
+     <button class="btn btn-p" id="mixStart">Nieuwe ronde starten →</button>
+   </div>
+   <div class="qwrap"><div class="qbar"><span class="qpos mono" id="mix-p"></span><span class="qsc" id="mix-s"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="mix-t"></div></div></div><div id="mix-a"></div></div>
+ </div>`;
+viewsHtml+=`<div class="view" id="view-voc">
+   <div class="stabs" role="tablist">
+     <button class="stab" data-sub="voc-tabel" aria-selected="true">Tabel</button>
+     <button class="stab" data-sub="voc-leren" aria-selected="false">Leren</button>
+   </div>
+   <div class="subview active" id="voc-tabel">
+     <div style="color:var(--soft);font-size:14.5px;max-width:70ch;margin-bottom:16px">Alle begrippen en sleutelfeiten uit de zeven hoofdstukken. Leer ze actief via het tabblad <em>Leren</em>.</div>
+     <table class="voc-table"><thead><tr><th>Begrip</th><th>Uitleg</th></tr></thead><tbody id="vocBody"></tbody></table>
+   </div>
+   <div class="subview" id="voc-leren">
+     <div class="voc-learn-wrap">
+       <div class="dir-btns">
+         <button class="dir-btn" id="d1" aria-pressed="true">Uitleg → typ het begrip</button>
+         <button class="dir-btn" id="d2" aria-pressed="false">Begrip → leg uit</button>
+         <button class="dir-btn" id="d3" aria-pressed="false">Alles door elkaar</button>
+       </div>
+       <div class="qbar"><span class="qpos mono" id="vp"></span><span class="qsc" id="vs"></span><div class="qtrack-wrap"><div class="qtrack-fill" id="vt"></div></div></div>
+       <div id="va"></div>
+     </div>
+   </div>
+ </div>`;
+viewsEl.innerHTML=viewsHtml;
+
+/* ======================================================
+   THEORIE
+====================================================== */
+function figH(f,cap){if(!f||!FIGS[f])return "";return `<figure><img src="${FIGS[f]}" alt="${cap||f}" loading="lazy"><figcaption>${cap||""}</figcaption></figure>`;}
+function renderTheory(c){
+  return c.theory.map(sec=>`
+    <div class="sec-head"><div class="snum">${c.short} · ${sec.num}</div><h2>${sec.title}</h2></div>
+    ${sec.items.map(it=>`
+      <div class="card">
+        <div class="card-top"><span class="cn">${it.id}</span><h3>${it.t}</h3><span class="badge bk">Kennen</span></div>
+        <div class="card-body">${it.body}${figH(it.fig,it.cap)}</div>
+      </div>`).join("")}
+  `).join("");
+}
+
+/* ======================================================
+   VRAGENENGINE
+====================================================== */
+const sessions={};
+KEYS.forEach(k=>sessions[k]={qs:CHAPTERS[ci(k)].q,pos:0,score:0,_ans:false,ids:{p:k+"-p",s:k+"-s",t:k+"-t",a:k+"-a"}});
+sessions.mix={qs:[],pos:0,score:0,_ans:false,ids:{p:"mix-p",s:"mix-s",t:"mix-t",a:"mix-a"}};
+
+function chapBadge(key){if(!key)return "";const idx=ci(key);return `<span class="chap-badge cc${idx}">${CHAPTERS[idx].label}</span>`;}
+
+function renderQ(key){
+  const ss=sessions[key],ids=ss.ids;
+  if(ss.pos>=ss.qs.length){renderResult(key);return;}
+  const q=ss.qs[ss.pos];ss._ans=false;
+  document.getElementById(ids.p).textContent=`Vraag ${ss.pos+1} / ${ss.qs.length}`;
+  document.getElementById(ids.s).textContent=`Score ${ss.score}`;
+  document.getElementById(ids.t).style.width=(ss.pos/ss.qs.length*100)+"%";
+  const typeLabel={mc:"Meerkeuze",tf:"Waar of niet waar",fill:"Vul het woord in",open:"Open vraag",match:"Combineer"}[q.type]||q.type;
+  let h=`<div class="qcard"><div class="qtype-lbl"><span>${typeLabel}</span>${chapBadge(q.chap)}</div><div class="qtext">${q.q}</div>`;
+  if(q.fig&&FIGS[q.fig])h+=`<div class="qfig"><img src="${FIGS[q.fig]}" alt="figuur bij de vraag"></div>`;
+  if(q.type==="mc"){
+    h+=`<div class="opts">`+q.opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="mk">${String.fromCharCode(97+i)}</span><span>${o}</span></button>`).join("")+`</div>`;
+  }else if(q.type==="tf"){
+    h+=`<div class="opts tf"><button class="opt" data-v="true">Waar</button><button class="opt" data-v="false">Niet waar</button></div>`;
+  }else if(q.type==="fill"){
+    h+=`<div class="fill-wrap"><input type="text" id="fin-${key}" placeholder="Typ je antwoord…" autocomplete="off"></div>`;
+  }else if(q.type==="open"){
+    h+=`<textarea class="openq" id="oin-${key}" placeholder="Schrijf je antwoord, controleer dan met de verbetersleutel…"></textarea>`;
+  }else if(q.type==="match"){
+    h+=`<div class="match-grid">`+q.left.map((l,i)=>`<div class="match-row"><span class="ml">${l}</span><select class="msel" data-i="${i}"><option value="">— kies —</option>${q.opts.map((o,j)=>`<option value="${j}">${o}</option>`).join("")}</select></div>`).join("")+`</div>`;
+  }
+  h+=`<div class="fb" id="fb-${key}"></div><div class="qactions" id="qa-${key}"></div></div>`;
+  document.getElementById(ids.a).innerHTML=h;
+  wireFeedback(key,q,ss);
+}
+
+function wireFeedback(key,q,ss){
+  const fb=document.getElementById("fb-"+key),act=document.getElementById("qa-"+key),aid=ss.ids.a;
+  const next=()=>{ss.pos++;renderQ(key);};
+  const nBtn=()=>{const b=document.createElement("button");b.className="btn btn-p";b.textContent=(ss.pos+1>=ss.qs.length)?"Toon resultaat →":"Volgende →";b.onclick=next;act.appendChild(b);};
+  if(q.type==="mc"){
+    document.querySelectorAll(`#${aid} .opt`).forEach(b=>b.onclick=()=>{
+      if(ss._ans)return;ss._ans=true;const i=+b.dataset.i,ok=i===q.cor;if(ok)ss.score++;
+      document.querySelectorAll(`#${aid} .opt`).forEach((o,j)=>{o.disabled=true;if(j===q.cor)o.classList.add(j===i?"pg":"pr");if(j===i&&!ok)o.classList.add("pb");});
+      fb.className="fb show "+(ok?"ok":"no");fb.innerHTML=`<b>${ok?"Juist!":"Niet juist."}</b> ${q.expl}`;nBtn();
+    });
+  }else if(q.type==="tf"){
+    document.querySelectorAll(`#${aid} .opt`).forEach(b=>b.onclick=()=>{
+      if(ss._ans)return;ss._ans=true;const p=b.dataset.v==="true",ok=p===q.cor;if(ok)ss.score++;
+      document.querySelectorAll(`#${aid} .opt`).forEach(o=>{o.disabled=true;const v=o.dataset.v==="true";if(v===q.cor)o.classList.add(v===p?"pg":"pr");if(v===p&&!ok)o.classList.add("pb");});
+      fb.className="fb show "+(ok?"ok":"no");fb.innerHTML=`<b>${ok?"Juist!":"Niet juist."}</b> ${q.fb}`;nBtn();
+    });
+  }else if(q.type==="fill"){
+    const chk=document.createElement("button");chk.className="btn btn-p";chk.textContent="Controleer";
+    chk.onclick=()=>{if(ss._ans)return;ss._ans=true;
+      const v=document.getElementById("fin-"+key).value,ok=(q.acc||[]).map(norm).includes(norm(v));if(ok)ss.score++;
+      fb.className="fb show "+(ok?"ok":"no");fb.innerHTML=ok?`<b>Juist!</b> Het antwoord is <b>${q.ans}</b>.`:`<b>Niet juist.</b> Correct: <span style="font-weight:600;color:var(--ink)">${q.ans}</span>`;
+      act.innerHTML="";nBtn();};
+    act.appendChild(chk);
+    setTimeout(()=>{const el=document.getElementById("fin-"+key);if(el)el.addEventListener("keydown",e=>{if(e.key==="Enter")chk.click();});},0);
+  }else if(q.type==="open"){
+    const show=document.createElement("button");show.className="btn btn-p";show.textContent="Toon verbetersleutel";
+    show.onclick=()=>{
+      fb.className="fb show key";fb.innerHTML=`<b>Verbetersleutel</b><div class="model">${q.model}</div>`;act.innerHTML="";
+      const w=document.createElement("div");w.className="self-check";w.innerHTML=`<span>Was je antwoord goed?</span>`;
+      const g=document.createElement("button");g.className="mini g";g.textContent="✓ Ja";
+      const b2=document.createElement("button");b2.className="mini b";b2.textContent="✗ Nog oefenen";
+      g.onclick=()=>{if(!ss._ans){ss._ans=true;ss.score++;}next();};
+      b2.onclick=()=>{ss._ans=true;next();};
+      w.appendChild(g);w.appendChild(b2);act.appendChild(w);
+    };
+    act.appendChild(show);
+  }else if(q.type==="match"){
+    const chk=document.createElement("button");chk.className="btn btn-p";chk.textContent="Controleer";
+    chk.onclick=()=>{if(ss._ans)return;ss._ans=true;
+      const sels=[...document.querySelectorAll(`#${aid} select`)];let all=true;
+      sels.forEach((sel,i)=>{const ok=+sel.value===q.key[i];sel.classList.add(ok?"ok":"no");sel.disabled=true;if(!ok)all=false;});
+      if(all)ss.score++;
+      fb.className="fb show "+(all?"ok":"no");fb.innerHTML=`<b>${all?"Alles juist!":"Bekijk de juiste antwoorden."}</b> ${q.expl||""}`;
+      act.innerHTML="";nBtn();};
+    act.appendChild(chk);
+  }
+}
+
+function renderResult(key){
+  const ss=sessions[key];
+  if(S.best[key]==null||ss.score>S.best[key]){S.best[key]=ss.score;saveS();}
+  document.getElementById(ss.ids.p).textContent="Resultaat";
+  document.getElementById(ss.ids.t).style.width="100%";
+  const n=ss.qs.length,pct=ss.score/n;
+  const stars=pct>=0.85?"⭐⭐⭐":pct>=0.65?"⭐⭐":"⭐";
+  const msg=pct>=0.85?"Uitstekend! Je beheerst dit hoofdstuk.":pct>=0.65?"Goed bezig — herhaal de vragen waar het misging.":"Neem de theorie opnieuw door en oefen dan opnieuw.";
+  document.getElementById(ss.ids.s).textContent=`Beste: ${S.best[key]}/${n}`;
+  document.getElementById(ss.ids.a).innerHTML=`<div class="qcard result-card"><div class="stars">${stars}</div><div class="big">${ss.score}/${n}</div><p>${msg}</p><button class="btn btn-p" id="rst-${key}">Opnieuw oefenen</button></div>`;
+  document.getElementById("rst-"+key).onclick=()=>resetSession(key);
+  updateProgress();
+}
+function resetSession(key){const ss=sessions[key];ss.pos=0;ss.score=0;ss._ans=false;if(key==="mix")buildMix();renderQ(key);}
+function buildMix(){
+  const all=[];CHAPTERS.forEach(c=>c.q.forEach(q=>all.push(Object.assign({chap:c.key},q))));
+  for(let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]];}
+  sessions.mix.qs=all;sessions.mix.pos=0;sessions.mix.score=0;sessions.mix._ans=false;
+}
+const MIXTOTAL=CHAPTERS.reduce((a,c)=>a+c.q.length,0);
+
+/* ======================================================
+   WOORDENSCHAT
+====================================================== */
+function renderVocTable(){
+  document.getElementById("vocBody").innerHTML=VOCAB.map(([t,d,key,idx])=>
+    `<tr><td>${t}<span class="vc cc${idx}">${CHAPTERS[idx].short}</span></td><td>${d}</td></tr>`).join("");
+}
+let vl={dir:1,order:[],pos:0,score:0,pool:VOCAB};
+function startVL(filtered){
+  const pool=filtered||VOCAB;vl.pool=pool;vl.order=pool.map((_,i)=>i);
+  for(let i=vl.order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vl.order[i],vl.order[j]]=[vl.order[j],vl.order[i]];}
+  vl.pos=0;vl.score=0;renderVL();
+}
+function renderVL(){
+  const el=document.getElementById("va");
+  document.getElementById("vs").textContent=`Score ${vl.score}/${vl.pool.length}`;
+  if(vl.pos>=vl.order.length){
+    document.getElementById("vp").textContent="Klaar!";document.getElementById("vt").style.width="100%";
+    el.innerHTML=`<div class="vlcard result-card"><div class="big">${vl.score}/${vl.pool.length}</div><p>Alle begrippen doorlopen.</p><button class="btn btn-p" id="vlr">Opnieuw</button></div>`;
+    document.getElementById("vlr").onclick=()=>startVL(vl.pool);return;
+  }
+  const [term,def,key,idx]=vl.pool[vl.order[vl.pos]];
+  const dir=vl.dir===3?(Math.random()<0.5?1:2):vl.dir;
+  document.getElementById("vp").textContent=`Begrip ${vl.pos+1} / ${vl.pool.length}`;
+  document.getElementById("vt").style.width=(vl.pos/vl.pool.length*100)+"%";
+  let h=`<div class="vlcard">`;
+  if(dir===1){
+    h+=`<div class="vl-prompt-lbl">Welk begrip hoort hierbij? <span class="vc cc${idx}">${CHAPTERS[idx].short}</span></div><div class="vl-prompt">${def}</div><div class="fill-wrap"><input type="text" id="vlin" placeholder="Typ het begrip…" autocomplete="off"></div>`;
+  }else{
+    h+=`<div class="vl-prompt-lbl">Leg dit begrip uit <span class="vc cc${idx}">${CHAPTERS[idx].short}</span></div><div class="vl-prompt big">${term}</div><textarea class="openq" id="vlta" placeholder="Geef je uitleg…"></textarea>`;
+  }
+  h+=`<div class="fb" id="vlfb"></div><div class="qactions" id="vlact"></div></div>`;el.innerHTML=h;
+  const fb=document.getElementById("vlfb"),act=document.getElementById("vlact");const adv=()=>{vl.pos++;renderVL();};
+  if(dir===1){
+    const chk=document.createElement("button");chk.className="btn btn-p";chk.textContent="Controleer";
+    chk.onclick=()=>{const v=document.getElementById("vlin").value,core=norm(term.split("(")[0]);
+      const ok=norm(v)===core||norm(v)===norm(term)||(core.length>4&&norm(v).includes(core));
+      if(ok){vl.score++;if(!S.vocMastered.includes(term)){S.vocMastered.push(term);saveS();updateProgress();}}
+      fb.className="fb show "+(ok?"ok":"no");
+      fb.innerHTML=ok?`<b>Juist!</b> Het begrip is <b>${term}</b>.`:`<b>Niet juist.</b> Het begrip is: <span style="font-weight:600;color:var(--ink)">${term}</span> — ${def}`;
+      act.innerHTML="";const n=document.createElement("button");n.className="btn btn-p";n.textContent="Volgende →";n.onclick=adv;act.appendChild(n);};
+    act.appendChild(chk);
+    setTimeout(()=>{const e2=document.getElementById("vlin");if(e2)e2.addEventListener("keydown",e=>{if(e.key==="Enter")chk.click();});},0);
+  }else{
+    const show=document.createElement("button");show.className="btn btn-p";show.textContent="Toon uitleg";
+    show.onclick=()=>{fb.className="fb show key";fb.innerHTML=`<b>Modeluitleg</b><div class="model">${def}</div>`;act.innerHTML="";
+      const w=document.createElement("div");w.className="self-check";w.innerHTML=`<span>Klopte jouw uitleg?</span>`;
+      const g=document.createElement("button");g.className="mini g";g.textContent="✓ Ja";
+      const b2=document.createElement("button");b2.className="mini b";b2.textContent="✗ Nee";
+      g.onclick=()=>{vl.score++;if(!S.vocMastered.includes(term)){S.vocMastered.push(term);saveS();updateProgress();}adv();};b2.onclick=adv;
+      w.appendChild(g);w.appendChild(b2);act.appendChild(w);};
+    act.appendChild(show);
+  }
+}
+
+/* ======================================================
+   VOORTGANG
+====================================================== */
+function updateProgress(){
+  const parts=CHAPTERS.map(c=>S.best[c.key]!=null?S.best[c.key]/c.q.length:0);
+  parts.push(S.best.mix!=null?S.best.mix/MIXTOTAL:0);
+  parts.push(VOCAB.length?Math.min(S.vocMastered.length/VOCAB.length,1):0);
+  const pct=Math.round(parts.reduce((a,b)=>a+b,0)/parts.length*100);
+  document.getElementById("ringAll").style.setProperty("--p",pct);
+  document.getElementById("ringPct").textContent=pct+"%";
+  document.getElementById("progLbl").textContent=pct>=85?"Je beheersing is sterk — succes! 💪":pct>=50?"Goede voortgang — blijf oefenen.":"Begin met oefenen — je voortgang wordt bewaard.";
+  document.getElementById("chapChips").innerHTML=CHAPTERS.map(c=>S.best[c.key]!=null?`<span class="chip">${c.short}: ${S.best[c.key]}/${c.q.length}</span>`:"").join("")+(S.best.mix!=null?`<span class="chip">Mix: ${S.best.mix}/${MIXTOTAL}</span>`:"");
+  let grid=CHAPTERS.map((c,i)=>{
+    const v=S.best[c.key]||0,t=c.q.length,p=t?Math.round(v/t*100):0;
+    return `<div class="prog-card"><h4>${c.short} · ${c.label}</h4><div class="prog-bar-wrap"><div class="prog-bar" style="width:${p}%"></div></div><div class="prog-lbl">${v}/${t} ${S.best[c.key]!=null?"(beste score)":""}</div></div>`;
+  }).join("");
+  const mv=S.best.mix||0,mp=MIXTOTAL?Math.round(mv/MIXTOTAL*100):0;
+  grid+=`<div class="prog-card"><h4>🔀 Gemixte modus</h4><div class="prog-bar-wrap"><div class="prog-bar" style="width:${mp}%"></div></div><div class="prog-lbl">${mv}/${MIXTOTAL} ${S.best.mix!=null?"(beste score)":""}</div></div>`;
+  const vv=S.vocMastered.length,vp=VOCAB.length?Math.round(vv/VOCAB.length*100):0;
+  grid+=`<div class="prog-card"><h4>📚 Woordenschat beheerst</h4><div class="prog-bar-wrap"><div class="prog-bar" style="width:${vp}%"></div></div><div class="prog-lbl">${vv}/${VOCAB.length} beheerst</div></div>`;
+  document.getElementById("progGrid").innerHTML=grid;
+}
+
+/* ======================================================
+   NAVIGATIE
+====================================================== */
+const allViews=["home",...KEYS,"mix","voc"];
+function goTo(id){
+  allViews.forEach(v=>{document.getElementById("nav-"+v).setAttribute("aria-selected",v===id);document.getElementById("view-"+v).classList.toggle("active",v===id);});
+  if(id==="mix"&&sessions.mix.qs.length===0){buildMix();renderQ("mix");}
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+allViews.forEach(v=>document.getElementById("nav-"+v).onclick=()=>goTo(v));
+document.getElementById("mixStart").onclick=()=>resetSession("mix");
+
+KEYS.forEach(key=>{
+  const view=document.getElementById("view-"+key);
+  view.querySelectorAll(".stab").forEach(b=>b.addEventListener("click",()=>{
+    view.querySelectorAll(".stab").forEach(x=>x.setAttribute("aria-selected",x===b));
+    const sub=b.dataset.sub;view.querySelectorAll(".subview").forEach(s=>s.classList.toggle("active",s.id===sub));
+    if(sub===key+"-oefen"&&sessions[key].pos===0)renderQ(key);
+  }));
+});
+document.querySelectorAll("#view-voc .stab").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("#view-voc .stab").forEach(x=>x.setAttribute("aria-selected",x===b));
+  const sub=b.dataset.sub;document.querySelectorAll("#view-voc .subview").forEach(s=>s.classList.toggle("active",s.id===sub));
+  if(sub==="voc-leren"&&vl.order.length===0)startVL();
+}));
+[["d1",1],["d2",2],["d3",3]].forEach(([id,d])=>document.getElementById(id).onclick=()=>{
+  vl.dir=d;["d1","d2","d3"].forEach(x=>document.getElementById(x).setAttribute("aria-pressed",x===id));startVL(vl.pool);
+});
+
+/* ======================================================
+   INIT
+====================================================== */
+(async()=>{
+  await loadS();
+  CHAPTERS.forEach(c=>document.getElementById(c.key+"-theorie").innerHTML=renderTheory(c));
+  renderVocTable();
+  updateProgress();
+})();
+</script>
+</body>
+</html>
