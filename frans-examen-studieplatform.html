@@ -98,6 +98,7 @@
     <button class="tab" data-tab="paris"> Paris <small>vocab · schrijven</small></button>
     <button class="tab" data-tab="jalle"> Jallé <small>intrus · schrijven</small></button>
     <button class="tab" data-tab="gram"> Grammatica <small>trajet 1·2·3</small></button>
+    <button class="tab" data-tab="ww"> Werkwoorden <small>tijden invullen</small></button>
     <button class="tab" data-tab="tools"> Tools <small>subjonctif · checklist</small></button>
   </div>
 
@@ -341,6 +342,15 @@
     </div>
   </section>
 
+  <!-- ============ WERKWOORDEN ============ -->
+  <section class="panel" id="ww">
+    <div class="card">
+      <h2>Werkwoordentrainer — tijden invullen</h2>
+      <p class="lead">Je krijgt het werkwoord in het <b>Nederlands</b> + de gevraagde <b>tijd</b>. Vul de juiste vorm in de zin in. Vooral onregelmatige werkwoorden + werkwoorden uit de woordenschat. Tijden: <i>conditionnel · passé composé · subjonctif · futur simple · imparfait</i>. Accenten zijn niet verplicht.</p>
+      <div id="ww-drill"></div>
+    </div>
+  </section>
+
   <!-- ============ TOOLS ============ -->
   <section class="panel" id="tools">
     <div class="card">
@@ -395,7 +405,7 @@
   </section>
 
   <footer>
-    Gemaakt voor Victor · examen Frans · <span id="ver">v5</span> — voortgang wordt lokaal bewaard
+    Gemaakt voor Victor · examen Frans · <span id="ver">v6</span> — voortgang wordt lokaal bewaard
   </footer>
 </div>
 
@@ -629,6 +639,34 @@ const gramImp = [
   {s:"(finir, vous) ontkennend: Ne ___ pas trop vite!",a:["finissez"],e:"vous-vorm → Ne finissez pas!"}
 ];
 
+// ---- WERKWOORDENTRAINER (tijden) ----
+const verbDrill = [
+  {nl:"zijn (être)",t:"futur simple",s:"Demain, je ___ à Paris.",a:["serai"],e:"être → futur: je serai."},
+  {nl:"hebben (avoir)",t:"conditionnel",s:"J'___ besoin de ton aide.",a:["aurais"],e:"avoir → cond: j'aurais."},
+  {nl:"gaan (aller)",t:"passé composé",s:"Hier, elle ___ au musée.",a:["est allée","est alle","est allé"],e:"aller → être + allé(e): est allée."},
+  {nl:"doen (faire)",t:"subjonctif",s:"Il faut que tu ___ tes devoirs.",a:["fasses"],e:"il faut que + subj: que tu fasses."},
+  {nl:"kunnen (pouvoir)",t:"conditionnel",s:"___-vous m'aider, s'il vous plaît ?",a:["pourriez"],e:"pouvoir → cond (beleefd): Pourriez-vous."},
+  {nl:"willen (vouloir)",t:"conditionnel",s:"Je ___ un café, s'il te plaît.",a:["voudrais"],e:"vouloir → cond: je voudrais."},
+  {nl:"moeten (devoir)",t:"imparfait",s:"Quand j'étais petit, je ___ étudier beaucoup.",a:["devais"],e:"devoir → imparfait: je devais."},
+  {nl:"weten (savoir)",t:"subjonctif",s:"Je ne pense pas qu'il ___ la réponse.",a:["sache"],e:"ne pas penser que + subj: qu'il sache."},
+  {nl:"komen (venir)",t:"passé composé",s:"Mes amis ___ hier soir.",a:["sont venus"],e:"venir → être + venus: sont venus."},
+  {nl:"nemen (prendre)",t:"futur simple",s:"Demain, nous ___ le train.",a:["prendrons"],e:"prendre → futur: nous prendrons."},
+  {nl:"moeten/nodig zijn (falloir)",t:"futur simple",s:"Il ___ partir tôt.",a:["faudra"],e:"falloir → futur: il faudra."},
+  {nl:"regenen (pleuvoir)",t:"subjonctif",s:"Bien qu'il ___, on sort quand même.",a:["pleuve"],e:"bien que + subj: qu'il pleuve."},
+  {nl:"zien (voir)",t:"conditionnel",s:"Sans la pluie, on ___ mieux la ville.",a:["verrait"],e:"voir → cond: on verrait."},
+  {nl:"zeggen (dire)",t:"passé composé",s:"Elle m'___ la vérité.",a:["a dit"],e:"dire → avoir + dit: a dit."},
+  {nl:"bewonderen (admirer)",t:"passé composé",s:"Nous ___ la Tour Eiffel.",a:["avons admiré","avons admire"],e:"admirer → avoir + admiré: avons admiré."},
+  {nl:"uitstappen/afdalen (descendre)",t:"passé composé",s:"Elle ___ à la station Louvre.",a:["est descendue","est descendu"],e:"descendre (zonder COD) → être: est descendue."},
+  {nl:"deelnemen (participer)",t:"futur simple",s:"L'année prochaine, je ___ à l'échange.",a:["participerai"],e:"participer → futur: je participerai."},
+  {nl:"verloren lopen (se perdre)",t:"passé composé",s:"Nous nous ___ dans le Quartier Latin.",a:["sommes perdus"],e:"se perdre → être: nous sommes perdus."},
+  {nl:"verblijven (séjourner)",t:"conditionnel",s:"Je ___ volontiers un mois à l'étranger.",a:["séjournerais","sejournerais"],e:"séjourner → cond: je séjournerais."},
+  {nl:"landen (atterrir)",t:"futur simple",s:"L'avion ___ à quatorze heures.",a:["atterrira"],e:"atterrir → futur: il atterrira."},
+  {nl:"zich uit de slag trekken (se débrouiller)",t:"futur simple",s:"Tu te ___ très bien tout seul.",a:["débrouilleras","debrouilleras"],e:"se débrouiller → futur: tu te débrouilleras."},
+  {nl:"(onder)steunen (soutenir)",t:"subjonctif",s:"Il faut qu'on ___ les réfugiés.",a:["soutienne"],e:"il faut que + subj: qu'on soutienne."},
+  {nl:"zich engageren (s'engager)",t:"passé composé",s:"Les jeunes se ___ pour une bonne cause.",a:["sont engagés","sont engages"],e:"s'engager → être: se sont engagés."},
+  {nl:"wennen aan (s'habituer)",t:"futur simple",s:"Je m'___ vite aux coutumes.",a:["habituerai"],e:"s'habituer → futur: je m'habituerai."}
+];
+
 const checklist = [
   "Subjonctif na de juiste triggers (il faut que, bien que, je ne pense pas que…)?",
   "Werkwoorden correct vervoegd (juiste persoon + tijd)?",
@@ -646,7 +684,7 @@ const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 let answered=0, totalQ=eteMC.length+eteSubj.length+parisIntrus.length+parisFill.length+parisSubj.length
   +gramAux.length+gramPP.length+gramAcc.length+gramPron.length+gramSubj1.length+gramCond.length+gramGer.length+gramSubj2.length+gramImp.length
-  +beneFill.length+jalleIntrus.length+jalleFill.length;
+  +beneFill.length+jalleIntrus.length+jalleFill.length+verbDrill.length;
 
 function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?]+$/,"");}
 function bumpProgress(){answered++;localStorage.setItem("fr_answered",answered);$("#globalbar").style.width=Math.min(100,Math.round(answered/totalQ*100))+"%";}
@@ -737,6 +775,27 @@ function pfRender(){
 }
 function pfNext(){pfIdx=(pfIdx+1)%parisVoc.length;pfShown=false;pfRender();}
 
+// werkwoordentrainer (accent-tolerant)
+function stripAcc(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function vnorm(s){return stripAcc(norm(s));}
+function renderVerb(host,data){
+  data.forEach((item,i)=>{
+    const q=document.createElement("div");q.className="q";
+    q.innerHTML=`<div class="qnum">werkwoord ${i+1} &nbsp; <b style="color:var(--text)">${item.nl}</b> &nbsp; <span class="badge">${item.t}</span></div><div class="qtext">${item.s}</div>`;
+    const inp=document.createElement("input");inp.className="txt";inp.placeholder="vul de werkwoordsvorm in…";
+    const btn=document.createElement("button");btn.className="btn";btn.textContent="Check";btn.style.marginTop="8px";
+    const fb=document.createElement("div");fb.className="feedback";
+    const check=()=>{
+      const ok=item.a.some(a=>vnorm(a)===vnorm(inp.value));
+      fb.className="feedback "+(ok?"ok":"no");
+      fb.innerHTML=ok?`✓ Juist! ${item.e}`:`✗ Antwoord: <b>${item.a[0]}</b> — ${item.e}`;
+      if(!inp.dataset.done){inp.dataset.done=1;bumpProgress();}
+    };
+    btn.onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+    q.appendChild(inp);q.appendChild(btn);q.appendChild(fb);host.appendChild(q);
+  });
+}
+
 // generieke flashcard-widget
 function buildFlashcards(host,deck){
   const order=[...deck.keys()];shuffle(order);
@@ -821,6 +880,9 @@ window.addEventListener("DOMContentLoaded",()=>{
   renderFill($("#gram-ger"),gramGer,"gérondif");
   renderFill($("#gram-subj2"),gramSubj2,"subj2");
   renderFill($("#gram-imp"),gramImp,"impératif");
+
+  // werkwoordentrainer
+  renderVerb($("#ww-drill"),verbDrill);
 
   // bénévolat
   buildFlashcards($("#bene-voc"),beneVoc);
