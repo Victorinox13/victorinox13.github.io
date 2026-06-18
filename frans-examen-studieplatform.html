@@ -161,6 +161,12 @@
   <!-- ============ PARIS ============ -->
   <section class="panel" id="paris">
     <div class="card">
+      <h2>📋 Inhoudsvragen — cursus Paris</h2>
+      <p class="lead">Feiten uit de cursus (aardrijkskunde, monumenten, geschiedenis, Seine-cruise). Meerkeuze, met uitleg.</p>
+      <div id="paris-content"></div>
+    </div>
+
+    <div class="card">
       <h2>Paris — Woordenschattrainer</h2>
       <p class="lead">Volledige examenwoordenschat uit het boekje. Klik op de kaart om de vertaling te zien, of test jezelf.</p>
       <div class="flash" id="paris-flash">
@@ -199,7 +205,29 @@
 
     <div class="card">
       <h2>✍️ Schrijfopdracht — bericht aan je Franstalige vriend</h2>
-      <p class="lead">100–120 woorden. Eerst: hoe heb jij Parijs ervaren (<b>subjonctif</b>). Dan: wat heb je gedaan/gezien — gebruik <b>minstens 5 elementen</b> van de prent. Structuurwoorden gebruiken. Goede slotzin.</p>
+      <div class="recap">
+        <b>De opdracht — goed begrijpen:</b> Je schrijft een bericht aan een <b>Franstalige vriend die binnenkort mét zijn school naar Parijs gaat</b>. <b>Jij bent er al geweest.</b><br>
+        1️⃣ Vertel hem eerst <b>hoe jij Parijs ervaren hebt</b> (jouw mening → <b>subjonctif</b>).<br>
+        2️⃣ Vertel daarna <b>wat je gedaan en gezien hebt</b> (verleden = <b>passé composé</b>) en gebruik <b>minstens 5 elementen die op de prent zichtbaar zijn</b>.<br>
+        3️⃣ Gebruik <b>structuurwoorden</b> (d'abord, ensuite…), <b>woordenschat uit de cursus</b>, en rond af met een <b>goede slotzin</b>. Lengte: <b>100–120 woorden</b>.
+      </div>
+      <details open>
+        <summary>📝 Nederlandse template (volg deze opbouw)</summary>
+        <ol style="font-size:.9rem;line-height:1.85;padding-left:18px">
+          <li><b>Begroeting:</b> « Salut [naam] ! » — Dag [naam]!</li>
+          <li><b>Inleiding:</b> Ik hoorde dat je binnenkort met je school naar Parijs gaat. <span class="note">(blijdschap + subjonctif: « Je suis si content(e) que tu <b>ailles</b> à Paris ! »)</span></li>
+          <li><b>Jouw ervaring (mening + subjonctif):</b> Ik ben er vorig jaar geweest en vond het een onvergetelijke stad. <span class="note">(« Bien que la ville <b>soit</b> très grande, je trouve qu'elle est magnifique. » / « Je ne pense pas que tu t'<b>ennuies</b>. »)</span></li>
+          <li><b>Wat je gedaan/gezien hebt (passé composé + ≥5 prent-elementen + structuurwoorden):</b><br>
+            • <i>D'abord</i>, we hebben de <b>Tour Eiffel</b> bewonderd — het uitzicht was prachtig.<br>
+            • <i>Ensuite</i>, we namen een <b>bateau-mouche</b> op de <b>Seine</b> en zagen de <b>ponts</b>.<br>
+            • <i>Puis</i>, we bezochten het <b>Louvre</b> waar ik <b>La Joconde</b> zag.<br>
+            • <i>Aussi</i>, we wandelden naar <b>Montmartre / le Sacré-Cœur</b>.<br>
+            • <i>Enfin</i>, we zijn verdwaald in het <b>Quartier Latin</b>.</li>
+          <li><b>Tip/aanmoediging:</b> Vergeet zeker niet… <span class="note">(« Il faut que tu <b>prennes</b> le métro et que tu <b>goûtes</b> un croissant ! »)</span></li>
+          <li><b>Slotzin + afsluiting:</b> Ik hoop dat je er net zoveel van geniet als ik. Veel plezier! <span class="note">(« J'espère que tu profiteras autant que moi. Bon voyage et amuse-toi bien ! Salut, [naam]. »)</span></li>
+        </ol>
+        <p class="note">⚠️ Let op: <i>je pense que / j'espère que</i> → indicatif; <i>je ne pense pas que / bien que / il faut que / je suis content que</i> → subjonctif.</p>
+      </details>
       <h3>Stap 1 — kies 5 elementen die je gebruikt</h3>
       <div class="word-elements" id="paris-elements"></div>
       <h3>Stap 2 — structuurwoorden (gebruik er enkele)</h3>
@@ -209,7 +237,7 @@
         <span class="chip fr">Enfin</span><span class="chip fr">Cependant</span><span class="chip fr">Donc</span>
       </div>
       <h3>Stap 3 — schrijf je tekst</h3>
-      <textarea class="txt" id="paris-write" placeholder="Salut ! Tu vas bientôt aller à Paris avec ton école, c'est génial !..."></textarea>
+      <textarea class="txt" id="paris-write" placeholder="Salut [naam] ! J'ai entendu que tu vas bientôt aller à Paris avec ton école..."></textarea>
       <div class="row">
         <span class="scorebar" id="paris-wc">0 woorden · 0/5 elementen gebruikt</span>
         <button class="btn ghost" id="paris-clear">Wissen</button>
@@ -405,7 +433,7 @@
   </section>
 
   <footer>
-    Gemaakt voor Victor · examen Frans · <span id="ver">v6</span> — voortgang wordt lokaal bewaard
+    Gemaakt voor Victor · examen Frans · <span id="ver">v7</span> — voortgang wordt lokaal bewaard
   </footer>
 </div>
 
@@ -546,6 +574,35 @@ const jalleFill = [
   {s:"Dans une ville inconnue, il faut savoir se ___.",a:["débrouiller"],e:"se débrouiller = zich uit de slag trekken."}
 ];
 
+// ---- PARIS inhoudsvragen (cursus) ----
+const parisContent = [
+  {q:"Welke rivier stroomt door Parijs?",o:["La Loire","La Seine","Le Rhône","La Marne"],a:1,e:"La Seine verdeelt de stad in twee oevers."},
+  {q:"In welke twee delen verdeelt de Seine de stad?",o:["Le nord et le sud","La rive gauche et la rive droite","L'est et l'ouest","La ville haute et basse"],a:1,e:"De rive gauche (linkeroever) en de rive droite (rechteroever)."},
+  {q:"Op welk eiland is Parijs ontstaan (volk: de Parisii)?",o:["L'île Saint-Louis","L'île de la Cité","L'île aux Cygnes","Montmartre"],a:1,e:"De Parisii leefden op l'île de la Cité; daar staat ook de Notre-Dame."},
+  {q:"Hoe noemden de Romeinen Parijs?",o:["Lutetia","Gallia","Parisium","Roma Nova"],a:0,e:"Na Jules César (52 v.Chr.) heette de stad Lutetia."},
+  {q:"Wie veroverde de stad in 52 v.Chr.?",o:["Clovis","Napoléon","Jules César","Charlemagne"],a:2,e:"Jules César nam de stad in; de Romeinen bouwden op de rive gauche."},
+  {q:"Wie bracht de huidige naam « Paris » + de Franken (508)?",o:["Louis XIV","Clovis","Haussmann","Napoléon III"],a:1,e:"Clovis de Merovinger; daarna werd Paris in de 7e eeuw de hoofdstad."},
+  {q:"Waarom werd de Tour Eiffel gebouwd?",o:["Voor de Olympische Spelen","Voor de Wereldtentoonstelling van 1889","Als verdedigingstoren","Voor een koning"],a:1,e:"Expo universelle 1889 — 100 jaar na de Franse Revolutie."},
+  {q:"Wie is de architect van de Tour Eiffel?",o:["Haussmann","Le Corbusier","Gustave Eiffel","I.M. Pei"],a:2,e:"Gustave Eiffel (hij bouwde ook bruggen in ijzer)."},
+  {q:"Waarom werd de Tour Eiffel behouden (niet afgebroken)?",o:["Ze werd nuttig als radioantenne (TSF)","Ze was te zwaar om af te breken","Een koning verbood het","Ze was een kerk"],a:0,e:"Ze bleek nuttig als antenne voor radio/telegrafie."},
+  {q:"Wat is de vroegere naam van de Place de la Concorde?",o:["Place de la Bastille","Place de la Révolution","Place du Tertre","Place Vendôme"],a:1,e:"Daar stond de guillotine tijdens de Revolutie."},
+  {q:"Wie werden in 1793 op dat plein onthoofd?",o:["Napoléon en Joséphine","Louis XVI en Marie-Antoinette","Henri IV en zijn vrouw","De Parisii"],a:1,e:"De koning en de koningin werden geguillotineerd."},
+  {q:"Wie liet de Arc de Triomphe bouwen?",o:["Louis XIV","Napoléon Bonaparte","De Gaulle","Clovis"],a:1,e:"Napoléon, ter ere van zijn legers."},
+  {q:"Hoeveel lanen komen samen op de Arc de Triomphe?",o:["6","8","12","20"],a:2,e:"Twaalf avenues vormen een ster (l'Étoile)."},
+  {q:"Wie ontwierp de glazen piramide van het Louvre?",o:["Gustave Eiffel","Ieoh Ming Pei (I.M. Pei)","Haussmann","Léonard de Vinci"],a:1,e:"De Chinees-Amerikaanse architect I.M. Pei."},
+  {q:"Welk beroemd schilderij bewonder je in het Louvre, en van wie?",o:["La Joconde — Léonard de Vinci","Les Nymphéas — Monet","La Nuit étoilée — Van Gogh","Guernica — Picasso"],a:0,e:"La Joconde (Mona Lisa) van Léonard de Vinci."},
+  {q:"Hoe heet de witte basiliek op Montmartre?",o:["Notre-Dame","Le Panthéon","Le Sacré-Cœur","La Madeleine"],a:2,e:"Le Sacré-Cœur, boven op Montmartre."},
+  {q:"Hoe heet het plein op Montmartre waar veel kunstenaars samenkomen?",o:["La Place du Tertre","La Place de la Concorde","La Place Vendôme","La Place des Vosges"],a:0,e:"La Place du Tertre — vol schilders en portrettisten."},
+  {q:"Welke architect hertekende Parijs onder Napoléon III?",o:["Gustave Eiffel","Haussmann","I.M. Pei","Le Nôtre"],a:1,e:"Baron Haussmann — de grote boulevards."},
+  {q:"Waarvoor werd in 1900 « le métropolitain » gemaakt?",o:["De Parijse metro (Expo 1900)","Een nieuwe brug","Een tramlijn naar Versailles","De riolering"],a:0,e:"Het métro, voor de Wereldtentoonstelling van 1900."},
+  {q:"Wat gebeurde op 14 juli 1789 (nu de nationale feestdag)?",o:["De kroning van Napoléon","De bestorming van de Bastille","De bouw van de Tour Eiffel","De studentenrellen"],a:1,e:"La prise de la Bastille — symbool van de Revolutie."},
+  {q:"Het Quartier Latin is vooral de wijk van de…?",o:["Kunstenaars","Studenten (la Sorbonne)","Bankiers","Vissers"],a:1,e:"Studentenwijk met o.a. de Sorbonne en het Panthéon."},
+  {q:"Waar woont de Franse president (Macron)?",o:["Au Louvre","Au Palais de l'Élysée","À Versailles","Au Palais de Chaillot"],a:1,e:"Le Palais de l'Élysée."},
+  {q:"Waar of niet waar? « Le Pont Neuf is een heel moderne brug. »",o:["Waar","Niet waar — het is net de oudste brug van Parijs"],a:1,e:"Ondanks de naam (« neuf » = nieuw) is het de oudste brug."},
+  {q:"Waar of niet waar? « De obelisk op de Concorde komt uit Egypte (Louqsor). »",o:["Waar","Niet waar"],a:0,e:"De obélisque de Louqsor is een geschenk uit Egypte."},
+  {q:"Waar of niet waar? « Het vertrek van de Tour de France is altijd aan de Champs-Élysées. »",o:["Waar","Niet waar — het is de aankomst die daar is"],a:1,e:"De Tour eindigt (aankomst) op de Champs-Élysées."}
+];
+
 const parisIntrus = [
   {l:["un musée","une statue","un cachet","une œuvre d'art","un tableau"],a:2,e:"« un cachet » (stempel) — de rest hoort bij kunst/museum."},
   {l:["à l'occasion de","au centre de","à droite de","en face de"],a:0,e:"« à l'occasion de » (ter gelegenheid van) — de rest zijn plaatsbepalingen."},
@@ -684,7 +741,7 @@ const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 let answered=0, totalQ=eteMC.length+eteSubj.length+parisIntrus.length+parisFill.length+parisSubj.length
   +gramAux.length+gramPP.length+gramAcc.length+gramPron.length+gramSubj1.length+gramCond.length+gramGer.length+gramSubj2.length+gramImp.length
-  +beneFill.length+jalleIntrus.length+jalleFill.length+verbDrill.length;
+  +beneFill.length+jalleIntrus.length+jalleFill.length+verbDrill.length+parisContent.length;
 
 function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.!?]+$/,"");}
 function bumpProgress(){answered++;localStorage.setItem("fr_answered",answered);$("#globalbar").style.width=Math.min(100,Math.round(answered/totalQ*100))+"%";}
@@ -844,6 +901,7 @@ window.addEventListener("DOMContentLoaded",()=>{
   $("#pf-next").onclick=pfNext;
   $("#pf-dir").onclick=()=>{pfDir=!pfDir;pfShown=false;$("#pf-dir").textContent="Richting: "+(pfDir?"FR → NL":"NL → FR");pfRender();};
   buildVocTable($("#paris-table"),parisVoc);
+  renderMC($("#paris-content"),parisContent,"inhoud");
   renderIntrus($("#paris-intrus"),parisIntrus);
   renderFill($("#paris-fill"),parisFill,"invul");
   renderFill($("#paris-subj"),parisSubj,"subjonctif");
