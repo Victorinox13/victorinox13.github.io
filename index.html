@@ -18,8 +18,8 @@
   --accent-strong: #4cbcff;
   --warm: #ffd36e;
   --green: #a8edca;
-  --radius: 20px;
-  --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  --radius: 18px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -27,24 +27,12 @@ body {
   margin: 0;
   font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
   color: var(--text);
-  background:
-    radial-gradient(900px 500px at 78% -8%, rgba(126,215,255,0.14), transparent 60%),
-    radial-gradient(700px 420px at 8% 4%, rgba(255,211,110,0.07), transparent 55%),
-    linear-gradient(180deg, #07101f 0%, #0a1424 48%, #060c16 100%);
+  background: linear-gradient(180deg, #0a1424 0%, #070e1a 100%);
   background-attachment: fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
-
-/* drifting starfield */
-.stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-.stars span {
-  position: absolute; border-radius: 50%; background: #fff;
-  opacity: var(--o, 0.7); animation: twinkle var(--t, 4s) ease-in-out infinite;
-}
-@keyframes twinkle { 0%,100% { opacity: calc(var(--o) * 0.35); } 50% { opacity: var(--o); } }
-@media (prefers-reduced-motion: reduce) { .stars span { animation: none; } }
 
 .wrap { width: min(1140px, calc(100% - 36px)); margin: 0 auto; position: relative; z-index: 1; padding: 30px 0 64px; }
 
@@ -94,8 +82,8 @@ h1 .grad { color: var(--accent); }
   font-weight: 800; font-size: 0.95rem; transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 .btn:active { transform: translateY(1px) scale(0.99); }
-.btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: #04121f; box-shadow: 0 12px 30px rgba(76,188,255,0.28); }
-.btn.primary:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(76,188,255,0.36); }
+.btn.primary { background: var(--accent); color: #04121f; }
+.btn.primary:hover { transform: translateY(-2px); background: var(--accent-strong); }
 .btn.ghost { background: rgba(255,255,255,0.05); border: 1px solid var(--panel-line); color: var(--text); }
 .btn.ghost:hover { transform: translateY(-2px); border-color: rgba(126,215,255,0.4); }
 
@@ -104,8 +92,7 @@ h1 .grad { color: var(--accent); }
   padding: 20px; border-radius: 20px; background: var(--panel); border: 1px solid var(--panel-line);
   backdrop-filter: blur(12px); display: flex; flex-direction: column; gap: 4px;
 }
-.stat .num { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
-.stat .num.c1 { color: var(--accent); } .stat .num.c2 { color: var(--green); } .stat .num.c3 { color: var(--warm); }
+.stat .num { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--text); }
 .stat .lbl { color: var(--muted); font-size: 0.9rem; }
 
 @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .hero-side { grid-template-columns: repeat(3, 1fr); } .hero-main { padding: 28px; } }
@@ -137,13 +124,16 @@ h1 .grad { color: var(--accent); }
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
   position: relative;
 }
-.card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--w-accent) 55%, transparent); box-shadow: 0 28px 60px rgba(0,0,0,0.5); }
+.card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--w-accent) 45%, transparent); box-shadow: 0 14px 34px rgba(0,0,0,0.4); }
 .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .card .widget {
   position: relative; aspect-ratio: 2.4 / 1; width: 100%; overflow: hidden;
   background: var(--w-bg); border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .card .widget svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* Widgets are still by default; they only animate while a card is hovered. */
+.card .widget [data-anim] { animation-play-state: paused !important; }
+.card:hover .widget [data-anim] { animation-play-state: running !important; }
 .card .open-chip {
   position: absolute; top: 12px; right: 12px; z-index: 3; display: inline-flex; align-items: center; gap: 6px;
   padding: 6px 11px; border-radius: 999px; font-size: 0.72rem; font-weight: 800;
@@ -185,13 +175,11 @@ footer { margin-top: 50px; text-align: center; color: var(--muted-2); font-size:
 
 @media (prefers-reduced-motion: reduce) {
   .card, .btn, .link, .cta .arrow { transition: none; }
-  svg [data-anim] { animation: none !important; }
+  .card:hover .widget [data-anim] { animation-play-state: paused !important; }
 }
 </style>
 </head>
 <body>
-<div class="stars" id="stars" aria-hidden="true"></div>
-
 <div class="wrap">
 
   <header class="topbar">
@@ -219,9 +207,9 @@ footer { margin-top: 50px; text-align: center; color: var(--muted-2); font-size:
       </div>
     </div>
     <aside class="hero-side">
-      <div class="stat"><span class="num c1" id="stat-projects">—</span><span class="lbl">live projects</span></div>
-      <div class="stat"><span class="num c2">6</span><span class="lbl">examen-studieplatforms</span></div>
-      <div class="stat"><span class="num c3">1</span><span class="lbl">App Store app</span></div>
+      <div class="stat"><span class="num" id="stat-projects">—</span><span class="lbl">live projects</span></div>
+      <div class="stat"><span class="num">6</span><span class="lbl">examen-studieplatforms</span></div>
+      <div class="stat"><span class="num">1</span><span class="lbl">App Store app</span></div>
     </aside>
   </section>
 
@@ -248,18 +236,6 @@ footer { margin-top: 50px; text-align: center; color: var(--muted-2); font-size:
 
 <script src="projects-data.js?v=15"></script>
 <script>
-/* ---------- starfield ---------- */
-(function () {
-  const box = document.getElementById('stars');
-  const n = window.matchMedia('(max-width: 640px)').matches ? 40 : 80;
-  let html = '';
-  for (let i = 0; i < n; i++) {
-    const s = (Math.random() * 1.6 + 0.6).toFixed(2);
-    html += `<span style="left:${(Math.random()*100).toFixed(2)}%;top:${(Math.random()*100).toFixed(2)}%;width:${s}px;height:${s}px;--o:${(Math.random()*0.6+0.3).toFixed(2)};--t:${(Math.random()*4+2.5).toFixed(2)}s"></span>`;
-  }
-  box.innerHTML = html;
-})();
-
 /* ---------- bespoke per-project widgets ----------
    Each returns an inline SVG (viewBox 0 0 240 100) themed by the app's palette. */
 const WIDGETS = {
@@ -434,6 +410,16 @@ const WIDGETS = {
           <p class="desc">${p.description}</p>
           <span class="cta">${p.linkLabel || 'Open'} <span class="arrow">→</span></span>
         </div>`;
+      // Freeze any SMIL <animate> in the widget; only run it while hovered.
+      const svg = a.querySelector('svg');
+      if (svg && svg.pauseAnimations) {
+        const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        try { svg.setCurrentTime(1.6); svg.pauseAnimations(); } catch (e) {}
+        if (!calm) {
+          a.addEventListener('mouseenter', () => { try { svg.unpauseAnimations(); } catch (e) {} });
+          a.addEventListener('mouseleave', () => { try { svg.pauseAnimations(); } catch (e) {} });
+        }
+      }
       grid.appendChild(a);
     });
   }
