@@ -10,8 +10,8 @@
 <meta name="description" content="Support and help for Cap Clash, the multiplayer bottle cap party game.">
 <style>
 :root {
-  --bg: #060d18;
-  --bg-2: #0a1525;
+  --bg: #0a1628;
+  --bg-2: #0d1b30;
   --panel: rgba(13, 24, 42, 0.66);
   --panel-line: rgba(159, 177, 201, 0.14);
   --text: #f4f7fb;
@@ -28,7 +28,7 @@ body {
   margin: 0;
   font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, #0a1424 0%, #070e1a 100%);
+  background: linear-gradient(180deg, #0a1628 0%, #070e1a 100%);
   background-attachment: fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -44,17 +44,19 @@ a { color: inherit; text-decoration: none; }
   backdrop-filter: blur(14px);
 }
 .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -0.01em; }
-.brand .mark {
-  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: #04121f; font-size: 1rem;
-}
+.brand img { width: 30px; height: 30px; border-radius: 9px; }
 .topbar nav { display: flex; gap: 6px; }
 .topbar nav a {
   padding: 8px 14px; border-radius: 999px; color: var(--muted); font-weight: 700; font-size: 0.9rem;
   transition: color .15s ease, background .15s ease;
 }
 .topbar nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-@media (max-width: 640px) { .topbar nav { display: none; } }
+.topbar nav a.active { color: var(--accent); background: rgba(255, 211, 110, 0.08); }
+@media (max-width: 640px) {
+  .topbar { padding: 10px 14px; }
+  .topbar nav { gap: 2px; }
+  .topbar nav a { padding: 7px 10px; font-size: 0.82rem; }
+}
 
 .page-title {
   margin-top: 48px;
@@ -82,6 +84,8 @@ a { color: inherit; text-decoration: none; }
 }
 .sec ul, .sec ol { padding-left: 20px; }
 .sec li { margin-bottom: 6px; }
+.sec a.link { color: var(--accent); }
+.sec a.link:hover { text-decoration: underline; }
 
 .nl { margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--panel-line); }
 .nl p { font-style: italic; color: var(--muted-2); font-size: 0.88rem; }
@@ -98,11 +102,12 @@ footer a:hover { color: var(--text); }
 <div class="wrap">
 
   <header class="topbar">
-    <a href="/capclash/" class="brand"><span class="mark">▲</span> Cap Clash</a>
+    <a href="/capclash/" class="brand"><img src="app-icon.png" alt="Cap Clash"> Cap Clash</a>
     <nav>
-      <a href="/capclash/">Hub</a>
+      <a href="/capclash/">Home</a>
+      <a href="/capclash/support.html" class="active">Support</a>
       <a href="/capclash/privacy.html">Privacy</a>
-      <a href="/">Astroleck</a>
+      <a href="/capclash/contact.html">Contact</a>
     </nav>
   </header>
 
@@ -111,7 +116,6 @@ footer a:hover { color: var(--text); }
     <p>Help and information for Cap Clash</p>
   </div>
 
-  <!-- What is Cap Clash -->
   <section class="sec">
     <h2>What is Cap Clash?</h2>
     <p>
@@ -124,7 +128,6 @@ footer a:hover { color: var(--text); }
     </div>
   </section>
 
-  <!-- How to play -->
   <section class="sec">
     <h2>How to play</h2>
     <ol>
@@ -140,7 +143,6 @@ footer a:hover { color: var(--text); }
     </div>
   </section>
 
-  <!-- Crowns, skins & purchases -->
   <section class="sec">
     <h2>Crowns, skins &amp; purchases</h2>
     <p>
@@ -152,7 +154,6 @@ footer a:hover { color: var(--text); }
     </p>
   </section>
 
-  <!-- Troubleshooting -->
   <section class="sec">
     <h2>Troubleshooting</h2>
     <ul>
@@ -167,23 +168,22 @@ footer a:hover { color: var(--text); }
     </div>
   </section>
 
-  <!-- Contact -->
   <section class="sec">
     <h2>Contact</h2>
     <p>
-      For questions, feedback or bug reports, you can reach out through the
-      <a href="https://github.com/Victorinox13" style="color:var(--accent);">developer's GitHub profile</a>
+      For questions, feedback or bug reports, reach out via e-mail at
+      <a class="link" href="mailto:victor@deleeck.be">victor@deleeck.be</a>
       or leave a review on the App Store. We'll do our best to respond.
     </p>
     <div class="nl">
-      <p>Voor vragen, feedback of bugrapporten kun je terecht op het
-      <a href="https://github.com/Victorinox13" style="color:var(--accent);">GitHub-profiel van de ontwikkelaar</a>
+      <p>Voor vragen, feedback of bugrapporten kun je mailen naar
+      <a class="link" href="mailto:victor@deleeck.be" style="color:var(--accent);">victor@deleeck.be</a>
       of via een review op de App Store.</p>
     </div>
   </section>
 
   <footer>
-    © 2026 Victor Deleeck · <a href="/capclash/">Cap Clash</a> · <a href="/">Astroleck</a>
+    <p>© 2026 A Victor Deleeck game · <a href="/capclash/">Cap Clash</a></p>
   </footer>
 </div>
 </body>

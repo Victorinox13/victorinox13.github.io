@@ -10,8 +10,8 @@
 <meta name="description" content="Privacy policy for Cap Clash, the multiplayer bottle cap party game.">
 <style>
 :root {
-  --bg: #060d18;
-  --bg-2: #0a1525;
+  --bg: #0a1628;
+  --bg-2: #0d1b30;
   --panel: rgba(13, 24, 42, 0.66);
   --panel-line: rgba(159, 177, 201, 0.14);
   --text: #f4f7fb;
@@ -28,7 +28,7 @@ body {
   margin: 0;
   font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, #0a1424 0%, #070e1a 100%);
+  background: linear-gradient(180deg, #0a1628 0%, #070e1a 100%);
   background-attachment: fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -44,17 +44,19 @@ a { color: inherit; text-decoration: none; }
   backdrop-filter: blur(14px);
 }
 .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -0.01em; }
-.brand .mark {
-  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: #04121f; font-size: 1rem;
-}
+.brand img { width: 30px; height: 30px; border-radius: 9px; }
 .topbar nav { display: flex; gap: 6px; }
 .topbar nav a {
   padding: 8px 14px; border-radius: 999px; color: var(--muted); font-weight: 700; font-size: 0.9rem;
   transition: color .15s ease, background .15s ease;
 }
 .topbar nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-@media (max-width: 640px) { .topbar nav { display: none; } }
+.topbar nav a.active { color: var(--accent); background: rgba(255, 211, 110, 0.08); }
+@media (max-width: 640px) {
+  .topbar { padding: 10px 14px; }
+  .topbar nav { gap: 2px; }
+  .topbar nav a { padding: 7px 10px; font-size: 0.82rem; }
+}
 
 .page-title {
   margin-top: 48px;
@@ -83,6 +85,8 @@ a { color: inherit; text-decoration: none; }
 }
 .sec ul { padding-left: 20px; }
 .sec li { margin-bottom: 6px; }
+.sec a.link { color: var(--accent); }
+.sec a.link:hover { text-decoration: underline; }
 
 footer {
   text-align: center; padding: 40px 0 20px;
@@ -96,11 +100,12 @@ footer a:hover { color: var(--text); }
 <div class="wrap">
 
   <header class="topbar">
-    <a href="/capclash/" class="brand"><span class="mark">▲</span> Cap Clash</a>
+    <a href="/capclash/" class="brand"><img src="app-icon.png" alt="Cap Clash"> Cap Clash</a>
     <nav>
-      <a href="/capclash/">Hub</a>
+      <a href="/capclash/">Home</a>
       <a href="/capclash/support.html">Support</a>
-      <a href="/">Astroleck</a>
+      <a href="/capclash/privacy.html" class="active">Privacy</a>
+      <a href="/capclash/contact.html">Contact</a>
     </nav>
   </header>
 
@@ -175,7 +180,7 @@ footer a:hover { color: var(--text); }
       If you are in the EU/EEA, you have rights under the GDPR including the right to access,
       correct, or delete your personal data. Since Cap Clash is designed to collect minimal data,
       most gameplay data stays on your device. For any data-related requests, please contact us
-      using the details below.
+      at <a class="link" href="mailto:victor@deleeck.be">victor@deleeck.be</a>.
     </p>
   </section>
 
@@ -190,14 +195,14 @@ footer a:hover { color: var(--text); }
   <section class="sec">
     <h2>Contact</h2>
     <p>
-      For privacy-related questions, you can reach out through the
-      <a href="https://github.com/Victorinox13" style="color:var(--accent);">developer's GitHub profile</a>
-      or via the <a href="/capclash/support.html" style="color:var(--accent);">Cap Clash support page</a>.
+      For privacy-related questions, contact us at
+      <a class="link" href="mailto:victor@deleeck.be">victor@deleeck.be</a>
+      or visit the <a class="link" href="/capclash/support.html">Cap Clash support page</a>.
     </p>
   </section>
 
   <footer>
-    © 2026 Victor Deleeck · <a href="/capclash/">Cap Clash</a> · <a href="/">Astroleck</a>
+    <p>© 2026 A Victor Deleeck game · <a href="/capclash/">Cap Clash</a></p>
   </footer>
 </div>
 </body>

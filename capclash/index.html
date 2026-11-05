@@ -10,8 +10,8 @@
 <meta name="description" content="Cap Clash — flick bottle caps, challenge friends. A multiplayer party game for 2 or 4 players on one phone or linked phones.">
 <style>
 :root {
-  --bg: #060d18;
-  --bg-2: #0a1525;
+  --bg: #0a1628;
+  --bg-2: #0d1b30;
   --panel: rgba(13, 24, 42, 0.66);
   --panel-line: rgba(159, 177, 201, 0.14);
   --text: #f4f7fb;
@@ -19,8 +19,6 @@
   --muted-2: #6f87a6;
   --accent: #ffd36e;
   --accent-strong: #e6b94e;
-  --warm: #ffd36e;
-  --green: #a8edca;
   --radius: 18px;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
 }
@@ -30,7 +28,7 @@ body {
   margin: 0;
   font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, #0a1424 0%, #070e1a 100%);
+  background: linear-gradient(180deg, #0a1628 0%, #070e1a 100%);
   background-attachment: fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -46,9 +44,8 @@ a { color: inherit; text-decoration: none; }
   backdrop-filter: blur(14px);
 }
 .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -0.01em; }
-.brand .mark {
-  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: #04121f; font-size: 1rem;
+.brand img {
+  width: 30px; height: 30px; border-radius: 9px;
 }
 .topbar nav { display: flex; gap: 6px; }
 .topbar nav a {
@@ -56,11 +53,22 @@ a { color: inherit; text-decoration: none; }
   transition: color .15s ease, background .15s ease;
 }
 .topbar nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-@media (max-width: 640px) { .topbar nav { display: none; } }
+.topbar nav a.active { color: var(--accent); background: rgba(255, 211, 110, 0.08); }
+@media (max-width: 640px) {
+  .topbar { padding: 10px 14px; }
+  .topbar nav { gap: 2px; }
+  .topbar nav a { padding: 7px 10px; font-size: 0.82rem; }
+}
 
 .hero {
   margin-top: 48px;
   text-align: center;
+}
+.app-icon {
+  width: 96px; height: 96px;
+  margin: 0 auto 24px;
+  border-radius: 22px;
+  box-shadow: 0 4px 24px rgba(255, 211, 110, 0.18);
 }
 .hero h1 {
   font-size: clamp(2rem, 5vw, 3rem);
@@ -85,16 +93,6 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 20px;
 }
 
-.cap-icon {
-  width: 80px; height: 80px;
-  margin: 0 auto 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  display: grid; place-items: center;
-  box-shadow: 0 4px 24px rgba(255, 211, 110, 0.2);
-}
-.cap-icon svg { width: 40px; height: 40px; }
-
 .links-row {
   display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
   margin-top: 32px;
@@ -102,10 +100,11 @@ a { color: inherit; text-decoration: none; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 12px 24px; border-radius: 999px; font-weight: 700; font-size: 0.95rem;
-  transition: background .15s ease, color .15s ease;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
 }
+.btn:hover { transform: translateY(-1px); }
 .btn.primary {
-  background: var(--accent); color: #0a1424;
+  background: var(--accent); color: #0a1628;
 }
 .btn.primary:hover { background: #ffe49a; }
 .btn.ghost {
@@ -145,6 +144,22 @@ a { color: inherit; text-decoration: none; }
 .feat h3 { font-size: 1rem; font-weight: 700; margin: 0 0 6px; }
 .feat p { font-size: 0.88rem; margin: 0; }
 
+.contact-cta {
+  margin-top: 56px;
+  padding: 36px 32px;
+  border-radius: var(--radius);
+  background: rgba(255, 211, 110, 0.06);
+  border: 1px solid rgba(255, 211, 110, 0.15);
+  text-align: center;
+}
+.contact-cta h2 {
+  font-size: 1.25rem; font-weight: 800; margin: 0 0 8px;
+  color: var(--accent);
+}
+.contact-cta p {
+  color: var(--muted); font-size: 0.95rem; margin: 0 0 20px; line-height: 1.55;
+}
+
 footer {
   text-align: center; padding: 40px 0 20px;
   color: var(--muted-2); font-size: 0.82rem;
@@ -157,21 +172,17 @@ footer a:hover { color: var(--text); }
 <div class="wrap">
 
   <header class="topbar">
-    <a href="/" class="brand"><span class="mark">▲</span> Astroleck</a>
+    <a href="/capclash/" class="brand"><img src="app-icon.png" alt="Cap Clash"> Cap Clash</a>
     <nav>
-      <a href="/">Home</a>
+      <a href="/capclash/" class="active">Home</a>
       <a href="/capclash/support.html">Support</a>
       <a href="/capclash/privacy.html">Privacy</a>
+      <a href="/capclash/contact.html">Contact</a>
     </nav>
   </header>
 
   <section class="hero">
-    <div class="cap-icon">
-      <svg viewBox="0 0 40 40" fill="none">
-        <circle cx="20" cy="20" r="16" fill="#0a1424"/>
-        <polygon points="20,10 23,17 30,17 24,22 26,29 20,25 14,29 16,22 10,17 17,17" fill="#ffd36e"/>
-      </svg>
-    </div>
+    <img class="app-icon" src="app-icon.png" alt="Cap Clash app icon">
     <span class="badge">Multiplayer Party Game</span>
     <h1>Flick caps. <span class="gold">Challenge friends.</span></h1>
     <p class="lead">
@@ -184,7 +195,7 @@ footer a:hover { color: var(--text); }
     <div class="links-row">
       <a class="btn primary" href="/capclash/support.html">Support</a>
       <a class="btn ghost" href="/capclash/privacy.html">Privacy Policy</a>
-      <a class="btn ghost" href="https://github.com/Victorinox13">GitHub</a>
+      <a class="btn ghost" href="/capclash/contact.html">Contact</a>
     </div>
   </section>
 
@@ -202,9 +213,9 @@ footer a:hover { color: var(--text); }
         <p>Pass the phone or link devices for head-to-head multiplayer matches.</p>
       </div>
       <div class="feat">
-        <div class="icon">👑</div>
-        <h3>Crowns &amp; skins</h3>
-        <p>Earn crowns and unlock cosmetic cap skins. All in-app purchases are cosmetic only.</p>
+        <div class="icon">🎯</div>
+        <h3>Zones &amp; Chaos</h3>
+        <p>Score in different zones for bonus points. Chaos mode shakes things up.</p>
       </div>
       <div class="feat">
         <div class="icon">🎉</div>
@@ -214,17 +225,14 @@ footer a:hover { color: var(--text); }
     </div>
   </section>
 
-  <section class="sec">
-    <h2>Links</h2>
-    <ul>
-      <li><a href="/capclash/support.html" style="color:var(--accent);">Support &amp; Help →</a></li>
-      <li><a href="/capclash/privacy.html" style="color:var(--accent);">Privacy Policy →</a></li>
-      <li><a href="/" style="color:var(--accent);">Back to Astroleck →</a></li>
-    </ul>
+  <section class="contact-cta">
+    <h2>Questions or feedback?</h2>
+    <p>We'd love to hear from you.</p>
+    <a class="btn primary" href="mailto:victor@deleeck.be">Contact us</a>
   </section>
 
   <footer>
-    © 2026 Victor Deleeck · <a href="/">Astroleck</a>
+    <p>© 2026 A Victor Deleeck game</p>
   </footer>
 </div>
 </body>
