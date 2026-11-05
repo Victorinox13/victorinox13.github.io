@@ -16,7 +16,7 @@
  *
  * Available widgets (each is unique, do not reuse loosely):
  *   engels · geschiedenis · frans · chemie · aardrijkskunde · bio
- *   housedeck · verbuga · pushunrot · astroleck
+ *   housedeck · verbuga · pushunrot · capclash · astroleck
  * Add a new render function in index.html when you add a genuinely new project.
  *
  * Newest items (by `date`) are shown first.
@@ -124,6 +124,19 @@ const PROJECTS = [
     date: "2025-09",
     widget: "verbuga",
     theme: { bg: "#eef3f7", fg: "#22324a", accent: "#1769e0", accent2: "#ae1c28" }
+  },
+  {
+    title: "Cap Clash",
+    emoji: "🧢",
+    category: "Apps",
+    tag: "Party Game",
+    description: "Multiplayer party game: flick bottle caps to score. Play with 2 or 4 players on one phone or link devices for bigger matches. Earn crowns, unlock cosmetic skins.",
+    link: "/capclash/",
+    linkLabel: "Open Cap Clash",
+    highlight: true,
+    date: "2026-11",
+    widget: "capclash",
+    theme: { bg: "#0a1424", fg: "#f4f7fb", accent: "#ffd36e", accent2: "#7ed7ff" }
   },
   {
     title: "Push Unrot — Screentime Block",

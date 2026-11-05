@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico?v=1" sizes="any">
+<link rel="icon" href="/icon.svg?v=1" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1">
+<title>Support — Cap Clash</title>
+<meta name="description" content="Support and help for Cap Clash, the multiplayer bottle cap party game.">
+<style>
+:root {
+  --bg: #060d18;
+  --bg-2: #0a1525;
+  --panel: rgba(13, 24, 42, 0.66);
+  --panel-line: rgba(159, 177, 201, 0.14);
+  --text: #f4f7fb;
+  --muted: #9bb0cb;
+  --muted-2: #6f87a6;
+  --accent: #ffd36e;
+  --accent-strong: #e6b94e;
+  --radius: 18px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #0a1424 0%, #070e1a 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+.wrap { width: min(760px, calc(100% - 36px)); margin: 0 auto; position: relative; z-index: 1; padding: 30px 0 64px; }
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px; border-radius: 999px;
+  background: rgba(10, 20, 36, 0.55); border: 1px solid var(--panel-line);
+  backdrop-filter: blur(14px);
+}
+.brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -0.01em; }
+.brand .mark {
+  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: #04121f; font-size: 1rem;
+}
+.topbar nav { display: flex; gap: 6px; }
+.topbar nav a {
+  padding: 8px 14px; border-radius: 999px; color: var(--muted); font-weight: 700; font-size: 0.9rem;
+  transition: color .15s ease, background .15s ease;
+}
+.topbar nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+@media (max-width: 640px) { .topbar nav { display: none; } }
+
+.page-title {
+  margin-top: 48px;
+  text-align: center;
+}
+.page-title h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 800; margin: 0 0 8px;
+}
+.page-title p { color: var(--muted); font-size: 1rem; margin: 0; }
+
+.sec {
+  margin-top: 36px;
+  padding: 28px 32px;
+  border-radius: var(--radius);
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+}
+.sec h2 {
+  font-size: 1.15rem; font-weight: 800; margin: 0 0 10px;
+  color: var(--accent);
+}
+.sec p, .sec li {
+  color: var(--muted); line-height: 1.65; font-size: 0.93rem;
+}
+.sec ul, .sec ol { padding-left: 20px; }
+.sec li { margin-bottom: 6px; }
+
+.nl { margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--panel-line); }
+.nl p { font-style: italic; color: var(--muted-2); font-size: 0.88rem; }
+
+footer {
+  text-align: center; padding: 40px 0 20px;
+  color: var(--muted-2); font-size: 0.82rem;
+}
+footer a { color: var(--muted); }
+footer a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topbar">
+    <a href="/capclash/" class="brand"><span class="mark">▲</span> Cap Clash</a>
+    <nav>
+      <a href="/capclash/">Hub</a>
+      <a href="/capclash/privacy.html">Privacy</a>
+      <a href="/">Astroleck</a>
+    </nav>
+  </header>
+
+  <div class="page-title">
+    <h1>Support</h1>
+    <p>Help and information for Cap Clash</p>
+  </div>
+
+  <!-- What is Cap Clash -->
+  <section class="sec">
+    <h2>What is Cap Clash?</h2>
+    <p>
+      Cap Clash is a multiplayer party game where you flick bottle caps to score points.
+      Play quick rounds with friends — 2 or 4 players on one phone, or link multiple phones for bigger matches.
+    </p>
+    <div class="nl">
+      <p>Cap Clash is een multiplayer partygame waarin je met flessendoppen flikt om punten te scoren.
+      Speel snelle rondes met vrienden — 2 of 4 spelers op één telefoon, of koppel meerdere telefoons.</p>
+    </div>
+  </section>
+
+  <!-- How to play -->
+  <section class="sec">
+    <h2>How to play</h2>
+    <ol>
+      <li>Start a new game and choose 2-player or 4-player mode.</li>
+      <li><strong>Same device:</strong> pass the phone between turns. Each player flicks their cap by swiping on the screen.</li>
+      <li><strong>Linked devices:</strong> one player hosts the game; others join on their own phone. The host controls the game flow.</li>
+      <li>Aim for the target zone to score. The player with the most points after all rounds wins.</li>
+    </ol>
+    <div class="nl">
+      <p>Start een nieuw spel en kies 2 of 4 spelers. Op één toestel geef je de telefoon door per beurt.
+      Bij gekoppelde telefoons maakt één speler het spel aan (host) en sluiten anderen aan.
+      Mik op de doelzone om te scoren — de speler met de meeste punten wint.</p>
+    </div>
+  </section>
+
+  <!-- Crowns, skins & purchases -->
+  <section class="sec">
+    <h2>Crowns, skins &amp; purchases</h2>
+    <p>
+      You can earn crowns by winning matches. Crowns and in-app purchases unlock cosmetic cap skins.
+      All purchasable content is cosmetic only and does not affect gameplay.
+    </p>
+    <p style="color:var(--muted-2);font-size:0.88rem;">
+      Note: in-app purchases and the in-game store may not be available in all versions. Cosmetic items are tied to your device.
+    </p>
+  </section>
+
+  <!-- Troubleshooting -->
+  <section class="sec">
+    <h2>Troubleshooting</h2>
+    <ul>
+      <li><strong>App won't open or crashes:</strong> make sure you're running the latest version of Cap Clash and iOS. Try restarting the app or your device.</li>
+      <li><strong>Linked play not working:</strong> ensure both devices are on the same Wi-Fi network or have Bluetooth enabled. Restart the game session if the connection drops.</li>
+      <li><strong>Missing purchases:</strong> go to Settings → App Store → restore purchases, or reinstall the app and sign in with the same Apple ID.</li>
+      <li><strong>Other issues:</strong> try deleting and reinstalling Cap Clash. Your Apple ID purchases will be restored automatically.</li>
+    </ul>
+    <div class="nl">
+      <p>Controleer of je de laatste versie van Cap Clash en iOS gebruikt. Herstart de app of je toestel bij problemen.
+      Voor gekoppeld spelen: zorg dat beide toestellen op hetzelfde Wi-Fi zitten of Bluetooth aan hebben.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="sec">
+    <h2>Contact</h2>
+    <p>
+      For questions, feedback or bug reports, you can reach out through the
+      <a href="https://github.com/Victorinox13" style="color:var(--accent);">developer's GitHub profile</a>
+      or leave a review on the App Store. We'll do our best to respond.
+    </p>
+    <div class="nl">
+      <p>Voor vragen, feedback of bugrapporten kun je terecht op het
+      <a href="https://github.com/Victorinox13" style="color:var(--accent);">GitHub-profiel van de ontwikkelaar</a>
+      of via een review op de App Store.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Victor Deleeck · <a href="/capclash/">Cap Clash</a> · <a href="/">Astroleck</a>
+  </footer>
+</div>
+</body>
+</html>
