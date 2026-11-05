@@ -1,0 +1,3 @@
+# Cap Clash — same AdMob publisher as site root /app-ads.txt
+# AdMob authorization crawls https://astroleck.com/app-ads.txt (domain root).
+google.com, pub-9559509402865286, DIRECT, f08c47fec0942fa0
