@@ -211,12 +211,15 @@ footer a:hover { color: var(--text); }
     <h1>Send feedback</h1>
     <p class="sub">Share bugs, ideas or general feedback — no account needed. You can attach a screenshot. Optional name and e-mail help us reply.</p>
 
-    <form action="https://formsubmit.co/victor@deleeck.be" method="POST" enctype="multipart/form-data">
-      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-      <input type="hidden" name="_subject" value="Cap Clash feedback">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://astroleck.com/capclash/feedback-thanks.html">
+    <form action="https://formly.email/submit" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="access_key" value="980cbe705aec4a29adf2c5d5552141e1">
+      <input type="hidden" name="subject" value="Cap Clash feedback">
+      <input type="hidden" name="from_name" value="Cap Clash">
+      <input type="hidden" name="redirect" value="https://astroleck.com/capclash/feedback-thanks.html">
+      <input type="hidden" name="honeypot" value="website">
+      <div style="display:none" aria-hidden="true">
+        <input type="text" name="website" tabindex="-1" autocomplete="off">
+      </div>
 
       <div class="form-group">
         <label for="name">Name <span class="optional">(optional)</span></label>
@@ -247,7 +250,7 @@ footer a:hover { color: var(--text); }
       <div class="form-group">
         <label for="screenshot">Screenshot <span class="optional">(optional)</span></label>
         <input type="file" id="screenshot" name="attachment" accept="image/*,.png,.jpg,.jpeg,.heic,.webp" capture="environment">
-        <p class="form-hint">PNG, JPG or HEIC · max about 10&nbsp;MB. From the app, you can pick a photo from your library.</p>
+        <p class="form-hint">PNG, JPG or HEIC · max about 5&nbsp;MB. From the app, you can pick a photo from your library.</p>
       </div>
 
       <button type="submit" class="btn primary">Send feedback</button>
