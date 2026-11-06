@@ -3,202 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1" sizes="any">
-<link rel="icon" href="/icon.svg?v=1" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1">
-<title>Support — Cap Clash</title>
-<meta name="description" content="Support and help for Cap Clash, the multiplayer bottle cap party game.">
-<style>
-:root {
-  --bg: #0a1628;
-  --bg-2: #0d1b30;
-  --panel: rgba(13, 24, 42, 0.66);
-  --panel-line: rgba(159, 177, 201, 0.14);
-  --text: #f4f7fb;
-  --muted: #9bb0cb;
-  --muted-2: #6f87a6;
-  --accent: #ffd36e;
-  --accent-strong: #e6b94e;
-  --radius: 18px;
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
-  color: var(--text);
-  background: linear-gradient(180deg, #0a1628 0%, #070e1a 100%);
-  background-attachment: fixed;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; text-decoration: none; }
-
-.wrap { width: min(760px, calc(100% - 36px)); margin: 0 auto; position: relative; z-index: 1; padding: 30px 0 64px; }
-
-.topbar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 18px; border-radius: 999px;
-  background: rgba(10, 20, 36, 0.55); border: 1px solid var(--panel-line);
-  backdrop-filter: blur(14px);
-}
-.brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -0.01em; }
-.brand img { width: 30px; height: 30px; border-radius: 9px; }
-.topbar nav { display: flex; gap: 6px; }
-.topbar nav a {
-  padding: 8px 14px; border-radius: 999px; color: var(--muted); font-weight: 700; font-size: 0.9rem;
-  transition: color .15s ease, background .15s ease;
-}
-.topbar nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-.topbar nav a.active { color: var(--accent); background: rgba(255, 211, 110, 0.08); }
-@media (max-width: 640px) {
-  .topbar { padding: 10px 14px; }
-  .topbar nav { gap: 2px; }
-  .topbar nav a { padding: 7px 10px; font-size: 0.82rem; }
-}
-
-.page-title {
-  margin-top: 48px;
-  text-align: center;
-}
-.page-title h1 {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  font-weight: 800; margin: 0 0 8px;
-}
-.page-title p { color: var(--muted); font-size: 1rem; margin: 0; }
-
-.sec {
-  margin-top: 36px;
-  padding: 28px 32px;
-  border-radius: var(--radius);
-  background: var(--panel);
-  border: 1px solid var(--panel-line);
-}
-.sec h2 {
-  font-size: 1.15rem; font-weight: 800; margin: 0 0 10px;
-  color: var(--accent);
-}
-.sec p, .sec li {
-  color: var(--muted); line-height: 1.65; font-size: 0.93rem;
-}
-.sec ul, .sec ol { padding-left: 20px; }
-.sec li { margin-bottom: 6px; }
-.sec a.link { color: var(--accent); }
-.sec a.link:hover { text-decoration: underline; }
-
-.nl { margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--panel-line); }
-.nl p { font-style: italic; color: var(--muted-2); font-size: 0.88rem; }
-
-footer {
-  text-align: center; padding: 40px 0 20px;
-  color: var(--muted-2); font-size: 0.82rem;
-}
-footer a { color: var(--muted); }
-footer a:hover { color: var(--text); }
-</style>
+<title>Support | Cap Clash</title>
+<meta name="description" content="Help with Cap Clash: how to play, linking phones, Crowns, purchases and contact.">
+<meta name="theme-color" content="#0D1729">
+<link rel="icon" href="/capclash/assets/cap-emblem.svg" type="image/svg+xml">
+<link rel="icon" href="/capclash/assets/icon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="/capclash/assets/icon-180.png">
+<link rel="stylesheet" href="/capclash/assets/site.css?v=3">
 </head>
 <body>
-<div class="wrap">
+<div class="wrap narrow">
 
   <header class="topbar">
-    <a href="/capclash/" class="brand"><img src="app-icon.png" alt="Cap Clash"> Cap Clash</a>
-    <nav>
-      <a href="/capclash/">Home</a>
-      <a href="/capclash/support.html" class="active">Support</a>
+    <a class="brand" href="/capclash/" aria-label="Cap Clash home">
+      <img src="/capclash/assets/cap-emblem.svg" alt="" width="34" height="34">
+      <span class="brand-text"><span>CAP CLASH</span></span>
+    </a>
+    <nav aria-label="Cap Clash">
+      <a href="/capclash/support.html" aria-current="page">Support</a>
       <a href="/capclash/feedback.html">Feedback</a>
       <a href="/capclash/contact.html">Contact</a>
     </nav>
   </header>
 
-  <div class="page-title">
-    <h1>Support</h1>
-    <p>Help and information for Cap Clash</p>
-  </div>
-
-  <section class="sec">
-    <h2>What is Cap Clash?</h2>
-    <p>
-      Cap Clash is a multiplayer party game where you flick bottle caps to score points.
-      Play quick rounds with friends — 2 or 4 players on one phone, or link multiple phones for bigger matches.
-    </p>
-    <div class="nl">
-      <p>Cap Clash is een multiplayer partygame waarin je met flessendoppen flikt om punten te scoren.
-      Speel snelle rondes met vrienden — 2 of 4 spelers op één telefoon, of koppel meerdere telefoons.</p>
+  <main>
+    <div class="page-head">
+      <h1 class="display">Support</h1>
+      <p>Help with Cap Clash, in English and Dutch.</p>
     </div>
-  </section>
 
-  <section class="sec">
-    <h2>How to play</h2>
-    <ol>
-      <li>Start a new game and choose 2-player or 4-player mode.</li>
-      <li><strong>Same device:</strong> pass the phone between turns. Each player flicks their cap by swiping on the screen.</li>
-      <li><strong>Linked devices:</strong> one player hosts the game; others join on their own phone. The host controls the game flow.</li>
-      <li>Aim for the target zone to score. The player with the most points after all rounds wins.</li>
-    </ol>
-    <div class="nl">
-      <p>Start een nieuw spel en kies 2 of 4 spelers. Op één toestel geef je de telefoon door per beurt.
-      Bij gekoppelde telefoons maakt één speler het spel aan (host) en sluiten anderen aan.
-      Mik op de doelzone om te scoren — de speler met de meeste punten wint.</p>
-    </div>
-  </section>
+    <article class="sheet">
+      <section class="topic" style="--tint:#6DCFE4">
+        <h2><span class="chip" style="--c:#1FB5D6" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round"><path d="M8.8 8.8a3.3 3.3 0 1 1 4.7 3c-.9.4-1.5 1.2-1.5 2.2v.4"/><circle cx="12" cy="18.6" r="1.3" fill="#fff" stroke="none"/></svg></span>What is Cap Clash?</h2>
+        <p>Cap Clash is a party game for iPhone and iPad. Two teams flick bottle caps across a mat and try to land them on the other team's fields. Play on one phone, or lay 2, 3 or 4 phones end to end for one big mat.</p>
+        <p class="nl" lang="nl">Cap Clash is een partygame voor iPhone en iPad. Twee teams flikken flessendoppen over een mat en proberen op de velden van het andere team te landen. Speel op één toestel, of leg 2, 3 of 4 telefoons achter elkaar voor één grote mat.</p>
+      </section>
 
-  <section class="sec">
-    <h2>Crowns, skins &amp; purchases</h2>
-    <p>
-      You can earn crowns by winning matches. Crowns and in-app purchases unlock cosmetic cap skins.
-      All purchasable content is cosmetic only and does not affect gameplay.
-    </p>
-    <p style="color:var(--muted-2);font-size:0.88rem;">
-      Note: in-app purchases and the in-game store may not be available in all versions. Cosmetic items are tied to your device.
-    </p>
-  </section>
+      <section class="topic" style="--tint:#F8C359">
+        <h2><span class="chip" style="--c:#F5A300" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.2v13.6a.8.8 0 0 0 1.2.7l10.6-6.8a.8.8 0 0 0 0-1.4L9.2 4.5A.8.8 0 0 0 8 5.2Z"/></svg></span>How to play</h2>
+        <ol>
+          <li>Choose <strong>1 Phone</strong>, or <strong>2, 3 or 4</strong> phones laid in a line, the bottom of one against the top of the next.</li>
+          <li>Two teams of two, one at each end. Tap the corner that starts; the order stays the same all game.</li>
+          <li>Swipe or drag forward from your cap; the line shows where it goes. Hold your cap to move it within your corner.</li>
+          <li>Caps on the other team's fields score 1, 2 or 3. Land one between the other team's posts for a <strong>BOSS HIT!</strong></li>
+        </ol>
+        <p>All the rules, with pictures, are on the <a href="/capclash/#how">Cap Clash home page</a> and under How to Play in the app.</p>
+        <p class="nl" lang="nl">Kies 1 toestel, of 2, 3 of 4 telefoons op een rij, de onderkant van de ene tegen de bovenkant van de volgende. Twee teams van twee, elk aan een kant. Swipe of sleep vooruit vanaf je dop; de lijn toont waar hij heen gaat. Doppen op de velden van het andere team scoren 1, 2 of 3 punten. Alle regels staan onder Uitleg in de app.</p>
+      </section>
 
-  <section class="sec">
-    <h2>Troubleshooting</h2>
-    <ul>
-      <li><strong>App won't open or crashes:</strong> make sure you're running the latest version of Cap Clash and iOS. Try restarting the app or your device.</li>
-      <li><strong>Linked play not working:</strong> ensure both devices are on the same Wi-Fi network or have Bluetooth enabled. Restart the game session if the connection drops.</li>
-      <li><strong>Missing purchases:</strong> go to Settings → App Store → restore purchases, or reinstall the app and sign in with the same Apple ID.</li>
-      <li><strong>Other issues:</strong> try deleting and reinstalling Cap Clash. Your Apple ID purchases will be restored automatically.</li>
-    </ul>
-    <div class="nl">
-      <p>Controleer of je de laatste versie van Cap Clash en iOS gebruikt. Herstart de app of je toestel bij problemen.
-      Voor gekoppeld spelen: zorg dat beide toestellen op hetzelfde Wi-Fi zitten of Bluetooth aan hebben.</p>
-    </div>
-  </section>
+      <section class="topic" style="--tint:#FF8CC8">
+        <h2><span class="chip" style="--c:#FF3EA5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M3.2 8.3a.6.6 0 0 1 1-.6l3.9 3.4 3.4-5.8a.6.6 0 0 1 1 0l3.4 5.8 3.9-3.4a.6.6 0 0 1 1 .6L18.6 18a1 1 0 0 1-1 .8H6.4a1 1 0 0 1-1-.8Z"/></svg></span>Crowns, skins and purchases</h2>
+        <p>You earn Crowns for every round you play and for every BOSS hit. You can also get them from an optional video ad, or buy a pack. Crowns unlock cap and mat skins. Skins only change the look; they never change how the game plays.</p>
+        <p><strong>Ad-Free</strong> removes the forced ads; optional videos for Crowns stay available. The <strong>Party Pass</strong> lets you host games on 2, 3 or 4 phones, and anyone who joins plays free.</p>
+        <p>Crowns and skins are saved on this device. Ad-Free and the Party Pass come back on another device with Restore Purchases in the shop.</p>
+        <p class="nl" lang="nl">Kroontjes verdien je per gespeelde ronde en per BOSS-hit, met een optionele video of door een pakket te kopen. Je ontgrendelt er skins voor doppen en matten mee; die veranderen niets aan het spel. Reclamevrij haalt de verplichte reclame weg. Met de Party Pass host je spellen op 2, 3 of 4 telefoons, en wie meedoet speelt gratis. Kroontjes en skins staan op dit toestel; Reclamevrij en de Party Pass zet je terug met Aankopen herstellen in de winkel.</p>
+      </section>
 
-  <section class="sec">
-    <h2>Send feedback</h2>
-    <p>
-      Found a bug or have an idea? Use the
-      <a class="link" href="/capclash/feedback.html">feedback form</a>
-      — no login required. Perfect for in-app reports.
-    </p>
-    <div class="nl">
-      <p>Bug gevonden of een idee? Gebruik het
-      <a class="link" href="/capclash/feedback.html" style="color:var(--accent);">feedbackformulier</a>
-      — geen account nodig.</p>
-    </div>
-  </section>
+      <section class="topic" style="--tint:#FCA46A">
+        <h2><span class="chip" style="--c:#FA731A" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9Z"/></svg></span>Troubleshooting</h2>
+        <ul>
+          <li><strong>Phones won't link:</strong> turn on Wi-Fi and Bluetooth on every phone (they don't need to share a network) and keep them close together. Allow Local Network for Cap Clash on each phone under Settings › Privacy &amp; Security › Local Network. The phone that hosts needs the Party Pass.</li>
+          <li><strong>Contact sharing pops up:</strong> when two iPhone tops touch, NameDrop can start. Lay the phones bottom to top instead, and turn a screen that is upside down.</li>
+          <li><strong>A purchase is missing:</strong> open the shop in Cap Clash and tap Restore Purchases, signed in with the Apple ID you bought it with.</li>
+          <li><strong>The app crashes or freezes:</strong> update Cap Clash and iOS, then restart the app. Reinstall only as a last resort: Crowns and skins are saved on the device and are removed with the app.</li>
+        </ul>
+        <p class="nl" lang="nl">Telefoons koppelen niet? Zet wifi en Bluetooth aan op elk toestel, leg ze dicht bij elkaar en sta Lokaal netwerk toe voor Cap Clash (Instellingen › Privacy en beveiliging › Lokaal netwerk). Het toestel dat host heeft de Party Pass nodig. Verschijnt NameDrop? Leg de telefoons onderkant tegen bovenkant. Aankoop kwijt? Tik in de winkel op Aankopen herstellen. Crasht de app? Werk Cap Clash en iOS bij en herstart de app.</p>
+      </section>
 
-  <section class="sec">
-    <h2>Contact</h2>
-    <p>
-      For questions, feedback or bug reports, reach out via e-mail at
-      <a class="link" href="mailto:victor@deleeck.be">victor@deleeck.be</a>,
-      use the <a class="link" href="/capclash/feedback.html">feedback form</a>,
-      or leave a review on the App Store. We'll do our best to respond.
-    </p>
-    <div class="nl">
-      <p>Voor vragen, feedback of bugrapporten kun je mailen naar
-      <a class="link" href="mailto:victor@deleeck.be" style="color:var(--accent);">victor@deleeck.be</a>
-      of via een review op de App Store.</p>
-    </div>
-  </section>
+      <section class="topic" style="--tint:#EF8BCE">
+        <h2><span class="chip" style="--c:#E64DB3" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2.5 21.5Z"/></svg></span>Send feedback</h2>
+        <p>Found a bug or have an idea? Use the <a href="/capclash/feedback.html">feedback form</a>. No account needed, and you can add a screenshot.</p>
+        <p class="nl" lang="nl">Bug gevonden of een idee? Gebruik het <a href="/capclash/feedback.html">feedbackformulier</a>. Geen account nodig, en je kunt een screenshot toevoegen.</p>
+      </section>
 
-  <footer>
-    <p>© 2026 A Victor Deleeck game · <a href="/capclash/">Cap Clash</a></p>
+      <section class="topic" style="--tint:#A49BF6">
+        <h2><span class="chip" style="--c:#7366F2" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m21.5 7.5-8.4 5.4a2 2 0 0 1-2.2 0L2.5 7.5"/></svg></span>Contact</h2>
+        <p>For questions, bug reports or anything else, e-mail <a href="mailto:victor@deleeck.be">victor@deleeck.be</a> or leave a review on the App Store. We reply as soon as we can.</p>
+        <p class="nl" lang="nl">Voor vragen of bugmeldingen kun je mailen naar <a href="mailto:victor@deleeck.be">victor@deleeck.be</a> of een review achterlaten in de App Store.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <p>© 2026 Victor Deleeck</p>
+    <nav aria-label="Footer">
+      <a href="/capclash/">Cap Clash</a>
+      <a href="/capclash/privacy.html">Privacy</a>
+      <a href="/capclash/contact.html">Contact</a>
+    </nav>
   </footer>
 </div>
 </body>

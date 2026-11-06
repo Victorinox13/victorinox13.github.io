@@ -3,215 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1" sizes="any">
-<link rel="icon" href="/icon.svg?v=1" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1">
-<title>Feedback — Cap Clash</title>
-<meta name="description" content="Send anonymous feedback, bug reports or ideas for Cap Clash. No account required.">
-<style>
-:root {
-  --bg: #0a1628;
-  --bg-2: #0d1b30;
-  --panel: rgba(13, 24, 42, 0.66);
-  --panel-line: rgba(159, 177, 201, 0.14);
-  --text: #f4f7fb;
-  --muted: #9bb0cb;
-  --muted-2: #6f87a6;
-  --accent: #ffd36e;
-  --accent-strong: #e6b94e;
-  --radius: 18px;
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
-  color: var(--text);
-  background: linear-gradient(180deg, #0a1628 0%, #070e1a 100%);
-  background-attachment: fixed;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; text-decoration: none; }
-
-.wrap { width: min(620px, calc(100% - 36px)); margin: 0 auto; position: relative; z-index: 1; padding: 30px 0 64px; }
-
-.topbar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 18px; border-radius: 999px;
-  background: rgba(10, 20, 36, 0.55); border: 1px solid var(--panel-line);
-  backdrop-filter: blur(14px);
-}
-.brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -0.01em; }
-.brand img { width: 30px; height: 30px; border-radius: 9px; }
-.topbar nav { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
-.topbar nav a {
-  padding: 8px 14px; border-radius: 999px; color: var(--muted); font-weight: 700; font-size: 0.9rem;
-  transition: color .15s ease, background .15s ease;
-}
-.topbar nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-.topbar nav a.active { color: var(--accent); background: rgba(255, 211, 110, 0.08); }
-@media (max-width: 640px) {
-  .topbar { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
-  .topbar nav { gap: 2px; }
-  .topbar nav a { padding: 7px 10px; font-size: 0.82rem; }
-}
-
-.contact-card {
-  margin-top: 48px;
-  padding: 40px 32px;
-  border-radius: var(--radius);
-  background: var(--panel);
-  border: 1px solid var(--panel-line);
-}
-.contact-card img {
-  display: block;
-  width: 64px; height: 64px; border-radius: 16px;
-  margin: 0 auto 20px;
-  box-shadow: 0 4px 20px rgba(255, 211, 110, 0.15);
-}
-.contact-card h1 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 800; margin: 0 0 10px;
-  text-align: center;
-}
-.contact-card .sub {
-  color: var(--muted); font-size: 1rem; margin: 0 0 28px; line-height: 1.55;
-  text-align: center;
-}
-
-.form-group { margin-bottom: 18px; text-align: left; }
-.form-group label {
-  display: block;
-  font-weight: 700;
-  font-size: 0.88rem;
-  color: var(--muted);
-  margin-bottom: 7px;
-}
-.form-group .optional {
-  font-weight: 500;
-  color: var(--muted-2);
-  font-size: 0.82rem;
-}
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="file"],
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid var(--panel-line);
-  background: rgba(7, 14, 26, 0.72);
-  color: var(--text);
-  font-family: inherit;
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color .15s ease, box-shadow .15s ease;
-}
-.form-group textarea {
-  min-height: 140px;
-  resize: vertical;
-  line-height: 1.5;
-}
-.form-group select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239bb0cb' d='M1.4 0.6L6 5.2 10.6 0.6 12 2 6 8 0 2z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 36px;
-}
-.form-group select option {
-  background: #0d1b30;
-  color: var(--text);
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: rgba(255, 211, 110, 0.55);
-  box-shadow: 0 0 0 3px rgba(255, 211, 110, 0.12);
-}
-
-.form-group input[type="file"] {
-  padding: 10px 12px;
-  cursor: pointer;
-  color: var(--muted);
-}
-.form-group input[type="file"]::file-selector-button {
-  margin-right: 12px;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 999px;
-  background: rgba(255, 211, 110, 0.14);
-  color: var(--accent);
-  font-weight: 700;
-  font-family: inherit;
-  cursor: pointer;
-}
-.form-hint {
-  margin-top: 6px;
-  color: var(--muted-2);
-  font-size: 0.8rem;
-  line-height: 1.4;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: var(--muted-2);
-}
-
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  width: 100%;
-  padding: 14px 28px; border-radius: 999px; font-weight: 700; font-size: 1rem;
-  border: none; cursor: pointer;
-  transition: background .15s ease, transform .15s ease;
-  font-family: inherit;
-}
-.btn:hover { transform: translateY(-1px); }
-.btn.primary {
-  background: var(--accent); color: #0a1628;
-}
-.btn.primary:hover { background: #ffe49a; }
-
-.form-note {
-  margin-top: 16px;
-  text-align: center;
-  color: var(--muted-2);
-  font-size: 0.85rem;
-  line-height: 1.5;
-}
-.form-note a { color: var(--accent); }
-.form-note a:hover { text-decoration: underline; }
-
-footer {
-  text-align: center; padding: 40px 0 20px;
-  color: var(--muted-2); font-size: 0.82rem;
-}
-footer a { color: var(--muted); }
-footer a:hover { color: var(--text); }
-</style>
+<title>Send feedback | Cap Clash</title>
+<meta name="description" content="Send anonymous feedback, bug reports or ideas for Cap Clash. No account needed.">
+<meta name="theme-color" content="#0D1729">
+<link rel="icon" href="/capclash/assets/cap-emblem.svg" type="image/svg+xml">
+<link rel="icon" href="/capclash/assets/icon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="/capclash/assets/icon-180.png">
+<link rel="stylesheet" href="/capclash/assets/site.css?v=3">
 </head>
 <body>
-<div class="wrap">
+<div class="wrap slim">
 
   <header class="topbar">
-    <a href="/capclash/" class="brand"><img src="app-icon.png" alt="Cap Clash"> Cap Clash</a>
-    <nav>
-      <a href="/capclash/">Home</a>
+    <a class="brand" href="/capclash/" aria-label="Cap Clash home">
+      <img src="/capclash/assets/cap-emblem.svg" alt="" width="34" height="34">
+      <span class="brand-text"><span>CAP CLASH</span></span>
+    </a>
+    <nav aria-label="Cap Clash">
       <a href="/capclash/support.html">Support</a>
-      <a href="/capclash/feedback.html" class="active">Feedback</a>
+      <a href="/capclash/feedback.html" aria-current="page">Feedback</a>
       <a href="/capclash/contact.html">Contact</a>
     </nav>
   </header>
 
-  <div class="contact-card">
-    <img src="cap-emblem.png" alt="Cap Clash emblem">
-    <h1>Send feedback</h1>
-    <p class="sub">Share bugs, ideas or general feedback — no account needed. You can attach a screenshot. Optional name and e-mail help us reply.</p>
+  <main class="card">
+    <img class="emblem" src="/capclash/assets/cap-emblem.svg" alt="" width="84" height="84">
+    <h1 class="display">Send feedback</h1>
+    <p class="sub">Share a bug, an idea or anything else. No account needed. Add your name and <span class="nowrap">e-mail</span> only if you'd like a reply.</p>
 
-    <form action="https://formly.email/submit" method="POST" enctype="multipart/form-data">
+    <form class="form" action="https://formly.email/submit" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="access_key" value="980cbe705aec4a29adf2c5d5552141e1">
       <input type="hidden" name="subject" value="Cap Clash feedback">
       <input type="hidden" name="from_name" value="Cap Clash">
@@ -221,46 +41,50 @@ footer a:hover { color: var(--text); }
         <input type="text" name="website" tabindex="-1" autocomplete="off">
       </div>
 
-      <div class="form-group">
+      <fieldset class="field">
+        <legend>Category</legend>
+        <div class="segmented">
+          <input type="radio" id="cat-bug" name="category" value="Bug"><label for="cat-bug">Bug</label>
+          <input type="radio" id="cat-feedback" name="category" value="Feedback" checked><label for="cat-feedback">Feedback</label>
+          <input type="radio" id="cat-idea" name="category" value="Idea"><label for="cat-idea">Idea</label>
+          <input type="radio" id="cat-other" name="category" value="Other"><label for="cat-other">Other</label>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required placeholder="What happened, or what's your idea?"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="screenshot">Screenshot <span class="optional">(optional)</span></label>
+        <input type="file" id="screenshot" name="attachment" accept="image/*,.png,.jpg,.jpeg,.heic,.webp">
+        <p class="hint">PNG, JPG or HEIC, up to about 5&nbsp;MB. You can pick one from your photo library.</p>
+      </div>
+
+      <div class="field">
         <label for="name">Name <span class="optional">(optional)</span></label>
         <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name">
       </div>
 
-      <div class="form-group">
+      <div class="field">
         <label for="email">E-mail <span class="optional">(optional, for a reply)</span></label>
         <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email">
       </div>
 
-      <div class="form-group">
-        <label for="category">Category</label>
-        <select id="category" name="category">
-          <option value="Bug">Bug</option>
-          <option value="Feedback" selected>Feedback</option>
-          <option value="Idea">Idea</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required placeholder="Describe the bug, idea or feedback…"></textarea>
-      </div>
-
-
-      <div class="form-group">
-        <label for="screenshot">Screenshot <span class="optional">(optional)</span></label>
-        <input type="file" id="screenshot" name="attachment" accept="image/*,.png,.jpg,.jpeg,.heic,.webp" capture="environment">
-        <p class="form-hint">PNG, JPG or HEIC · max about 5&nbsp;MB. From the app, you can pick a photo from your library.</p>
-      </div>
-
-      <button type="submit" class="btn primary">Send feedback</button>
+      <button type="submit" class="btn btn-gold">Send feedback</button>
     </form>
 
-    <p class="form-note">Prefer e-mail? Write to <a href="mailto:victor@deleeck.be">victor@deleeck.be</a> or visit <a href="/capclash/contact.html">Contact</a>.</p>
-  </div>
+    <p class="note">Prefer e-mail? Write to <a href="mailto:victor@deleeck.be">victor@deleeck.be</a>.</p>
+  </main>
 
-  <footer>
-    <p>© 2026 A Victor Deleeck game · <a href="/capclash/">Cap Clash</a></p>
+  <footer class="foot">
+    <p>© 2026 Victor Deleeck</p>
+    <nav aria-label="Footer">
+      <a href="/capclash/">Cap Clash</a>
+      <a href="/capclash/privacy.html">Privacy</a>
+      <a href="/capclash/support.html">Support</a>
+    </nav>
   </footer>
 </div>
 </body>

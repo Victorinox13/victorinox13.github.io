@@ -3,133 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1" sizes="any">
-<link rel="icon" href="/icon.svg?v=1" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1">
-<title>Thanks — Cap Clash Feedback</title>
+<title>Feedback sent | Cap Clash</title>
 <meta name="description" content="Thank you for your Cap Clash feedback.">
+<meta name="theme-color" content="#0D1729">
+<link rel="icon" href="/capclash/assets/cap-emblem.svg" type="image/svg+xml">
+<link rel="icon" href="/capclash/assets/icon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="/capclash/assets/icon-180.png">
+<link rel="stylesheet" href="/capclash/assets/site.css?v=3">
 <style>
-:root {
-  --bg: #0a1628;
-  --bg-2: #0d1b30;
-  --panel: rgba(13, 24, 42, 0.66);
-  --panel-line: rgba(159, 177, 201, 0.14);
-  --text: #f4f7fb;
-  --muted: #9bb0cb;
-  --muted-2: #6f87a6;
-  --accent: #ffd36e;
-  --accent-strong: #e6b94e;
-  --radius: 18px;
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
-  color: var(--text);
-  background: linear-gradient(180deg, #0a1628 0%, #070e1a 100%);
-  background-attachment: fixed;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; text-decoration: none; }
-
-.wrap { width: min(620px, calc(100% - 36px)); margin: 0 auto; position: relative; z-index: 1; padding: 30px 0 64px; }
-
-.topbar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 18px; border-radius: 999px;
-  background: rgba(10, 20, 36, 0.55); border: 1px solid var(--panel-line);
-  backdrop-filter: blur(14px);
-}
-.brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -0.01em; }
-.brand img { width: 30px; height: 30px; border-radius: 9px; }
-.topbar nav { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
-.topbar nav a {
-  padding: 8px 14px; border-radius: 999px; color: var(--muted); font-weight: 700; font-size: 0.9rem;
-  transition: color .15s ease, background .15s ease;
-}
-.topbar nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-.topbar nav a.active { color: var(--accent); background: rgba(255, 211, 110, 0.08); }
-@media (max-width: 640px) {
-  .topbar { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
-  .topbar nav { gap: 2px; }
-  .topbar nav a { padding: 7px 10px; font-size: 0.82rem; }
-}
-
-.contact-card {
-  margin-top: 64px;
-  padding: 48px 36px;
-  border-radius: var(--radius);
-  background: var(--panel);
-  border: 1px solid var(--panel-line);
-  text-align: center;
-}
-.contact-card img {
-  width: 72px; height: 72px; border-radius: 18px;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 20px rgba(255, 211, 110, 0.15);
-}
-.contact-card h1 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 800; margin: 0 0 10px;
-}
-.contact-card .sub {
-  color: var(--muted); font-size: 1rem; margin: 0 0 28px; line-height: 1.55;
-}
-.links-row {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-}
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 24px; border-radius: 999px; font-weight: 700; font-size: 0.95rem;
-  transition: background .15s ease, transform .15s ease;
-}
-.btn:hover { transform: translateY(-1px); }
-.btn.primary {
-  background: var(--accent); color: #0a1628;
-}
-.btn.primary:hover { background: #ffe49a; }
-.btn.ghost {
-  background: rgba(255,255,255,0.06); color: var(--muted);
-  border: 1px solid var(--panel-line);
-}
-.btn.ghost:hover { color: var(--text); background: rgba(255,255,255,0.1); }
-
-footer {
-  text-align: center; padding: 40px 0 20px;
-  color: var(--muted-2); font-size: 0.82rem;
-}
-footer a { color: var(--muted); }
-footer a:hover { color: var(--text); }
+/* The emblem drops in like a cap that just scored. */
+.card .emblem { animation: landed 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
+@keyframes landed { from { transform: translateY(-40px) rotate(-120deg) scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap slim">
 
   <header class="topbar">
-    <a href="/capclash/" class="brand"><img src="app-icon.png" alt="Cap Clash"> Cap Clash</a>
-    <nav>
-      <a href="/capclash/">Home</a>
+    <a class="brand" href="/capclash/" aria-label="Cap Clash home">
+      <img src="/capclash/assets/cap-emblem.svg" alt="" width="34" height="34">
+      <span class="brand-text"><span>CAP CLASH</span></span>
+    </a>
+    <nav aria-label="Cap Clash">
       <a href="/capclash/support.html">Support</a>
-      <a href="/capclash/feedback.html" class="active">Feedback</a>
+      <a href="/capclash/feedback.html" aria-current="page">Feedback</a>
       <a href="/capclash/contact.html">Contact</a>
     </nav>
   </header>
 
-  <div class="contact-card">
-    <img src="cap-emblem.png" alt="Cap Clash emblem">
-    <h1>Thanks for your feedback</h1>
-    <p class="sub">Your message was sent. If you left an e-mail address, we may reply when we can. Every report helps improve Cap Clash.</p>
-    <div class="links-row">
-      <a class="btn primary" href="/capclash/">Back to Cap Clash</a>
-      <a class="btn ghost" href="/capclash/feedback.html">Send more feedback</a>
+  <main class="card">
+    <img class="emblem" src="/capclash/assets/cap-emblem.svg" alt="" width="84" height="84">
+    <h1 class="display">Feedback sent</h1>
+    <p class="sub">Thanks! If you left an e-mail address, we may reply when we can. Every report helps make Cap Clash better.</p>
+    <div class="actions">
+      <a class="btn btn-gold" href="/capclash/">Back to Cap Clash</a>
+      <a class="btn btn-glass" href="/capclash/feedback.html">Send more feedback</a>
     </div>
-  </div>
+  </main>
 
-  <footer>
-    <p>© 2026 A Victor Deleeck game · <a href="/capclash/">Cap Clash</a></p>
+  <footer class="foot">
+    <p>© 2026 Victor Deleeck</p>
+    <nav aria-label="Footer">
+      <a href="/capclash/">Cap Clash</a>
+      <a href="/capclash/privacy.html">Privacy</a>
+      <a href="/capclash/support.html">Support</a>
+    </nav>
   </footer>
 </div>
 </body>

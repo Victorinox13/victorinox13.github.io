@@ -3,241 +3,528 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1" sizes="any">
-<link rel="icon" href="/icon.svg?v=1" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1">
-<title>Cap Clash — Multiplayer Party Game</title>
-<meta name="description" content="Cap Clash — flick bottle caps, challenge friends. A multiplayer party game for 2 or 4 players on one phone or linked phones.">
+<title>Cap Clash: flick caps, beat your friends</title>
+<meta name="description" content="Cap Clash is a party game for iPhone and iPad. Two teams flick bottle caps across the mat onto each other's fields. Play on one phone, or lay up to four phones end to end.">
+<meta name="theme-color" content="#0D1729">
+<link rel="icon" href="/capclash/assets/cap-emblem.svg" type="image/svg+xml">
+<link rel="icon" href="/capclash/assets/icon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="/capclash/assets/icon-180.png">
+<meta property="og:title" content="Cap Clash">
+<meta property="og:description" content="Flick caps. Beat your friends. A party game for iPhone and iPad.">
+<meta property="og:image" content="https://astroleck.com/capclash/assets/icon-512.png">
+<meta property="og:url" content="https://astroleck.com/capclash/">
+<link rel="preload" href="/capclash/assets/fonts/barlow-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/capclash/assets/site.css?v=3">
 <style>
-:root {
-  --bg: #0a1628;
-  --bg-2: #0d1b30;
-  --panel: rgba(13, 24, 42, 0.66);
-  --panel-line: rgba(159, 177, 201, 0.14);
-  --text: #f4f7fb;
-  --muted: #9bb0cb;
-  --muted-2: #6f87a6;
-  --accent: #ffd36e;
-  --accent-strong: #e6b94e;
-  --radius: 18px;
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+/* ---------- Hero: the main menu logo ---------- */
+
+.hero { padding: 28px 0 0; text-align: center; }
+
+.emblem-bob {
+  width: 116px;
+  height: 116px;
+  margin: 0 auto 6px;
+  filter: drop-shadow(0 0 26px rgba(245, 163, 0, 0.6));
+  animation: emblem-in 0.6s cubic-bezier(0.3, 1.5, 0.5, 1) both, bob 2.86s ease-in-out 0.6s infinite alternate;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
+.emblem-bob img { width: 100%; height: 100%; display: block; animation: spin 12s linear infinite; }
+@keyframes emblem-in { from { transform: scale(0.2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes bob { from { translate: 0 -7px; } to { translate: 0 7px; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.wordmark {
+  display: flex;
+  justify-content: center;
   margin: 0;
-  font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
-  color: var(--text);
-  background: linear-gradient(180deg, #0a1628 0%, #070e1a 100%);
-  background-attachment: fixed;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
+  font-size: clamp(68px, 15vw, 150px);
+  line-height: 0.95;
+  letter-spacing: 0.005em;
+  filter: drop-shadow(0.03em 0.04em 0 rgba(0, 0, 0, 0.55));
 }
-a { color: inherit; text-decoration: none; }
-
-.wrap { width: min(860px, calc(100% - 36px)); margin: 0 auto; position: relative; z-index: 1; padding: 30px 0 64px; }
-
-.topbar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 18px; border-radius: 999px;
-  background: rgba(10, 20, 36, 0.55); border: 1px solid var(--panel-line);
-  backdrop-filter: blur(14px);
+.wordmark span {
+  display: inline-block;
+  animation: wave 0.9s ease-in-out calc(350ms + var(--i) * 65ms) both;
 }
-.brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -0.01em; }
-.brand img {
-  width: 30px; height: 30px; border-radius: 9px;
-}
-.topbar nav { display: flex; gap: 6px; }
-.topbar nav a {
-  padding: 8px 14px; border-radius: 999px; color: var(--muted); font-weight: 700; font-size: 0.9rem;
-  transition: color .15s ease, background .15s ease;
-}
-.topbar nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-.topbar nav a.active { color: var(--accent); background: rgba(255, 211, 110, 0.08); }
-@media (max-width: 640px) {
-  .topbar { padding: 10px 14px; }
-  .topbar nav { gap: 2px; }
-  .topbar nav a { padding: 7px 10px; font-size: 0.82rem; }
+.wordmark .gap { width: 0.2em; }
+@keyframes wave {
+  0% { transform: translateY(0.25em); opacity: 0; }
+  45% { transform: translateY(-0.08em); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
-.hero {
-  margin-top: 48px;
-  text-align: center;
+.tagline {
+  margin: 14px 0 0;
+  font-size: clamp(22px, 3.6vw, 30px);
+  font-weight: 900;
+  line-height: 1.2;
 }
-.app-icon {
-  width: 96px; height: 96px;
-  margin: 0 auto 24px;
+.lead {
+  max-width: 34em;
+  margin: 12px auto 0;
+  color: var(--soft);
+  font-size: 18px;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+.store-note { margin: 16px 0 0; color: var(--faint); font-size: 15px; }
+
+/* ---------- The mat you can play on ---------- */
+
+.table { margin-top: 36px; }
+.mat-wrap {
+  position: relative;
+  padding: 10px;
+}
+/* The team glows at each end, like around the board in the game. */
+.mat-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -30px -10px;
+  z-index: -1;
+  background:
+    radial-gradient(closest-side at 4% 50%, rgba(245, 163, 0, 0.35), transparent),
+    radial-gradient(closest-side at 96% 50%, rgba(255, 62, 165, 0.3), transparent);
+  filter: blur(10px);
+}
+#mat {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  cursor: grab;
+  touch-action: pan-y pinch-zoom;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.45));
   border-radius: 22px;
-  box-shadow: 0 4px 24px rgba(255, 211, 110, 0.18);
 }
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+#mat.aiming { cursor: grabbing; }
+#mat:focus { outline: none; }
+#mat:focus-visible { outline: 3px solid var(--sun); outline-offset: 6px; }
+#mat text { font-family: var(--rounded); font-weight: 900; }
+#mat .num { font-size: 40px; fill: #13756D; fill-opacity: 0.9; text-anchor: middle; dominant-baseline: central; }
+#mat .boss-text { font-size: 19px; fill: #fff; text-anchor: middle; dominant-baseline: central; letter-spacing: 1px; }
+#mat .badge-cap { font-family: var(--brand); font-weight: 800; font-size: 13px; fill: var(--sun); text-anchor: middle; }
+#mat .badge-clash { font-family: var(--brand); font-weight: 800; font-size: 8px; fill: var(--sun); text-anchor: middle; }
+#mat .appear { transform-box: fill-box; transform-origin: center; animation: cap-in 0.35s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
+#mat .leaving { transition: opacity 0.4s ease; opacity: 0; }
+@keyframes cap-in { from { transform: scale(0); } to { transform: scale(1); } }
+
+#mat .pop {
+  font-size: 34px;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke-width: 7px;
+  stroke-linejoin: round;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pop 1.3s ease-out forwards;
+}
+#mat .pop-score { fill: var(--sun); stroke: var(--ink); }
+#mat .pop-boss { fill: #fff; stroke: var(--red); font-size: 40px; }
+@keyframes pop {
+  0% { opacity: 0; transform: translateY(10px) scale(0.5); }
+  14% { opacity: 1; transform: translateY(0) scale(1.15); }
+  28% { transform: translateY(0) scale(1); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-34px) scale(1); }
+}
+
+.mat-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+.mat-bar p { margin: 0; }
+.mat-hint { color: var(--soft); font-size: 16px; }
+.mat-score {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  color: var(--faint);
+  font-size: 15px;
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin: 0 0 12px;
 }
-.hero h1 .gold { color: var(--accent); }
-.hero .lead {
-  font-size: 1.1rem;
-  color: var(--muted);
-  max-width: 520px;
-  margin: 0 auto 28px;
-  line-height: 1.55;
+.mat-score b {
+  display: grid;
+  place-items: center;
+  min-width: 46px;
+  height: 46px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--gold-grad);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.45), 0 4px 14px rgba(245, 163, 0, 0.4);
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 900;
 }
-.badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 16px; border-radius: 999px;
-  background: rgba(255, 211, 110, 0.1); border: 1px solid rgba(255, 211, 110, 0.2);
-  color: var(--accent); font-weight: 700; font-size: 0.85rem;
-  margin-bottom: 20px;
+.mat-score b.bump { animation: bump 0.35s cubic-bezier(0.3, 1.6, 0.5, 1); }
+@keyframes bump { 50% { transform: scale(1.25); } }
+
+/* ---------- How to play (HowToPlayView) ---------- */
+
+.how { margin-top: 104px; }
+.section-title { font-size: clamp(34px, 5vw, 46px); text-align: center; }
+.rules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 760px) { .rules { grid-template-columns: 1fr; gap: 12px; } }
+.rule {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 18px 12px 12px;
+  border-radius: 24px;
+  background: var(--glass);
+  box-shadow: inset 0 0 0 1px var(--glass-line);
+}
+.rule img,
+.rule .chip-big {
+  display: block;
+  width: 104px;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.rule .chip-big {
+  height: 104px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c) 95%, transparent), color-mix(in srgb, var(--c) 70%, transparent));
+}
+.rule .chip-big svg { width: 50px; height: 50px; }
+.rule h3 {
+  margin: 0 0 4px;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.25;
+  color: var(--tint);
+}
+.rule p { margin: 0; color: var(--soft); font-size: 16px; line-height: 1.5; }
+@media (min-width: 761px) {
+  .rule:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 7px); }
 }
 
-.links-row {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-  margin-top: 32px;
-}
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 24px; border-radius: 999px; font-weight: 700; font-size: 0.95rem;
-  transition: background .15s ease, color .15s ease, transform .15s ease;
-}
-.btn:hover { transform: translateY(-1px); }
-.btn.primary {
-  background: var(--accent); color: #0a1628;
-}
-.btn.primary:hover { background: #ffe49a; }
-.btn.ghost {
-  background: rgba(255,255,255,0.06); color: var(--muted);
-  border: 1px solid var(--panel-line);
-}
-.btn.ghost:hover { color: var(--text); background: rgba(255,255,255,0.1); }
+/* ---------- One phone or several (the menu's device tiles) ---------- */
 
-.sec {
-  margin-top: 56px;
-  padding: 32px;
-  border-radius: var(--radius);
-  background: var(--panel);
-  border: 1px solid var(--panel-line);
+.phones {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 48px;
+  margin-top: 104px;
 }
-.sec h2 {
-  font-size: 1.25rem; font-weight: 800; margin: 0 0 12px;
-  color: var(--accent);
+@media (max-width: 760px) { .phones { grid-template-columns: 1fr; gap: 28px; } }
+.tiles { display: flex; gap: 16px; justify-content: center; }
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 172px;
+  height: 148px;
+  border-radius: 30px;
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
 }
-.sec p, .sec li {
-  color: var(--muted); line-height: 1.65; font-size: 0.95rem;
-}
-.sec ul { padding-left: 20px; }
-.sec li { margin-bottom: 6px; }
+@media (max-width: 400px) { .tile { width: calc(50% - 8px); height: 136px; font-size: 21px; } }
+.tile-gold { color: var(--ink); background: var(--gold-grad); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5), 0 8px 26px rgba(245, 163, 0, 0.45); }
+.tile-cyan { color: #fff; background: linear-gradient(180deg, var(--cyan), #1473BF); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5), 0 8px 26px rgba(20, 115, 191, 0.5); }
+.tile svg { height: 56px; width: auto; }
+.phones-copy .display { font-size: clamp(30px, 4.4vw, 40px); }
+.phones-copy p { max-width: 34em; margin: 14px 0 0; color: var(--soft); }
+@media (max-width: 760px) { .phones-copy { text-align: center; } .phones-copy p { margin-inline: auto; } }
 
-.features {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;
-  margin-top: 20px;
-}
-.feat {
-  padding: 20px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--panel-line);
-}
-.feat .icon { font-size: 1.4rem; margin-bottom: 8px; }
-.feat h3 { font-size: 1rem; font-weight: 700; margin: 0 0 6px; }
-.feat p { font-size: 0.88rem; margin: 0; }
+/* ---------- Help ---------- */
 
-.contact-cta {
-  margin-top: 56px;
-  padding: 36px 32px;
-  border-radius: var(--radius);
-  background: rgba(255, 211, 110, 0.06);
-  border: 1px solid rgba(255, 211, 110, 0.15);
+.help {
+  margin-top: 104px;
+  padding: 44px 24px;
+  border-radius: 32px;
+  background:
+    radial-gradient(420px 220px at 50% 0%, rgba(245, 163, 0, 0.14), transparent 70%),
+    var(--glass);
+  box-shadow: inset 0 0 0 1px var(--glass-line);
   text-align: center;
 }
-.contact-cta h2 {
-  font-size: 1.25rem; font-weight: 800; margin: 0 0 8px;
-  color: var(--accent);
-}
-.contact-cta p {
-  color: var(--muted); font-size: 0.95rem; margin: 0 0 20px; line-height: 1.55;
-}
-
-footer {
-  text-align: center; padding: 40px 0 20px;
-  color: var(--muted-2); font-size: 0.82rem;
-}
-footer a { color: var(--muted); }
-footer a:hover { color: var(--text); }
+.help .display { font-size: clamp(30px, 4.4vw, 40px); }
+.help > p { margin: 10px auto 0; max-width: 34em; color: var(--soft); }
+.help .hero-actions { margin-top: 24px; }
+.help .mail { margin-top: 20px; color: var(--faint); font-size: 15px; }
+.help .mail a { color: var(--sun); font-weight: 800; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header class="topbar">
-    <a href="/capclash/" class="brand"><img src="app-icon.png" alt="Cap Clash"> Cap Clash</a>
-    <nav>
-      <a href="/capclash/" class="active">Home</a>
+    <a class="brand" href="/capclash/" aria-label="Cap Clash home">
+      <img src="/capclash/assets/cap-emblem.svg" alt="" width="34" height="34">
+      <span class="brand-text"><span>CAP CLASH</span></span>
+    </a>
+    <nav aria-label="Cap Clash">
       <a href="/capclash/support.html">Support</a>
       <a href="/capclash/feedback.html">Feedback</a>
       <a href="/capclash/contact.html">Contact</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <img class="app-icon" src="app-icon.png" alt="Cap Clash app icon">
-    <span class="badge">Multiplayer Party Game</span>
-    <h1>Flick caps. <span class="gold">Challenge friends.</span></h1>
-    <p class="lead">
-      Cap Clash is a multiplayer party game where you flick bottle caps to score.
-      Play with 2 or 4 players on one phone, or link phones for a bigger match.
-    </p>
-    <p class="lead" style="font-size:0.95rem;color:var(--muted-2);">
-      Coming to the App Store.
-    </p>
-    <div class="links-row">
-      <a class="btn primary" href="/capclash/support.html">Support</a>
-      <a class="btn ghost" href="/capclash/feedback.html">Feedback</a>
-      <a class="btn ghost" href="/capclash/privacy.html">Privacy Policy</a>
-      <a class="btn ghost" href="/capclash/contact.html">Contact</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="emblem-bob"><img src="/capclash/assets/cap-emblem.svg" alt="" width="116" height="116"></div>
+      <h1 class="wordmark" aria-label="Cap Clash">
+        <span aria-hidden="true" style="--i:0">C</span><span aria-hidden="true" style="--i:1">A</span><span aria-hidden="true" style="--i:2">P</span><span aria-hidden="true" class="gap" style="--i:3"></span><span aria-hidden="true" style="--i:4">C</span><span aria-hidden="true" style="--i:5">L</span><span aria-hidden="true" style="--i:6">A</span><span aria-hidden="true" style="--i:7">S</span><span aria-hidden="true" style="--i:8">H</span>
+      </h1>
+      <p class="tagline">Flick caps. Beat your friends.</p>
+      <p class="lead">A party game for the table. Two teams flick bottle caps across the mat onto each other's fields. Play on one phone, or lay up to four phones end to end.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#how">How to play</a>
+        <a class="btn btn-glass" href="/capclash/support.html">Support</a>
+      </div>
+      <!-- After release: swap this line for a link to https://apps.apple.com/app/id6829208121 -->
+      <p class="store-note">Coming soon to the App Store for iPhone and iPad.</p>
+    </section>
 
-  <section class="sec">
-    <h2>How it works</h2>
-    <div class="features">
-      <div class="feat">
-        <div class="icon">👆</div>
-        <h3>Flick to score</h3>
-        <p>Swipe your bottle cap across the board and aim for the target zone.</p>
-      </div>
-      <div class="feat">
-        <div class="icon">👥</div>
-        <h3>2 or 4 players</h3>
-        <p>Pass the phone or link devices for head-to-head multiplayer matches.</p>
-      </div>
-      <div class="feat">
-        <div class="icon">🎯</div>
-        <h3>Zones &amp; Chaos</h3>
-        <p>Score in different zones for bonus points. Chaos mode shakes things up.</p>
-      </div>
-      <div class="feat">
-        <div class="icon">🎉</div>
-        <h3>Party-ready</h3>
-        <p>Quick rounds, simple rules — perfect for groups.</p>
-      </div>
-    </div>
-  </section>
+    <section class="table" aria-label="Try the mat">
+      <div class="mat-wrap">
+        <svg id="mat" viewBox="0 0 1000 340" tabindex="0" aria-describedby="mat-hint">
+          <title>A Cap Clash mat you can flick caps on</title>
+          <defs>
+            <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+              <circle cx="7" cy="7" r="1.6" fill="#3E2E7C"/>
+            </pattern>
+            <pattern id="stripes" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="6" height="16" fill="#fff" fill-opacity=".13"/>
+            </pattern>
+            <pattern id="boss-stripes" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="12" height="12" fill="#E0414A"/>
+              <rect width="5" height="12" fill="#F07B80"/>
+            </pattern>
+            <clipPath id="mat-clip"><rect x="6" y="6" width="988" height="328" rx="20"/></clipPath>
+            <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#F8BA40"/><stop offset="1" stop-color="#F5A300"/>
+            </linearGradient>
+            <linearGradient id="g-pink" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#FF7AC2"/><stop offset="1" stop-color="#FF3EA5"/>
+            </linearGradient>
+            <symbol id="star" viewBox="-17 -17 34 34">
+              <polygon stroke-linejoin="round" points="0,-16 4.35,-4.99 16.17,-4.25 7.04,3.29 9.99,14.75 0,8.4 -9.99,14.75 -7.04,3.29 -16.17,-4.25 -4.35,-4.99"/>
+            </symbol>
+            <polygon id="crown" points="50,0 44.5,6.71 47.78,14.74 40.54,19.52 41.31,28.17 32.99,30.61 31.17,39.09 22.5,38.97 18.27,46.54 10.01,43.87 3.74,49.86 -3.36,44.87 -11.13,48.75 -16.44,41.89 -25,43.3 -28.06,35.18 -36.65,34.01 -37.18,25.35 -45.05,21.69 -43,13.26 -49.44,7.45 -45,0 -49.44,-7.45 -43,-13.26 -45.05,-21.69 -37.18,-25.35 -36.65,-34.01 -28.06,-35.18 -25,-43.3 -16.44,-41.89 -11.13,-48.75 -3.36,-44.87 3.74,-49.86 10.01,-43.87 18.27,-46.54 22.5,-38.97 31.17,-39.09 32.99,-30.61 41.31,-28.17 40.54,-19.52 47.78,-14.74 44.5,-6.71"/>
+            <symbol id="cap-gold" viewBox="-50 -50 100 100">
+              <use href="#crown" fill="url(#g-gold)"/>
+              <circle r="36" fill="none" stroke="#000" stroke-opacity=".2" stroke-width="5"/>
+              <use href="#star" x="-19" y="-19" width="38" height="38" fill="#0A1217" fill-opacity=".85" stroke="#0A1217" stroke-opacity=".85" stroke-width="3"/>
+              <ellipse cx="-16" cy="-24" rx="17" ry="7" fill="#fff" fill-opacity=".38" transform="rotate(-30 -16 -24)"/>
+            </symbol>
+            <symbol id="cap-pink" viewBox="-50 -50 100 100">
+              <use href="#crown" fill="url(#g-pink)"/>
+              <circle r="36" fill="none" stroke="#000" stroke-opacity=".2" stroke-width="5"/>
+              <use href="#star" x="-19" y="-19" width="38" height="38" fill="#fff" fill-opacity=".9" stroke="#fff" stroke-opacity=".9" stroke-width="3"/>
+              <ellipse cx="-16" cy="-24" rx="17" ry="7" fill="#fff" fill-opacity=".38" transform="rotate(-30 -16 -24)"/>
+            </symbol>
+          </defs>
 
-  <section class="contact-cta">
-    <h2>Questions or feedback?</h2>
-    <p>We'd love to hear from you. Send anonymous feedback — no account needed.</p>
-    <div class="links-row" style="margin-top:0;">
-      <a class="btn primary" href="/capclash/feedback.html">Send feedback</a>
-      <a class="btn ghost" href="/capclash/contact.html">Contact</a>
-    </div>
-  </section>
+          <g clip-path="url(#mat-clip)">
+            <rect x="6" y="6" width="988" height="328" fill="#2A1C5C"/>
+            <rect x="6" y="6" width="988" height="328" fill="url(#dots)"/>
 
-  <footer>
-    <p>© 2026 A Victor Deleeck game</p>
+            <!-- Corners: gold team on the left, pink team on the right. -->
+            <polygon points="6,6 52,6 6,52" fill="#F5A300"/>
+            <polygon points="6,334 52,334 6,288" fill="#F5A300"/>
+            <polygon points="994,6 948,6 994,52" fill="#FF3EA5"/>
+            <polygon points="994,334 948,334 994,288" fill="#FF3EA5"/>
+
+            <!-- BOSS fields between the posts at each end. -->
+            <rect x="19" y="116" width="56" height="108" fill="url(#boss-stripes)"/>
+            <text class="boss-text" x="47" y="170" transform="rotate(90 47 170)">BOSS</text>
+            <rect x="925" y="116" width="56" height="108" fill="url(#boss-stripes)"/>
+            <text class="boss-text" x="953" y="170" transform="rotate(-90 953 170)">BOSS</text>
+
+            <!-- One figure in three layers per team. -->
+            <g fill="#2CC5B4">
+              <g id="ff-us">
+                <polygon data-score="3" points="85,170 190.2,125.8 190.2,214.2"/>
+                <polygon data-score="2" points="200.1,121.6 293.9,82.3 293.9,257.7 200.1,218.4"/>
+                <polygon data-score="1" points="305.4,77.4 417.2,30.4 486.3,170 417.2,309.6 305.4,262.6"/>
+              </g>
+              <g id="ff-them">
+                <polygon data-score="3" points="915,170 809.8,125.8 809.8,214.2"/>
+                <polygon data-score="2" points="799.9,121.6 706.1,82.3 706.1,257.7 799.9,218.4"/>
+                <polygon data-score="1" points="694.6,77.4 582.8,30.4 513.7,170 582.8,309.6 694.6,262.6"/>
+              </g>
+            </g>
+            <use href="#ff-us" fill="url(#stripes)"/>
+            <use href="#ff-them" fill="url(#stripes)"/>
+            <text class="num" x="157.3" y="170" transform="rotate(90 157.3 170)">3</text>
+            <text class="num" x="247.8" y="170" transform="rotate(90 247.8 170)">2</text>
+            <text class="num" x="374.5" y="170" transform="rotate(90 374.5 170)">1</text>
+            <text class="num" x="842.7" y="170" transform="rotate(-90 842.7 170)">3</text>
+            <text class="num" x="752.2" y="170" transform="rotate(-90 752.2 170)">2</text>
+            <text class="num" x="625.5" y="170" transform="rotate(-90 625.5 170)">1</text>
+
+            <!-- Posts -->
+            <g>
+              <circle cx="55.4" cy="122.3" r="20" fill="#1FB5D6" stroke="#fff" stroke-width="2.5"/>
+              <circle cx="55.4" cy="122.3" r="13" fill="#137C99"/>
+              <use href="#star" x="45.4" y="112.3" width="20" height="20" fill="#FFCC3D"/>
+              <circle cx="55.4" cy="217.7" r="20" fill="#1FB5D6" stroke="#fff" stroke-width="2.5"/>
+              <circle cx="55.4" cy="217.7" r="13" fill="#137C99"/>
+              <use href="#star" x="45.4" y="207.7" width="20" height="20" fill="#FFCC3D"/>
+              <circle cx="944.6" cy="122.3" r="20" fill="#1FB5D6" stroke="#fff" stroke-width="2.5"/>
+              <circle cx="944.6" cy="122.3" r="13" fill="#137C99"/>
+              <use href="#star" x="934.6" y="112.3" width="20" height="20" fill="#FFCC3D"/>
+              <circle cx="944.6" cy="217.7" r="20" fill="#1FB5D6" stroke="#fff" stroke-width="2.5"/>
+              <circle cx="944.6" cy="217.7" r="13" fill="#137C99"/>
+              <use href="#star" x="934.6" y="207.7" width="20" height="20" fill="#FFCC3D"/>
+            </g>
+
+            <!-- CAP CLASH badges on the side rails. -->
+            <g>
+              <circle cx="500" cy="46.6" r="21" fill="#0A1217" stroke="#F5A300" stroke-width="2.5"/>
+              <text class="badge-cap" x="500" y="47">CAP</text>
+              <text class="badge-clash" x="500" y="56">CLASH</text>
+              <circle cx="500" cy="293.4" r="21" fill="#0A1217" stroke="#F5A300" stroke-width="2.5"/>
+              <text class="badge-cap" x="500" y="293.8">CAP</text>
+              <text class="badge-clash" x="500" y="302.8">CLASH</text>
+            </g>
+
+            <g id="caps"></g>
+            <line id="aim" x1="0" y1="0" x2="0" y2="0" stroke="#fff" stroke-opacity=".85" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9" visibility="hidden"/>
+            <g id="pops"></g>
+          </g>
+          <rect x="9" y="9" width="982" height="322" rx="18" fill="none" stroke="#8B6CFF" stroke-width="6"/>
+        </svg>
+      </div>
+      <div class="mat-bar">
+        <p class="mat-hint" id="mat-hint">Your turn: drag forward anywhere on the mat to flick the gold cap.</p>
+        <p class="mat-score">Score <b id="mat-score">0</b></p>
+      </div>
+      <p class="sr-only" id="mat-live" aria-live="polite"></p>
+    </section>
+
+    <section class="how" id="how" aria-labelledby="how-title">
+      <h2 class="display section-title" id="how-title">How to play</h2>
+      <ul class="rules">
+        <li class="rule" style="--tint:#6DCFE4">
+          <img src="/capclash/assets/howto/teams.jpg" alt="" width="360" height="782" loading="lazy">
+          <div><h3>Two teams</h3><p>Two teams of two, one at each end. Your side has your team's colour.</p></div>
+        </li>
+        <li class="rule" style="--tint:#A49BF6">
+          <img src="/capclash/assets/howto/start.jpg" alt="" width="360" height="782" loading="lazy">
+          <div><h3>Who goes first?</h3><p>Tap the corner that starts. The order stays the same all game.</p></div>
+        </li>
+        <li class="rule" style="--tint:#F8C359">
+          <img src="/capclash/assets/howto/shoot.jpg" alt="" width="360" height="656" loading="lazy">
+          <div><h3>Shooting</h3><p>Swipe or drag forward from your cap; the line shows where it goes. Switch style with the blue or orange dot in your corner.</p></div>
+        </li>
+        <li class="rule" style="--tint:#6DD1B3">
+          <img src="/capclash/assets/howto/move.jpg" alt="" width="360" height="428" loading="lazy">
+          <div><h3>Moving your cap</h3><p>Hold your cap, then drag it within your corner.</p></div>
+        </li>
+        <li class="rule" style="--tint:#FCA46A">
+          <img src="/capclash/assets/howto/score.jpg" alt="" width="360" height="782" loading="lazy">
+          <div><h3>Scoring</h3><p>Caps on the other team's fields score 1, 2 or 3. Your score shows at your end.</p></div>
+        </li>
+        <li class="rule" style="--tint:#ED5D66">
+          <img src="/capclash/assets/howto/boss.jpg" alt="" width="360" height="307" loading="lazy">
+          <div><h3>BOSS HIT!</h3><p>Land a cap on the BOSS field between the other team's posts.</p></div>
+        </li>
+        <li class="rule" style="--tint:#EF8BCE">
+          <img src="/capclash/assets/howto/joker.jpg" alt="" width="360" height="335" loading="lazy">
+          <div><h3>Joker</h3><p>After a round: shake your phone. Once per team per game.</p></div>
+        </li>
+        <li class="rule" style="--tint:#FCA46A">
+          <span class="chip-big" style="--c:#FA731A" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.4 1.6c.9 3.9-1.2 5.9-3 7.9C8 11.1 6.5 12.8 6.5 15.6a5.5 5.5 0 0 0 11 0c0-2.6-1.2-4.6-2.6-5.9.2 1.8-.5 3.2-1.8 3.7.6-4.1-.1-8.6-.7-11.8Z"/></svg>
+          </span>
+          <div><h3>ALL IN!</h3><p>Three rounds in a row without a cap in a field.</p></div>
+        </li>
+        <li class="rule" style="--tint:#F8C359">
+          <span class="chip-big" style="--c:#F5A300" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M2.5 13a5.5 5.5 0 0 1 5.5-5.5h13a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1h-7.7A5.5 5.5 0 1 1 2.5 13Zm5.5 2.3a2.3 2.3 0 1 0 0-4.6 2.3 2.3 0 0 0 0 4.6ZM14 3.5a1.2 1.2 0 0 1 1.2 1.2v1.8h-2.4V4.7A1.2 1.2 0 0 1 14 3.5Z"/></svg>
+          </span>
+          <div><h3>REFEREE ROUND!</h3><p>A cap stops on the CAP CLASH logo.</p></div>
+        </li>
+        <li class="rule" style="--tint:#6DCFE4">
+          <span class="chip-big" style="--c:#1FB5D6" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+          </span>
+          <div><h3>Knocked away?</h3><p>One shot per cap in your corner. None left? Skip your turn.</p></div>
+        </li>
+        <li class="rule" style="--tint:#A483E7">
+          <img src="/capclash/assets/howto/chaos.jpg" alt="" width="360" height="638" loading="lazy">
+          <div><h3>Chaos mode</h3><p>Table trouble for 1–3 rounds: spills, a cat, a fold in the mat, wind and more.</p></div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="phones" aria-labelledby="phones-title">
+      <div class="tiles" aria-hidden="true">
+        <div class="tile tile-gold">
+          <svg viewBox="0 0 30 52" fill="none" stroke="#0A1217" stroke-width="3.5"><rect x="2" y="2" width="26" height="48" rx="6"/><path d="M12 7.5h6" stroke-linecap="round"/></svg>
+          <span>1 Phone</span>
+        </div>
+        <div class="tile tile-cyan">
+          <svg viewBox="-2 -2 128 86" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="1.5">
+            <rect x="0" y="0" width="20" height="40" rx="4"/><rect x="0" y="42" width="20" height="40" rx="4"/>
+            <rect x="4.5" y="7" width="11" height="68" rx="2" fill="#fff" fill-opacity=".45" stroke="none"/>
+            <rect x="31" y="10" width="40" height="20" rx="4"/><rect x="30" y="32" width="20" height="40" rx="4"/><rect x="52" y="32" width="20" height="40" rx="4"/>
+            <rect x="37" y="14.6" width="28" height="52.7" rx="2" fill="#fff" fill-opacity=".45" stroke="none"/>
+            <rect x="82" y="0" width="20" height="40" rx="4"/><rect x="104" y="0" width="20" height="40" rx="4"/><rect x="82" y="42" width="20" height="40" rx="4"/><rect x="104" y="42" width="20" height="40" rx="4"/>
+            <rect x="89" y="7" width="28" height="68" rx="2" fill="#fff" fill-opacity=".45" stroke="none"/>
+          </svg>
+          <span>2, 3 or 4</span>
+        </div>
+      </div>
+      <div class="phones-copy">
+        <h2 class="display" id="phones-title">One phone or the whole table</h2>
+        <p>Pass one phone around, or lay 2, 3 or 4 phones in a line, the bottom of one against the top of the next. The mat runs across all the screens.</p>
+        <p>Playing on one phone stays free. With the Party Pass you host games on 2, 3 or 4 phones, and anyone who joins plays free.</p>
+      </div>
+    </section>
+
+    <section class="help" aria-labelledby="help-title">
+      <h2 class="display" id="help-title">Need a hand?</h2>
+      <p>Stuck, found a bug or have an idea for a skin? Get help or send feedback, no account needed.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="/capclash/feedback.html">Send feedback</a>
+        <a class="btn btn-glass" href="/capclash/support.html">Support</a>
+        <a class="btn btn-glass" href="/capclash/privacy.html">Privacy policy</a>
+      </div>
+      <p class="mail">Or e-mail <a href="mailto:victor@deleeck.be">victor@deleeck.be</a></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>© 2026 Victor Deleeck</p>
+    <nav aria-label="Footer">
+      <a href="/capclash/privacy.html">Privacy</a>
+      <a href="/capclash/support.html">Support</a>
+      <a href="/capclash/contact.html">Contact</a>
+    </nav>
   </footer>
 </div>
+<script src="/capclash/assets/mat.js?v=3" defer></script>
 </body>
 </html>
