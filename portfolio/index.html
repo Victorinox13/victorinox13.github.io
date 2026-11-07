@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Victor Deleeck | Founder of Astroleck</title>
+<meta name="description" content="Victor Deleeck, founder of Astroleck. iPhone apps on the App Store, web tools and AI automation at Suspicious Antwerp.">
+<meta name="theme-color" content="#07080a">
+<link rel="icon" href="/assets/brand/mark.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<meta property="og:title" content="Victor Deleeck | Founder of Astroleck">
+<meta property="og:description" content="iPhone apps, web tools, AI automation and the founder of Astroleck.">
+<meta property="og:image" content="https://astroleck.com/assets/img/moon-hero-2400.jpg">
+<meta property="og:url" content="https://astroleck.com/portfolio/">
+<meta property="og:type" content="profile">
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: "Archivo"; src: url("/assets/fonts/archivo-latin.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/assets/fonts/jetbrains-mono-latin.woff2") format("woff2"); font-weight: 100 800; font-display: swap; }
+</style>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #07080a;
+  --bg-2: #0d0f12;
+  --bg-3: #121519;
+  --text: #eceae6;
+  --muted: #a1a5ad;
+  --muted-2: #6f747d;
+  --line: rgba(236, 234, 230, 0.13);
+  --line-strong: rgba(236, 234, 230, 0.28);
+  --accent: #f2552c;
+  --ink: #0b0c0e;
+  --gutter: max(20px, 4.2vw);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--display); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.shell { width: 100%; padding: 0 var(--gutter); }
+.label { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); }
+h2 { margin: 0; font-stretch: 125%; font-weight: 700; letter-spacing: -0.02em; line-height: 1; text-transform: uppercase; font-size: clamp(34px, 5.2vw, 76px); }
+
+/* header */
+.site-header { position: absolute; z-index: 10; inset: 0 0 auto 0; display: flex; align-items: center; justify-content: space-between; padding: 26px var(--gutter); }
+.logo { display: inline-flex; align-items: center; gap: 12px; }
+.logo svg { width: 30px; height: 30px; color: var(--text); flex: none; }
+.logo span { font-stretch: 125%; font-weight: 700; font-size: 16px; letter-spacing: 0.2em; }
+.nav { display: flex; align-items: center; gap: 34px; }
+.nav a { font-stretch: 112%; font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); transition: color .3s var(--ease); }
+.nav a:hover { color: var(--text); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 18px;
+  height: 52px; padding: 0 8px 0 22px; white-space: nowrap;
+  font-stretch: 112%; font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+  border: 1px solid var(--line-strong); color: var(--text); background: transparent;
+  transition: background .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease);
+}
+.btn .ic { width: 36px; height: 36px; display: grid; place-items: center; background: rgba(236,234,230,0.08); transition: transform .5s var(--ease); }
+.btn .ic svg { width: 14px; height: 14px; }
+.btn:hover { border-color: var(--text); }
+.btn:hover .ic { transform: translate(2px, -2px); }
+.btn:active { transform: scale(0.98); }
+.btn.solid { background: var(--text); color: var(--ink); border-color: var(--text); }
+.btn.solid .ic { background: var(--ink); color: var(--text); }
+.btn.solid:hover { background: #fff; }
+.btn.sm { height: 44px; padding-left: 18px; }
+.btn.sm .ic { width: 30px; height: 30px; }
+.menu-btn { display: none; }
+@media (max-width: 900px) {
+  .nav a { display: none; }
+  .menu-btn { display: inline-flex; align-items: center; gap: 12px; height: 44px; padding: 0 16px; border: 1px solid var(--line-strong); background: rgba(7,8,10,0.4); color: var(--text); font: 700 12px/1 var(--display); font-stretch: 112%; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; }
+  .menu-btn i { position: relative; width: 16px; height: 8px; }
+  .menu-btn i::before, .menu-btn i::after { content: ""; position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor; transition: transform .5s var(--ease), top .5s var(--ease); }
+  .menu-btn i::before { top: 0; } .menu-btn i::after { top: 6.5px; }
+  .menu-open .menu-btn i::before { top: 3.25px; transform: rotate(45deg); }
+  .menu-open .menu-btn i::after { top: 3.25px; transform: rotate(-45deg); }
+}
+.menu { position: fixed; inset: 0; z-index: 9; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--gutter) 48px; background: rgba(7,8,10,0.94); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); opacity: 0; visibility: hidden; transition: opacity .5s var(--ease), visibility 0s linear .5s; }
+.menu-open .menu { opacity: 1; visibility: visible; transition: opacity .5s var(--ease); }
+.menu a { display: block; padding: 10px 0; border-bottom: 1px solid var(--line); font-stretch: 125%; font-weight: 700; font-size: clamp(28px, 8vw, 44px); text-transform: uppercase; transform: translateY(24px); opacity: 0; transition: transform .7s var(--ease), opacity .7s var(--ease); }
+.menu-open .menu a { transform: none; opacity: 1; }
+.menu-open .menu a:nth-child(2) { transition-delay: .05s; } .menu-open .menu a:nth-child(3) { transition-delay: .1s; } .menu-open .menu a:nth-child(4) { transition-delay: .15s; }
+.menu-open { overflow: hidden; }
+.menu-open .site-header { position: fixed; }
+
+.reveal { transition: opacity 1.1s var(--ease), transform 1.1s var(--ease), filter 1.1s var(--ease); }
+.js .reveal:not(.in) { opacity: 0; transform: translateY(28px); filter: blur(6px); }
+.d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; }
+.sec { padding-top: clamp(100px, 12vw, 180px); }
+
+/* intro */
+.intro { padding-top: clamp(150px, 18vw, 230px); }
+.intro h1 { margin: 22px 0 0; font-stretch: 125%; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.9; font-size: clamp(48px, 10.4vw, 168px); }
+.intro-grid { margin-top: clamp(44px, 6vw, 80px); display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.intro-grid p { margin: 0; max-width: 40ch; font-size: clamp(19px, 1.7vw, 26px); line-height: 1.45; font-weight: 400; }
+.intro-grid p em { font-style: normal; color: var(--muted); }
+.links { border-top: 1px solid var(--line); }
+.links a { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--line); font-stretch: 112%; font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; transition: padding .5s var(--ease), color .3s var(--ease); }
+.links a span { font-family: var(--mono); font-weight: 400; font-size: 12px; letter-spacing: 0.04em; text-transform: none; color: var(--muted-2); }
+.links a svg { width: 14px; height: 14px; transition: transform .5s var(--ease); }
+.links a:hover { padding-left: 10px; }
+.links a:hover svg { transform: translate(2px, -2px); color: var(--accent); }
+.facts { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.facts div { padding: 22px 20px 0 0; }
+.facts div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+.facts dd { margin: 8px 0 0; font-stretch: 112%; font-weight: 600; font-size: clamp(18px, 1.6vw, 24px); line-height: 1.2; }
+@media (max-width: 900px) {
+  .intro-grid { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .facts div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .facts div:nth-child(n+3) { margin-top: 22px; border-top: 1px solid var(--line); }
+}
+
+/* app features */
+.app { margin-top: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: 1fr 1.25fr; border-top: 1px solid var(--line); }
+.app + .app { margin-top: 0; }
+.app-copy { padding: clamp(36px, 4vw, 56px) clamp(24px, 4vw, 64px) clamp(36px, 4vw, 56px) 0; display: flex; flex-direction: column; }
+.app-head { display: flex; align-items: center; gap: 18px; }
+.app-head img { width: 72px; height: 72px; border-radius: 16px; }
+.app-head .label { display: block; margin-bottom: 6px; }
+.app h3 { margin: 0; font-stretch: 125%; font-weight: 700; text-transform: uppercase; font-size: clamp(30px, 3.6vw, 54px); letter-spacing: -0.02em; line-height: 1; }
+.app p { margin: 28px 0 0; max-width: 42ch; color: var(--muted); font-size: 18px; }
+.app ul { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.app li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.app li b { font-weight: 600; }
+.app .actions { margin-top: auto; padding-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; }
+.app-shots { position: relative; overflow: hidden; background: var(--bg-2); border-left: 1px solid var(--line); min-height: 560px; }
+.app-shots::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 60%, var(--glow), transparent 70%); opacity: 0.55; }
+.phones { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 2vw, 28px); padding: 48px 24px; }
+.phone { width: clamp(130px, 13vw, 210px); aspect-ratio: 9 / 19.5; border-radius: 22px; overflow: hidden; background: #000; border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.7); transition: transform 1s var(--ease); }
+.phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.phone:nth-child(1) { transform: translateY(26px) rotate(-4deg); }
+.phone:nth-child(2) { transform: translateY(-14px); z-index: 1; }
+.phone:nth-child(3) { transform: translateY(26px) rotate(4deg); }
+.app:hover .phone:nth-child(1) { transform: translateY(16px) rotate(-6deg) translateX(-8px); }
+.app:hover .phone:nth-child(3) { transform: translateY(16px) rotate(6deg) translateX(8px); }
+.app.flip { grid-template-columns: 1.25fr 1fr; }
+.app.flip .app-shots { order: -1; border-left: 0; border-right: 1px solid var(--line); }
+.app.flip .app-copy { padding-left: clamp(24px, 4vw, 64px); padding-right: 0; }
+@media (max-width: 900px) {
+  .app, .app.flip { grid-template-columns: 1fr; }
+  .app.flip .app-shots { order: 0; border-right: 0; }
+  .app-shots { border-left: 0; border-top: 1px solid var(--line); min-height: 440px; }
+  .app-copy, .app.flip .app-copy { padding: 36px 0; }
+  .phone:nth-child(1), .phone:nth-child(3) { display: none; }
+  .phone:nth-child(2) { transform: none; width: 190px; }
+}
+
+/* experience */
+.job { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: 1fr 1.2fr 1.6fr; gap: 24px clamp(24px, 4vw, 56px); padding: 32px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.job strong { font-stretch: 125%; font-weight: 700; text-transform: uppercase; font-size: clamp(22px, 2.2vw, 32px); line-height: 1.05; }
+.job .role b { display: block; font-weight: 600; font-size: 19px; }
+.job p { margin: 0; color: var(--muted); }
+.job a { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-family: var(--mono); font-size: 13px; color: var(--text); border-bottom: 1px solid var(--line-strong); padding-bottom: 2px; }
+.job a:hover { border-color: var(--accent); }
+@media (max-width: 900px) { .job { grid-template-columns: 1fr; } }
+
+/* projects */
+.projects { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(20px, 2vw, 28px); }
+.project { display: flex; flex-direction: column; }
+.project figure { margin: 0; position: relative; overflow: hidden; border: 1px solid var(--line); background: var(--bg-2); aspect-ratio: 16 / 10; }
+.project figure img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.project:hover figure img { transform: scale(1.04); }
+.project .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-top: 20px; }
+.project h3 { margin: 0; font-stretch: 125%; font-weight: 700; text-transform: uppercase; font-size: clamp(22px, 2.2vw, 32px); }
+.project p { margin: 10px 0 0; color: var(--muted); max-width: 46ch; }
+.project .go { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-stretch: 112%; font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
+.project .go svg { width: 14px; height: 14px; transition: transform .5s var(--ease); }
+.project:hover .go svg { transform: translate(2px, -2px); color: var(--accent); }
+@media (max-width: 900px) { .projects { grid-template-columns: 1fr; gap: 56px; } }
+
+/* footer */
+footer { margin-top: clamp(120px, 14vw, 200px); padding: 80px 0 36px; border-top: 1px solid var(--line); overflow: hidden; }
+.foot-row { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.foot-row nav { display: flex; gap: 28px; flex-wrap: wrap; }
+.foot-row nav a { font-stretch: 112%; font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); transition: color .3s var(--ease); }
+.foot-row nav a:hover { color: var(--text); }
+.wordmark { margin: clamp(56px, 8vw, 120px) 0 28px; display: flex; align-items: center; gap: 2vw; }
+.wordmark svg { width: 9.6vw; height: 9.6vw; flex: none; }
+.wordmark span { font-stretch: 125%; font-weight: 800; font-size: 8.9vw; line-height: 0.8; letter-spacing: 0.01em; white-space: nowrap; }
+.legal { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { transition: none; }
+  .js .reveal:not(.in) { opacity: 1; transform: none; filter: none; }
+  .btn, .btn .ic, .links a, .phone, .project figure img, .menu, .menu a { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <mask id="horizon" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="#fff"/>
+      <circle cx="32" cy="164" r="120" fill="#000"/>
+      <circle cx="32" cy="164" r="114.5" fill="#fff"/>
+    </mask>
+    <symbol id="mark" viewBox="0 0 64 64">
+      <path fill-rule="evenodd" d="M32 4 L61 59 L3 59 Z M32 25 L45.5 59 L18.5 59 Z" fill="currentColor" mask="url(#horizon)"/>
+      <circle cx="32" cy="38" r="3.4" fill="#f2552c"/>
+    </symbol>
+    <symbol id="arrow" viewBox="0 0 16 16"><path d="M4 12 L12 4 M5.5 4 H12 V10.5" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <a class="logo" href="/" aria-label="Astroleck home"><svg aria-hidden="true"><use href="#mark"/></svg><span>ASTROLECK</span></a>
+  <nav class="nav" aria-label="Portfolio">
+    <a href="#apps">Apps</a>
+    <a href="#work">Work</a>
+    <a href="#projects">Projects</a>
+    <a class="btn sm" href="/">Astroleck <span class="ic"><svg><use href="#arrow"/></svg></span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu <i aria-hidden="true"></i></button>
+  </nav>
+</header>
+<div class="menu" id="menu" role="dialog" aria-label="Menu">
+  <a href="#apps">Apps</a>
+  <a href="#work">Work</a>
+  <a href="#projects">Projects</a>
+  <a href="/">Astroleck</a>
+</div>
+
+<main>
+  <section class="intro shell" id="about">
+    <span class="label reveal">Founder, Astroleck</span>
+    <h1 class="reveal d1">Victor<br>Deleeck</h1>
+    <div class="intro-grid">
+      <p class="reveal d2">I build iPhone apps, web tools and AI automations. <em>By day I work on AI at Suspicious Antwerp. The rest of the time I'm building Astroleck: a space channel today, a space technologies company tomorrow.</em></p>
+      <nav class="links reveal d3" aria-label="Profiles">
+        <a href="https://www.linkedin.com/in/victor-deleeck-156681368/">LinkedIn <span>Victor Deleeck</span><svg aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="https://github.com/Victorinox13">GitHub <span>Victorinox13</span><svg aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="https://www.youtube.com/@astro-leck">YouTube <span>@astro-leck</span><svg aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="https://www.tiktok.com/@astroleck">TikTok <span>@astroleck</span><svg aria-hidden="true"><use href="#arrow"/></svg></a>
+      </nav>
+    </div>
+    <dl class="facts reveal">
+      <div><dt class="label">Based in</dt><dd>Antwerp, Belgium</dd></div>
+      <div><dt class="label">On the App Store</dt><dd>2 apps</dd></div>
+      <div><dt class="label">Works at</dt><dd>Suspicious Antwerp</dd></div>
+      <div><dt class="label">Building</dt><dd>Astroleck</dd></div>
+    </dl>
+  </section>
+
+  <section class="sec shell" id="apps">
+    <h2 class="reveal">Apps</h2>
+
+    <article class="app reveal" style="--glow:#ffd36e">
+      <div class="app-copy">
+        <div class="app-head">
+          <img src="/capclash/app-icon.png" alt="Cap Clash app icon" width="72" height="72" loading="lazy">
+          <div><span class="label">iOS game, 2026</span><h3>Cap Clash</h3></div>
+        </div>
+        <p>A fast party game for 2 or 4 players: flick bottle caps down the mat and into the other team's fields. Play on one phone, or link several phones into one long mat.</p>
+        <ul>
+          <li><span class="label">Players</span><b>2 or 4</b></li>
+          <li><span class="label">Multiplayer</span><b>One phone or linked phones</b></li>
+          <li><span class="label">Status</span><b>Live on the App Store</b></li>
+        </ul>
+        <div class="actions">
+          <a class="btn solid" href="https://apps.apple.com/app/cap-clash/id6829208121">App Store <span class="ic"><svg><use href="#arrow"/></svg></span></a>
+          <a class="btn" href="/capclash/">Website <span class="ic"><svg><use href="#arrow"/></svg></span></a>
+        </div>
+      </div>
+      <div class="app-shots" aria-hidden="true">
+        <div class="phones">
+          <div class="phone"><img src="/capclash/assets/howto/start.jpg" alt="" loading="lazy"></div>
+          <div class="phone"><img src="/capclash/assets/howto/score.jpg" alt="" loading="lazy"></div>
+          <div class="phone"><img src="/capclash/assets/howto/teams.jpg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="app flip reveal" style="--glow:#ff7a59">
+      <div class="app-copy">
+        <div class="app-head">
+          <img src="/assets/img/repcoin/icon.jpg" alt="RepCoin app icon" width="72" height="72" loading="lazy">
+          <div><span class="label">iOS app, 2026</span><h3>RepCoin</h3></div>
+        </div>
+        <p>Lock the apps that waste your time and earn screen time back with real pushups. The camera counts every rep, and reps become coins you spend on unlock time.</p>
+        <ul>
+          <li><span class="label">Category</span><b>Productivity</b></li>
+          <li><span class="label">Tech</span><b>Screen Time API, camera rep counting</b></li>
+          <li><span class="label">Status</span><b>Live on the App Store</b></li>
+        </ul>
+        <div class="actions">
+          <a class="btn solid" href="https://apps.apple.com/app/repcoin-earn-screen-time/id6762221005">App Store <span class="ic"><svg><use href="#arrow"/></svg></span></a>
+        </div>
+      </div>
+      <div class="app-shots" aria-hidden="true">
+        <div class="phones">
+          <div class="phone"><img src="/assets/img/repcoin/screen-2.jpg" alt="" loading="lazy"></div>
+          <div class="phone"><img src="/assets/img/repcoin/screen-1.jpg" alt="" loading="lazy"></div>
+          <div class="phone"><img src="/assets/img/repcoin/screen-3.jpg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="sec shell" id="work">
+    <h2 class="reveal">Work</h2>
+    <div class="job reveal">
+      <div><span class="label">Current</span><br><strong>Suspicious Antwerp</strong></div>
+      <div class="role"><b>AI Automation &amp; Enablement</b><span class="label">Part-time</span></div>
+      <div>
+        <p>I build AI agents, automations and internal tools for the team at this Antwerp streetwear brand, and help everyone there get the most out of AI in their daily work.</p>
+        <a href="https://www.suspiciousantwerp.com/">suspiciousantwerp.com <svg width="12" height="12" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec shell" id="projects">
+    <h2 class="reveal">Projects</h2>
+    <div class="projects">
+      <a class="project reveal" href="/">
+        <figure><img src="/assets/img/moon-hero-2400.jpg" alt="The Astroleck project sign on the Moon, rendered in real time" loading="lazy"></figure>
+        <div class="meta"><h3>Astroleck</h3><span class="label">2025 to now</span></div>
+        <p>A space channel on TikTok and YouTube, and the start of a future space technologies company. The site runs a real-time 3D lunar scene built with three.js.</p>
+        <span class="go">Visit Astroleck <svg aria-hidden="true"><use href="#arrow"/></svg></span>
+      </a>
+      <a class="project reveal d1" href="/housedeck/">
+        <figure><img src="/assets/img/housedeck.jpg" alt="HouseDeck console showing satellite imagery around the Atomium in Brussels" loading="lazy"></figure>
+        <div class="meta"><h3>HouseDeck</h3><span class="label">Web, 2026</span></div>
+        <p>A cyberdeck-style console for everything above a location: satellite imagery, live flights, the ISS, weather, air quality and earthquakes.</p>
+        <span class="go">Open HouseDeck <svg aria-hidden="true"><use href="#arrow"/></svg></span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="foot-row">
+      <span class="label">Victor Deleeck</span>
+      <nav aria-label="Footer">
+        <a href="/">Astroleck</a>
+        <a href="https://www.linkedin.com/in/victor-deleeck-156681368/">LinkedIn</a>
+        <a href="https://github.com/Victorinox13">GitHub</a>
+        <a href="https://www.youtube.com/@astro-leck">YouTube</a>
+        <a href="https://www.tiktok.com/@astroleck">TikTok</a>
+      </nav>
+    </div>
+    <div class="wordmark" aria-hidden="true"><svg><use href="#mark"/></svg><span>ASTROLECK</span></div>
+    <div class="legal">
+      <span class="label">© 2026 Victor Deleeck</span>
+      <span class="label">Founder, Astroleck</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var btn = document.querySelector('.menu-btn');
+  var menu = document.getElementById('menu');
+  function setMenu(open) { document.body.classList.toggle('menu-open', open); btn.setAttribute('aria-expanded', open); }
+  btn.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
+  menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+  var items = document.querySelectorAll('.reveal');
+  if (calm || !('IntersectionObserver' in window)) { items.forEach(function (el) { el.classList.add('in'); }); }
+  else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
